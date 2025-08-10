@@ -43,7 +43,7 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="talentforge-ui-theme">
+      <ThemeProvider>
         <TooltipProvider>
           <Toaster />
           <Router />
