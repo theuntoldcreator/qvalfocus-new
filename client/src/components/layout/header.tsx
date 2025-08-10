@@ -4,6 +4,7 @@ import { Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,7 +35,7 @@ export function Header() {
               </Link>
               
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-8">
+              <div className="hidden md:flex items-center space-x-4">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-700 dark:text-slate-300 h-full">
                   {navLinks.map((link) => (
                     <Link
@@ -55,10 +56,12 @@ export function Header() {
                 <Button variant="ghost" className="flex items-center text-base font-medium">
                   <Search className="h-5 w-5 mr-2" /> Search
                 </Button>
+                <ThemeToggle />
               </div>
               
               {/* Mobile Menu Button */}
               <div className="md:hidden flex items-center">
+                <ThemeToggle />
                 <Button
                   variant="ghost"
                   size="icon"
