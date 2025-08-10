@@ -24,19 +24,11 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "talentforge-ui-theme",
+  ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") {
-      return defaultTheme;
-    }
-    try {
-      const storedTheme = window.localStorage.getItem(storageKey) as Theme | null;
-      return storedTheme || defaultTheme;
-    } catch (e) {
-      console.error("Failed to parse theme from localStorage", e);
-      return defaultTheme;
-    }
-  });
+  const [theme, setTheme] = useState<Theme>(
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+  );
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -59,17 +51,13 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      try {
-        window.localStorage.setItem(storageKey, theme);
-      } catch (e) {
-        console.error("Failed to set theme in localStorage", e);
-      }
+      localStorage.setItem(storageKey, theme);
       setTheme(theme);
     },
   };
 
   return (
-    <ThemeProviderContext.Provider value={value}>
+    <ThemeProviderContext.Provider {...props} value={value}>
       {children}
     </ThemeProviderContext.Provider>
   );
