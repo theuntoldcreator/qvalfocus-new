@@ -1,83 +1,119 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { heroContent as slides } from "@/lib/data";
-import { HeroSlider } from "@/components/hero/hero-slider";
+
+const heroContent = [
+  {
+    id: "talent",
+    tabTitle: "For Companies",
+    title: "Connecting Exceptional Talent with Visionary Companies",
+    description:
+      "We forge partnerships that drive innovation by connecting you with premier talent across technology, finance, and healthcare.",
+    buttonText: "Find Talent",
+    buttonLink: "/contact?type=client",
+    image:
+      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+  },
+  {
+    id: "careers",
+    tabTitle: "For Professionals",
+    title: "Find Your Next Career-Defining Opportunity",
+    description:
+      "Discover roles at innovative companies that match your skills, ambitions, and long-term career goals.",
+    buttonText: "Explore Careers",
+    buttonLink: "/jobs",
+    image:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+  },
+  {
+    id: "solutions",
+    tabTitle: "Our Solutions",
+    title: "End-to-End Solutions for Business Growth",
+    description:
+      "From strategic staffing to transformative consulting, we deliver solutions that propel your business forward.",
+    buttonText: "Explore Services",
+    buttonLink: "/services/staffing",
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+  },
+];
 
 export function Hero() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const activeSlide = slides[activeIndex];
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % slides.length);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-  
-  useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext();
-    }, 8000); // Auto-slide every 8 seconds
-    return () => clearInterval(timer);
-  }, [activeIndex]);
+  const [activeTab, setActiveTab] = useState(heroContent[0].id);
+  const activeContent = heroContent.find((item) => item.id === activeTab)!;
 
   return (
-    <section className="w-full bg-slate-50 dark:bg-slate-900 py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen flex flex-col bg-slate-900 text-white overflow-hidden">
+      {/* Background Image Container */}
+      <div className="absolute top-0 right-0 h-full w-full lg:w-3/5">
+        <AnimatePresence>
+          <motion.div
+            key={activeContent.id}
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${activeContent.image})` }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
         <div
-          className="relative w-full min-h-[80vh] rounded-3xl flex items-center overflow-hidden transition-all duration-700 ease-in-out"
-        >
-          <AnimatePresence>
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to right, #0f172a 20%, transparent 100%)",
+          }}
+        ></div>
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex items-center pt-20">
+        <div className="max-w-xl">
+          <AnimatePresence mode="wait">
             <motion.div
-              key={activeSlide.id}
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${activeSlide.image})` }}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-            />
+              key={activeContent.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
+                {activeContent.title}
+              </h1>
+              <p className="text-lg md:text-xl text-slate-300 mb-8">
+                {activeContent.description}
+              </p>
+              <Button size="lg" asChild>
+                <Link href={activeContent.buttonLink}>
+                  {activeContent.buttonText}
+                </Link>
+              </Button>
+            </motion.div>
           </AnimatePresence>
-          
-          <div className="absolute inset-0 bg-black/40" />
+        </div>
+      </div>
 
-          <div className="relative w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center p-8 md:p-12">
-            {/* Left Content */}
-            <div className="text-white z-10">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSlide.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5, ease: "easeInOut" }}
-                >
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 leading-tight">
-                    {activeSlide.title}
-                  </h1>
-                  <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-lg">
-                    {activeSlide.description}
-                  </p>
-                  <Button size="lg" asChild className="bg-white text-slate-900 hover:bg-slate-200 h-12 px-8 text-base">
-                    <Link href={activeSlide.buttonLink}>
-                      {activeSlide.buttonText}
-                    </Link>
-                  </Button>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Right Content (Slider) */}
-            <div className="hidden lg:flex justify-center items-center">
-              <HeroSlider
-                activeSlide={{ ...activeSlide, slideNumber: activeIndex + 1 }}
-                onNext={handleNext}
-                onPrev={handlePrev}
-              />
-            </div>
+      {/* Bottom Navigation */}
+      <div className="relative z-10 w-full border-t border-white/10 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-start items-center h-24 space-x-8 overflow-x-auto">
+            {heroContent.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className="relative text-sm font-medium transition-colors text-slate-400 hover:text-white py-2 whitespace-nowrap"
+              >
+                {tab.tabTitle}
+                {activeTab === tab.id && (
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+                    layoutId="underline"
+                  />
+                )}
+              </button>
+            ))}
           </div>
         </div>
       </div>

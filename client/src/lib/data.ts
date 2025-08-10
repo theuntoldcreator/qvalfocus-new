@@ -43,45 +43,6 @@ export const industries = [
   }
 ];
 
-export const heroContent = [
-  {
-    id: "talent",
-    title: "Connecting Exceptional Talent with Visionary Companies",
-    description:
-      "We forge partnerships that drive innovation by connecting you with premier talent across technology, finance, and healthcare.",
-    buttonText: "Find Talent",
-    buttonLink: "/contact?type=client",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-    price: "$1M+",
-    annualYield: "for top-tier talent",
-    benefit: "Build your dream team",
-  },
-  {
-    id: "careers",
-    title: "Find Your Next Career-Defining Opportunity",
-    description:
-      "Discover roles at innovative companies that match your skills, ambitions, and long-term career goals.",
-    buttonText: "Explore Careers",
-    buttonLink: "/jobs",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-    price: "15 Days",
-    annualYield: "avg. time to fill",
-    benefit: "Accelerate your career",
-  },
-  {
-    id: "solutions",
-    title: "End-to-End Solutions for Business Growth",
-    description:
-      "From strategic staffing to transformative consulting, we deliver solutions that propel your business forward.",
-    buttonText: "Explore Services",
-    buttonLink: "/services/project-solution",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
-    price: "95%",
-    annualYield: "client satisfaction",
-    benefit: "Achieve your project goals",
-  },
-];
-
 export const testimonials = [
   {
     id: 1,
