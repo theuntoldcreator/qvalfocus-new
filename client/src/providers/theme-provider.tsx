@@ -25,9 +25,18 @@ export function ThemeProvider({
   defaultTheme = "system",
   storageKey = "talentforge-ui-theme",
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") {
+      return defaultTheme;
+    }
+    try {
+      const storedTheme = window.localStorage.getItem(storageKey) as Theme | null;
+      return storedTheme || defaultTheme;
+    } catch (e) {
+      console.error("Failed to parse theme from localStorage", e);
+      return defaultTheme;
+    }
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -50,7 +59,11 @@ export function ThemeProvider({
   const value = {
     theme,
     setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
+      try {
+        window.localStorage.setItem(storageKey, theme);
+      } catch (e) {
+        console.error("Failed to set theme in localStorage", e);
+      }
       setTheme(theme);
     },
   };
