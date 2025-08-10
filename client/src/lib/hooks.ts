@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "./queryClient";
-import type { Job, Application, Contact, Newsletter, CaseStudy } from "@shared/schema";
+import type { Job, Application, Contact, Newsletter, CaseStudy, InsertApplication, InsertContact } from "@shared/schema";
 
 // Jobs
 export function useJobs(filters?: { location?: string; type?: string; industry?: string; search?: string }) {
@@ -46,7 +46,7 @@ export function useCreateApplication() {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async (application: Omit<Application, 'id' | 'createdAt' | 'status'>) => {
+    mutationFn: async (application: InsertApplication) => {
       const response = await apiRequest('POST', '/api/applications', application);
       return response.json();
     },
@@ -61,7 +61,7 @@ export function useCreateContact() {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async (contact: Omit<Contact, 'id' | 'createdAt' | 'status'>) => {
+    mutationFn: async (contact: InsertContact) => {
       const response = await apiRequest('POST', '/api/contacts', contact);
       return response.json();
     },
