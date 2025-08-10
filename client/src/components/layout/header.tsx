@@ -21,15 +21,26 @@ export function Header() {
   }, []);
 
   const isHomePage = location === "/";
+  const isTransparent = !isScrolled && isHomePage;
+
+  const transparentNavStyles = isTransparent ? {
+    '--background': 'transparent',
+    '--input': 'hsl(0 0% 100% / 0.2)',
+    '--accent': 'hsl(0 0% 100% / 0.1)',
+    '--accent-foreground': 'hsl(0 0% 100%)',
+  } as React.CSSProperties : {};
 
   return (
     <>
-      <nav className={cn(
-        "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled || !isHomePage 
-          ? "navbar-glass" 
-          : "navbar-transparent"
-      )}>
+      <nav 
+        className={cn(
+          "fixed top-0 w-full z-50 transition-all duration-300",
+          isTransparent
+            ? "navbar-transparent text-white"
+            : "navbar-glass"
+        )}
+        style={transparentNavStyles}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
