@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useCreateApplication } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
-import type { Job } from "@shared/schema";
+import type { Job, InsertApplication } from "@shared/schema";
 
 const applicationSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -55,14 +55,23 @@ export function ApplyForm({ job, onSuccess }: ApplyFormProps) {
   const onSubmit = async (data: ApplicationFormData) => {
     try {
       setIsSubmitting(true);
-      await createApplication.mutateAsync({
+      
+      const payload: InsertApplication = {
         jobId: job.id,
-        ...data,
-        linkedin: data.linkedin || undefined,
-        github: data.github || undefined,
-        portfolio: data.portfolio || undefined,
-        coverLetter: data.coverLetter || undefined,
-      });
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        experienceLevel: data.experienceLevel,
+        phone: data.phone || null,
+        currentRole: data.currentRole || null,
+        linkedin: data.linkedin || null,
+        github: data.github || null,
+        portfolio: data.portfolio || null,
+        coverLetter: data.coverLetter || null,
+        resumeUrl: null, // Not in form, assuming null for now
+      };
+
+      await createApplication.mutateAsync(payload);
 
       toast({
         title: "Application submitted successfully!",

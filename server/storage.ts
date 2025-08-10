@@ -132,8 +132,7 @@ export class MemStorage implements IStorage {
     ];
 
     sampleJobs.forEach(job => {
-      const id = randomUUID();
-      this.jobs.set(id, { ...job, id, createdAt: new Date(), updatedAt: new Date() });
+      this.createJob(job);
     });
 
     // Seed case studies
@@ -176,7 +175,15 @@ export class MemStorage implements IStorage {
 
     sampleCaseStudies.forEach(caseStudy => {
       const id = randomUUID();
-      this.caseStudies.set(id, { ...caseStudy, id, createdAt: new Date() });
+      this.caseStudies.set(id, { 
+        ...caseStudy, 
+        id, 
+        createdAt: new Date(),
+        subtitle: caseStudy.subtitle ?? null,
+        results: caseStudy.results ?? null,
+        imageUrl: caseStudy.imageUrl ?? null,
+        featured: caseStudy.featured ?? null,
+      });
     });
   }
 
@@ -242,7 +249,16 @@ export class MemStorage implements IStorage {
       ...job, 
       id, 
       createdAt: new Date(), 
-      updatedAt: new Date() 
+      updatedAt: new Date(),
+      companyLogo: job.companyLogo ?? null,
+      salary: job.salary ?? null,
+      benefits: job.benefits ?? null,
+      skills: job.skills ?? null,
+      remote: job.remote ?? null,
+      featured: job.featured ?? null,
+      recruiterName: job.recruiterName ?? null,
+      recruiterEmail: job.recruiterEmail ?? null,
+      recruiterPhone: job.recruiterPhone ?? null,
     };
     this.jobs.set(id, newJob);
     return newJob;
@@ -262,7 +278,14 @@ export class MemStorage implements IStorage {
       ...application, 
       id, 
       status: "pending",
-      createdAt: new Date() 
+      createdAt: new Date(),
+      phone: application.phone ?? null,
+      currentRole: application.currentRole ?? null,
+      linkedin: application.linkedin ?? null,
+      github: application.github ?? null,
+      portfolio: application.portfolio ?? null,
+      coverLetter: application.coverLetter ?? null,
+      resumeUrl: application.resumeUrl ?? null,
     };
     this.applications.set(id, newApplication);
     return newApplication;
@@ -281,7 +304,13 @@ export class MemStorage implements IStorage {
       ...contact, 
       id, 
       status: "new",
-      createdAt: new Date() 
+      createdAt: new Date(),
+      company: contact.company ?? null,
+      currentRole: contact.currentRole ?? null,
+      experienceLevel: contact.experienceLevel ?? null,
+      hiringNeed: contact.hiringNeed ?? null,
+      message: contact.message ?? null,
+      resumeUrl: contact.resumeUrl ?? null,
     };
     this.contacts.set(id, newContact);
     return newContact;

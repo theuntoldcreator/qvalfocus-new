@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useCreateContact } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
+import type { InsertContact } from "@shared/schema";
 
 const clientSchema = z.object({
   type: z.literal("client"),
@@ -63,7 +64,18 @@ export function ContactForm({ type, onSuccess }: ContactFormProps) {
   const onSubmit = async (data: ContactFormData) => {
     try {
       setIsSubmitting(true);
-      await createContact.mutateAsync(data);
+      
+      const payload: InsertContact = {
+        ...data,
+        company: data.type === 'client' ? data.company : null,
+        hiringNeed: data.type === 'client' ? data.hiringNeed : null,
+        message: data.message || null,
+        currentRole: data.type === 'candidate' ? data.currentRole || null : null,
+        experienceLevel: data.type === 'candidate' ? data.experienceLevel : null,
+        resumeUrl: null,
+      };
+
+      await createContact.mutateAsync(payload);
 
       toast({
         title: "Thank you for your interest!",
