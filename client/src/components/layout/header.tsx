@@ -19,6 +19,10 @@ export function Header() {
     setActiveMenu(null);
   };
 
+  const staffingService = services.find(s => s.id === 'staffing');
+  const consultingService = services.find(s => s.id === 'consulting');
+  const managedService = services.find(s => s.id === 'managed-services');
+
   return (
     <>
       <header 
@@ -102,13 +106,41 @@ export function Header() {
             >
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 {activeMenu === "services" && (
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {services.map((service) => (
-                      <Link key={service.id} href={service.link} onClick={() => setActiveMenu(null)} className="group block p-4 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
-                        <h3 className="font-semibold text-base mb-2 group-hover:text-primary">{service.title}</h3>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">{service.description}</p>
-                      </Link>
-                    ))}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                      <h3 className="font-bold text-lg mb-4 px-4">Staffing Solution</h3>
+                      <ul className="space-y-1">
+                        {staffingService && (
+                          <li>
+                            <Link href={staffingService.link} onClick={() => setActiveMenu(null)} className="group block p-4 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                              <h4 className="font-semibold text-base mb-1 group-hover:text-primary">{staffingService.title}</h4>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{staffingService.description}</p>
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg mb-4 px-4">Project Solution</h3>
+                      <ul className="space-y-1">
+                        {consultingService && (
+                           <li>
+                            <Link href={consultingService.link} onClick={() => setActiveMenu(null)} className="group block p-4 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                              <h4 className="font-semibold text-base mb-1 group-hover:text-primary">{consultingService.title}</h4>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{consultingService.description}</p>
+                            </Link>
+                          </li>
+                        )}
+                        {managedService && (
+                           <li>
+                            <Link href={managedService.link} onClick={() => setActiveMenu(null)} className="group block p-4 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+                              <h4 className="font-semibold text-base mb-1 group-hover:text-primary">{managedService.title}</h4>
+                              <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">{managedService.description}</p>
+                            </Link>
+                          </li>
+                        )}
+                      </ul>
+                    </div>
                   </div>
                 )}
                 {activeMenu === "industries" && (
