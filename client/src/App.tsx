@@ -6,9 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
-import StaffingPage from "@/pages/services/staffing";
-import ConsultingPage from "@/pages/services/consulting";
-import ManagedServicesPage from "@/pages/services/managed-services";
+import StaffingSolutionPage from "@/pages/services/staffing-solution";
+import ProjectSolutionPage from "@/pages/services/project-solution";
 import IndustriesPage from "@/pages/industries";
 import IndustryPage from "@/pages/industry/[slug]";
 import JobsPage from "@/pages/jobs";
@@ -24,9 +23,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/services/staffing" component={StaffingPage} />
-      <Route path="/services/consulting" component={ConsultingPage} />
-      <Route path="/services/managed-services" component={ManagedServicesPage} />
+      <Route path="/services/staffing-solution" component={StaffingSolutionPage} />
+      <Route path="/services/project-solution" component={ProjectSolutionPage} />
       <Route path="/industries" component={IndustriesPage} />
       <Route path="/industries/:slug" component={IndustryPage} />
       <Route path="/jobs" component={JobsPage} />

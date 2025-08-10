@@ -79,31 +79,22 @@ export const kpis = [
 
 export const services = [
   {
-    id: "staffing",
-    title: "Strategic Staffing",
-    description: "Permanent, contract, and executive search solutions. Our proven methodology ensures perfect cultural and skill alignment for lasting success.",
-    features: ["Executive Search", "Contract Staffing", "Direct Hire", "Contract-to-Hire"],
+    id: "staffing-solution",
+    title: "Staffing Solution",
+    description: "Flexible and scalable staffing services tailored to your organization’s goals, from filling critical roles to building long-term hiring strategies.",
+    features: [],
     icon: "👥",
     color: "primary",
-    link: "/services/staffing"
+    link: "/services/staffing-solution"
   },
   {
-    id: "consulting", 
-    title: "Consulting Excellence",
-    description: "Digital transformation, cloud migration, data & AI, and cybersecurity. We architect solutions that deliver measurable business outcomes.",
-    features: ["Digital Transformation", "Cloud & Infrastructure", "Data & AI Strategy", "Cybersecurity"],
+    id: "project-solution", 
+    title: "Project Solution",
+    description: "End-to-end project-based solutions to accelerate delivery, improve efficiency, and meet regulatory or technical demands.",
+    features: [],
     icon: "📊",
     color: "accent",
-    link: "/services/consulting"
-  },
-  {
-    id: "managed-services",
-    title: "Managed Services",
-    description: "End-to-end project management and dedicated teams. Focus on your core business while we handle the execution with guaranteed SLAs.",
-    features: ["Project Management", "Dedicated Teams", "Quality Assurance", "24/7 Support"],
-    icon: "⚙️",
-    color: "emerald",
-    link: "/services/managed-services"
+    link: "/services/project-solution"
   }
 ];
 
