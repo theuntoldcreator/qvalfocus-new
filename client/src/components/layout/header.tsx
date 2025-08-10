@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Search, User, MapPin, ChevronDown } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -21,24 +21,6 @@ export function Header() {
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-white dark:bg-slate-900">
-        {/* Top bar */}
-        <div className="bg-[#3d3d3d] text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-end items-center h-8 text-xs space-x-4">
-              <Link href="#" className="flex items-center hover:underline">
-                <User className="w-3.5 h-3.5 mr-1" /> Sign in
-              </Link>
-              <span className="text-slate-500">|</span>
-              <Link href="#" className="hover:underline">
-                Register
-              </Link>
-              <button className="flex items-center hover:underline ml-4">
-                <MapPin className="w-3.5 h-3.5 mr-1" /> United States <ChevronDown className="w-3.5 h-3.5 ml-1" />
-              </button>
-            </div>
-          </div>
-        </div>
-
         {/* Main navigation */}
         <div className="border-b border-slate-200 dark:border-slate-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
