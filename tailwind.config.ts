@@ -71,6 +71,8 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        'brand-red': '#ff5c3d',
+        'brand-blue': '#00a9ff',
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
