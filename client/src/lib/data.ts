@@ -1,0 +1,145 @@
+export const industries = [
+  {
+    id: "technology",
+    name: "Technology",
+    description: "Software, AI, Cloud, Cybersecurity",
+    icon: "💻",
+    slug: "technology"
+  },
+  {
+    id: "financial-services",
+    name: "Financial Services", 
+    description: "Banking, FinTech, Investment",
+    icon: "💰",
+    slug: "financial-services"
+  },
+  {
+    id: "healthcare",
+    name: "Healthcare",
+    description: "Digital Health, Biotech, Medical Devices",
+    icon: "❤️",
+    slug: "healthcare"
+  },
+  {
+    id: "retail",
+    name: "Retail",
+    description: "E-commerce, Omnichannel, Consumer",
+    icon: "🛍️",
+    slug: "retail"
+  },
+  {
+    id: "manufacturing",
+    name: "Manufacturing",
+    description: "Industry 4.0, IoT, Supply Chain",
+    icon: "🏭",
+    slug: "manufacturing"
+  },
+  {
+    id: "public-sector",
+    name: "Public Sector",
+    description: "Government, Education, Non-profit",
+    icon: "🏛️",
+    slug: "public-sector"
+  }
+];
+
+export const testimonials = [
+  {
+    id: 1,
+    name: "Sarah Chen",
+    role: "CTO, InnovateTech",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+    content: "TalentForge transformed our hiring process. They understood our culture and technical needs, delivering candidates who weren't just qualified but genuinely excited about our mission.",
+    rating: 5
+  },
+  {
+    id: 2,
+    name: "Marcus Rodriguez",
+    role: "Senior Developer",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+    content: "Found my dream role through TalentForge. Their team took time to understand my career goals and connected me with a company that's been the perfect fit for over two years now.",
+    rating: 5
+  },
+  {
+    id: 3,
+    name: "Dr. Aisha Patel",
+    role: "VP Engineering, MedTech Corp",
+    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+    content: "Their consulting team helped us modernize our entire tech stack. The roadmap they created has been our north star for digital transformation over the past 18 months.",
+    rating: 5
+  }
+];
+
+export const kpis = [
+  { label: "Successful Placements", value: "2,500+", delay: 0 },
+  { label: "Client Satisfaction", value: "95%", delay: 0.5 },
+  { label: "Avg. Time to Fill", value: "15 Days", delay: 1 },
+  { label: "Fortune 500 Partners", value: "Fortune 500", delay: 1.5 }
+];
+
+export const services = [
+  {
+    id: "staffing",
+    title: "Strategic Staffing",
+    description: "Permanent, contract, and executive search solutions. Our proven methodology ensures perfect cultural and skill alignment for lasting success.",
+    features: ["Executive Search", "Contract Staffing", "Direct Hire", "Contract-to-Hire"],
+    icon: "👥",
+    color: "primary",
+    link: "/services/staffing"
+  },
+  {
+    id: "consulting", 
+    title: "Consulting Excellence",
+    description: "Digital transformation, cloud migration, data & AI, and cybersecurity. We architect solutions that deliver measurable business outcomes.",
+    features: ["Digital Transformation", "Cloud & Infrastructure", "Data & AI Strategy", "Cybersecurity"],
+    icon: "📊",
+    color: "accent",
+    link: "/services/consulting"
+  },
+  {
+    id: "managed-services",
+    title: "Managed Services",
+    description: "End-to-end project management and dedicated teams. Focus on your core business while we handle the execution with guaranteed SLAs.",
+    features: ["Project Management", "Dedicated Teams", "Quality Assurance", "24/7 Support"],
+    icon: "⚙️",
+    color: "emerald",
+    link: "/services/managed-services"
+  }
+];
+
+export const companyInfo = {
+  name: "TalentForge",
+  tagline: "Connecting Exceptional Talent with Visionary Companies",
+  description: "Premier staffing, consulting, and managed services across technology, finance, healthcare, and beyond. We don't just fill positions—we forge partnerships that drive innovation.",
+  founded: "2018",
+  headquarters: "San Francisco, CA",
+  offices: ["New York", "London", "Singapore"],
+  email: "hello@talentforge.com",
+  phone: "+1-555-TALENT",
+  linkedin: "https://linkedin.com/company/talentforge",
+  twitter: "https://twitter.com/talentforge"
+};
+
+export const leadership = [
+  {
+    name: "Alex Chen",
+    role: "CEO & Founder",
+    bio: "Former McKinsey partner with 15+ years in talent strategy and organizational transformation.",
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
+    linkedin: "https://linkedin.com/in/alexchen"
+  },
+  {
+    name: "Maya Patel",
+    role: "COO",
+    bio: "Ex-Google People Operations leader specializing in scaling high-performance teams.",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
+    linkedin: "https://linkedin.com/in/mayapatel"
+  },
+  {
+    name: "James Wilson",
+    role: "CTO",
+    bio: "Technology executive with expertise in AI/ML platforms and enterprise software architecture.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300",
+    linkedin: "https://linkedin.com/in/jameswilson"
+  }
+];

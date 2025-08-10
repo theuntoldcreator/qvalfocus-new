@@ -1,0 +1,161 @@
+Got it—here’s a **copy-paste Lovable prompt** for a **staffing + consulting + services** site that’s image-heavy, polished, and a little fancy ✨
+
+---
+
+# Prompt (Lovable AI): Build a Fancy Staffing + Consulting Website (Next.js + TS)
+
+**Goal**
+Create a premium, image-forward **Staffing + Consulting + Services** website for **{{CompanyName}}** that feels modern and fancy, with smooth micro-interactions, strong visuals, and conversion-focused CTAs. Generate a full **Next.js 14 (App Router) + TypeScript + Tailwind** project, production-ready.
+
+## Brand & Style
+
+* Visual vibe: sleek enterprise + creative agency (think subtle glassmorphism, soft gradients, big imagery, tasteful parallax).
+* Motion: smooth hover states, section fade/slide reveals, marquee logos, counters; keep performance high.
+* Imagery: diverse, professional photos of teams, offices, collaboration, tech; include an **image-rich hero** on every major page.
+* Color: primary {{PrimaryColor}}, accent {{AccentColor}}, neutral background; support dark mode toggle.
+* Typography: modern sans for UI, elegant serif for headlines (fallbacks defined).
+
+## Sitemap & Content (no lorem ipsum—write real copy)
+
+1. **Home**
+
+   * Hero: value prop for clients & candidates; 2 CTAs (“Hire Talent”, “Find Jobs”).
+   * Service strips: Staffing, Consulting, Managed Services.
+   * Industries slider with logos.
+   * Featured jobs (3–6 cards) + quick filters.
+   * Case studies carousel (3).
+   * Testimonials slider.
+   * KPI band (placements, time-to-fill, NPS).
+   * Newsletter signup + trust badges.
+
+2. **Staffing** (service pillar)
+
+   * Permanent, Contract, Contract-to-Hire, Executive Search.
+   * Process steps (Discovery → Shortlist → Interviews → Placement → Support).
+   * Differentiators, tools/ATS, SLAs, FAQs, CTA.
+
+3. **Consulting** (service pillar)
+
+   * Offerings: Digital Transformation, Cloud, Data & AI, Cybersecurity, Product/QA.
+   * Engagement models, playbooks, sample outcomes with metrics.
+
+4. **Managed Services / MSP**
+
+   * SOWs, SLAs, governance model, reporting dashboards (mock images), pricing tiers.
+
+5. **Industries (hub)**
+
+   * Pages for: Technology, Financial Services, Healthcare, Retail, Manufacturing, Public Sector.
+   * Each: challenges, tailored solutions, roles we place, regulations (if relevant), mini case studies.
+
+6. **Jobs / Careers**
+
+   * Job board list + filters (role, location, type, experience).
+   * Job detail page: description, responsibilities, requirements, salary range, apply form, recruiter contact.
+   * Candidate resources: resume tips, interview prep, visa/relocation note (if applicable).
+
+7. **Case Studies**
+
+   * 6–10 detailed write-ups with problem/approach/outcomes and metrics. Include a simple architecture diagram (SVG/ASCII).
+
+8. **About**
+
+   * Story, mission/values, leadership bios (photos), offices map, DEI statement, awards timeline.
+
+9. **Contact**
+
+   * Two paths: **For Clients** (request talent) & **For Candidates** (submit resume/portfolio).
+   * Multi-step forms with validation + success screens.
+
+10. **Legal**
+
+    * Privacy, Terms, Accessibility, Cookies.
+
+## Components (build as reusable TS components)
+
+* Layout: `Header`, `MobileNav`, `Footer`, `Section`, `Container`, `Grid`, `Card`
+* Media: `HeroImage`, `ImageGrid`, `ParallaxBanner`, `LogoMarquee`, `VideoBlock`
+* Content: `KPIStat`, `FAQ`, `Testimonial`, `Steps`, `Tabs`, `Accordion`, `Callout`, `CTA`
+* Jobs: `JobFilters`, `JobCard`, `JobDetail`, `ApplyForm`
+* Forms: `TextInput`, `Select`, `FileUpload` (PDF/Docs), `MultiStepForm`, `NewsletterForm`
+* SEO: `Seo`, `JsonLd`
+* Utilities: `ThemeToggle`, `Breadcrumbs`, `Pagination`, `Toast`
+
+## Data & Dummy Content
+
+* Provide **seed JSON** for jobs (title, location, type, salary range, description, tags), testimonials, industries, case studies, logos.
+* Use **Contentlayer** or simple JSON/MDX for posts/case studies.
+* Place images in `/public/images/...` with descriptive names.
+
+## UX Details
+
+* Sticky header, transparent on hero → solid on scroll.
+* Fancy but fast: lazy-load images, use `next/image`, prefetch critical routes.
+* Keyboard accessible, focus states, labeled inputs, alt text, skip-to-content.
+
+## Pages & Routing (App Router)
+
+```
+/app
+  /(site)/page.tsx
+  /(site)/about/page.tsx
+  /(site)/services/staffing/page.tsx
+  /(site)/services/consulting/page.tsx
+  /(site)/services/managed-services/page.tsx
+  /(site)/industries/page.tsx
+  /(site)/industries/[slug]/page.tsx
+  /(site)/jobs/page.tsx
+  /(site)/jobs/[slug]/page.tsx
+  /(site)/case-studies/page.tsx
+  /(site)/case-studies/[slug]/page.tsx
+  /(site)/contact/page.tsx
+  /(site)/legal/privacy/page.tsx
+  /(site)/legal/terms/page.tsx
+```
+
+## Job Board (client-side for now)
+
+* Filters: text search, location, role type (FT/Contract/C2H), salary min/max, experience level.
+* Sort by: newest, salary high→low.
+* Apply form: upload resume (PDF/DOC), name, email, phone, LinkedIn/GitHub, cover letter.
+* Show recruiter card with photo/contact on job detail.
+* Save jobs (localStorage) and “quick apply” prefill.
+
+## Forms & Integrations
+
+* Abstract form submission to `/api/forms/*` with a simple stub; show success/error toasts.
+* Add spam protection (honeypot + submission time check).
+* Newsletter stub endpoint.
+* Optional hooks for HubSpot/Greenhouse later (document in README).
+
+## SEO/Analytics
+
+* Route-level metadata, OpenGraph/Twitter images.
+* JSON-LD: `Organization`, `JobPosting`, `BreadcrumbList`, `FAQPage`.
+* GA4 + consent banner (non-blocking).
+
+## Performance Targets
+
+* Lighthouse ≥90 (mobile and desktop).
+* Images optimized, animations GPU-friendly, code-split heavy sections.
+
+## Deliverables
+
+1. Full Next.js + TS + Tailwind project with pages, components, seed content, and image assets.
+2. Fancy but tasteful animations & image-led layouts.
+3. README with run/build/deploy steps and how to edit jobs/case studies.
+
+**Use these placeholders:**
+
+* Company: **{{CompanyName}}**
+* Tagline: **{{Tagline}}**
+* Regions: **{{Regions}}**
+* Contact (masked): **{{Contact}}**
+* Primary Color: **{{PrimaryColor}}**
+* Accent Color: **{{AccentColor}}**
+
+If anything is ambiguous, make reasonable, visually impressive choices and proceed.
+
+---
+
+Want me to prefill the placeholders (name, colors, industries) and generate sample copy for each page?
