@@ -1,15 +1,20 @@
 import { useApplications, useDeleteApplication } from "@/lib/hooks";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function ApplicationList({ jobId }: { jobId: string }) {
   const { data: applications, isLoading } = useApplications(jobId);
   const deleteApplication = useDeleteApplication();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const handleDelete = (id: string) => {
     deleteApplication.mutate(id, {
-        onSuccess: () => toast({ title: "Application deleted" }),
+        onSuccess: () => {
+            toast({ title: "Application deleted" });
+            queryClient.invalidateQueries({ queryKey: ['applications', 'job', jobId] });
+        },
         onError: (err) => toast({ title: "Error", description: err.message, variant: "destructive" })
     });
   };

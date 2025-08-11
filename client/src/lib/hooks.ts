@@ -1,27 +1,51 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "./queryClient";
+import { supabase } from "@/integrations/supabase/client";
 import type { Job, Application, InsertJob, InsertApplication, CaseStudy, Contact, InsertContact } from "@shared/schema";
 import { caseStudies as mockCaseStudies } from './data';
-import { supabase } from "@/integrations/supabase/client";
+
+// Helper to generate a URL-friendly slug
+function toSlug(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+}
 
 // Jobs
 export function useJobs(options: { poll?: boolean } = {}) {
   return useQuery<Job[]>({
-    queryKey: ['/api/jobs'],
-    refetchInterval: options.poll ? 60000 : false, // Poll every 60 seconds if enabled
+    queryKey: ['jobs'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) throw new Error(error.message);
+      return data as Job[];
+    },
+    refetchInterval: options.poll ? 60000 : false,
   });
 }
 
 export function useFeaturedJobs() {
   return useQuery<Job[]>({
-    queryKey: ['/api/jobs'],
-    select: (jobs) => jobs.filter(job => job.featured).slice(0, 3)
+    queryKey: ['jobs'],
+    select: (jobs) => (jobs || []).filter(job => job.featured).slice(0, 3)
   });
 }
 
 export function useJobBySlug(slug: string) {
   return useQuery<Job>({
-    queryKey: ['/api/jobs/slug', slug],
+    queryKey: ['jobs', 'slug', slug],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('jobs')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+      if (error) throw new Error(error.message);
+      return data as Job;
+    },
     enabled: !!slug,
   });
 }
@@ -29,9 +53,18 @@ export function useJobBySlug(slug: string) {
 export function useCreateJob() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (newJob: InsertJob) => apiRequest('POST', '/api/jobs', newJob),
+        mutationFn: async (newJob: InsertJob) => {
+            const slug = toSlug(newJob.title);
+            const { data, error } = await supabase
+                .from('jobs')
+                .insert([{ ...newJob, slug }])
+                .select()
+                .single();
+            if (error) throw new Error(error.message);
+            return data;
+        },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['/api/jobs'] });
+            queryClient.invalidateQueries({ queryKey: ['jobs'] });
         },
     });
 }
@@ -39,9 +72,12 @@ export function useCreateJob() {
 export function useDeleteJob() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (id: string) => apiRequest('DELETE', `/api/jobs/${id}`),
+        mutationFn: async (id: string) => {
+            const { error } = await supabase.from('jobs').delete().eq('id', id);
+            if (error) throw new Error(error.message);
+        },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['/api/jobs'] });
+            queryClient.invalidateQueries({ queryKey: ['jobs'] });
         },
     });
 }
@@ -51,18 +87,32 @@ export function useCreateApplication() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (newApplication: InsertApplication) => {
-            const res = await apiRequest('POST', '/api/applications', newApplication);
-            return res.json();
+            const { data, error } = await supabase
+                .from('applications')
+                .insert([newApplication])
+                .select()
+                .single();
+            if (error) throw new Error(error.message);
+            return data;
         },
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['/api/applications/job', data.jobId] });
+            queryClient.invalidateQueries({ queryKey: ['applications', 'job', data.job_id] });
         },
     });
 }
 
 export function useApplications(jobId: string) {
     return useQuery<Application[]>({
-        queryKey: ['/api/applications/job', jobId],
+        queryKey: ['applications', 'job', jobId],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from('applications')
+                .select('*')
+                .eq('job_id', jobId)
+                .order('created_at', { ascending: false });
+            if (error) throw new Error(error.message);
+            return data as Application[];
+        },
         enabled: !!jobId,
     });
 }
@@ -70,9 +120,12 @@ export function useApplications(jobId: string) {
 export function useDeleteApplication() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (id: string) => apiRequest('DELETE', `/api/applications/${id}`),
+        mutationFn: async (id: string) => {
+            const { error } = await supabase.from('applications').delete().eq('id', id);
+            if (error) throw new Error(error.message);
+        },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['/api/applications/job'] });
+            queryClient.invalidateQueries({ queryKey: ['applications'] });
         },
     });
 }
@@ -80,21 +133,37 @@ export function useDeleteApplication() {
 // Contacts
 export function useContacts() {
     return useQuery<Contact[]>({
-        queryKey: ['/api/contacts'],
+        queryKey: ['contacts'],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from('contacts')
+                .select('*')
+                .order('created_at', { ascending: false });
+            if (error) throw new Error(error.message);
+            return data as Contact[];
+        },
     });
 }
 
 export function useCreateContact() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (newContact: InsertContact) => apiRequest('POST', '/api/contacts', newContact),
+        mutationFn: async (newContact: InsertContact) => {
+            const { data, error } = await supabase
+                .from('contacts')
+                .insert([newContact])
+                .select()
+                .single();
+            if (error) throw new Error(error.message);
+            return data;
+        },
         onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['/api/contacts'] });
+            queryClient.invalidateQueries({ queryKey: ['contacts'] });
         },
     });
 }
 
-// Mocked Hooks
+// Mocked Hooks (unchanged)
 export function useCaseStudies() {
   return useQuery<CaseStudy[]>({
     queryKey: ['case-studies'],
