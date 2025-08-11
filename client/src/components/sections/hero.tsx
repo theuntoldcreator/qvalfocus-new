@@ -45,7 +45,7 @@ export function Hero() {
   const activeContent = heroContent.find((item) => item.id === activeTab)!;
 
   return (
-    <section className="relative min-h-screen flex flex-col bg-slate-900 text-white overflow-hidden">
+    <section className="relative min-h-screen flex flex-col bg-white text-slate-900 overflow-hidden">
       {/* Background Image Container */}
       <div className="absolute top-0 right-0 h-full w-full lg:w-3/5">
         <AnimatePresence>
@@ -63,7 +63,7 @@ export function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(to right, #0f172a 20%, transparent 100%)",
+              "linear-gradient(to right, hsl(0 0% 100%) 20%, transparent 100%)",
           }}
         ></div>
       </div>
@@ -82,7 +82,7 @@ export function Hero() {
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">
                 {activeContent.title}
               </h1>
-              <p className="text-lg md:text-xl text-slate-300 mb-8">
+              <p className="text-lg md:text-xl text-slate-600 mb-8">
                 {activeContent.description}
               </p>
               <Button size="lg" asChild>
@@ -100,19 +100,19 @@ export function Hero() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className="relative text-sm font-medium transition-colors text-slate-400 hover:text-white py-2 whitespace-nowrap"
+                  className="relative text-sm font-medium transition-colors text-slate-500 hover:text-slate-900 py-2 whitespace-nowrap"
                 >
                   {tab.tabTitle}
                   {activeTab === tab.id && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-slate-900"
                       layoutId="underline"
                     />
                   )}
                 </button>
               ))}
             </div>
-            <div className="border-t border-white/10"></div>
+            <div className="border-t border-slate-200"></div>
           </div>
         </div>
       </div>
