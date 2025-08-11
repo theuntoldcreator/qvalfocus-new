@@ -12,7 +12,7 @@ export default function TermsPage() {
     <div className="min-h-screen">
       <Header />
       
-      <main className="pt-20">
+      <main> {/* Removed pt-20 */}
         {/* Header */}
         <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
