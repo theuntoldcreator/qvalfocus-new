@@ -1,11 +1,11 @@
-import { Link, useLocation } from "wouter";
+import { Link, useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { Briefcase, Mail, LogOut, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function AdminSidebar() {
-  const [location, navigate] = useLocation();
+  const [, navigate] = useLocation();
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
@@ -13,9 +13,9 @@ export function AdminSidebar() {
   };
 
   const navLinks = [
-    { href: "/", label: "Dashboard", icon: LayoutDashboard }, // Changed to relative path
-    { href: "/jobs", label: "Jobs", icon: Briefcase }, // Changed to relative path
-    { href: "/contacts", label: "Contacts", icon: Mail }, // Changed to relative path
+    { href: "/", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/jobs", label: "Jobs", icon: Briefcase },
+    { href: "/contacts", label: "Contacts", icon: Mail },
   ];
 
   return (
@@ -28,12 +28,7 @@ export function AdminSidebar() {
       <nav className="flex-grow p-4 space-y-2">
         {navLinks.map(link => {
           const Icon = link.icon;
-          // Determine active state:
-          // For the dashboard home link, it's active only if the location is exactly the dashboard home.
-          // For other links (like jobs, contacts), it's active if the location starts with the link's href.
-          const isActive = link.href === "/"
-            ? location === "/admin/dashboard" || location === "/admin/dashboard/" // Check for base path
-            : location.startsWith(`/admin/dashboard${link.href}`); // Check for sub-paths
+          const [isActive] = useRoute(link.href);
           
           return (
             <Link key={link.href} href={link.href}>
