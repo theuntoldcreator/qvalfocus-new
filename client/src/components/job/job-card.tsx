@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock } from "lucide-react";
+import { MapPin, Briefcase, Clock } from "lucide-react";
 import type { Job } from "@shared/schema";
 
 interface JobCardProps {
@@ -9,60 +9,35 @@ interface JobCardProps {
 }
 
 export function JobCard({ job }: JobCardProps) {
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case 'full-time':
-        return 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200';
-      case 'contract':
-        return 'bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200';
-      case 'part-time':
-        return 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200';
-      default:
-        return 'bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200';
-    }
-  };
-
-  const jobSlug = job.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-
   return (
-    <div className="glass dark:glass-dark rounded-xl p-6 border border-slate-200 dark:border-slate-700">
-      <div className="flex justify-between items-start mb-4">
-        <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-          <span className="text-white font-bold">{job.companyLogo}</span>
-        </div>
-        <Badge className={`px-2 py-1 rounded-full text-xs font-semibold ${getTypeColor(job.type)}`}>
-          {job.type.replace('-', ' ')}
-        </Badge>
-      </div>
-      
-      <h3 className="text-xl font-bold mb-2">{job.title}</h3>
-      <p className="text-slate-600 dark:text-slate-300 text-sm mb-4">{job.company}</p>
-      <p className="text-slate-500 dark:text-slate-400 text-sm mb-4 line-clamp-3">
-        {job.description.substring(0, 120)}...
-      </p>
-      
-      <div className="flex flex-wrap gap-2 mb-4">
-        {job.skills?.slice(0, 3).map((skill, index) => (
-          <Badge key={index} variant="secondary" className="text-xs">
-            {skill}
-          </Badge>
-        ))}
-      </div>
-      
-      <div className="flex justify-between items-center">
-        <div>
-          <div className="flex items-center text-sm text-slate-500 dark:text-slate-400 mb-1">
-            <MapPin className="w-4 h-4 mr-1" />
-            {job.location}
-          </div>
-          {job.salary && (
-            <p className="text-sm font-semibold text-primary">{job.salary}</p>
+    <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+      <div className="flex-grow">
+        <div className="mb-4">
+          {job.tags && job.tags.length > 0 && (
+            <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/50 dark:text-blue-300 dark:border-blue-800">
+              <Clock className="w-3 h-3 mr-1.5" />
+              {job.tags[0]}
+            </Badge>
           )}
         </div>
-        <Button variant="ghost" className="text-primary hover:text-primary/80 text-sm p-0" asChild>
-          <Link href={`/jobs/${jobSlug}`}>
-            Apply →
-          </Link>
+        <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-white">{job.title}</h3>
+        <div className="flex items-center text-sm text-slate-500 dark:text-slate-400 space-x-4 mb-4">
+          <div className="flex items-center">
+            <MapPin className="w-4 h-4 mr-1.5" />
+            {job.location}
+          </div>
+          <div className="flex items-center">
+            <Briefcase className="w-4 h-4 mr-1.5" />
+            {job.type}
+          </div>
+        </div>
+      </div>
+      <div className="bg-slate-50 dark:bg-slate-800/50 rounded-lg p-4 mt-4 flex justify-between items-center">
+        <p className="text-sm text-slate-600 dark:text-slate-300 flex-1 pr-4 line-clamp-2">
+          {job.description}
+        </p>
+        <Button asChild size="sm" className="flex-shrink-0">
+          <Link href={`/jobs/${job.slug}`}>Apply Now</Link>
         </Button>
       </div>
     </div>

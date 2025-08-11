@@ -1,50 +1,38 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
-import { insertJobSchema, insertApplicationSchema, insertContactSchema, insertNewsletterSchema } from "@shared/schema";
+import { db } from "./db";
+import { insertJobSchema } from "@shared/schema";
 import { z } from "zod";
+import { supabaseAdmin } from "./supabase";
+
+// Auth middleware
+async function authMiddleware(req: Request, res: Response, next: NextFunction) {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: No token provided' });
+  }
+  const { data: { user }, error } = await supabaseAdmin.auth.getUser(token);
+  if (error || !user) {
+    return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+  }
+  (req as any).user = user;
+  next();
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Jobs endpoints
   app.get("/api/jobs", async (req, res) => {
     try {
-      const { location, type, industry, search } = req.query;
-      const jobs = await storage.getJobs({
-        location: location as string,
-        type: type as string,
-        industry: industry as string,
-        search: search as string
-      });
+      const jobs = await db.getJobs();
       res.json(jobs);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch jobs" });
     }
   });
 
-  app.get("/api/jobs/featured", async (req, res) => {
-    try {
-      const jobs = await storage.getFeaturedJobs();
-      res.json(jobs);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch featured jobs" });
-    }
-  });
-
-  app.get("/api/jobs/:id", async (req, res) => {
-    try {
-      const job = await storage.getJob(req.params.id);
-      if (!job) {
-        return res.status(404).json({ message: "Job not found" });
-      }
-      res.json(job);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch job" });
-    }
-  });
-
   app.get("/api/jobs/slug/:slug", async (req, res) => {
     try {
-      const job = await storage.getJobBySlug(req.params.slug);
+      const job = await db.getJobBySlug(req.params.slug);
       if (!job) {
         return res.status(404).json({ message: "Job not found" });
       }
@@ -54,10 +42,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/jobs", async (req, res) => {
+  app.post("/api/jobs", authMiddleware, async (req, res) => {
     try {
       const jobData = insertJobSchema.parse(req.body);
-      const job = await storage.createJob(jobData);
+      const job = await db.createJob(jobData);
       res.status(201).json(job);
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -67,115 +55,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Applications endpoints
-  app.post("/api/applications", async (req, res) => {
+  app.delete("/api/jobs/:id", authMiddleware, async (req, res) => {
     try {
-      const applicationData = insertApplicationSchema.parse(req.body);
-      const application = await storage.createApplication(applicationData);
-      res.status(201).json(application);
+        await db.deleteJob(req.params.id);
+        res.status(204).send();
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid application data", errors: error.errors });
-      }
-      res.status(500).json({ message: "Failed to submit application" });
+        res.status(500).json({ message: "Failed to delete job" });
     }
   });
 
-  app.get("/api/applications/job/:jobId", async (req, res) => {
+  // Applications endpoints
+  app.get("/api/applications/job/:jobId", authMiddleware, async (req, res) => {
     try {
-      const applications = await storage.getApplicationsByJob(req.params.jobId);
+      const applications = await db.getApplicationsByJob(req.params.jobId);
       res.json(applications);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch applications" });
     }
   });
 
-  // Contacts endpoints
-  app.post("/api/contacts", async (req, res) => {
+  app.delete("/api/applications/:id", authMiddleware, async (req, res) => {
     try {
-      const contactData = insertContactSchema.parse(req.body);
-      const contact = await storage.createContact(contactData);
-      res.status(201).json(contact);
+        await db.deleteApplication(req.params.id);
+        res.status(204).send();
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid contact data", errors: error.errors });
-      }
-      res.status(500).json({ message: "Failed to submit contact form" });
+        res.status(500).json({ message: "Failed to delete application" });
     }
   });
 
-  app.get("/api/contacts", async (req, res) => {
-    try {
-      const contacts = await storage.getContacts();
-      res.json(contacts);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch contacts" });
-    }
-  });
-
-  // Newsletter endpoints
-  app.post("/api/newsletter/subscribe", async (req, res) => {
-    try {
-      const newsletterData = insertNewsletterSchema.parse(req.body);
-      
-      // Check if email is already subscribed
-      const isSubscribed = await storage.isEmailSubscribed(newsletterData.email);
-      if (isSubscribed) {
-        return res.status(400).json({ message: "Email is already subscribed" });
-      }
-
-      const newsletter = await storage.subscribeNewsletter(newsletterData);
-      res.status(201).json(newsletter);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid email address", errors: error.errors });
-      }
-      res.status(500).json({ message: "Failed to subscribe to newsletter" });
-    }
-  });
-
-  // Case studies endpoints
-  app.get("/api/case-studies", async (req, res) => {
-    try {
-      const caseStudies = await storage.getCaseStudies();
-      res.json(caseStudies);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch case studies" });
-    }
-  });
-
-  app.get("/api/case-studies/featured", async (req, res) => {
-    try {
-      const caseStudies = await storage.getFeaturedCaseStudies();
-      res.json(caseStudies);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch featured case studies" });
-    }
-  });
-
-  app.get("/api/case-studies/:id", async (req, res) => {
-    try {
-      const caseStudy = await storage.getCaseStudy(req.params.id);
-      if (!caseStudy) {
-        return res.status(404).json({ message: "Case study not found" });
-      }
-      res.json(caseStudy);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch case study" });
-    }
-  });
-
-  app.get("/api/case-studies/slug/:slug", async (req, res) => {
-    try {
-      const caseStudy = await storage.getCaseStudyBySlug(req.params.slug);
-      if (!caseStudy) {
-        return res.status(404).json({ message: "Case study not found" });
-      }
-      res.json(caseStudy);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch case study" });
-    }
-  });
+  // NOTE: Other routes for contacts, newsletter, etc. are removed for now
+  // as they were using the in-memory storage. They can be added back with a DB implementation.
 
   const httpServer = createServer(app);
   return httpServer;
