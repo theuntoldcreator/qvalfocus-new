@@ -1,18 +1,30 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Briefcase, Clock } from "lucide-react";
+import { MapPin, Briefcase, Clock, Building } from "lucide-react";
 import type { Job } from "@shared/schema";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface JobCardProps {
   job: Job;
 }
 
 export function JobCard({ job }: JobCardProps) {
+  const companyInitial = job.company ? job.company.charAt(0).toUpperCase() : '';
+
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 flex flex-col h-full hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
       <div className="flex-grow">
-        <div className="mb-4">
+        <div className="flex justify-between items-start mb-4">
+          <Avatar className="w-12 h-12 rounded-lg">
+            {job.companyLogo ? (
+              <AvatarImage src={job.companyLogo} alt={`${job.company} logo`} />
+            ) : (
+              <AvatarFallback className="bg-primary text-white text-lg font-bold">
+                {companyInitial || <Building className="w-6 h-6" />}
+              </AvatarFallback>
+            )}
+          </Avatar>
           {job.tags && job.tags.length > 0 && (
             <Badge variant="outline" className="bg-blue-100 text-blue-800 border-blue-200 dark:bg-blue-900/50 dark:text-blue-300 dark:border-blue-800">
               <Clock className="w-3 h-3 mr-1.5" />

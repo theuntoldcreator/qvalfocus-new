@@ -63,7 +63,7 @@ export default function AboutPage() {
             <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
               Flexible, Scalable Talent Solutions
             </h1>
-            <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-white md:text-slate-600 mb-8 max-w-3xl mx-auto"> {/* Changed text color */}
               At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
             </p>
             <Button size="lg" asChild>

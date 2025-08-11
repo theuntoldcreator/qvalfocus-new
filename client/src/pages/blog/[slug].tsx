@@ -81,13 +81,13 @@ export default function BlogPostPage() {
               </Link>
             </div>
 
-            <div className="text-center mb-12">
-              <Badge className="mb-4 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400">
+            <div className="text-center mb-12 text-white"> {/* Added text-white here */}
+              <Badge className="mb-4 bg-white/20 text-white border-white/30"> {/* Adjusted badge for white text */}
                 {blogPost.category}
               </Badge>
               
               {blogPost.subtitle && (
-                <div className="text-sm font-semibold text-primary mb-2 uppercase tracking-wide">
+                <div className="text-sm font-semibold mb-2 uppercase tracking-wide">
                   {blogPost.subtitle}
                 </div>
               )}
@@ -96,7 +96,7 @@ export default function BlogPostPage() {
                 {blogPost.title}
               </h1>
               
-              <div className="flex items-center justify-center gap-6 text-slate-600 dark:text-slate-300">
+              <div className="flex items-center justify-center gap-6"> {/* Removed text-slate-600 dark:text-slate-300 */}
                 <div className="flex items-center">
                   {blogPost.authorAvatar ? (
                     <img src={blogPost.authorAvatar} alt={blogPost.author} className="w-6 h-6 rounded-full mr-2" />

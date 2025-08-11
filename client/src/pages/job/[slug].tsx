@@ -19,6 +19,7 @@ import {
   Share2,
   Bookmark
 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function JobPage() {
   const { slug } = useParams();
@@ -92,11 +93,13 @@ export default function JobPage() {
     }
   };
 
+  const companyInitial = job.company ? job.company.charAt(0).toUpperCase() : '';
+
   return (
     <div className="min-h-screen">
       <Header />
       
-      <main> {/* Removed pt-20 */}
+      <main>
         {/* Job Header */}
         <section className="py-12 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -113,9 +116,15 @@ export default function JobPage() {
               <div className="lg:col-span-3">
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mr-6">
-                      <span className="text-white font-bold text-lg">{job.companyLogo}</span>
-                    </div>
+                    <Avatar className="w-16 h-16 rounded-xl mr-6">
+                      {job.companyLogo ? (
+                        <AvatarImage src={job.companyLogo} alt={`${job.company} logo`} />
+                      ) : (
+                        <AvatarFallback className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xl font-bold">
+                          {companyInitial || <Building className="w-8 h-8" />}
+                        </AvatarFallback>
+                      )}
+                    </Avatar>
                     <div>
                       <h1 className="text-3xl md:text-4xl font-serif font-bold mb-2">{job.title}</h1>
                       <div className="flex items-center gap-4 text-slate-600 dark:text-slate-300">

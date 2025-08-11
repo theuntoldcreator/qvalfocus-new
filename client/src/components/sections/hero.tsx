@@ -17,7 +17,7 @@ const heroContent = [
     title: "Experience the Power of Agentic Business",
     description: "Turn isolated AI pilots into production-grade agent networks with Agent Foundry.",
     buttonText: "Learn More",
-    imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   },
   {
     navLabel: "Multi-agent services",
@@ -42,8 +42,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative bg-white text-slate-900 overflow-hidden"
-      style={{ height: 'calc(100vh - 5rem)', minHeight: '700px' }}
+      className="relative bg-white text-slate-900 overflow-hidden min-h-[calc(100vh-5rem)] flex items-center" // Adjusted height
     >
       {/* Fading Image Background */}
       <div className="absolute top-0 right-0 h-full w-full md:w-3/5">
@@ -58,7 +57,7 @@ export function Hero() {
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-black/50 md:hidden" />
+        <div className="absolute inset-0 bg-black/60 md:hidden" /> {/* Increased overlay */}
         <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-white from-0% via-white/80 via-30% to-transparent" />
       </div>
 
