@@ -34,6 +34,8 @@ export default function AdminLoginPage() {
             appearance={{ theme: ThemeSupa }}
             providers={[]}
             theme="light"
+            view="sign_in"
+            showLinks={false}
           />
         </CardContent>
       </Card>
