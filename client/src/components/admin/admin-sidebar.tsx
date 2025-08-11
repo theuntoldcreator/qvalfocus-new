@@ -32,15 +32,15 @@ export function AdminSidebar() {
           
           return (
             <Link key={link.href} href={link.href}>
-              <a className={cn(
-                "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+              <div className={cn(
+                "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer",
                 isActive 
                   ? "bg-primary text-primary-foreground" 
                   : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
               )}>
                 <Icon className="w-5 h-5 mr-3" />
                 {link.label}
-              </a>
+              </div>
             </Link>
           );
         })}
