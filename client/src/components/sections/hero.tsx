@@ -92,28 +92,27 @@ export function Hero() {
               </Button>
             </motion.div>
           </AnimatePresence>
-        </div>
-      </div>
 
-      {/* Bottom Navigation */}
-      <div className="relative z-10 w-full border-t border-white/10 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-start items-center h-24 space-x-8 overflow-x-auto">
-            {heroContent.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className="relative text-sm font-medium transition-colors text-slate-400 hover:text-white py-2 whitespace-nowrap"
-              >
-                {tab.tabTitle}
-                {activeTab === tab.id && (
-                  <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
-                    layoutId="underline"
-                  />
-                )}
-              </button>
-            ))}
+          {/* Tabs and Divider */}
+          <div className="mt-12 w-full">
+            <div className="flex justify-start items-center space-x-8 overflow-x-auto mb-6">
+              {heroContent.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className="relative text-sm font-medium transition-colors text-slate-400 hover:text-white py-2 whitespace-nowrap"
+                >
+                  {tab.tabTitle}
+                  {activeTab === tab.id && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+                      layoutId="underline"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+            <div className="border-t border-white/10"></div>
           </div>
         </div>
       </div>
