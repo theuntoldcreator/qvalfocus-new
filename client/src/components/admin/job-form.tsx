@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useCreateJob } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
+import { useLocation } from "wouter";
 
 const jobFormSchema = insertJobSchema.extend({
   skills: z.string().optional(),
@@ -19,6 +20,7 @@ type JobFormData = z.infer<typeof jobFormSchema>;
 export function JobForm() {
   const createJob = useCreateJob();
   const { toast } = useToast();
+  const [, navigate] = useLocation();
 
   const form = useForm<JobFormData>({
     resolver: zodResolver(jobFormSchema),
@@ -52,6 +54,7 @@ export function JobForm() {
       onSuccess: () => {
         toast({ title: "Job posted successfully!" });
         form.reset();
+        navigate("/admin/dashboard/jobs");
       },
       onError: (error) => {
         toast({ title: "Error posting job", description: error.message, variant: "destructive" });
