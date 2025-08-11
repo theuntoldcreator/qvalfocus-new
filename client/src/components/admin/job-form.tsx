@@ -14,6 +14,15 @@ import { useLocation } from "wouter";
 const jobFormSchema = insertJobSchema.extend({
   skills: z.string().optional(),
   tags: z.string().optional(),
+  // Add optional fields that are nullable in schema but not in form inputs
+  companyLogo: z.string().optional(),
+  salary: z.string().optional(),
+  benefits: z.string().optional(),
+  remote: z.boolean().optional(),
+  featured: z.boolean().optional(),
+  recruiterName: z.string().optional(),
+  recruiterEmail: z.string().optional(),
+  recruiterPhone: z.string().optional(),
 });
 type JobFormData = z.infer<typeof jobFormSchema>;
 
@@ -38,6 +47,15 @@ export function JobForm() {
       externalApplicationUrl: "",
       tags: "",
       skills: "",
+      // Explicitly set defaults for nullable fields not in form inputs
+      companyLogo: "",
+      salary: "",
+      benefits: "",
+      remote: false,
+      featured: false,
+      recruiterName: "",
+      recruiterEmail: "",
+      recruiterPhone: "",
     },
   });
 
@@ -45,9 +63,29 @@ export function JobForm() {
 
   const onSubmit = async (data: JobFormData) => {
     const payload: InsertJob = {
-        ...data,
-        skills: data.skills ? data.skills.split(',').map(s => s.trim()).filter(Boolean) : [],
-        tags: data.tags ? data.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
+        title: data.title,
+        company: data.company,
+        location: data.location,
+        type: data.type,
+        level: data.level,
+        industry: data.industry,
+        description: data.description,
+        requirements: data.requirements,
+        responsibilities: data.responsibilities,
+        applicationType: data.applicationType,
+        // Explicitly handle nullable fields, converting empty strings to null
+        companyLogo: data.companyLogo || null,
+        salary: data.salary || null,
+        benefits: data.benefits || null,
+        remote: data.remote ?? false, // Default to false if undefined
+        featured: data.featured ?? false, // Default to false if undefined
+        recruiterName: data.recruiterName || null,
+        recruiterEmail: data.recruiterEmail || null,
+        recruiterPhone: data.recruiterPhone || null,
+        externalApplicationUrl: data.externalApplicationUrl || null,
+        // Convert comma-separated strings to arrays, or null if empty
+        skills: data.skills ? data.skills.split(',').map(s => s.trim()).filter(Boolean) : null,
+        tags: data.tags ? data.tags.split(',').map(t => t.trim()).filter(Boolean) : null,
     };
 
     await createJob.mutateAsync(payload, {
