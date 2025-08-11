@@ -9,10 +9,8 @@ export function Footer() {
           {/* Company Info */}
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">TF</span>
-              </div>
-              <span className="text-xl font-bold text-white">TalentForge</span>
+              <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="w-8 h-8" />
+              <span className="text-xl font-bold text-white">QvalFocus</span>
             </div>
             <p className="text-slate-400 mb-6">
               {companyInfo.description}
@@ -77,7 +75,7 @@ export function Footer() {
               <a href="#" className="text-sm hover:text-white transition-colors">Cookie Policy</a>
             </div>
             <div className="text-sm text-slate-400">
-              © 2024 TalentForge. All rights reserved.
+              © 2024 QvalFocus. All rights reserved.
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 # Overview
 
-TalentForge is a premium staffing and consulting services website built with modern web technologies. The application serves as a comprehensive platform for connecting exceptional talent with visionary companies through strategic staffing, consulting services, and managed services. The site features a sophisticated, image-heavy design with smooth animations and glassmorphism effects, targeting technology, financial services, healthcare, retail, manufacturing, and public sector industries.
+QvalFocus is a premium staffing and consulting services website built with modern web technologies. The application serves as a comprehensive platform for connecting exceptional talent with visionary companies through strategic staffing, consulting services, and managed services. The site features a sophisticated, image-heavy design with smooth animations and glassmorphism effects, targeting technology, financial services, healthcare, retail, manufacturing, and public sector industries.
 
 # User Preferences
 

@@ -275,12 +275,12 @@ export default function PrivacyPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="font-bold mb-2">Data Protection Officer</h4>
-                    <p>Email: privacy@talentforge.com</p>
+                    <p>Email: privacy@qvalfocus.com</p>
                     <p>Phone: +1 (415) 555-0199</p>
                   </div>
                   <div>
                     <h4 className="font-bold mb-2">Mailing Address</h4>
-                    <p>TalentForge Privacy Team<br />
+                    <p>QvalFocus Privacy Team<br />
                     123 Market Street, Suite 500<br />
                     San Francisco, CA 94105</p>
                   </div>

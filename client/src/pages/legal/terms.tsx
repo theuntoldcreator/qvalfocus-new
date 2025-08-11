@@ -29,7 +29,7 @@ export default function TermsPage() {
               <Badge className="mb-6">Legal</Badge>
               <h1 className="text-4xl md:text-5xl font-serif font-bold mb-6">Terms of Service</h1>
               <p className="text-xl text-slate-600 dark:text-slate-300 mb-4">
-                Terms and conditions for using TalentForge services
+                Terms and conditions for using QvalFocus services
               </p>
               <p className="text-sm text-slate-500 dark:text-slate-400">
                 Last updated: {lastUpdated}
@@ -82,16 +82,16 @@ export default function TermsPage() {
               <h2>1. Acceptance of Terms</h2>
               
               <p>
-                By accessing and using the TalentForge website and services ("Services"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                By accessing and using the QvalFocus website and services ("Services"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
               </p>
 
               <p>
-                These Terms of Service ("Terms") constitute a legally binding agreement between you and TalentForge, Inc. ("TalentForge," "we," "us," or "our") governing your use of our website, platform, and services.
+                These Terms of Service ("Terms") constitute a legally binding agreement between you and QvalFocus, Inc. ("QvalFocus," "we," "us," or "our") governing your use of our website, platform, and services.
               </p>
 
               <h2>2. Description of Service</h2>
               
-              <p>TalentForge provides the following services:</p>
+              <p>QvalFocus provides the following services:</p>
               
               <ul>
                 <li><strong>Staffing Services:</strong> Permanent, contract, and executive search placements</li>
@@ -173,9 +173,9 @@ export default function TermsPage() {
 
               <h2>7. Intellectual Property Rights</h2>
               
-              <h3>TalentForge IP</h3>
+              <h3>QvalFocus IP</h3>
               <ul>
-                <li>All website content, trademarks, and technology are owned by TalentForge</li>
+                <li>All website content, trademarks, and technology are owned by QvalFocus</li>
                 <li>You may not copy, distribute, or create derivative works without permission</li>
                 <li>Our algorithms and matching technology are proprietary and confidential</li>
               </ul>
@@ -214,7 +214,7 @@ export default function TermsPage() {
 
               <h3>Limitation of Liability</h3>
               <p>
-                <strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, TALENTFORGE'S TOTAL LIABILITY TO YOU FOR ANY DAMAGES ARISING FROM OR RELATED TO THESE TERMS OR THE SERVICES SHALL NOT EXCEED THE AMOUNT PAID BY YOU TO TALENTFORGE IN THE 12 MONTHS PRECEDING THE CLAIM.</strong>
+                <strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, QVALFOCUS'S TOTAL LIABILITY TO YOU FOR ANY DAMAGES ARISING FROM OR RELATED TO THESE TERMS OR THE SERVICES SHALL NOT EXCEED THE AMOUNT PAID BY YOU TO QVALFOCUS IN THE 12 MONTHS PRECEDING THE CLAIM.</strong>
               </p>
 
               <p>
@@ -224,7 +224,7 @@ export default function TermsPage() {
               <h2>11. Indemnification</h2>
               
               <p>
-                You agree to indemnify and hold harmless TalentForge, its officers, directors, employees, and agents from any claims, damages, or expenses arising from:
+                You agree to indemnify and hold harmless QvalFocus, its officers, directors, employees, and agents from any claims, damages, or expenses arising from:
               </p>
               
               <ul>
@@ -282,7 +282,7 @@ export default function TermsPage() {
 
               <h3>Entire Agreement</h3>
               <p>
-                These Terms, together with our Privacy Policy and any service agreements, constitute the entire agreement between you and TalentForge.
+                These Terms, together with our Privacy Policy and any service agreements, constitute the entire agreement between you and QvalFocus.
               </p>
 
               <h3>Assignment</h3>
@@ -318,12 +318,12 @@ export default function TermsPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="font-bold mb-2">Legal Department</h4>
-                    <p>Email: legal@talentforge.com</p>
+                    <p>Email: legal@qvalfocus.com</p>
                     <p>Phone: +1 (415) 555-0188</p>
                   </div>
                   <div>
                     <h4 className="font-bold mb-2">Mailing Address</h4>
-                    <p>TalentForge Legal Team<br />
+                    <p>QvalFocus Legal Team<br />
                     123 Market Street, Suite 500<br />
                     San Francisco, CA 94105</p>
                   </div>

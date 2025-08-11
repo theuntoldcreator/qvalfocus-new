@@ -49,7 +49,7 @@ export const testimonials = [
     name: "Sarah Chen",
     role: "CTO, InnovateTech",
     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
-    content: "TalentForge transformed our hiring process. They understood our culture and technical needs, delivering candidates who weren't just qualified but genuinely excited about our mission.",
+    content: "QvalFocus transformed our hiring process. They understood our culture and technical needs, delivering candidates who weren't just qualified but genuinely excited about our mission.",
     rating: 5
   },
   {
@@ -57,7 +57,7 @@ export const testimonials = [
     name: "Marcus Rodriguez",
     role: "Senior Developer",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
-    content: "Found my dream role through TalentForge. Their team took time to understand my career goals and connected me with a company that's been the perfect fit for over two years now.",
+    content: "Found my dream role through QvalFocus. Their team took time to understand my career goals and connected me with a company that's been the perfect fit for over two years now.",
     rating: 5
   },
   {
@@ -99,16 +99,16 @@ export const services = [
 ];
 
 export const companyInfo = {
-  name: "TalentForge",
+  name: "QvalFocus",
   tagline: "Connecting Exceptional Talent with Visionary Companies",
   description: "Premier staffing, consulting, and managed services across technology, finance, healthcare, and beyond. We don't just fill positions—we forge partnerships that drive innovation.",
   founded: "2018",
   headquarters: "San Francisco, CA",
   offices: ["New York", "London", "Singapore"],
-  email: "hello@talentforge.com",
+  email: "hello@qvalfocus.com",
   phone: "+1-555-TALENT",
-  linkedin: "https://linkedin.com/company/talentforge",
-  twitter: "https://twitter.com/talentforge"
+  linkedin: "https://linkedin.com/company/qvalfocus",
+  twitter: "https://twitter.com/qvalfocus"
 };
 
 export const leadership = [

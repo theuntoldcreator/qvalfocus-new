@@ -97,7 +97,7 @@ export default function AboutPage() {
               Flexible, Scalable Talent Solutions
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
-              At TalentForge, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
+              At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
             </p>
             <Button size="lg" asChild>
               <Link href="/contact?type=client">Get In Touch</Link>
@@ -113,7 +113,7 @@ export default function AboutPage() {
                 <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Who We Are</h2>
                 <div className="space-y-6 text-slate-700 dark:text-slate-300">
                   <p>
-                    TalentForge, Inc. is an emerging professional services provider delivering innovative, high-quality solutions across the Life Sciences and Information Technology sectors. Backed by modern technology, passionate experts, and a leadership team with over 50 years of combined industry experience, we specialize in connecting top-tier talent with forward-thinking organizations. We do the heavy lifting—so you can focus on delivering your projects on time with skilled and reliable resources.
+                    QvalFocus, Inc. is an emerging professional services provider delivering innovative, high-quality solutions across the Life Sciences and Information Technology sectors. Backed by modern technology, passionate experts, and a leadership team with over 50 years of combined industry experience, we specialize in connecting top-tier talent with forward-thinking organizations. We do the heavy lifting—so you can focus on delivering your projects on time with skilled and reliable resources.
                   </p>
                 </div>
               </div>
