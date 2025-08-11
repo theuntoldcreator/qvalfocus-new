@@ -14,7 +14,7 @@ const heroContent = [
     buttonText: "Find Talent",
     buttonLink: "/contact?type=client",
     image:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   },
   {
     id: "careers",
@@ -25,7 +25,7 @@ const heroContent = [
     buttonText: "Explore Careers",
     buttonLink: "/jobs",
     image:
-      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   },
   {
     id: "solutions",
@@ -36,7 +36,7 @@ const heroContent = [
     buttonText: "Explore Services",
     buttonLink: "/services/staffing",
     image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
   },
 ];
 
