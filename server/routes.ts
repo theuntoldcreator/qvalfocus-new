@@ -1,7 +1,7 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { db } from "./db";
-import { insertJobSchema } from "@shared/schema";
+import { insertJobSchema, insertApplicationSchema } from "@shared/schema";
 import { z } from "zod";
 import { supabaseAdmin } from "./supabase";
 
@@ -65,6 +65,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Applications endpoints
+  app.post("/api/applications", async (req, res) => {
+    try {
+      const appData = insertApplicationSchema.parse(req.body);
+      const application = await db.createApplication(appData);
+      res.status(201).json(application);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid application data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create application" });
+    }
+  });
+
   app.get("/api/applications/job/:jobId", authMiddleware, async (req, res) => {
     try {
       const applications = await db.getApplicationsByJob(req.params.jobId);

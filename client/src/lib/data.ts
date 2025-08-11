@@ -104,3 +104,40 @@ export const leadership = [
     linkedin: "https://linkedin.com/in/jameswilson"
   }
 ];
+
+export const caseStudies = [
+  {
+    id: '1',
+    slug: 'tech-giant-cloud-migration',
+    title: 'Cloud Migration for a Tech Giant',
+    subtitle: 'Modernizing Infrastructure',
+    client: 'InnovateCorp',
+    industry: 'Technology',
+    challenge: 'InnovateCorp was struggling with a legacy on-premise infrastructure that was costly to maintain and slow to scale. They needed to migrate their entire platform to a modern cloud architecture without disrupting their 24/7 operations.',
+    solution: 'QvalFocus deployed a team of cloud architects and DevOps engineers who designed and executed a phased migration strategy to AWS. We automated infrastructure provisioning using Terraform and implemented a robust CI/CD pipeline with Kubernetes to ensure seamless deployments.',
+    results: [
+      { metric: 'Time to Deploy', value: '-80%' },
+      { metric: 'Infrastructure Costs', value: '-40%' },
+      { metric: 'System Uptime', value: '99.99%' },
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: '2',
+    slug: 'biotech-validation-acceleration',
+    title: 'Accelerating Validation for a Biotech Startup',
+    subtitle: 'Ensuring Compliance and Speed',
+    client: 'BioGenetics Inc.',
+    industry: 'Life Sciences',
+    challenge: 'BioGenetics Inc. needed to validate their new manufacturing facility to meet FDA regulations. Their in-house team lacked the specialized expertise to complete the complex validation process on an aggressive timeline.',
+    solution: 'QvalFocus provided a team of CQV specialists who developed and executed a comprehensive validation master plan. Our experts managed everything from equipment qualification (IQ/OQ/PQ) to process validation, ensuring full cGMP compliance.',
+    results: [
+      { metric: 'Validation Timeline', value: '-50%' },
+      { metric: 'Audit Findings', value: '0' },
+      { metric: 'Time to Market', value: 'Faster' },
+    ],
+    imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba9996a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    createdAt: new Date().toISOString(),
+  },
+];

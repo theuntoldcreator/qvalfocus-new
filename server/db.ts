@@ -1,5 +1,5 @@
 import { supabaseAdmin } from "./supabase";
-import type { InsertJob, Job } from "@shared/schema";
+import type { InsertJob, Job, InsertApplication, Application } from "@shared/schema";
 
 function toSlug(text: string) {
   return text
@@ -48,6 +48,16 @@ export const db = {
       .eq("id", id);
     if (error) throw error;
     return { id };
+  },
+
+  async createApplication(applicationData: InsertApplication): Promise<Application> {
+    const { data, error } = await supabaseAdmin
+      .from("applications")
+      .insert([applicationData])
+      .select()
+      .single();
+    if (error) throw error;
+    return data as Application;
   },
 
   async getApplicationsByJob(jobId: string) {
