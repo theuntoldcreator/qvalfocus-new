@@ -32,11 +32,11 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><Link href="/services/staffing" className="hover:text-white transition-colors">Strategic Staffing</Link></li>
-              <li><Link href="/services/staffing" className="hover:text-white transition-colors">Executive Search</Link></li>
-              <li><Link href="/services/consulting" className="hover:text-white transition-colors">Consulting Services</Link></li>
-              <li><Link href="/services/managed-services" className="hover:text-white transition-colors">Managed Services</Link></li>
-              <li><Link href="/services/consulting" className="hover:text-white transition-colors">Digital Transformation</Link></li>
+              <li><Link href="/services/staffing-solution" className="hover:text-white transition-colors">Strategic Staffing</Link></li>
+              <li><Link href="/services/staffing-solution" className="hover:text-white transition-colors">Executive Search</Link></li>
+              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Consulting Services</Link></li>
+              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Managed Services</Link></li>
+              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Digital Transformation</Link></li>
             </ul>
           </div>
           
