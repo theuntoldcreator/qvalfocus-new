@@ -2,14 +2,22 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/providers/auth-provider';
-import { Redirect } from 'wouter';
+import { useLocation } from 'wouter';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { useEffect } from 'react';
 
 export default function AdminLoginPage() {
   const { session } = useAuth();
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    if (session) {
+      navigate('/admin/dashboard', { replace: true });
+    }
+  }, [session, navigate]);
 
   if (session) {
-    return <Redirect to="/admin/dashboard" />;
+    return null;
   }
 
   return (
