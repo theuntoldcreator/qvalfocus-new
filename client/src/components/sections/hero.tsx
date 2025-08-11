@@ -45,7 +45,7 @@ export function Hero() {
   const activeContent = heroContent.find((item) => item.id === activeTab)!;
 
   return (
-    <section className="relative min-h-screen flex flex-col bg-white text-slate-900 overflow-hidden">
+    <section className="relative h-[calc(100vh-5rem)] min-h-[600px] flex flex-col bg-white text-slate-900 overflow-hidden">
       {/* Background Image Container */}
       <div className="absolute top-0 right-0 h-full w-full lg:w-3/5">
         <AnimatePresence>
@@ -69,7 +69,7 @@ export function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex items-center pt-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow flex items-center">
         <div className="max-w-xl">
           <AnimatePresence mode="wait">
             <motion.div
