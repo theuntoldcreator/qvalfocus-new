@@ -21,7 +21,7 @@ export default function AdminLoginPage() {
         backgroundPosition: 'center'
       }}
     >
-      <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-slate-900/50"></div>
       <Card className="w-full max-w-md z-10 shadow-2xl">
         <CardHeader className="text-center">
           <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-12 mx-auto mb-4" />
