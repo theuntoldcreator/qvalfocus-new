@@ -168,7 +168,7 @@ export default function CaseStudyPage() {
                       <h2 className="text-2xl font-serif font-bold">The Challenge</h2>
                     </div>
                     <div className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                      {caseStudy.challenge.split('\n').map((paragraph, index) => (
+                      {caseStudy.challenge.split('\n').map((paragraph: string, index: number) => (
                         <p key={index} className="mb-4">{paragraph}</p>
                       ))}
                     </div>
@@ -183,7 +183,7 @@ export default function CaseStudyPage() {
                       <h2 className="text-2xl font-serif font-bold">Our Solution</h2>
                     </div>
                     <div className="text-slate-700 dark:text-slate-300 leading-relaxed">
-                      {caseStudy.solution.split('\n').map((paragraph, index) => (
+                      {caseStudy.solution.split('\n').map((paragraph: string, index: number) => (
                         <p key={index} className="mb-4">{paragraph}</p>
                       ))}
                     </div>

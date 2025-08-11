@@ -68,7 +68,7 @@ export function JobForm() {
         )} />
         {applicationType === 'external' && (
             <FormField name="externalApplicationUrl" control={form.control} render={({ field }) => (
-                <FormItem><FormLabel>External URL</FormLabel><FormControl><Input {...field} placeholder="https://example.com/apply" /></FormControl><FormMessage /></FormItem>
+                <FormItem><FormLabel>External URL</FormLabel><FormControl><Input {...field} value={field.value || ''} placeholder="https://example.com/apply" /></FormControl><FormMessage /></FormItem>
             )} />
         )}
         <Button type="submit" disabled={createJob.isPending}>
