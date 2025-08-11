@@ -41,7 +41,7 @@ export function Header() {
                         "h-full flex items-center border-b-4 transition-colors",
                         location === link.href
                           ? "border-slate-900 dark:border-white text-slate-900 dark:text-white"
-                          : "border-transparent hover:text-slate-900 dark:hover:text-white"
+                          : "border-transparent hover:border-slate-300 dark:hover:border-slate-600 hover:text-slate-900 dark:hover:text-white"
                       )}
                     >
                       {link.label}
