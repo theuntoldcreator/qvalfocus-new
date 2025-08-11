@@ -32,32 +32,32 @@ export default function IndustriesPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-20 pb-16 overflow-hidden">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
-            }}
-          >
-            <div className="absolute inset-0 bg-slate-900/70"></div>
+        <section className="relative pt-32 pb-20 overflow-hidden bg-slate-50 dark:bg-slate-900">
+          <div className="absolute inset-0">
+            <img
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
+              alt="Industries"
+              className="w-full h-full object-cover opacity-10"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center text-white">
-              <Badge className="mb-6 bg-white/20 text-white border-white/30">
+            <div className="text-center">
+              <Badge className="mb-6">
                 Industry Expertise
               </Badge>
               <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
                 Deep <span className="text-gradient">Industry Knowledge</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-200 mb-8 max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
                 We specialize in Life Sciences and Information Technology — delivering industry-aligned staffing and project solutions that produce measurable results.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>
                   <Link href="/contact?type=client">Discuss Your Industry</Link>
                 </Button>
-                <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10" asChild>
+                <Button variant="outline" size="lg" asChild>
                   <Link href="/case-studies">View Success Stories</Link>
                 </Button>
               </div>
