@@ -13,9 +13,9 @@ export function AdminSidebar() {
   };
 
   const navLinks = [
-    { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/admin/dashboard/jobs", label: "Jobs", icon: Briefcase },
-    { href: "/admin/dashboard/contacts", label: "Contacts", icon: Mail },
+    { href: "/", label: "Dashboard", icon: LayoutDashboard }, // Relative path
+    { href: "/jobs", label: "Jobs", icon: Briefcase }, // Relative path
+    { href: "/contacts", label: "Contacts", icon: Mail }, // Relative path
   ];
 
   return (
@@ -28,7 +28,7 @@ export function AdminSidebar() {
       <nav className="flex-grow p-4 space-y-2">
         {navLinks.map(link => {
           const Icon = link.icon;
-          // useRoute will correctly match the full absolute path
+          // useRoute will correctly match the relative path within the nested router
           const [isActive] = useRoute(link.href); 
           
           return (

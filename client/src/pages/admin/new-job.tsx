@@ -10,7 +10,7 @@ export default function NewJobPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Post a New Job</h1>
         <Button asChild variant="outline">
-          <Link href="/admin/dashboard/jobs">
+          <Link href="/jobs"> {/* Relative path */}
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Jobs
           </Link>

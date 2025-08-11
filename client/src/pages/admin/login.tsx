@@ -12,7 +12,7 @@ export default function AdminLoginPage() {
 
   useEffect(() => {
     if (session) {
-      navigate('/admin/dashboard', { replace: true });
+      navigate('/admin/dashboard', { replace: true }); // Absolute path
     }
   }, [session, navigate]);
 
@@ -43,7 +43,6 @@ export default function AdminLoginPage() {
               providers={[]}
               theme="light"
               view="sign_in"
-              showLinks={false}
             />
           </CardContent>
         </Card>

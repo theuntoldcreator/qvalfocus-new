@@ -88,7 +88,7 @@ export function JobForm() {
       onSuccess: () => {
         toast({ title: "Job posted successfully!" });
         form.reset();
-        navigate("/admin/dashboard/jobs"); // Redirect to jobs management page
+        navigate("/jobs"); // Changed to relative path
       },
       onError: (error) => {
         toast({ title: "Error posting job", description: error.message, variant: "destructive" });
