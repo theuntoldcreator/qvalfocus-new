@@ -9,7 +9,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="w-8 h-8" />
+              <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-8" />
             </div>
             <p className="text-slate-400 mb-6">
               {companyInfo.description}
