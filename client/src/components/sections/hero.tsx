@@ -95,7 +95,8 @@ export function Hero() {
 
           {/* Tabs and Divider */}
           <div className="mt-12 w-full">
-            <div className="flex justify-start items-center space-x-8 overflow-x-auto mb-6">
+            <div className="border-t border-slate-200"></div>
+            <div className="flex justify-start items-center space-x-8 overflow-x-auto mt-6">
               {heroContent.map((tab) => (
                 <button
                   key={tab.id}
@@ -112,7 +113,6 @@ export function Hero() {
                 </button>
               ))}
             </div>
-            <div className="border-t border-slate-200"></div>
           </div>
         </div>
       </div>
