@@ -1,9 +1,10 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter"; // Import useLocation
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { useEffect } from "react"; // Import useEffect
 
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
@@ -13,14 +14,21 @@ import IndustriesPage from "@/pages/industries";
 import IndustryPage from "@/pages/industry/[slug]";
 import JobsPage from "@/pages/jobs";
 import JobPage from "@/pages/job/[slug]";
-import BlogsPage from "@/pages/blogs"; // Updated import
-import BlogPostPage from "@/pages/blog/[slug]"; // Updated import
+import BlogsPage from "@/pages/blogs";
+import BlogPostPage from "@/pages/blog/[slug]";
 import AboutPage from "@/pages/about";
 import ContactPage from "@/pages/contact";
 import PrivacyPage from "@/pages/legal/privacy";
 import TermsPage from "@/pages/legal/terms";
 
 function Router() {
+  const [location] = useLocation(); // Get current location
+
+  useEffect(() => {
+    // Scroll to top on route change
+    window.scrollTo(0, 0);
+  }, [location]); // Re-run effect when location changes
+
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -30,8 +38,8 @@ function Router() {
       <Route path="/industries/:slug" component={IndustryPage} />
       <Route path="/jobs" component={JobsPage} />
       <Route path="/jobs/:slug" component={JobPage} />
-      <Route path="/blogs" component={BlogsPage} /> {/* Updated route */}
-      <Route path="/blogs/:slug" component={BlogPostPage} /> {/* Updated route */}
+      <Route path="/blogs" component={BlogsPage} />
+      <Route path="/blogs/:slug" component={BlogPostPage} />
       <Route path="/about" component={AboutPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/legal/privacy" component={PrivacyPage} />
