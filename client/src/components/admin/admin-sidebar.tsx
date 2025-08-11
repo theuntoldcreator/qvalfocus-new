@@ -28,8 +28,12 @@ export function AdminSidebar() {
       <nav className="flex-grow p-4 space-y-2">
         {navLinks.map(link => {
           const Icon = link.icon;
-          const isDashboardHome = link.href === "/admin/dashboard";
-          const isActive = isDashboardHome ? location === link.href : location.startsWith(link.href) && location !== "/admin/dashboard";
+          // Determine active state:
+          // For the dashboard home link, it's active only if the location is exactly the dashboard home.
+          // For other links (like jobs, contacts), it's active if the location starts with the link's href.
+          const isActive = link.href === "/admin/dashboard"
+            ? location === link.href
+            : location.startsWith(link.href);
           
           return (
             <Link key={link.href} href={link.href}>
