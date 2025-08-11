@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X } from "lucide-react"; // Removed Search icon
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -10,12 +10,12 @@ export function Header() {
   const [location] = useLocation();
 
   const navLinks = [
-    { href: "/case-studies", label: "Featured insights" },
-    { href: "/services/project-solution", label: "Capabilities" },
+    { href: "/", label: "Home" },
+    { href: "/services/staffing-solution", label: "Services" },
     { href: "/industries", label: "Industries" },
-    { href: "/industries/technology", label: "Technology" },
-    { href: "/about", label: "About us" },
+    { href: "/about", label: "About Us" },
     { href: "/jobs", label: "Careers" },
+    { href: "/contact", label: "Contact Us" },
   ];
 
   return (
@@ -48,10 +48,7 @@ export function Header() {
                     </Link>
                   ))}
                 </nav>
-                
-                <Button variant="ghost" className="flex items-center text-base font-medium">
-                  <Search className="h-5 w-5 mr-2" /> Search
-                </Button>
+                {/* Search button removed */}
               </div>
               
               {/* Mobile Menu Button */}
