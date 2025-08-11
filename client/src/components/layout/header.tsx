@@ -28,7 +28,6 @@ export function Header() {
               {/* Logo */}
               <Link href="/" className="flex items-center space-x-2">
                 <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="w-10 h-10" />
-                <span className="text-2xl font-bold">QvalFocus</span>
               </Link>
               
               {/* Desktop Navigation */}
