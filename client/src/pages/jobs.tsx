@@ -21,13 +21,6 @@ export default function JobsPage() {
     setFilters(newFilters);
   };
 
-  const stats = [
-    { icon: Briefcase, label: "Open Positions", value: jobs?.length || "..." },
-    { icon: MapPin, label: "Locations", value: "50+" },
-    { icon: Clock, label: "Avg. Response Time", value: "24hrs" },
-    { icon: Filter, label: "Industries", value: "6+" }
-  ];
-
   return (
     <div className="min-h-screen">
       <Header />
@@ -58,26 +51,6 @@ export default function JobsPage() {
               <div className="max-w-2xl mx-auto">
                 <JobFilters onFiltersChange={handleFiltersChange} />
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Bar */}
-        <section className="py-12 bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-              {stats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div key={index} className="text-center">
-                    <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-r from-primary to-accent rounded-lg flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-2xl font-bold text-primary mb-1">{stat.value}</div>
-                    <div className="text-sm text-slate-600 dark:text-slate-300">{stat.label}</div>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>
