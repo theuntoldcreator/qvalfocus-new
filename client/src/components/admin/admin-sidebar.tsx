@@ -27,7 +27,9 @@ export function AdminSidebar() {
       <nav className="flex-grow p-4 space-y-2">
         {navLinks.map(link => {
           const Icon = link.icon;
-          const isActive = location.startsWith(link.href) && (link.href !== "/admin/dashboard" || location === "/admin/dashboard");
+          const isDashboardHome = link.href === "/admin/dashboard";
+          const isActive = isDashboardHome ? location === link.href : location.startsWith(link.href);
+          
           return (
             <Link key={link.href} href={link.href}>
               <a className={cn(
