@@ -105,39 +105,77 @@ export const leadership = [
   }
 ];
 
-export const caseStudies = [
+export const blogs = [
   {
-    id: '1',
-    slug: 'tech-giant-cloud-migration',
-    title: 'Cloud Migration for a Tech Giant',
-    subtitle: 'Modernizing Infrastructure',
-    client: 'InnovateCorp',
-    industry: 'Technology',
-    challenge: 'InnovateCorp was struggling with a legacy on-premise infrastructure that was costly to maintain and slow to scale. They needed to migrate their entire platform to a modern cloud architecture without disrupting their 24/7 operations.',
-    solution: 'QvalFocus deployed a team of cloud architects and DevOps engineers who designed and executed a phased migration strategy to AWS. We automated infrastructure provisioning using Terraform and implemented a robust CI/CD pipeline with Kubernetes to ensure seamless deployments.',
-    results: [
-      { metric: 'Time to Deploy', value: '-80%' },
-      { metric: 'Infrastructure Costs', value: '-40%' },
-      { metric: 'System Uptime', value: '99.99%' },
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    id: 'blog-1',
+    slug: 'the-future-of-ai-in-staffing',
+    title: 'The Future of AI in Staffing: Beyond Automation',
+    subtitle: 'How AI is Revolutionizing Talent Acquisition',
+    author: 'Dr. Emily White',
+    authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150',
+    publishDate: '2024-07-15',
+    imageUrl: 'https://images.unsplash.com/photo-1550592704-cc9b8b707880?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    category: 'Artificial Intelligence',
+    content: `
+      The integration of Artificial Intelligence (AI) into the staffing industry is rapidly moving beyond simple automation. While AI has already streamlined tasks like resume screening and initial candidate outreach, its true potential lies in its ability to enhance human decision-making, predict future talent needs, and create more personalized experiences for both candidates and clients.
+
+      One of the most significant shifts is the move towards predictive analytics. AI algorithms can analyze vast datasets of market trends, talent availability, and historical hiring patterns to forecast future staffing demands. This allows companies to proactively build talent pipelines, rather than reactively searching for candidates when a need arises. This foresight is invaluable in competitive markets, ensuring businesses have the right skills at the right time.
+
+      Furthermore, AI is enabling a more nuanced understanding of candidate fit. Beyond keywords and qualifications, advanced AI can assess soft skills, cultural alignment, and even potential for growth within an organization. This is achieved through analyzing communication patterns, project contributions, and even public professional profiles, providing recruiters with a holistic view of a candidate.
+
+      However, it's crucial to remember that AI is a tool to augment, not replace, human expertise. The human element—empathy, negotiation, and complex problem-solving—remains indispensable. AI handles the heavy lifting of data processing and pattern recognition, freeing up recruiters to focus on building relationships and making strategic decisions. The future of staffing is a collaborative ecosystem where human intuition and AI efficiency work hand-in-hand to achieve unparalleled results.
+    `,
+    tags: ['AI', 'Staffing', 'Recruitment', 'Future of Work'],
+    readTimeMinutes: 5,
+    featured: true,
     createdAt: new Date().toISOString(),
   },
   {
-    id: '2',
-    slug: 'biotech-validation-acceleration',
-    title: 'Accelerating Validation for a Biotech Startup',
-    subtitle: 'Ensuring Compliance and Speed',
-    client: 'BioGenetics Inc.',
-    industry: 'Life Sciences',
-    challenge: 'BioGenetics Inc. needed to validate their new manufacturing facility to meet FDA regulations. Their in-house team lacked the specialized expertise to complete the complex validation process on an aggressive timeline.',
-    solution: 'QvalFocus provided a team of CQV specialists who developed and executed a comprehensive validation master plan. Our experts managed everything from equipment qualification (IQ/OQ/PQ) to process validation, ensuring full cGMP compliance.',
-    results: [
-      { metric: 'Validation Timeline', value: '-50%' },
-      { metric: 'Audit Findings', value: '0' },
-      { metric: 'Time to Market', value: 'Faster' },
-    ],
-    imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba9996a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    id: 'blog-2',
+    slug: 'navigating-life-sciences-compliance',
+    title: 'Navigating Life Sciences Compliance: A Guide for Startups',
+    subtitle: 'Ensuring Regulatory Adherence from Day One',
+    author: 'Dr. John Smith',
+    authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150',
+    publishDate: '2024-06-28',
+    imageUrl: 'https://images.unsplash.com/photo-1530026405186-5e11f8f9ee7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    category: 'Life Sciences',
+    content: `
+      For life sciences startups, navigating the complex landscape of regulatory compliance can be daunting. From FDA regulations to cGMP guidelines, adherence is not just a legal requirement but a cornerstone of product quality and patient safety. Establishing a robust compliance framework from day one is critical for long-term success and avoiding costly pitfalls.
+
+      One of the first steps is to understand the specific regulatory pathways applicable to your product. Whether it's a new drug, medical device, or diagnostic tool, each has distinct requirements for development, testing, manufacturing, and post-market surveillance. Engaging with regulatory experts early can help map out these pathways and identify potential challenges.
+
+      Implementing a strong Quality Management System (QMS) is paramount. A QMS provides the organizational structure, procedures, processes, and resources needed to implement quality management. This includes document control, change control, deviation management, CAPA (Corrective and Preventive Actions), and internal audits. Digital QMS solutions can significantly streamline these processes, ensuring traceability and efficiency.
+
+      Finally, fostering a culture of quality throughout the organization is essential. Compliance is not just the responsibility of the quality department; it's a collective effort. Regular training, clear communication of policies, and leadership commitment to quality principles will embed compliance into the company's DNA, paving the way for successful product development and market entry.
+    `,
+    tags: ['Compliance', 'Life Sciences', 'Startups', 'FDA', 'cGMP'],
+    readTimeMinutes: 7,
+    featured: false,
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 'blog-3',
+    slug: 'cybersecurity-trends-2024',
+    title: 'Cybersecurity Trends 2024: Protecting Your Digital Assets',
+    subtitle: 'Key Challenges and Strategies for Businesses',
+    author: 'Sarah Lee',
+    authorAvatar: 'https://images.unsplash.com/photo-1520813792240-56ff4269802a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150',
+    publishDate: '2024-06-10',
+    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    category: 'Cybersecurity',
+    content: `
+      The digital threat landscape continues to evolve at an alarming pace, making robust cybersecurity more critical than ever for businesses of all sizes. In 2024, several key trends are shaping how organizations approach their digital defense strategies. Understanding these trends is the first step towards protecting valuable digital assets.
+
+      One prominent trend is the rise of AI-powered cyberattacks. Threat actors are leveraging AI and machine learning to create more sophisticated phishing campaigns, automate malware development, and conduct highly targeted attacks. This necessitates a counter-response: businesses must also adopt AI-driven security solutions that can detect and respond to threats faster than traditional methods.
+
+      Another critical area is supply chain security. As organizations become more interconnected, a vulnerability in one vendor's system can expose an entire network. Businesses are increasingly focusing on vetting their third-party partners' security postures and implementing stricter controls over data sharing across the supply chain.
+
+      Finally, the human element remains the weakest link. Despite technological advancements, social engineering attacks continue to be highly effective. Continuous employee training on cybersecurity best practices, recognizing phishing attempts, and understanding data handling protocols is indispensable. A strong security culture, combined with advanced technology, forms the most resilient defense against modern cyber threats.
+    `,
+    tags: ['Cybersecurity', 'IT Security', 'Data Protection', 'AI', 'Trends'],
+    readTimeMinutes: 6,
+    featured: true,
     createdAt: new Date().toISOString(),
   },
 ];

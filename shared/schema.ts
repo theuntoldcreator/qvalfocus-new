@@ -29,14 +29,6 @@ export const jobSchema = z.object({
   updatedAt: z.string(),
 });
 
-// InsertJob schema removed as admin panel is deleted
-// export const insertJobSchema = jobSchema.omit({
-//   id: true,
-//   slug: true,
-//   createdAt: true,
-//   updatedAt: true,
-// });
-
 export const applicationSchema = z.object({
     id: z.string().uuid(),
     jobId: z.string().uuid(),
@@ -79,22 +71,36 @@ export const insertContactSchema = contactSchema.omit({
     createdAt: true,
 });
 
+// New Blog Schema
+export const blogSchema = z.object({
+  id: z.string().uuid(),
+  slug: z.string(),
+  title: z.string(),
+  subtitle: z.string().nullable(),
+  author: z.string(),
+  authorAvatar: z.string().nullable(),
+  publishDate: z.string(),
+  imageUrl: z.string().nullable(),
+  category: z.string(),
+  content: z.string(), // Full blog content
+  tags: z.array(z.string()).nullable(),
+  readTimeMinutes: z.number().nullable(),
+  featured: z.boolean().nullable(),
+  createdAt: z.string(),
+});
 
 export type Job = z.infer<typeof jobSchema>;
-// export type InsertJob = z.infer<typeof insertJobSchema>; // Removed
 export type Application = z.infer<typeof applicationSchema>;
 export type InsertApplication = z.infer<typeof insertApplicationSchema>;
 export type Contact = z.infer<typeof contactSchema>;
 export type InsertContact = z.infer<typeof insertContactSchema>;
+export type Blog = z.infer<typeof blogSchema>;
 
 // The other schemas are no longer backed by a database, so they are removed for now.
 // I can add them back if needed.
 export const insertUserSchema = z.object({});
 export const insertNewsletterSchema = z.object({});
-export const insertCaseStudySchema = z.object({});
 export type User = any;
 export type InsertUser = any;
 export type Newsletter = any;
 export type InsertNewsletter = any;
-export type CaseStudy = any;
-export type InsertCaseStudy = any;

@@ -13,8 +13,8 @@ import IndustriesPage from "@/pages/industries";
 import IndustryPage from "@/pages/industry/[slug]";
 import JobsPage from "@/pages/jobs";
 import JobPage from "@/pages/job/[slug]";
-import CaseStudiesPage from "@/pages/case-studies";
-import CaseStudyPage from "@/pages/case-study/[slug]";
+import BlogsPage from "@/pages/blogs"; // Updated import
+import BlogPostPage from "@/pages/blog/[slug]"; // Updated import
 import AboutPage from "@/pages/about";
 import ContactPage from "@/pages/contact";
 import PrivacyPage from "@/pages/legal/privacy";
@@ -30,8 +30,8 @@ function Router() {
       <Route path="/industries/:slug" component={IndustryPage} />
       <Route path="/jobs" component={JobsPage} />
       <Route path="/jobs/:slug" component={JobPage} />
-      <Route path="/case-studies" component={CaseStudiesPage} />
-      <Route path="/case-studies/:slug" component={CaseStudyPage} />
+      <Route path="/blogs" component={BlogsPage} /> {/* Updated route */}
+      <Route path="/blogs/:slug" component={BlogPostPage} /> {/* Updated route */}
       <Route path="/about" component={AboutPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/legal/privacy" component={PrivacyPage} />
@@ -46,7 +46,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        {/* AuthProvider removed as admin panel is deleted */}
         <TooltipProvider>
           <Toaster />
           <Router />

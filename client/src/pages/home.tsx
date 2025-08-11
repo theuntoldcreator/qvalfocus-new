@@ -4,7 +4,7 @@ import { Hero } from "@/components/sections/hero";
 import { Services } from "@/components/sections/services";
 import { Industries } from "@/components/sections/industries";
 import { FeaturedJobs } from "@/components/sections/featured-jobs";
-import { CaseStudies } from "@/components/sections/case-studies";
+import { Blogs } from "@/components/sections/blogs"; // Updated import
 import { Testimonials } from "@/components/sections/testimonials";
 import { Newsletter } from "@/components/sections/newsletter";
 
@@ -17,7 +17,7 @@ export default function Home() {
         <Services />
         <Industries />
         <FeaturedJobs />
-        <CaseStudies />
+        <Blogs /> {/* Updated component usage */}
         <Testimonials />
         <Newsletter />
       </main>

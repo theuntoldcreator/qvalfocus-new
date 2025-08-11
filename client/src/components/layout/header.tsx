@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react"; // Removed Search icon
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -15,6 +15,7 @@ export function Header() {
     { href: "/industries", label: "Industries" },
     { href: "/about", label: "About Us" },
     { href: "/jobs", label: "Careers" },
+    { href: "/blogs", label: "Blogs" }, // Updated link
     { href: "/contact", label: "Contact Us" },
   ];
 
@@ -48,7 +49,6 @@ export function Header() {
                     </Link>
                   ))}
                 </nav>
-                {/* Search button removed */}
               </div>
               
               {/* Mobile Menu Button */}

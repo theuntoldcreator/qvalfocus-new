@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { Job, Application, InsertApplication, CaseStudy, Contact, InsertContact } from "@shared/schema";
-import { caseStudies as mockCaseStudies } from './data';
+import type { Job, Application, InsertApplication, Blog, Contact, InsertContact } from "@shared/schema";
+import { blogs as mockBlogs } from './data';
 
 // Helper to generate a URL-friendly slug
 function toSlug(text: string) {
@@ -50,10 +50,6 @@ export function useJobBySlug(slug: string) {
   });
 }
 
-// Admin-related job mutations removed
-// export function useCreateJob() { ... }
-// export function useDeleteJob() { ... }
-
 // Applications
 export function useCreateApplication() {
     const queryClient = useQueryClient();
@@ -73,15 +69,7 @@ export function useCreateApplication() {
     });
 }
 
-// Admin-related application queries/mutations removed
-// export function useApplications(jobId: string) { ... }
-// export function useDeleteApplication() { ... }
-// export function useAllApplications() { ... }
-
 // Contacts
-// Admin-related contact queries/mutations removed
-// export function useContacts() { ... }
-
 export function useCreateContact() {
     const queryClient = useQueryClient();
     return useMutation({
@@ -100,37 +88,37 @@ export function useCreateContact() {
     });
 }
 
-// Mocked Hooks (unchanged)
-export function useCaseStudies() {
-  return useQuery<CaseStudy[]>({
-    queryKey: ['case-studies'],
+// Blog Hooks (replacing Case Study hooks)
+export function useBlogs() {
+  return useQuery<Blog[]>({
+    queryKey: ['blogs'],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 500));
-      return mockCaseStudies;
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
+      return mockBlogs;
     },
   });
 }
 
-export function useFeaturedCaseStudies() {
-  return useQuery<CaseStudy[]>({
-    queryKey: ['featured-case-studies'],
+export function useFeaturedBlogs() {
+  return useQuery<Blog[]>({
+    queryKey: ['featured-blogs'],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 500));
-      return mockCaseStudies.slice(0, 2);
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
+      return mockBlogs.filter(blog => blog.featured).slice(0, 2);
     },
   });
 }
 
-export function useCaseStudyBySlug(slug: string) {
-  return useQuery<CaseStudy>({
-    queryKey: ['case-study', slug],
+export function useBlogPostBySlug(slug: string) {
+  return useQuery<Blog>({
+    queryKey: ['blog', slug],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 500));
-      const study = mockCaseStudies.find((cs: any) => cs.slug === slug);
-      if (!study) {
-        throw new Error('Case study not found');
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
+      const post = mockBlogs.find((b: any) => b.slug === slug);
+      if (!post) {
+        throw new Error('Blog post not found');
       }
-      return study;
+      return post;
     },
     enabled: !!slug,
   });
