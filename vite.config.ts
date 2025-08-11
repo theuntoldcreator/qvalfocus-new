@@ -18,8 +18,7 @@ export default defineConfig({
   },
   root: resolve(__dirname, "client"),
   build: {
-    // Output to server/public, which is where Express serves static files from
-    outDir: resolve(__dirname, "server", "public"),
+    outDir: resolve(__dirname, "dist/public"),
     emptyOutDir: true,
   },
   server: {
