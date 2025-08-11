@@ -1,6 +1,20 @@
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { services } from "@/lib/data"; // Import the updated services data
+
+const serviceData = [
+  {
+    title: "Staffing Solutions",
+    description: "At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly, address seasonal hiring spikes, or build a long-term workforce strategy, we ensure you have access to the right talent — when and where you need it.",
+    link: "/services/staffing-solution",
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    title: "Project Solutions",
+    description: "We deliver end-to-end project execution for both IT and Life Sciences sectors. Our goal is to help you accelerate delivery, improve efficiency, and meet technical or regulatory requirements with precision.",
+    link: "/services/project-solution",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+  }
+];
 
 export function Services() {
   return (
@@ -14,7 +28,7 @@ export function Services() {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {services.map((service, index) => ( // Use the imported services data
+          {serviceData.map((service, index) => (
             <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden group flex flex-col">
               <div className="overflow-hidden">
                 <img 
