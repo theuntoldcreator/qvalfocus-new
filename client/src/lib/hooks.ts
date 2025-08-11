@@ -60,7 +60,10 @@ export function useCreateJob() {
                 .insert([{ ...newJob, slug }])
                 .select()
                 .single();
-            if (error) throw new Error(error.message);
+            if (error) {
+              console.error("Supabase insert error:", error); // Added logging
+              throw new Error(error.message);
+            }
             return data;
         },
         onSuccess: () => {
