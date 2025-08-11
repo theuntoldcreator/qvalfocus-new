@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
@@ -24,13 +23,6 @@ export function JobFilters({ className, onFiltersChange }: JobFiltersProps) {
   return (
     <div className={cn("flex flex-wrap gap-4", className)}>
       <div className="flex items-center space-x-2">
-        <Input 
-          type="text" 
-          placeholder="Search roles..." 
-          value={filters.search}
-          onChange={(e) => handleFilterChange("search", e.target.value)}
-          className="min-w-[200px]"
-        />
         <Select value={filters.location} onValueChange={(value) => handleFilterChange("location", value)}>
           <SelectTrigger className="min-w-[150px]">
             <SelectValue />

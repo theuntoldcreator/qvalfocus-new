@@ -25,7 +25,7 @@ export function JobCard({ job }: JobCardProps) {
   const jobSlug = job.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
 
   return (
-    <div className="glass dark:glass-dark rounded-xl p-6">
+    <div className="glass dark:glass-dark rounded-xl p-6 border border-slate-200 dark:border-slate-700">
       <div className="flex justify-between items-start mb-4">
         <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
           <span className="text-white font-bold">{job.companyLogo}</span>
