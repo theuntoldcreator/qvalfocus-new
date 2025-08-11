@@ -63,7 +63,7 @@ export function Hero() {
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse 80% 80% at -10% 50%, hsl(0 0% 100%) 40%, transparent 100%)",
+              "linear-gradient(to right, hsl(0 0% 100%) 20%, transparent 100%)",
           }}
         ></div>
       </div>
