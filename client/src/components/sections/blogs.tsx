@@ -36,11 +36,17 @@ export function Blogs() {
             blogs?.slice(0, 2).map((blog) => (
               <div key={blog.id} className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300">
                 <div className="w-full h-48 rounded-xl mb-6 overflow-hidden">
-                  <img 
-                    src={blog.imageUrl || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"} 
-                    alt={blog.title}
-                    className="w-full h-full object-cover"
-                  />
+                  {blog.imageUrl ? (
+                    <img 
+                      src={blog.imageUrl} 
+                      alt={blog.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400">
+                      No Image
+                    </div>
+                  )}
                 </div>
                 <div className="text-sm text-primary font-semibold mb-2">{blog.category}</div>
                 <h3 className="text-2xl font-bold mb-4">{blog.title}</h3>

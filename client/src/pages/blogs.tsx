@@ -115,11 +115,17 @@ export default function BlogsPage() {
                   <Link key={blog.id} href={`/blogs/${blog.slug}`}>
                     <div className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300 group h-full">
                       <div className="w-full h-48 rounded-xl mb-6 overflow-hidden">
-                        <img 
-                          src={blog.imageUrl || "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400"} 
-                          alt={blog.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
+                        {blog.imageUrl ? (
+                          <img 
+                            src={blog.imageUrl} 
+                            alt={blog.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 dark:text-slate-400">
+                            No Image
+                          </div>
+                        )}
                       </div>
                       
                       <Badge className="mb-4 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400">
