@@ -43,6 +43,13 @@ function Router() {
       
       {/* Admin Routes */}
       <Route path="/admin/login" component={AdminLoginPage} />
+      {/* Explicitly match the base dashboard path first */}
+      <Route path="/admin/dashboard">
+        <ProtectedRoute>
+          <AdminDashboardPage />
+        </ProtectedRoute>
+      </Route>
+      {/* Then match any sub-paths within the dashboard */}
       <Route path="/admin/dashboard/:rest*">
         <ProtectedRoute>
           <AdminDashboardPage />
