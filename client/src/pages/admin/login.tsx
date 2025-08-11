@@ -3,7 +3,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/providers/auth-provider';
 import { Redirect } from 'wouter';
-import { useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 export default function AdminLoginPage() {
   const { session } = useAuth();
@@ -13,16 +13,30 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-      <div className="w-full max-w-md p-8">
-        <h1 className="text-3xl font-bold text-center mb-8">Admin Portal</h1>
-        <Auth
-          supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
-          providers={[]}
-          theme="light"
-        />
-      </div>
+    <div 
+      className="min-h-screen w-full flex items-center justify-center p-4"
+      style={{
+        backgroundImage: "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}
+    >
+      <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
+      <Card className="w-full max-w-md z-10 shadow-2xl">
+        <CardHeader className="text-center">
+          <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-12 mx-auto mb-4" />
+          <CardTitle className="text-2xl font-bold">Admin Portal</CardTitle>
+          <CardDescription>Sign in to manage your platform</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Auth
+            supabaseClient={supabase}
+            appearance={{ theme: ThemeSupa }}
+            providers={[]}
+            theme="light"
+          />
+        </CardContent>
+      </Card>
     </div>
   );
 }

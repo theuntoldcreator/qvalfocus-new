@@ -50,22 +50,8 @@ export function useDeleteJob() {
 export function useCreateApplication() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: async (newApplication: InsertApplication & { resumeFile?: File }) => {
-            let resumeUrl: string | null = null;
-            if (newApplication.resumeFile) {
-                const file = newApplication.resumeFile;
-                const filePath = `public/${Date.now()}-${file.name}`;
-                const { error: uploadError } = await supabase.storage.from('resumes').upload(filePath, file);
-                if (uploadError) throw new Error(uploadError.message);
-                
-                const { data: { publicUrl } } = supabase.storage.from('resumes').getPublicUrl(filePath);
-                resumeUrl = publicUrl;
-            }
-            
-            const { resumeFile, ...appData } = newApplication;
-            const payload = { ...appData, resumeUrl };
-
-            const res = await apiRequest('POST', '/api/applications', payload);
+        mutationFn: async (newApplication: InsertApplication) => {
+            const res = await apiRequest('POST', '/api/applications', newApplication);
             return res.json();
         },
         onSuccess: (data) => {
