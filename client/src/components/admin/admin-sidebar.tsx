@@ -13,9 +13,9 @@ export function AdminSidebar() {
   };
 
   const navLinks = [
-    { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/admin/dashboard/jobs", label: "Jobs", icon: Briefcase },
-    { href: "/admin/dashboard/contacts", label: "Contacts", icon: Mail },
+    { href: "/", label: "Dashboard", icon: LayoutDashboard }, // Changed to relative path
+    { href: "/jobs", label: "Jobs", icon: Briefcase }, // Changed to relative path
+    { href: "/contacts", label: "Contacts", icon: Mail }, // Changed to relative path
   ];
 
   return (
@@ -31,9 +31,9 @@ export function AdminSidebar() {
           // Determine active state:
           // For the dashboard home link, it's active only if the location is exactly the dashboard home.
           // For other links (like jobs, contacts), it's active if the location starts with the link's href.
-          const isActive = link.href === "/admin/dashboard"
-            ? location === link.href
-            : location.startsWith(link.href);
+          const isActive = link.href === "/"
+            ? location === "/admin/dashboard" || location === "/admin/dashboard/" // Check for base path
+            : location.startsWith(`/admin/dashboard${link.href}`); // Check for sub-paths
           
           return (
             <Link key={link.href} href={link.href}>

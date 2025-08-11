@@ -26,7 +26,7 @@ export function JobsManagement() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Manage Job Listings</CardTitle>
           <Button asChild>
-            <Link href="/admin/dashboard/jobs/new">
+            <Link href="/jobs/new"> {/* Changed to relative path */}
               <PlusCircle className="mr-2 h-4 w-4" />
               Post a New Job
             </Link>
