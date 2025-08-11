@@ -13,9 +13,9 @@ export function AdminSidebar() {
   };
 
   const navLinks = [
-    { href: "/", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/jobs", label: "Jobs", icon: Briefcase },
-    { href: "/contacts", label: "Contacts", icon: Mail },
+    { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard }, // Changed to absolute path
+    { href: "/admin/dashboard/jobs", label: "Jobs", icon: Briefcase }, // Changed to absolute path
+    { href: "/admin/dashboard/contacts", label: "Contacts", icon: Mail }, // Changed to absolute path
   ];
 
   return (
@@ -28,7 +28,8 @@ export function AdminSidebar() {
       <nav className="flex-grow p-4 space-y-2">
         {navLinks.map(link => {
           const Icon = link.icon;
-          const [isActive] = useRoute(link.href);
+          // useRoute will correctly match the full absolute path
+          const [isActive] = useRoute(link.href); 
           
           return (
             <Link key={link.href} href={link.href}>
