@@ -8,9 +8,9 @@ const heroContent = [
   {
     id: "talent",
     tabTitle: "For Companies",
-    title: "Driving Excellence Through Expertise.",
+    title: "Excellence Through Expertise.",
     description:
-      "Merging your vision & our expertise, We help you achieve Excellence.",
+      "We merge your vision with our deep domain expertise to drive operational excellence and tangible results.",
     buttonText: "Find Talent",
     buttonLink: "/contact?type=client",
     image:
