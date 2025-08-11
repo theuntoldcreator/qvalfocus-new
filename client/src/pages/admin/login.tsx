@@ -12,7 +12,7 @@ export default function AdminLoginPage() {
 
   useEffect(() => {
     if (session) {
-      navigate('/admin/dashboard', { replace: true }); // Absolute path
+      navigate('/admin/dashboard', { replace: true });
     }
   }, [session, navigate]);
 
@@ -32,7 +32,7 @@ export default function AdminLoginPage() {
       <div className="relative z-10 min-h-screen w-full flex items-center justify-center p-4">
         <Card className="w-full max-w-md shadow-2xl">
           <CardHeader className="text-center">
-            <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-12 mx-auto mb-4" />
+            <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-12 mx-auto mb-4" /> {/* Added alt attribute */}
             <CardTitle className="text-2xl font-bold">Admin Portal</CardTitle>
             <CardDescription>Sign in to manage your platform</CardDescription>
           </CardHeader>

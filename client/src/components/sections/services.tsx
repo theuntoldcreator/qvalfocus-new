@@ -33,7 +33,7 @@ export function Services() {
               <div className="overflow-hidden">
                 <img 
                   src={service.image} 
-                  alt={service.title} 
+                  alt={service.title} {/* Added alt attribute */}
                   className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>

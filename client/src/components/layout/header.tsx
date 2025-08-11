@@ -15,7 +15,7 @@ export function Header() {
     { href: "/industries", label: "Industries" },
     { href: "/about", label: "About Us" },
     { href: "/jobs", label: "Careers" },
-    { href: "/blogs", label: "Blogs" }, // Updated link
+    { href: "/blogs", label: "Blogs" },
     { href: "/contact", label: "Contact Us" },
   ];
 
@@ -28,7 +28,7 @@ export function Header() {
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
               <Link href="/" className="flex items-center space-x-2">
-                <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-10" />
+                <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-10" /> {/* Added alt attribute */}
               </Link>
               
               {/* Desktop Navigation */}

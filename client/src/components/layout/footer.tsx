@@ -9,7 +9,7 @@ export function Footer() {
           {/* Company Info */}
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-8" />
+              <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-8" /> {/* Added alt attribute */}
             </div>
             <p className="text-slate-400 mb-6">
               {companyInfo.description}
@@ -52,7 +52,7 @@ export function Footer() {
             <ul className="space-y-2">
               <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/jobs" className="hover:text-white transition-colors">Careers</Link></li>
-              <li><Link href="/blogs" className="hover:text-white transition-colors">Blogs</Link></li> {/* Updated link */}
+              <li><Link href="/blogs" className="hover:text-white transition-colors">Blogs</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>

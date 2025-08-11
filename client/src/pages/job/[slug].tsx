@@ -99,7 +99,7 @@ export default function JobPage() {
     <div className="min-h-screen">
       <Header />
       
-      <main>
+      <main className="pt-20"> {/* Added pt-20 */}
         {/* Job Header */}
         <section className="py-12 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
