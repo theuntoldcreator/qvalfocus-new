@@ -8,7 +8,7 @@ const heroContent = [
   {
     id: "talent",
     tabTitle: "For Companies",
-    title: "Connecting Exceptional Talent with Visionary Companies",
+    title: "Driving Operational Excellence Through Deep Domain Expertise.",
     description:
       "We forge partnerships that drive innovation by connecting you with premier talent across technology, finance, and healthcare.",
     buttonText: "Find Talent",
