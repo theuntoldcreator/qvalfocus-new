@@ -32,14 +32,14 @@ export default function IndustriesPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden bg-slate-50 dark:bg-slate-900">
+        <section className="relative pt-32 pb-20 overflow-hidden bg-slate-100 dark:bg-slate-900">
           <div className="absolute inset-0">
             <img
               src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080"
               alt="Industries"
               className="w-full h-full object-cover opacity-10"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-100 via-slate-100/80 to-transparent"></div>
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
