@@ -184,7 +184,7 @@ export default function ProjectSolutionPage() {
             <p className="text-xl text-primary-100 mb-8">
               Let's discuss how our project solutions can help you achieve your business objectives.
             </p>
-            <Button size="lg" variant="secondary" asChild>
+            <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
               <Link href="/contact?type=client">Schedule a Consultation</Link>
             </Button>
           </div>

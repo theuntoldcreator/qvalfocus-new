@@ -151,7 +151,7 @@ export default function StaffingSolutionPage() {
             <p className="text-xl text-primary-100 mb-8">
               Connect with our talent specialists to find the right professionals for your organization.
             </p>
-            <Button size="lg" variant="secondary" asChild>
+            <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
               <Link href="/contact?type=client">Find Talent Now</Link>
             </Button>
           </div>

@@ -220,7 +220,7 @@ export default function AboutPage() {
               we'd love to be part of your journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" asChild>
+              <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
                 <Link href="/contact?type=client">Partner With Us</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>

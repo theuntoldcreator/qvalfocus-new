@@ -181,7 +181,7 @@ export default function JobsPage() {
             <p className="text-xl text-primary-100 mb-8">
               Get personalized job alerts delivered to your inbox based on your skills and preferences.
             </p>
-            <Button size="lg" variant="secondary">
+            <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200">
               Set Up Job Alerts
             </Button>
           </div>

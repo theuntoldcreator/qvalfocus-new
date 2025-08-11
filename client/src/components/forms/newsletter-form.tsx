@@ -70,9 +70,9 @@ export function NewsletterForm() {
         />
         <Button 
           type="submit" 
-          variant="secondary"
+          variant="default"
           disabled={isSubmitting}
-          className="bg-white text-primary hover:bg-slate-50"
+          className="bg-white text-primary hover:bg-slate-200"
         >
           {isSubmitting ? "Subscribing..." : "Subscribe"}
         </Button>
