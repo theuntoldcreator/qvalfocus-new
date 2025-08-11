@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ArrowRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const heroContent = [
   {
@@ -37,6 +38,7 @@ const heroContent = [
 export function Hero() {
   const [activeIndex, setActiveIndex] = useState(1);
   const activeContent = heroContent[activeIndex];
+  const isMobile = useIsMobile();
 
   return (
     <section
@@ -56,25 +58,26 @@ export function Hero() {
             transition={{ duration: 0.8, ease: 'easeInOut' }}
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-r from-white from-0% via-white/80 via-30% to-transparent" />
+        <div className="absolute inset-0 bg-black/50 md:hidden" />
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-white from-0% via-white/80 via-30% to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col">
         {/* Main Content */}
-        <div className="flex-grow flex items-center">
+        <div className="flex-grow flex items-center justify-center md:justify-start">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              className="max-w-xl"
+              className="max-w-xl text-center md:text-left"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight font-sans">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight font-sans text-white md:text-slate-900">
                 {activeContent.title}
               </h1>
-              <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-lg">
+              <p className="text-lg md:text-xl text-slate-300 md:text-slate-600 mb-8 max-w-lg">
                 {activeContent.description}
               </p>
               <Button
@@ -89,7 +92,7 @@ export function Hero() {
 
         {/* Bottom Navigation */}
         <motion.div
-          className="hidden md:flex items-center gap-8 pb-12"
+          className="hidden md:flex items-center gap-8 pb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}

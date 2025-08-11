@@ -1,76 +1,102 @@
+import { useState } from "react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { JobCard } from "@/components/job/job-card";
+import { JobFilters } from "@/components/job/job-filters";
+import { useJobs } from "@/lib/hooks";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Search, Briefcase } from "lucide-react";
 
 export default function JobsPage() {
-  const featuredPositions = [
-    { title: "Technical Recruiter (Remote)" },
-    { title: "SDET Consultant – Life Sciences (Remote/Hybrid)" },
-    { title: "Account Manager – IT & Life Sciences (Hybrid, NJ)" },
-    { title: "CSV Consultant – Pharma Client (Remote/Onsite)" },
-    { title: "Business Analyst – IT Services" },
-  ];
+  const [filters, setFilters] = useState({
+    search: "",
+    location: "All Locations",
+    type: "All Types",
+  });
+  const { data: jobs, isLoading } = useJobs(filters);
+
+  const handleFilterChange = (newFilters: Partial<typeof filters>) => {
+    setFilters(prev => ({ ...prev, ...newFilters }));
+  };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Header />
-      
       <main>
         {/* Hero Section */}
-        <section className="relative pt-20 pb-16 overflow-hidden">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
-            }}
-          >
-            <div className="absolute inset-0 bg-slate-900/70"></div>
-          </div>
-          
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center text-white">
-              <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
-                Empowering People. <span className="text-gradient">Building Futures.</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-slate-200 mb-8 max-w-3xl mx-auto">
-                We offer opportunities across multiple roles — from recruitment to project consulting — where you can grow and make a lasting impact.
-              </p>
-            </div>
+        <section className="py-20 bg-white dark:bg-slate-800 text-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Find Your Next Opportunity</h1>
+            <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+              Browse our open positions and discover a role that matches your expertise and career aspirations.
+            </p>
           </div>
         </section>
 
-        {/* Jobs Listing */}
-        <section className="py-20 bg-slate-50 dark:bg-slate-900">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-serif font-bold mb-4">Featured Positions</h2>
+        {/* Filters and Job Grid */}
+        <section className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Filter Bar */}
+            <div className="mb-8 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-lg flex flex-col md:flex-row gap-4 items-center sticky top-20 z-40">
+              <div className="relative flex-grow w-full">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <Input
+                  placeholder="Search by title, company, or skill..."
+                  className="pl-10"
+                  value={filters.search}
+                  onChange={(e) => handleFilterChange({ search: e.target.value })}
+                />
+              </div>
+              <JobFilters
+                onFiltersChange={(newFilters) => handleFilterChange(newFilters)}
+              />
             </div>
 
-            <div className="space-y-6">
-              {featuredPositions.map((job, index) => (
-                <Card key={index} className="glass dark:glass-dark">
-                  <CardContent className="p-6 flex justify-between items-center">
-                    <h3 className="text-xl font-semibold">{job.title}</h3>
-                    <Button disabled>Apply</Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <div className="mt-16 text-center glass dark:glass-dark p-8 rounded-2xl">
-              <Mail className="w-12 h-12 mx-auto text-primary mb-4" />
-              <h3 className="text-2xl font-bold mb-4">Didn’t find a role?</h3>
-              <p className="text-slate-600 dark:text-slate-300 mb-6 max-w-md mx-auto">
-                Send your resume to <a href="mailto:careers@qvalfocus.com" className="text-primary font-semibold hover:underline">careers@qvalfocus.com</a> — we’ll reach out when a matching opportunity arises.
-              </p>
-            </div>
+            {/* Job Listings */}
+            {isLoading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div key={i} className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700">
+                    <div className="flex justify-between items-start mb-4">
+                      <Skeleton className="w-12 h-12 rounded-lg" />
+                      <Skeleton className="w-16 h-6 rounded-full" />
+                    </div>
+                    <Skeleton className="h-6 w-3/4 mb-2" />
+                    <Skeleton className="h-4 w-1/2 mb-4" />
+                    <Skeleton className="h-16 w-full mb-4" />
+                    <div className="flex gap-2 mb-4">
+                      <Skeleton className="h-6 w-16" />
+                      <Skeleton className="h-6 w-20" />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <Skeleton className="h-4 w-32 mb-1" />
+                        <Skeleton className="h-4 w-20" />
+                      </div>
+                      <Skeleton className="h-8 w-16" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : jobs && jobs.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {jobs.map((job) => (
+                  <JobCard key={job.id} job={job} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <Briefcase className="w-16 h-16 text-slate-400 mx-auto mb-6" />
+                <h3 className="text-2xl font-bold mb-4">No Matching Jobs Found</h3>
+                <p className="text-slate-600 dark:text-slate-300 mb-6 max-w-md mx-auto">
+                  Try adjusting your filters or check back later for new opportunities.
+                </p>
+              </div>
+            )}
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );
