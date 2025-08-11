@@ -6,9 +6,11 @@ import { useJobs } from "@/lib/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Briefcase } from "lucide-react";
 import { Link } from "wouter";
+import { useAuth } from "@/providers/auth-provider";
 
 export default function JobsPage() {
   const { data: jobs, isLoading } = useJobs({ poll: true });
+  const { session } = useAuth();
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
@@ -20,7 +22,11 @@ export default function JobsPage() {
               Careers
             </h1>
             <Button variant="outline" asChild>
-              <Link href="/admin/dashboard">Admin Portal</Link>
+              {session ? (
+                <Link href="/admin/dashboard">Admin Portal</Link>
+              ) : (
+                <Link href="/admin/login">Admin Login</Link>
+              )}
             </Button>
           </div>
 
