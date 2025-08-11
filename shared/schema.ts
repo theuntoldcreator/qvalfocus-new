@@ -58,21 +58,41 @@ export const insertApplicationSchema = applicationSchema.omit({
     createdAt: true,
 });
 
+export const contactSchema = z.object({
+    id: z.string().uuid(),
+    type: z.enum(['client', 'candidate']),
+    firstName: z.string(),
+    lastName: z.string(),
+    email: z.string().email(),
+    company: z.string().nullable(),
+    hiringNeed: z.string().nullable(),
+    message: z.string().nullable(),
+    currentRole: z.string().nullable(),
+    experienceLevel: z.string().nullable(),
+    resumeUrl: z.string().url().nullable(),
+    createdAt: z.string(),
+});
+
+export const insertContactSchema = contactSchema.omit({
+    id: true,
+    createdAt: true,
+});
+
+
 export type Job = z.infer<typeof jobSchema>;
 export type InsertJob = z.infer<typeof insertJobSchema>;
 export type Application = z.infer<typeof applicationSchema>;
 export type InsertApplication = z.infer<typeof insertApplicationSchema>;
+export type Contact = z.infer<typeof contactSchema>;
+export type InsertContact = z.infer<typeof insertContactSchema>;
 
 // The other schemas are no longer backed by a database, so they are removed for now.
 // I can add them back if needed.
 export const insertUserSchema = z.object({});
-export const insertContactSchema = z.object({});
 export const insertNewsletterSchema = z.object({});
 export const insertCaseStudySchema = z.object({});
 export type User = any;
 export type InsertUser = any;
-export type Contact = any;
-export type InsertContact = any;
 export type Newsletter = any;
 export type InsertNewsletter = any;
 export type CaseStudy = any;

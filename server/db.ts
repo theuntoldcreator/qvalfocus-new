@@ -1,5 +1,5 @@
 import { supabaseAdmin } from "./supabase";
-import type { InsertJob, Job, InsertApplication, Application } from "@shared/schema";
+import type { InsertJob, Job, InsertApplication, Application, InsertContact, Contact } from "@shared/schema";
 
 function toSlug(text: string) {
   return text
@@ -77,5 +77,24 @@ export const db = {
         .eq('id', id);
     if (error) throw error;
     return { id };
+  },
+
+  async getContacts(): Promise<Contact[]> {
+    const { data, error } = await supabaseAdmin
+      .from("contacts")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return data as Contact[];
+  },
+
+  async createContact(contactData: InsertContact): Promise<Contact> {
+    const { data, error } = await supabaseAdmin
+      .from("contacts")
+      .insert([contactData])
+      .select()
+      .single();
+    if (error) throw error;
+    return data as Contact;
   }
 };

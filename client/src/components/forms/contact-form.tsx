@@ -41,7 +41,6 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ type, onSuccess }: ContactFormProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const createContact = useCreateContact();
   const { toast } = useToast();
 
@@ -63,8 +62,6 @@ export function ContactForm({ type, onSuccess }: ContactFormProps) {
 
   const onSubmit = async (data: ContactFormData) => {
     try {
-      setIsSubmitting(true);
-      
       const payload: InsertContact = {
         ...data,
         company: data.type === 'client' ? data.company : null,
@@ -90,8 +87,6 @@ export function ContactForm({ type, onSuccess }: ContactFormProps) {
         description: "Please try again later.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -99,151 +94,24 @@ export function ContactForm({ type, onSuccess }: ContactFormProps) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField
-            control={form.control}
-            name="firstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="First Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="lastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl>
-                  <Input placeholder="Last Name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <FormField control={form.control} name="firstName" render={({ field }) => ( <FormItem><FormControl><Input placeholder="First Name" {...field} /></FormControl><FormMessage /></FormItem>)} />
+          <FormField control={form.control} name="lastName" render={({ field }) => ( <FormItem><FormControl><Input placeholder="Last Name" {...field} /></FormControl><FormMessage /></FormItem>)} />
         </div>
-
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <Input 
-                  type="email" 
-                  placeholder={type === "client" ? "Work Email" : "Email Address"} 
-                  {...field} 
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
+        <FormField control={form.control} name="email" render={({ field }) => ( <FormItem><FormControl><Input type="email" placeholder={type === "client" ? "Work Email" : "Email Address"} {...field} /></FormControl><FormMessage /></FormItem>)} />
         {type === "client" ? (
           <>
-            <FormField
-              control={form.control}
-              name="company"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Company Name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="hiringNeed"
-              render={({ field }) => (
-                <FormItem>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Hiring Need" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="immediate">Immediate (0-2 weeks)</SelectItem>
-                      <SelectItem value="planned">Planned (1-3 months)</SelectItem>
-                      <SelectItem value="strategic">Strategic (3+ months)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Tell us about your hiring goals and team needs..." 
-                      rows={4}
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <FormField control={form.control} name="company" render={({ field }) => ( <FormItem><FormControl><Input placeholder="Company Name" {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="hiringNeed" render={({ field }) => ( <FormItem><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue placeholder="Hiring Need" /></SelectTrigger></FormControl><SelectContent><SelectItem value="immediate">Immediate (0-2 weeks)</SelectItem><SelectItem value="planned">Planned (1-3 months)</SelectItem><SelectItem value="strategic">Strategic (3+ months)</SelectItem></SelectContent></Select><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="message" render={({ field }) => ( <FormItem><FormControl><Textarea placeholder="Tell us about your hiring goals and team needs..." rows={4} {...field} /></FormControl><FormMessage /></FormItem>)} />
           </>
         ) : (
           <>
-            <FormField
-              control={form.control}
-              name="currentRole"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input placeholder="Current Role" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="experienceLevel"
-              render={({ field }) => (
-                <FormItem>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Experience Level" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="entry">Entry Level (0-2 years)</SelectItem>
-                      <SelectItem value="mid">Mid Level (3-7 years)</SelectItem>
-                      <SelectItem value="senior">Senior Level (8-15 years)</SelectItem>
-                      <SelectItem value="executive">Executive Level (15+ years)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <FormField control={form.control} name="currentRole" render={({ field }) => ( <FormItem><FormControl><Input placeholder="Current Role" {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="experienceLevel" render={({ field }) => ( <FormItem><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue placeholder="Experience Level" /></SelectTrigger></FormControl><SelectContent><SelectItem value="entry">Entry Level (0-2 years)</SelectItem><SelectItem value="mid">Mid Level (3-7 years)</SelectItem><SelectItem value="senior">Senior Level (8-15 years)</SelectItem><SelectItem value="executive">Executive Level (15+ years)</SelectItem></SelectContent></Select><FormMessage /></FormItem>)} />
           </>
         )}
-
-        <Button 
-          type="submit" 
-          className="w-full"
-          disabled={isSubmitting}
-        >
-          {isSubmitting 
-            ? "Submitting..." 
-            : type === "client" 
-              ? "Start Hiring Process" 
-              : "Submit Application"
-          }
+        <Button type="submit" className="w-full" disabled={createContact.isPending}>
+          {createContact.isPending ? "Submitting..." : type === "client" ? "Start Hiring Process" : "Submit Application"}
         </Button>
       </form>
     </Form>

@@ -1,7 +1,7 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { db } from "./db";
-import { insertJobSchema, insertApplicationSchema } from "@shared/schema";
+import { insertJobSchema, insertApplicationSchema, insertContactSchema } from "@shared/schema";
 import { z } from "zod";
 import { supabaseAdmin } from "./supabase";
 
@@ -96,8 +96,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // NOTE: Other routes for contacts, newsletter, etc. are removed for now
-  // as they were using the in-memory storage. They can be added back with a DB implementation.
+  // Contacts endpoints
+  app.get("/api/contacts", authMiddleware, async (req, res) => {
+    try {
+      const contacts = await db.getContacts();
+      res.json(contacts);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch contacts" });
+    }
+  });
+
+  app.post("/api/contacts", async (req, res) => {
+    try {
+      const contactData = insertContactSchema.parse(req.body);
+      const contact = await db.createContact(contactData);
+      res.status(201).json(contact);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid contact data", errors: error.errors });
+      }
+      res.status(500).json({ message: "Failed to create contact" });
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;

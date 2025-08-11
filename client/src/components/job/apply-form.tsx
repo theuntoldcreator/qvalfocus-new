@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useCreateApplication } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
 import type { Job, InsertApplication } from "@shared/schema";
+import { Upload } from "lucide-react";
 
 const applicationSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -22,6 +23,7 @@ const applicationSchema = z.object({
   github: z.string().url().optional().or(z.literal("")),
   portfolio: z.string().url().optional().or(z.literal("")),
   coverLetter: z.string().optional(),
+  resumeFile: z.instanceof(File).optional(),
 });
 
 type ApplicationFormData = z.infer<typeof applicationSchema>;
@@ -32,7 +34,6 @@ interface ApplyFormProps {
 }
 
 export function ApplyForm({ job, onSuccess }: ApplyFormProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const createApplication = useCreateApplication();
   const { toast } = useToast();
 
@@ -53,10 +54,13 @@ export function ApplyForm({ job, onSuccess }: ApplyFormProps) {
   });
 
   const onSubmit = async (data: ApplicationFormData) => {
+    if (job.applicationType === 'external' && job.externalApplicationUrl) {
+        window.open(job.externalApplicationUrl, '_blank');
+        return;
+    }
+
     try {
-      setIsSubmitting(true);
-      
-      const payload: InsertApplication = {
+      const payload: InsertApplication & { resumeFile?: File } = {
         jobId: job.id,
         firstName: data.firstName,
         lastName: data.lastName,
@@ -68,7 +72,8 @@ export function ApplyForm({ job, onSuccess }: ApplyFormProps) {
         github: data.github || null,
         portfolio: data.portfolio || null,
         coverLetter: data.coverLetter || null,
-        resumeUrl: null, // Not in form, assuming null for now
+        resumeUrl: null,
+        resumeFile: data.resumeFile,
       };
 
       await createApplication.mutateAsync(payload);
@@ -86,8 +91,6 @@ export function ApplyForm({ job, onSuccess }: ApplyFormProps) {
         description: "Please try again later.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -97,167 +100,22 @@ export function ApplyForm({ job, onSuccess }: ApplyFormProps) {
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="firstName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>First Name *</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lastName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Last Name *</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          {job.applicationType === 'internal' ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField control={form.control} name="firstName" render={({ field }) => ( <FormItem><FormLabel>First Name *</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+                <FormField control={form.control} name="lastName" render={({ field }) => ( <FormItem><FormLabel>Last Name *</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+              </div>
+              <FormField control={form.control} name="email" render={({ field }) => ( <FormItem><FormLabel>Email *</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>)} />
+              <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>Phone</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+              <FormField control={form.control} name="experienceLevel" render={({ field }) => ( <FormItem><FormLabel>Experience Level *</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue placeholder="Select your experience level" /></SelectTrigger></FormControl><SelectContent><SelectItem value="entry">Entry Level (0-2 years)</SelectItem><SelectItem value="mid">Mid Level (3-7 years)</SelectItem><SelectItem value="senior">Senior Level (8-15 years)</SelectItem><SelectItem value="executive">Executive Level (15+ years)</SelectItem></SelectContent></Select><FormMessage /></FormItem>)} />
+              <FormField control={form.control} name="resumeFile" render={({ field: { onChange, value, ...rest } }) => ( <FormItem><FormLabel>Resume (PDF, DOCX)</FormLabel><FormControl><div className="relative"><Upload className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" /><Input type="file" accept=".pdf,.doc,.docx" className="pl-10" onChange={(e) => onChange(e.target.files?.[0])} {...rest} /></div></FormControl><FormMessage /></FormItem>)} />
+              <FormField control={form.control} name="coverLetter" render={({ field }) => ( <FormItem><FormLabel>Cover Letter</FormLabel><FormControl><Textarea placeholder="Tell us why you're interested in this role..." rows={4} {...field} /></FormControl><FormMessage /></FormItem>)} />
+            </>
+          ) : null}
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email *</FormLabel>
-                <FormControl>
-                  <Input type="email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="currentRole"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Current Role</FormLabel>
-                <FormControl>
-                  <Input {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="experienceLevel"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Experience Level *</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select your experience level" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="entry">Entry Level (0-2 years)</SelectItem>
-                    <SelectItem value="mid">Mid Level (3-7 years)</SelectItem>
-                    <SelectItem value="senior">Senior Level (8-15 years)</SelectItem>
-                    <SelectItem value="executive">Executive Level (15+ years)</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <FormField
-              control={form.control}
-              name="linkedin"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>LinkedIn URL</FormLabel>
-                  <FormControl>
-                    <Input placeholder="https://linkedin.com/in/..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="github"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>GitHub URL</FormLabel>
-                  <FormControl>
-                    <Input placeholder="https://github.com/..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="portfolio"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Portfolio URL</FormLabel>
-                  <FormControl>
-                    <Input placeholder="https://..." {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-
-          <FormField
-            control={form.control}
-            name="coverLetter"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Cover Letter</FormLabel>
-                <FormControl>
-                  <Textarea 
-                    placeholder="Tell us why you're interested in this role..."
-                    rows={4}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button 
-            type="submit" 
-            className="w-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Submitting..." : "Submit Application"}
+          <Button type="submit" className="w-full" disabled={createApplication.isPending}>
+            {createApplication.isPending ? "Submitting..." : (job.applicationType === 'external' ? 'Apply on Company Site' : 'Submit Application')}
           </Button>
         </form>
       </Form>

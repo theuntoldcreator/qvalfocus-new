@@ -8,7 +8,7 @@ import { Briefcase } from "lucide-react";
 import { Link } from "wouter";
 
 export default function JobsPage() {
-  const { data: jobs, isLoading } = useJobs();
+  const { data: jobs, isLoading } = useJobs({ poll: true });
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">

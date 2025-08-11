@@ -1,41 +1,20 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "./queryClient";
-import type { Job, Application, InsertJob, InsertApplication, CaseStudy } from "@shared/schema";
+import type { Job, Application, InsertJob, InsertApplication, CaseStudy, Contact, InsertContact } from "@shared/schema";
 import { caseStudies as mockCaseStudies } from './data';
+import { supabase } from "@/integrations/supabase/client";
 
 // Jobs
-export function useJobs(filters?: { search: string; location: string; type: string; }) {
+export function useJobs(options: { poll?: boolean } = {}) {
   return useQuery<Job[]>({
     queryKey: ['/api/jobs'],
-    queryFn: async () => {
-      const response = await fetch('/api/jobs');
-      if (!response.ok) throw new Error('Failed to fetch jobs');
-      return response.json();
-    },
-    select: (jobs) => {
-      if (!filters) return jobs;
-      return jobs.filter(job => {
-        const searchMatch = filters.search ? 
-          job.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-          job.company.toLowerCase().includes(filters.search.toLowerCase()) ||
-          job.skills?.some(skill => skill.toLowerCase().includes(filters.search.toLowerCase()))
-          : true;
-        const locationMatch = filters.location !== 'All Locations' ? job.location === filters.location : true;
-        const typeMatch = filters.type !== 'All Types' ? job.type === filters.type : true;
-        return searchMatch && locationMatch && typeMatch;
-      });
-    }
+    refetchInterval: options.poll ? 60000 : false, // Poll every 60 seconds if enabled
   });
 }
 
 export function useFeaturedJobs() {
   return useQuery<Job[]>({
     queryKey: ['/api/jobs'],
-    queryFn: async () => {
-      const response = await fetch('/api/jobs');
-      if (!response.ok) throw new Error('Failed to fetch jobs');
-      return response.json();
-    },
     select: (jobs) => jobs.filter(job => job.featured).slice(0, 3)
   });
 }
@@ -71,8 +50,22 @@ export function useDeleteJob() {
 export function useCreateApplication() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: async (newApplication: InsertApplication) => {
-            const res = await apiRequest('POST', '/api/applications', newApplication);
+        mutationFn: async (newApplication: InsertApplication & { resumeFile?: File }) => {
+            let resumeUrl: string | null = null;
+            if (newApplication.resumeFile) {
+                const file = newApplication.resumeFile;
+                const filePath = `public/${Date.now()}-${file.name}`;
+                const { error: uploadError } = await supabase.storage.from('resumes').upload(filePath, file);
+                if (uploadError) throw new Error(uploadError.message);
+                
+                const { data: { publicUrl } } = supabase.storage.from('resumes').getPublicUrl(filePath);
+                resumeUrl = publicUrl;
+            }
+            
+            const { resumeFile, ...appData } = newApplication;
+            const payload = { ...appData, resumeUrl };
+
+            const res = await apiRequest('POST', '/api/applications', payload);
             return res.json();
         },
         onSuccess: (data) => {
@@ -94,6 +87,23 @@ export function useDeleteApplication() {
         mutationFn: (id: string) => apiRequest('DELETE', `/api/applications/${id}`),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['/api/applications/job'] });
+        },
+    });
+}
+
+// Contacts
+export function useContacts() {
+    return useQuery<Contact[]>({
+        queryKey: ['/api/contacts'],
+    });
+}
+
+export function useCreateContact() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: (newContact: InsertContact) => apiRequest('POST', '/api/contacts', newContact),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['/api/contacts'] });
         },
     });
 }
@@ -138,16 +148,6 @@ export function useSubscribeNewsletter() {
   return useMutation({
     mutationFn: async (data: { email: string }) => {
       console.log("Subscribing to newsletter:", data.email);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return { success: true };
-    },
-  });
-}
-
-export function useCreateContact() {
-  return useMutation({
-    mutationFn: async (data: any) => {
-      console.log("Creating contact:", data);
       await new Promise(resolve => setTimeout(resolve, 1000));
       return { success: true };
     },
