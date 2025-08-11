@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { Job, Application, InsertJob, InsertApplication, CaseStudy, Contact, InsertContact } from "@shared/schema";
+import type { Job, Application, InsertApplication, CaseStudy, Contact, InsertContact } from "@shared/schema";
 import { caseStudies as mockCaseStudies } from './data';
 
 // Helper to generate a URL-friendly slug
@@ -50,40 +50,9 @@ export function useJobBySlug(slug: string) {
   });
 }
 
-export function useCreateJob() {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: async (newJob: InsertJob) => {
-            const slug = toSlug(newJob.title);
-            const { data, error } = await supabase
-                .from('jobs')
-                .insert([{ ...newJob, slug }])
-                .select()
-                .single();
-            if (error) {
-              console.error("Supabase insert error:", error); // Added logging
-              throw new Error(error.message);
-            }
-            return data;
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['jobs'] });
-        },
-    });
-}
-
-export function useDeleteJob() {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: async (id: string) => {
-            const { error } = await supabase.from('jobs').delete().eq('id', id);
-            if (error) throw new Error(error.message);
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['jobs'] });
-        },
-    });
-}
+// Admin-related job mutations removed
+// export function useCreateJob() { ... }
+// export function useDeleteJob() { ... }
 
 // Applications
 export function useCreateApplication() {
@@ -104,62 +73,14 @@ export function useCreateApplication() {
     });
 }
 
-export function useApplications(jobId: string) {
-    return useQuery<Application[]>({
-        queryKey: ['applications', 'job', jobId],
-        queryFn: async () => {
-            const { data, error } = await supabase
-                .from('applications')
-                .select('*')
-                .eq('job_id', jobId)
-                .order('created_at', { ascending: false });
-            if (error) throw new Error(error.message);
-            return data as Application[];
-        },
-        enabled: !!jobId,
-    });
-}
-
-export function useDeleteApplication() {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: async (id: string) => {
-            const { error } = await supabase.from('applications').delete().eq('id', id);
-            if (error) throw new Error(error.message);
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ['applications'] });
-        },
-    });
-}
-
-export function useAllApplications() {
-    return useQuery<{ id: string }[]>({
-        queryKey: ['applications', 'all'],
-        queryFn: async () => {
-            const { data, error } = await supabase
-                .from('applications')
-                .select('id');
-            if (error) throw new Error(error.message);
-            return data || [];
-        },
-    });
-}
+// Admin-related application queries/mutations removed
+// export function useApplications(jobId: string) { ... }
+// export function useDeleteApplication() { ... }
+// export function useAllApplications() { ... }
 
 // Contacts
-export function useContacts() {
-    return useQuery<Contact[]>({
-        queryKey: ['contacts'],
-        queryFn: async () => {
-            const { data, error } = await supabase
-                .from('contacts')
-                .select('*')
-                .order('created_at', { ascending: false });
-            if (error) throw new Error(error.message);
-            return data as Contact[];
-        },
-    });
-}
+// Admin-related contact queries/mutations removed
+// export function useContacts() { ... }
 
 export function useCreateContact() {
     const queryClient = useQueryClient();

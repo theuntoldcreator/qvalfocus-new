@@ -4,8 +4,6 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { AuthProvider } from "@/providers/auth-provider";
-import { ProtectedRoute } from "@/components/protected-route";
 
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
@@ -21,8 +19,6 @@ import AboutPage from "@/pages/about";
 import ContactPage from "@/pages/contact";
 import PrivacyPage from "@/pages/legal/privacy";
 import TermsPage from "@/pages/legal/terms";
-import AdminLoginPage from "@/pages/admin/login";
-import AdminDashboardPage from "@/pages/admin/dashboard";
 
 function Router() {
   return (
@@ -41,21 +37,6 @@ function Router() {
       <Route path="/legal/privacy" component={PrivacyPage} />
       <Route path="/legal/terms" component={TermsPage} />
       
-      {/* Admin Routes */}
-      <Route path="/admin/login" component={AdminLoginPage} />
-      {/* Explicitly match the base dashboard path first */}
-      <Route path="/admin/dashboard">
-        <ProtectedRoute>
-          <AdminDashboardPage />
-        </ProtectedRoute>
-      </Route>
-      {/* Then match any sub-paths within the dashboard */}
-      <Route path="/admin/dashboard/:rest*">
-        <ProtectedRoute>
-          <AdminDashboardPage />
-        </ProtectedRoute>
-      </Route>
-
       <Route component={NotFound} />
     </Switch>
   );
@@ -65,12 +46,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <AuthProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
-        </AuthProvider>
+        {/* AuthProvider removed as admin panel is deleted */}
+        <TooltipProvider>
+          <Toaster />
+          <Router />
+        </TooltipProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

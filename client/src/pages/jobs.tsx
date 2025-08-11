@@ -6,11 +6,11 @@ import { useJobs } from "@/lib/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Briefcase } from "lucide-react";
 import { Link } from "wouter";
-import { useAuth } from "@/providers/auth-provider";
+// useAuth import removed as admin panel is deleted
 
 export default function JobsPage() {
   const { data: jobs, isLoading } = useJobs({ poll: true });
-  const { session } = useAuth();
+  // session removed as admin panel is deleted
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
@@ -21,13 +21,7 @@ export default function JobsPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-primary font-sans">
               Careers
             </h1>
-            <Button variant="outline" asChild>
-              {session ? (
-                <Link href="/admin/dashboard">Admin Portal</Link>
-              ) : (
-                <Link href="/admin/login">Admin Login</Link>
-              )}
-            </Button>
+            {/* Admin button removed as admin panel is deleted */}
           </div>
 
           {isLoading ? (
