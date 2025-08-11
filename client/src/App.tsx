@@ -43,7 +43,7 @@ function Router() {
       
       {/* Admin Routes */}
       <Route path="/admin/login" component={AdminLoginPage} />
-      <Route path="/admin/dashboard">
+      <Route path="/admin/dashboard/:rest*">
         <ProtectedRoute>
           <AdminDashboardPage />
         </ProtectedRoute>

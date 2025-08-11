@@ -8,13 +8,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useCreateJob } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const jobFormSchema = insertJobSchema.extend({
+  skills: z.string().optional(),
+  tags: z.string().optional(),
+});
+type JobFormData = z.infer<typeof jobFormSchema>;
 
 export function JobForm() {
   const createJob = useCreateJob();
   const { toast } = useToast();
 
-  const form = useForm<InsertJob>({
-    resolver: zodResolver(insertJobSchema),
+  const form = useForm<JobFormData>({
+    resolver: zodResolver(jobFormSchema),
     defaultValues: {
       title: "",
       company: "QvalFocus",
@@ -27,15 +34,21 @@ export function JobForm() {
       responsibilities: "",
       applicationType: "internal",
       externalApplicationUrl: "",
-      tags: [],
-      skills: [],
+      tags: "",
+      skills: "",
     },
   });
 
   const applicationType = form.watch("applicationType");
 
-  const onSubmit = async (data: InsertJob) => {
-    await createJob.mutateAsync(data, {
+  const onSubmit = async (data: JobFormData) => {
+    const payload: InsertJob = {
+        ...data,
+        skills: data.skills ? data.skills.split(',').map(s => s.trim()).filter(Boolean) : [],
+        tags: data.tags ? data.tags.split(',').map(t => t.trim()).filter(Boolean) : [],
+    };
+
+    await createJob.mutateAsync(payload, {
       onSuccess: () => {
         toast({ title: "Job posted successfully!" });
         form.reset();
@@ -52,16 +65,34 @@ export function JobForm() {
         <FormField name="title" control={form.control} render={({ field }) => (
           <FormItem><FormLabel>Job Title</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
         )} />
-        <div className="grid grid-cols-2 gap-4">
-            <FormField name="location" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Location</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-            )} />
+        <FormField name="company" control={form.control} render={({ field }) => (
+          <FormItem><FormLabel>Company</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+        )} />
+        <FormField name="location" control={form.control} render={({ field }) => (
+          <FormItem><FormLabel>Location</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
+        )} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField name="type" control={form.control} render={({ field }) => (
             <FormItem><FormLabel>Type</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl><SelectContent><SelectItem value="full-time">Full-time</SelectItem><SelectItem value="contract">Contract</SelectItem><SelectItem value="part-time">Part-time</SelectItem></SelectContent></Select><FormMessage /></FormItem>
             )} />
+            <FormField name="level" control={form.control} render={({ field }) => (
+            <FormItem><FormLabel>Level</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl><SelectContent><SelectItem value="entry">Entry</SelectItem><SelectItem value="mid">Mid</SelectItem><SelectItem value="senior">Senior</SelectItem></SelectContent></Select><FormMessage /></FormItem>
+            )} />
         </div>
+        <FormField name="industry" control={form.control} render={({ field }) => (
+            <FormItem><FormLabel>Industry</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl><SelectContent><SelectItem value="Information Technology">Information Technology</SelectItem><SelectItem value="Life Sciences">Life Sciences</SelectItem></SelectContent></Select><FormMessage /></FormItem>
+        )} />
         <FormField name="description" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Description</FormLabel><FormControl><Textarea {...field} /></FormControl><FormMessage /></FormItem>
+            <FormItem><FormLabel>Description</FormLabel><FormControl><Textarea {...field} rows={5} /></FormControl><FormMessage /></FormItem>
+        )} />
+        <FormField name="responsibilities" control={form.control} render={({ field }) => (
+            <FormItem><FormLabel>Responsibilities</FormLabel><FormControl><Textarea {...field} rows={5} /></FormControl><FormMessage /></FormItem>
+        )} />
+        <FormField name="requirements" control={form.control} render={({ field }) => (
+            <FormItem><FormLabel>Requirements</FormLabel><FormControl><Textarea {...field} rows={5} /></FormControl><FormMessage /></FormItem>
+        )} />
+        <FormField name="skills" control={form.control} render={({ field }) => (
+          <FormItem><FormLabel>Skills (comma-separated)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
         )} />
         <FormField name="applicationType" control={form.control} render={({ field }) => (
             <FormItem><FormLabel>Application Type</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl><SelectContent><SelectItem value="internal">Internal</SelectItem><SelectItem value="external">External</SelectItem></SelectContent></Select><FormMessage /></FormItem>
@@ -71,7 +102,7 @@ export function JobForm() {
                 <FormItem><FormLabel>External URL</FormLabel><FormControl><Input {...field} value={field.value || ''} placeholder="https://example.com/apply" /></FormControl><FormMessage /></FormItem>
             )} />
         )}
-        <Button type="submit" disabled={createJob.isPending}>
+        <Button type="submit" disabled={createJob.isPending} className="w-full">
           {createJob.isPending ? "Posting..." : "Post Job"}
         </Button>
       </form>
