@@ -6,11 +6,11 @@ import { useJobs } from "@/lib/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Briefcase } from "lucide-react";
 import { Link } from "wouter";
-import { useAuth } from "@/providers/auth-provider"; // Re-added useAuth
+import { useAuth } from "@/providers/auth-provider";
 
 export default function JobsPage() {
   const { data: jobs, isLoading } = useJobs({ poll: true });
-  const { session } = useAuth(); // Re-added session check
+  const { session } = useAuth();
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
