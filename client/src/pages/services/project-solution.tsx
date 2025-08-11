@@ -23,38 +23,38 @@ export default function ProjectSolutionPage() {
   const lifeSciencesSolutions = [
     {
       icon: FlaskConical,
-      title: "Equipment, Utility and Facility Validation",
-      description: "Comprehensive CQV services for equipment, utilities, and facilities using robust IQ, OQ, and PQ protocols to ensure compliance and audit readiness."
+      title: "Equipment, Utility & Facility Validation",
+      description: "Complete CQV (IQ, OQ, PQ) execution in line with GAMP 5 and regulatory expectations. Validation for autoclaves, HVAC, cleanrooms, and purified water systems."
     },
     {
       icon: TestTube,
       title: "Cleaning Validation",
-      description: "Data-driven, risk-based cleaning validation services, including cycle development for COP, CIP, and SIP systems to prevent cross-contamination."
+      description: "Risk-based cleaning strategies for COP, CIP, SIP systems. Ensuring removal of residues to safe, acceptable levels."
     },
     {
       icon: Laptop,
-      title: "Computer System Validation",
-      description: "Robust validation for software, hardware, and automation systems (SCADA, DeltaV, Rockwell) to meet global GxP requirements, including 21 CFR Part 11."
+      title: "Computer System Validation (CSV)",
+      description: "Compliance with FDA, EMA, and 21 CFR Part 11 requirements. Expertise in SCADA, DeltaV, RockWell Automation, SIEMENs."
     },
     {
       icon: Wind,
       title: "Environmental Monitoring",
-      description: "Continuous environmental monitoring strategies for viable and non-viable particles to maintain the integrity of your cleanrooms and controlled areas."
+      description: "Viable and non-viable particle monitoring to maintain GMP compliance."
     },
     {
       icon: Thermometer,
       title: "Temperature Mapping Studies",
-      description: "Precise temperature mapping of storage units, warehouses, and transport vehicles to identify fluctuations and ensure product stability."
+      description: "Ensuring controlled environments for product storage and transport."
     },
     {
       icon: Siren,
       title: "Remediation Services",
-      description: "Gap assessments, root cause analysis, and corrective action planning to quickly and effectively restore compliance after regulatory findings."
+      description: "Addressing audit findings, implementing corrective actions, and restoring compliance."
     },
     {
       icon: FileCheck,
-      title: "Deviation & Capa Backlog Closeout",
-      description: "Efficiently close out accumulated deviations and CAPAs by reviewing, investigating, and remediating backlog records to restore and sustain GMP compliance."
+      title: "Deviation & CAPA Backlog Closeout",
+      description: "Investigation, documentation, and compliance restoration for backlog issues."
     }
   ];
 
@@ -62,32 +62,32 @@ export default function ProjectSolutionPage() {
     {
       icon: Code,
       title: "Application Development & Modernization",
-      description: "End-to-end solutions to build, scale, and transform applications. We deliver robust, secure, and future-ready applications from greenfield builds to legacy system modernization."
+      description: "Full-stack development across modern frameworks. Secure, scalable, and future-ready solutions."
     },
     {
       icon: CheckCircle,
       title: "QA & Test Automation",
-      description: "Scalable QA strategies, automation frameworks, and performance testing to ensure flawless user experiences and defect-free delivery across all platforms."
+      description: "Automation frameworks, performance testing, and QA strategy implementation."
     },
     {
       icon: Cloud,
       title: "Cloud & Infrastructure Projects",
-      description: "Cloud-native and hybrid infrastructure solutions. From cloud migration and optimization to DevOps implementation and infrastructure automation."
+      description: "Cloud migration, optimization, and infrastructure scaling (AWS, Azure, GCP)."
     },
     {
       icon: DatabaseZap,
       title: "Data & Analytics",
-      description: "Turn data into a competitive edge. Our experts design data pipelines, implement ETL processes, and develop interactive dashboards to unlock real-time insights."
+      description: "Data engineering, analytics, BI implementation, and governance."
     },
     {
       icon: ShieldCheck,
       title: "Cybersecurity Programs",
-      description: "Vulnerability assessments, governance and compliance (NIST, ISO, SOC2), and DevSecOps adoption to embed security into every layer of your technology stack."
+      description: "Threat detection, SOC operations, and compliance readiness."
     },
     {
       icon: BrainCircuit,
       title: "AI/ML Initiatives",
-      description: "Accelerate innovation with data-driven intelligence. From model development and MLOps pipelines to Generative AI integration and intelligent automation."
+      description: "Predictive analytics, intelligent automation, and AI-driven process improvement."
     }
   ];
 
@@ -115,7 +115,7 @@ export default function ProjectSolutionPage() {
               End-to-End Project Delivery
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
-              At QvalFocus, we provide end-to-end project-based solutions designed to help our clients accelerate delivery, improve efficiency, and meet regulatory or technical demands.
+              We deliver end-to-end project execution for both IT and Life Sciences sectors. Our goal is to help you accelerate delivery, improve efficiency, and meet technical or regulatory requirements with precision.
             </p>
             <Button size="lg" asChild>
               <Link href="/contact?type=client">Get In Touch</Link>
@@ -129,7 +129,7 @@ export default function ProjectSolutionPage() {
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Life Sciences Project Solutions</h2>
               <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-                Specialized solutions to ensure compliance, quality, and efficiency in the life sciences sector.
+                We provide specialized services that ensure compliance, efficiency, and high-quality results throughout your product lifecycle.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -155,7 +155,7 @@ export default function ProjectSolutionPage() {
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">IT Project Solutions</h2>
               <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-                Modern technology solutions to drive digital transformation and business growth.
+                We help businesses innovate, modernize, and scale technology with industry-leading project delivery.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

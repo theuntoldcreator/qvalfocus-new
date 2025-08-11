@@ -11,54 +11,27 @@ import {
   CheckSquare,
   Wrench,
   UserCheck,
-  Laptop
+  Laptop,
+  FileText,
+  Search,
+  Users2,
+  Building2
 } from "lucide-react";
 
 export default function StaffingSolutionPage() {
-  const strategicSolutions = [
-    {
-      icon: Briefcase,
-      title: "Project Delivery",
-      description: "Our Project Delivery solutions offer comprehensive support across the entire project lifecycle. We source, onboard, and manage skilled professionals to execute key initiatives whether IT, Life Sciences, or cross-functional programs. From kickoff to completion, we ensure seamless execution, consistent quality, and measurable results that align with your delivery goals."
-    },
-    {
-      icon: Handshake,
-      title: "Talent Partnership",
-      description: "Our Talent Partnership model goes beyond traditional staffing. We immerse ourselves in your business to understand your long-term goals, company culture, and evolving skill needs. Acting as an extension of your HR and hiring teams, we offer consultative support, data-driven hiring strategies, and a flexible engagement model delivering not just people, but business-aligned solutions that drive sustained success."
-    }
+  const coreOfferings = [
+    { icon: Briefcase, title: "Contract & Contract-to-Hire", description: "Short-term or evaluation-based hires for maximum flexibility." },
+    { icon: Search, title: "Direct Hire & Executive Search", description: "Targeted recruitment for permanent and leadership roles." },
+    { icon: Users2, title: "FSP (Functional Service Provider) Teams", description: "Dedicated, embedded teams for consistent service delivery." },
+    { icon: Building2, title: "Project-Based Outsourcing", description: "Full project teams managed and delivered by QvalFocus." }
   ];
 
   const expertiseAreas = [
-    {
-      icon: FlaskConical,
-      title: "Commissioning, Qualification & Validation (CQV) Resources",
-      description: "Ensure the successful initiation of your projects with our qualified professionals who oversee commissioning and qualification processes, guaranteeing compliance and efficiency."
-    },
-    {
-      icon: CheckSquare,
-      title: "Quality Control Resources",
-      description: "Exceed quality benchmarks with our experts who manage and optimize your quality control processes, ensuring precision and compliance in every facet of your operations."
-    },
-    {
-      icon: Wrench,
-      title: "Cleaning Validation Resources",
-      description: "Maintain the highest hygiene standards with our experienced professionals who oversee and validate your cleaning processes, ensuring a safe and compliant environment."
-    },
-    {
-      icon: UserCheck,
-      title: "Quality Assurance Resources",
-      description: "Elevate your quality standards with our dedicated personnel committed to maintaining the highest quality throughout your processes, ensuring strict compliance and excellence."
-    },
-    {
-      icon: Laptop,
-      title: "Computer System Validation Resources",
-      description: "Stay at the forefront of the digital landscape with our skilled professionals who validate and maintain your computer systems, ensuring they consistently meet industry standards."
-    },
-    {
-      icon: Users,
-      title: "Engineers (Quality, Manufacturing, Process)",
-      description: "Secure top-tier talent for critical engineering roles. Connect with engineers who bring both expertise and innovation to your projects."
-    }
+    { icon: FlaskConical, title: "Commissioning, Qualification & Validation (CQV)" },
+    { icon: CheckSquare, title: "Quality Control (QC) & Quality Assurance (QA)" },
+    { icon: Wrench, title: "Cleaning Validation" },
+    { icon: Laptop, title: "Computer System Validation (CSV)" },
+    { icon: Users, title: "Manufacturing & Process Engineers" },
   ];
 
   return (
@@ -85,7 +58,7 @@ export default function StaffingSolutionPage() {
               Flexible, Scalable Talent Solutions
             </h1>
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
-              At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
+              At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly, address seasonal hiring spikes, or build a long-term workforce strategy, we ensure you have access to the right talent when and where you need it.
             </p>
             <Button size="lg" asChild>
               <Link href="/contact?type=client">Get In Touch</Link>
@@ -93,22 +66,49 @@ export default function StaffingSolutionPage() {
           </div>
         </section>
 
-        {/* Strategic Talent Solutions */}
+        {/* Staffing Approach */}
         <section className="py-20 bg-white dark:bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Strategic Talent Solutions for Evolving Business Needs</h2>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Our Staffing Approach</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {strategicSolutions.map((solution, index) => {
-                const Icon = solution.icon;
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="text-center">
+                <h3 className="text-xl font-bold mb-2">Rapid Deployment</h3>
+                <p className="text-slate-600 dark:text-slate-300">For urgent roles</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold mb-2">Specialized Recruitment</h3>
+                <p className="text-slate-600 dark:text-slate-300">In IT & Life Sciences</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold mb-2">Long-Term Strategies</h3>
+                <p className="text-slate-600 dark:text-slate-300">Aligned with your growth</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold mb-2">Tailored Engagement</h3>
+                <p className="text-slate-600 dark:text-slate-300">To match your needs</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Core Staffing Offerings */}
+        <section className="py-20 bg-slate-100 dark:bg-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Core Staffing Offerings</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {coreOfferings.map((offering, index) => {
+                const Icon = offering.icon;
                 return (
-                  <div key={index} className="text-center">
-                    <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
-                      <Icon className="w-10 h-10 text-white" />
+                  <div key={index} className="glass dark:glass-dark rounded-2xl p-8 text-center">
+                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center">
+                      <Icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-4">{solution.title}</h3>
-                    <p className="text-slate-600 dark:text-slate-300 max-w-lg mx-auto">{solution.description}</p>
+                    <h3 className="text-xl font-bold mb-4">{offering.title}</h3>
+                    <p className="text-slate-600 dark:text-slate-300">{offering.description}</p>
                   </div>
                 );
               })}
@@ -116,25 +116,21 @@ export default function StaffingSolutionPage() {
           </div>
         </section>
 
-        {/* Our Expertise */}
-        <section className="py-20 bg-slate-100 dark:bg-slate-900">
+        {/* Specialized Resource Areas */}
+        <section className="py-20 bg-white dark:bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Our Expertise</h2>
-              <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-                We specialize in sourcing highly skilled professionals for a wide range of critical roles in the life sciences and technology sectors.
-              </p>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Specialized Resource Areas</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {expertiseAreas.map((area, index) => {
                 const Icon = area.icon;
                 return (
-                  <div key={index} className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300">
-                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mb-6">
+                  <div key={index} className="glass dark:glass-dark rounded-2xl p-8 text-center hover:scale-105 transition-all duration-300">
+                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold mb-4">{area.title}</h3>
-                    <p className="text-slate-600 dark:text-slate-300">{area.description}</p>
+                    <h3 className="text-xl font-bold">{area.title}</h3>
                   </div>
                 );
               })}

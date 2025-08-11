@@ -9,11 +9,6 @@ import {
   Heart, 
   Lightbulb, 
   Handshake,
-  GitMerge,
-  Briefcase,
-  TrendingUp,
-  UserCheck,
-  FileCheck,
   Target,
   Eye
 } from "lucide-react";
@@ -23,55 +18,27 @@ export default function AboutPage() {
     {
       icon: Shield,
       title: "Integrity",
-      description: "We operate with transparency and honesty in everything we do."
+      description: "Transparency in all actions"
     },
     {
       icon: Award,
       title: "Excellence",
-      description: "We strive for the highest standards in our services, solutions, and people."
+      description: "High standards in delivery"
     },
     {
       icon: Heart,
       title: "Customer Focus",
-      description: "Your goals are our priority—we’re driven by your success."
+      description: "Success-driven partnerships"
     },
     {
       icon: Lightbulb,
       title: "Innovation",
-      description: "We embrace modern tools and thinking to solve today’s challenges."
+      description: "Modern tools and problem-solving"
     },
     {
       icon: Handshake,
       title: "Collaboration",
-      description: "We believe in building strong, long-term relationships with clients and talent alike."
-    }
-  ];
-
-  const offerings = [
-    {
-      icon: GitMerge,
-      title: "Flexible Engagement Models",
-      description: "Contract, contract-to-hire, direct hire, executive search, FSP teams, and project-based outsourcing tailored to your needs."
-    },
-    {
-      icon: Briefcase,
-      title: "Industry Expertise",
-      description: "Specialized support for Life Sciences, Biotechnology, Pharmaceuticals, and Information Technology sectors."
-    },
-    {
-      icon: TrendingUp,
-      title: "Scalable Solutions",
-      description: "From individual consultants to fully managed teams, we offer scalable talent and project solutions."
-    },
-    {
-      icon: UserCheck,
-      title: "Talent-First Approach",
-      description: "Our rigorous screening and cultural alignment process ensures you get the right fit every time."
-    },
-    {
-      icon: FileCheck,
-      title: "Compliance & Quality Focus",
-      description: "Strong emphasis on regulatory compliance and quality assurance, especially in validated environments."
+      description: "Strong client and talent relationships"
     }
   ];
 
@@ -113,7 +80,7 @@ export default function AboutPage() {
                 <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Who We Are</h2>
                 <div className="space-y-6 text-slate-700 dark:text-slate-300">
                   <p>
-                    QvalFocus, Inc. is an emerging professional services provider delivering innovative, high-quality solutions across the Life Sciences and Information Technology sectors. Backed by modern technology, passionate experts, and a leadership team with over 50 years of combined industry experience, we specialize in connecting top-tier talent with forward-thinking organizations. We do the heavy lifting—so you can focus on delivering your projects on time with skilled and reliable resources.
+                    QvalFocus, Inc. is a professional services company delivering innovative solutions in Life Sciences and Information Technology. With over 50 years of combined leadership experience, we connect high-caliber talent with forward-thinking companies.
                   </p>
                 </div>
               </div>
@@ -178,33 +145,10 @@ export default function AboutPage() {
                     <h2 className="text-3xl font-serif font-bold">Our Mission</h2>
                   </div>
                   <p className="text-lg text-slate-700 dark:text-slate-300">
-                    Our mission is to empower our clients by delivering high-impact staffing and project-based solutions that drive success, efficiency, and growth. We are committed to bridging the gap between exceptional talent and innovative companies through integrity, agility, and unmatched service.
+                    To empower clients with staffing and project solutions that drive growth, compliance, and innovation.
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* What We Offer */}
-        <section className="py-20 bg-slate-100 dark:bg-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">What We Offer</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {offerings.map((offering, index) => {
-                const Icon = offering.icon;
-                return (
-                  <div key={index} className={`glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300 flex flex-col ${index === 3 ? 'md:col-span-1' : ''} ${index === 4 ? 'md:col-span-2 lg:col-span-1 lg:col-start-2' : ''}`}>
-                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mb-6">
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-4 flex-grow">{offering.title}</h3>
-                    <p className="text-slate-600 dark:text-slate-300">{offering.description}</p>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>

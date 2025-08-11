@@ -1,45 +1,15 @@
 export const industries = [
   {
-    id: "technology",
-    name: "Technology",
-    description: "Software, AI, Cloud, Cybersecurity",
-    icon: "💻",
-    slug: "technology"
+    id: "life-sciences",
+    name: "Life Sciences",
+    description: "Aseptic Manufacturing, Biologics, Validation",
+    slug: "life-sciences"
   },
   {
-    id: "financial-services",
-    name: "Financial Services", 
-    description: "Banking, FinTech, Investment",
-    icon: "💰",
-    slug: "financial-services"
-  },
-  {
-    id: "healthcare",
-    name: "Healthcare",
-    description: "Digital Health, Biotech, Medical Devices",
-    icon: "❤️",
-    slug: "healthcare"
-  },
-  {
-    id: "retail",
-    name: "Retail",
-    description: "E-commerce, Omnichannel, Consumer",
-    icon: "🛍️",
-    slug: "retail"
-  },
-  {
-    id: "manufacturing",
-    name: "Manufacturing",
-    description: "Industry 4.0, IoT, Supply Chain",
-    icon: "🏭",
-    slug: "manufacturing"
-  },
-  {
-    id: "public-sector",
-    name: "Public Sector",
-    description: "Government, Education, Non-profit",
-    icon: "🏛️",
-    slug: "public-sector"
+    id: "information-technology",
+    name: "Information Technology", 
+    description: "Software, Cloud, Data, Cybersecurity",
+    slug: "information-technology"
   }
 ];
 
@@ -100,13 +70,13 @@ export const services = [
 
 export const companyInfo = {
   name: "QvalFocus",
-  tagline: "Connecting Exceptional Talent with Visionary Companies",
-  description: "Premier staffing, consulting, and managed services across technology, finance, healthcare, and beyond. We don't just fill positions—we forge partnerships that drive innovation.",
+  tagline: "Driving Operational Excellence Through Deep Domain Expertise.",
+  description: "QvalFocus, Inc. is a professional services company delivering innovative solutions in Life Sciences and Information Technology.",
   founded: "2018",
-  headquarters: "San Francisco, CA",
-  offices: ["New York", "London", "Singapore"],
-  email: "hello@qvalfocus.com",
-  phone: "+1-555-TALENT",
+  headquarters: "666 Plainsboro Rd #615, Plainsboro Township, NJ 08536",
+  offices: ["Hyderabad, India"],
+  email: "info@qvalfocus.com",
+  phone: "+1 (609) 701-9988",
   linkedin: "https://linkedin.com/company/qvalfocus",
   twitter: "https://twitter.com/qvalfocus"
 };

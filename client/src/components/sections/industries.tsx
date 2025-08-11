@@ -1,14 +1,10 @@
 import { Link } from "wouter";
 import { industries } from "@/lib/data";
-import { Cpu, DollarSign, Heart, ShoppingBag, Factory, Building } from "lucide-react";
+import { Cpu, FlaskConical } from "lucide-react";
 
-const iconMap = {
-  technology: Cpu,
-  "financial-services": DollarSign,
-  healthcare: Heart,
-  retail: ShoppingBag,
-  manufacturing: Factory,
-  "public-sector": Building,
+const iconMap: { [key: string]: React.ElementType } = {
+  "information-technology": Cpu,
+  "life-sciences": FlaskConical,
 };
 
 export function Industries() {
@@ -18,14 +14,13 @@ export function Industries() {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">Industries We Serve</h2>
           <p className="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-            Deep sector expertise across high-growth industries, with specialized knowledge 
-            of unique challenges and opportunities.
+            We specialize in Life Sciences and Information Technology — delivering industry-aligned staffing and project solutions that produce measurable results.
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
           {industries.map((industry) => {
-            const Icon = iconMap[industry.id as keyof typeof iconMap];
+            const Icon = iconMap[industry.id];
             
             return (
               <Link key={industry.id} href={`/industries/${industry.slug}`} className="text-center group">

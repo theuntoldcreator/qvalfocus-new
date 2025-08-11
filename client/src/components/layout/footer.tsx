@@ -32,11 +32,8 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><Link href="/services/staffing-solution" className="hover:text-white transition-colors">Strategic Staffing</Link></li>
-              <li><Link href="/services/staffing-solution" className="hover:text-white transition-colors">Executive Search</Link></li>
-              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Consulting Services</Link></li>
-              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Managed Services</Link></li>
-              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Digital Transformation</Link></li>
+              <li><Link href="/services/staffing-solution" className="hover:text-white transition-colors">Staffing Solutions</Link></li>
+              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Project Solutions</Link></li>
             </ul>
           </div>
           
@@ -44,11 +41,8 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Industries</h3>
             <ul className="space-y-2">
-              <li><Link href="/industries/technology" className="hover:text-white transition-colors">Technology</Link></li>
-              <li><Link href="/industries/financial-services" className="hover:text-white transition-colors">Financial Services</Link></li>
-              <li><Link href="/industries/healthcare" className="hover:text-white transition-colors">Healthcare</Link></li>
-              <li><Link href="/industries/retail" className="hover:text-white transition-colors">Retail</Link></li>
-              <li><Link href="/industries/manufacturing" className="hover:text-white transition-colors">Manufacturing</Link></li>
+              <li><Link href="/industries/life-sciences" className="hover:text-white transition-colors">Life Sciences</Link></li>
+              <li><Link href="/industries/information-technology" className="hover:text-white transition-colors">Information Technology</Link></li>
             </ul>
           </div>
           
@@ -57,7 +51,6 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/about" className="hover:text-white transition-colors">Leadership</Link></li>
               <li><Link href="/jobs" className="hover:text-white transition-colors">Careers</Link></li>
               <li><Link href="/case-studies" className="hover:text-white transition-colors">Case Studies</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
