@@ -13,32 +13,33 @@ export const industries = [
   }
 ];
 
-export const testimonials = [
-  {
-    id: 1,
-    name: "Sarah Chen",
-    role: "CTO, InnovateTech",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
-    content: "QvalFocus transformed our hiring process. They understood our culture and technical needs, delivering candidates who weren't just qualified but genuinely excited about our mission.",
-    rating: 5
-  },
-  {
-    id: 2,
-    name: "Marcus Rodriguez",
-    role: "Senior Developer",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
-    content: "Found my dream role through QvalFocus. Their team took time to understand my career goals and connected me with a company that's been the perfect fit for over two years now.",
-    rating: 5
-  },
-  {
-    id: 3,
-    name: "Dr. Aisha Patel",
-    role: "VP Engineering, MedTech Corp",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
-    content: "Their consulting team helped us modernize our entire tech stack. The roadmap they created has been our north star for digital transformation over the past 18 months.",
-    rating: 5
-  }
-];
+// Testimonials data removed
+// export const testimonials = [
+//   {
+//     id: 1,
+//     name: "Sarah Chen",
+//     role: "CTO, InnovateTech",
+//     avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+//     content: "QvalFocus transformed our hiring process. They understood our culture and technical needs, delivering candidates who weren't just qualified but genuinely excited about our mission.",
+//     rating: 5
+//   },
+//   {
+//     id: 2,
+//     name: "Marcus Rodriguez",
+//     role: "Senior Developer",
+//     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+//     content: "Found my dream role through QvalFocus. Their team took time to understand my career goals and connected me with a company that's been the perfect fit for over two years now.",
+//     rating: 5
+//   },
+//   {
+//     id: 3,
+//     name: "Dr. Aisha Patel",
+//     role: "VP Engineering, MedTech Corp",
+//     avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+//     content: "Their consulting team helped us modernize our entire tech stack. The roadmap they created has been our north star for digital transformation over the past 18 months.",
+//     rating: 5
+//   }
+// ];
 
 export const kpis = [
   { label: "Successful Placements", value: "2,500+", delay: 0 },
