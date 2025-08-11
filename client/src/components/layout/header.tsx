@@ -28,7 +28,7 @@ export function Header() {
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
               <Link href="/" className="flex items-center space-x-2">
-                <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-10" /> {/* Added alt attribute */}
+                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
               </Link>
               
               {/* Desktop Navigation */}
