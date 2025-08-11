@@ -25,10 +25,10 @@ export function Hero() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white">
-            Driving Operational Excellence Through Deep Domain Expertise.
+            Flexible, Scalable Talent Solutions
           </h1>
           <p className="text-lg md:text-xl text-slate-200 mb-8 max-w-3xl mx-auto">
-            Merging Your Vision & Our Expertise — We Help You Achieve Excellence.
+            At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
