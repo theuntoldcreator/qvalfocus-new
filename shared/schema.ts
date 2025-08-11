@@ -29,6 +29,13 @@ export const jobSchema = z.object({
   updatedAt: z.string(),
 });
 
+export const insertJobSchema = jobSchema.omit({
+  id: true,
+  slug: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export const applicationSchema = z.object({
     id: z.string().uuid(),
     jobId: z.string().uuid(),
@@ -90,6 +97,7 @@ export const blogSchema = z.object({
 });
 
 export type Job = z.infer<typeof jobSchema>;
+export type InsertJob = z.infer<typeof insertJobSchema>;
 export type Application = z.infer<typeof applicationSchema>;
 export type InsertApplication = z.infer<typeof insertApplicationSchema>;
 export type Contact = z.infer<typeof contactSchema>;

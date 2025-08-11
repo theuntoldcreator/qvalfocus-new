@@ -1,10 +1,11 @@
-import { Switch, Route, useLocation } from "wouter"; // Import useLocation
+import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
-import { useEffect } from "react"; // Import useEffect
+import { AuthProvider } from "@/providers/auth-provider"; // Re-added AuthProvider
+import { ProtectedRoute } from "@/components/protected-route"; // Re-added ProtectedRoute
 
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
@@ -20,15 +21,10 @@ import AboutPage from "@/pages/about";
 import ContactPage from "@/pages/contact";
 import PrivacyPage from "@/pages/legal/privacy";
 import TermsPage from "@/pages/legal/terms";
+import AdminLoginPage from "@/pages/admin/login"; // Re-added AdminLoginPage
+import AdminDashboardPage from "@/pages/admin/dashboard"; // Re-added AdminDashboardPage
 
 function Router() {
-  const [location] = useLocation(); // Get current location
-
-  useEffect(() => {
-    // Scroll to top on route change
-    window.scrollTo(0, 0);
-  }, [location]); // Re-run effect when location changes
-
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -45,6 +41,14 @@ function Router() {
       <Route path="/legal/privacy" component={PrivacyPage} />
       <Route path="/legal/terms" component={TermsPage} />
       
+      {/* Admin Routes */}
+      <Route path="/admin/login" component={AdminLoginPage} />
+      <Route path="/admin/dashboard/:rest*"> {/* Catch-all for admin dashboard and its sub-routes */}
+        <ProtectedRoute>
+          <AdminDashboardPage />
+        </ProtectedRoute>
+      </Route>
+
       <Route component={NotFound} />
     </Switch>
   );
@@ -54,10 +58,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <AuthProvider> {/* AuthProvider re-added */}
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );
