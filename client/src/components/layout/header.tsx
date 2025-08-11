@@ -10,12 +10,12 @@ export function Header() {
   const [location] = useLocation();
 
   const navLinks = [
-    { href: "/case-studies", label: "Featured insights" },
-    { href: "/services/project-solution", label: "Capabilities" },
+    { href: "/", label: "Home" },
+    { href: "/services/staffing-solution", label: "Services" }, // Changed to Staffing Solution as per reference
     { href: "/industries", label: "Industries" },
-    { href: "/industries/technology", label: "Technology" },
-    { href: "/about", label: "About us" },
+    { href: "/about", label: "About Us" },
     { href: "/jobs", label: "Careers" },
+    { href: "/contact", label: "Contact Us" },
   ];
 
   return (

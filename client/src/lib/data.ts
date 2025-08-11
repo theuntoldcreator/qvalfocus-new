@@ -50,21 +50,23 @@ export const kpis = [
 export const services = [
   {
     id: "staffing-solution",
-    title: "Staffing Solution",
-    description: "Flexible and scalable staffing services tailored to your organization’s goals, from filling critical roles to building long-term hiring strategies.",
+    title: "Staffing Solutions",
+    description: "At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly, address seasonal hiring spikes, or build a long-term workforce strategy, we ensure you have access to the right talent — when and where you need it.",
     features: [],
     icon: "👥",
     color: "primary",
-    link: "/services/staffing-solution"
+    link: "/services/staffing-solution",
+    image: "https://namasteped.com/qvalfocus/assets/img/staffing-solutions.jpg"
   },
   {
     id: "project-solution", 
-    title: "Project Solution",
-    description: "End-to-end project-based solutions to accelerate delivery, improve efficiency, and meet regulatory or technical demands.",
+    title: "Project Solutions",
+    description: "We deliver end-to-end project execution for both IT and Life Sciences sectors. Our goal is to help you accelerate delivery, improve efficiency, and meet technical or regulatory requirements with precision.",
     features: [],
     icon: "📊",
     color: "accent",
-    link: "/services/project-solution"
+    link: "/services/project-solution",
+    image: "https://namasteped.com/qvalfocus/assets/img/project-solutions.jpg"
   }
 ];
 
