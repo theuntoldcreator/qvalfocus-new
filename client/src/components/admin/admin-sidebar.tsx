@@ -1,7 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { Briefcase, Mail, LogOut } from "lucide-react";
+import { Briefcase, Mail, LogOut, LayoutDashboard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function AdminSidebar() {
@@ -13,7 +13,8 @@ export function AdminSidebar() {
   };
 
   const navLinks = [
-    { href: "/admin/dashboard", label: "Jobs", icon: Briefcase },
+    { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/admin/dashboard/jobs", label: "Jobs", icon: Briefcase },
     { href: "/admin/dashboard/contacts", label: "Contacts", icon: Mail },
   ];
 
@@ -28,7 +29,7 @@ export function AdminSidebar() {
         {navLinks.map(link => {
           const Icon = link.icon;
           const isDashboardHome = link.href === "/admin/dashboard";
-          const isActive = isDashboardHome ? location === link.href : location.startsWith(link.href);
+          const isActive = isDashboardHome ? location === link.href : location.startsWith(link.href) && location !== "/admin/dashboard";
           
           return (
             <Link key={link.href} href={link.href}>

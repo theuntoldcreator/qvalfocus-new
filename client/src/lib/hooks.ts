@@ -130,6 +130,19 @@ export function useDeleteApplication() {
     });
 }
 
+export function useAllApplications() {
+    return useQuery<{ id: string }[]>({
+        queryKey: ['applications', 'all'],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from('applications')
+                .select('id');
+            if (error) throw new Error(error.message);
+            return data || [];
+        },
+    });
+}
+
 // Contacts
 export function useContacts() {
     return useQuery<Contact[]>({
