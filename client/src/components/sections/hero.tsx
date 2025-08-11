@@ -10,7 +10,7 @@ const heroContent = [
     tabTitle: "For Companies",
     title: "Driving Operational Excellence Through Deep Domain Expertise.",
     description:
-      "We forge partnerships that drive innovation by connecting you with premier talent across technology, finance, and healthcare.",
+      "Merging your vision & our expertise, We help you achieve Excellence.",
     buttonText: "Find Talent",
     buttonLink: "/contact?type=client",
     image:
