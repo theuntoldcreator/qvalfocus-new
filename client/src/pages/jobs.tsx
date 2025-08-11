@@ -46,11 +46,6 @@ export default function JobsPage() {
                 Discover roles at innovative companies that match your skills, 
                 ambitions, and career goals.
               </p>
-              
-              {/* Quick Search */}
-              <div className="max-w-2xl mx-auto">
-                <JobFilters onFiltersChange={handleFiltersChange} />
-              </div>
             </div>
           </div>
         </section>
