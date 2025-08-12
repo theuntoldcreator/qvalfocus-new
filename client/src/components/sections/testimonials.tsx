@@ -70,10 +70,8 @@ export function Testimonials() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <div className="absolute -top-24 right-0 flex space-x-2">
-              <CarouselPrevious className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
-              <CarouselNext className="bg-white/10 border-white/20 text-white hover:bg-white/20" />
-            </div>
+            <CarouselPrevious className="absolute left-[-50px] top-1/2 -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+            <CarouselNext className="absolute right-[-50px] top-1/2 -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20" />
           </Carousel>
         )}
       </div>
