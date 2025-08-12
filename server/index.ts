@@ -2,16 +2,10 @@ import express, { type Request, Response, NextFunction } from "express";
 import history from "connect-history-api-fallback";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import type { UrlWithParsedQuery } from 'url'; // Import UrlWithParsedQuery from 'url'
-import type { ParsedUrlQuery } from 'querystring'; // Import ParsedUrlQuery for the query object
+// Removed: import type { UrlWithParsedQuery } from 'url';
+// Removed: import type { ParsedUrlQuery } from 'querystring';
 
-// Define the RewriteContext interface locally to match the expected structure
-// This ensures 'parsedUrl.query' is always 'ParsedUrlQuery' as expected by the 'to' function
-interface RewriteContext {
-  match: RegExpMatchArray;
-  parsedUrl: UrlWithParsedQuery & { query: ParsedUrlQuery };
-  request: Request; // Assuming Request from express
-}
+// Removed: interface RewriteContext { ... }
 
 const app = express();
 app.use(express.json());
@@ -53,7 +47,7 @@ app.use(
   history({
     disableDotRule: true,
     rewrites: [
-      { from: /^\/api\/.*$/, to: (ctx: RewriteContext) => ctx.parsedUrl.path || "/api" },
+      { from: /^\/api\/.*$/, to: (ctx: any) => ctx.parsedUrl.path || "/api" }, // Cast ctx to any
     ],
   })
 );
