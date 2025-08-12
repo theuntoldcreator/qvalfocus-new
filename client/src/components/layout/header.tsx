@@ -147,9 +147,12 @@ export function Header() {
                                   "focus:border-primary dark:focus:border-primary",
                                   "focus-visible:border-primary dark:focus-visible:border-primary",
                                   // Specific overrides for when data-state=open AND hovered/focused
-                                  "data-[state=open]:hover:bg-white dark:data-[state=open]:hover:bg-white",
-                                  "data-[state=open]:focus:bg-white dark:data-[state=open]:focus:bg-white",
-                                  "data-[state=open]:focus-visible:bg-white dark:data-[state=open]:focus-visible:bg-white"
+                                  "data-[state=open]:hover:bg-slate-900 dark:data-[state=open]:hover:bg-slate-900",
+                                  "data-[state=open]:focus:bg-slate-900 dark:data-[state=open]:focus:bg-slate-900",
+                                  "data-[state=open]:focus-visible:bg-slate-900 dark:data-[state=open]:focus-visible:bg-slate-900",
+                                  "data-[state=open]:hover:text-white dark:data-[state=open]:hover:text-white",
+                                  "data-[state=open]:focus:text-white dark:data-[state=open]:focus:text-white",
+                                  "data-[state=open]:focus-visible:text-white dark:data-[state=open]:focus-visible:text-white"
                                 )}
                               >
                                 {link.label}
