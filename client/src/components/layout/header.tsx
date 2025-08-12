@@ -134,7 +134,7 @@ export function Header() {
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
-                              <NavigationMenuContent>
+                              <NavigationMenuContent className="bg-white"> {/* Changed bg-accent to bg-white */}
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
                                   {servicesDropdownLinks.map((service) => (
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
