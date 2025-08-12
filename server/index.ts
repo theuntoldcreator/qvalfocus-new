@@ -2,7 +2,15 @@ import express, { type Request, Response, NextFunction } from "express";
 import history from "connect-history-api-fallback";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import * as historyApiFallback from "connect-history-api-fallback"; // Import as namespace
+import type { UrlWithParsedQuery } from 'url'; // Import UrlWithParsedQuery from 'url'
+
+// Define the RewriteContext interface locally as it's not exported by the module
+interface RewriteContext {
+  parsedUrl: UrlWithParsedQuery;
+  // Add other properties if needed, e.g., match, request
+  // match: RegExpMatchArray;
+  // request: Request;
+}
 
 const app = express();
 app.use(express.json());
@@ -44,7 +52,7 @@ app.use(
   history({
     disableDotRule: true,
     rewrites: [
-      { from: /^\/api\/.*$/, to: (ctx: historyApiFallback.RewriteContext) => ctx.parsedUrl.path || "/api" },
+      { from: /^\/api\/.*$/, to: (ctx: RewriteContext) => ctx.parsedUrl.path || "/api" },
     ],
   })
 );
