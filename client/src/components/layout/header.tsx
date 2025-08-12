@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Users, ClipboardCheck, MapPin, ChevronDown, Search, User } from "lucide-react";
+import { Menu, X, Search, Globe } from "lucide-react"; // Removed Users, ClipboardCheck, MapPin, ChevronDown, User
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -14,10 +14,11 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-const ListItem = React.forwardRef<
+// Helper component for dropdown list items
+const DropdownListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { to: string; icon: React.ElementType }
->(({ className, title, children, to, icon: Icon, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { to: string }
+>(({ className, title, children, to, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -25,145 +26,194 @@ const ListItem = React.forwardRef<
           to={to}
           ref={ref}
           className={cn(
-            "flex items-start space-x-4 rounded-md p-3 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-800 dark:focus:bg-slate-800",
             className
           )}
           {...props}
         >
-          <div className="flex-shrink-0 mt-1">
-            <Icon className="h-6 w-6 text-primary" />
-          </div>
-          <div>
-            <div className="text-base font-semibold text-slate-900 dark:text-white">{title}</div>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              {children}
-            </p>
-          </div>
+          <div className="text-sm font-medium leading-none text-slate-900 dark:text-white">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-slate-500 dark:text-slate-400">
+            {children}
+          </p>
         </Link>
       </NavigationMenuLink>
     </li>
   );
 });
-ListItem.displayName = "ListItem";
+DropdownListItem.displayName = "DropdownListItem";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Updated navLinks to match the image
+  // Main navigation links, all are dropdowns in this design
   const navLinks = [
-    { to: "/", label: "Home" }, // Keeping Home for consistency, not in image
-    { to: "/blogs", label: "Featured insights" },
-    // Capabilities will be a dropdown
-    { to: "/industries", label: "Industries" },
-    { to: "#", label: "Technology" }, // Placeholder for Technology page
-    { to: "/about", label: "About us" },
-    { to: "/jobs", label: "Careers" },
+    { label: "SERVICES", key: "services" },
+    { label: "INDUSTRIES", key: "industries" },
+    { label: "PARTNERSHIPS", key: "partnerships" },
+    { label: "INSIGHTS", key: "insights" },
+    { label: "CAREERS", key: "careers" },
+    { label: "ABOUT US", key: "about-us" },
   ];
 
-  // Content for the "Capabilities" dropdown
-  const capabilitiesLinks = [
-    { 
-      to: "/services/staffing-solution", 
-      title: "Staffing Solution", 
-      description: "Flexible and scalable staffing services.",
-      icon: Users 
-    },
-    { 
-      to: "/services/project-solution", 
-      title: "Project Solution", 
-      description: "End-to-end project-based solutions.",
-      icon: ClipboardCheck
-    }
+  // Content for the "SERVICES" dropdown
+  const servicesDropdownContent = {
+    "Experience design": [
+      { to: "#", label: "UX strategy" },
+      { to: "#", label: "Digital design" },
+      { to: "#", label: "Front-end engineering" },
+      { to: "#", label: "Content services" },
+    ],
+    "Management consulting": [
+      { to: "#", label: "Strategic alignment" },
+      { to: "#", label: "Business transformation" },
+      { to: "#", label: "Operational excellence" },
+    ],
+    "Data": [
+      { to: "#", label: "Data strategy" },
+      { to: "#", label: "Data architecture" },
+      { to: "#", label: "Data democratization" },
+      { to: "#", label: "Data products" },
+      { to: "#", label: "Data analytics" },
+    ],
+    "MarTech": [
+      { to: "#", label: "MarTech strategy" },
+      { to: "#", label: "MarTech enablement" },
+      { to: "#", label: "MarTech optimization" },
+    ],
+    "Ecommerce": [
+      { to: "#", label: "Ecommerce strategy" },
+      { to: "#", label: "Ecommerce enablement" },
+      { to: "#", label: "Ecommerce optimization" },
+    ],
+    "Innovation": [
+      { to: "#", label: "Innovation strategy" },
+      { to: "#", label: "Product management" },
+      { to: "#", label: "Product & service incubation" },
+      { to: "#", label: "Product & service ideation" },
+    ],
+    "Artificial intelligence": [
+      { to: "#", label: "AI strategy" },
+      { to: "#", label: "AI products" },
+      { to: "#", label: "AI models" },
+      { to: "#", label: "AI everywhere" },
+    ],
+    "Cloud & engineering": [
+      { to: "#", label: "Cloud advisory" },
+      { to: "#", label: "Platform engineering" },
+      { to: "#", label: "Cloud native development" },
+      { to: "#", label: "Cloud data & AI" },
+      { to: "#", label: "Cloud migration & app modernization" },
+    ],
+  };
+
+  // Placeholder content for other dropdowns
+  const placeholderDropdownContent = [
+    { to: "#", label: "Sub-item 1" },
+    { to: "#", label: "Sub-item 2" },
+    { to: "#", label: "Sub-item 3" },
   ];
 
   const allNavLinksForMobile = [
-    { to: "/", label: "Home" },
-    { to: "/services/staffing-solution", label: "Staffing Solution" }, // For mobile, list dropdown items directly
-    { to: "/services/project-solution", label: "Project Solution" },
-    ...navLinks.slice(1), // Exclude Home, add others
+    { to: "/", label: "Home" }, // Keeping Home for mobile for now
+    ...navLinks.map(link => ({ to: `#${link.key}`, label: link.label })), // Placeholder for mobile dropdowns
   ];
 
   return (
     <>
       {/* Top Bar */}
-      <div className="fixed top-0 w-full z-50 bg-white border-b border-gray-200 text-sm text-gray-700 hidden md:block h-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-end items-center">
-          <div className="flex items-center space-x-4">
-            <Link to="/admin/login" className="flex items-center hover:text-primary">
-              <User className="h-4 w-4 mr-1" /> Sign in
-            </Link>
-            <span>|</span>
-            <Link to="/admin/register" className="hover:text-primary">Register</Link> {/* Assuming a register page */}
+      <div className="fixed top-0 w-full z-50 bg-white border-b border-gray-200 text-sm text-slate-600 hidden md:block h-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-end items-center space-x-6">
+          <Link to="/contact" className="hover:text-brand-red">CONTACT</Link>
+          <div className="flex items-center space-x-1 cursor-pointer hover:text-brand-red">
+            <Search className="h-4 w-4" />
+            <span>SEARCH</span>
           </div>
-          <div className="flex items-center space-x-1 ml-6 cursor-pointer hover:text-primary">
-            <MapPin className="h-4 w-4" />
-            <span>United States</span>
-            <ChevronDown className="h-4 w-4" />
+          <div className="flex items-center space-x-1 cursor-pointer hover:text-brand-red">
+            <Globe className="h-4 w-4" />
+            <span>India</span>
           </div>
         </div>
       </div>
 
       {/* Main Header */}
-      <header className="fixed top-8 w-full z-50 bg-white dark:bg-slate-900">
+      <header className="fixed top-10 w-full z-50 bg-white dark:bg-slate-900">
         <div className="border-b border-slate-200 dark:border-slate-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               <Link to="/" className="flex items-center space-x-2">
-                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
+                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="CREDERA Logo" className="h-10" />
+                {/* If you want text logo: <span className="text-2xl font-bold text-slate-900 dark:text-white">CREDERA</span> */}
               </Link>
               
-              <div className="hidden md:flex items-center space-x-8">
-                <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
-                  {navLinks.map((link) => {
-                    if (link.label === "Capabilities") {
-                      return (
-                        <NavigationMenu key={link.label}>
-                          <NavigationMenuList>
-                            <NavigationMenuItem>
-                              <NavigationMenuTrigger 
-                                className={cn(
-                                  "p-0 rounded-none", // Basic style resets
-                                  "h-full flex items-center border-b-4 border-transparent", // Base link appearance
-                                  "text-slate-900 dark:text-slate-300", // Default text color
-                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent", // Open state: black underline, black text, transparent background
-                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent" // Hover state: black underline, black text, transparent background
-                                )}
-                              >
-                                {link.label}
-                              </NavigationMenuTrigger>
-                              <NavigationMenuContent>
-                                <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                                  {capabilitiesLinks.map((service) => (
-                                    <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
-                                      {service.description}
-                                    </ListItem>
-                                  ))}
-                                </ul>
-                              </NavigationMenuContent>
-                            </NavigationMenuItem>
-                          </NavigationMenuList>
-                        </NavigationMenu>
-                      );
-                    }
-                    return (
-                      <Link 
-                        key={link.to} 
-                        to={link.to} 
-                        className={cn(
-                          "h-full flex items-center border-b-4 border-transparent", 
-                          location.pathname === link.to ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : ""
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    );
-                  })}
-                </nav>
-                <div className="flex items-center space-x-2 text-slate-900 dark:text-slate-300 cursor-pointer hover:text-primary">
-                  <Search className="h-5 w-5" />
-                  <span>Search</span>
-                </div>
+              <div className="hidden md:flex items-center">
+                <NavigationMenu>
+                  <NavigationMenuList>
+                    {navLinks.map((link) => (
+                      <NavigationMenuItem key={link.key}>
+                        <NavigationMenuTrigger 
+                          className={cn(
+                            "p-0 rounded-none", // Basic style resets
+                            "h-full flex items-center border-b-4 border-transparent", // Base link appearance
+                            "text-slate-900 dark:text-slate-300", // Default text color
+                            "data-[state=open]:border-brand-red data-[state=open]:text-brand-red data-[state=open]:bg-transparent", // Open state: red underline, red text, transparent background
+                            "hover:border-brand-red hover:text-brand-red hover:bg-transparent" // Hover state: red underline, red text, transparent background
+                          )}
+                        >
+                          {link.label}
+                        </NavigationMenuTrigger>
+                        <NavigationMenuContent>
+                          {link.key === "services" ? (
+                            <div className="flex p-6 w-[1000px] max-w-[1000px]"> {/* Adjust width as needed */}
+                              {/* Left section: Services overview */}
+                              <div className="w-1/4 pr-6 border-r border-slate-200 dark:border-slate-700">
+                                <h2 className="text-3xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Services</h2>
+                                <p className="text-slate-600 dark:text-slate-300 mb-6">
+                                  Our global expertise and experience partnered with deep relationships unlocks extraordinary results.
+                                </p>
+                                <Link to="/services/staffing-solution" className="font-semibold text-brand-red hover:text-brand-red/80 transition-colors flex items-center">
+                                  READ OVERVIEW →
+                                </Link>
+                                <div className="mt-6 w-full h-32 overflow-hidden rounded-lg">
+                                  <img 
+                                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" 
+                                    alt="Services overview" 
+                                    className="w-full h-full object-cover"
+                                  />
+                                </div>
+                              </div>
+                              {/* Right sections: Grid of categories */}
+                              <div className="flex-1 pl-6 grid grid-cols-4 gap-x-8 gap-y-4">
+                                {Object.entries(servicesDropdownContent).map(([category, items]) => (
+                                  <div key={category}>
+                                    <h3 className="text-lg font-semibold mb-3 text-slate-900 dark:text-white">{category}</h3>
+                                    <ul className="space-y-2">
+                                      {items.map((item, idx) => (
+                                        <li key={idx}>
+                                          <Link to={item.to} className="text-slate-600 dark:text-slate-300 hover:text-brand-red text-sm">
+                                            {item.label}
+                                          </Link>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ) : (
+                            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] grid-cols-1">
+                              {placeholderDropdownContent.map((item, index) => (
+                                <DropdownListItem key={index} to={item.to} title={item.label}>
+                                  Description for {item.label.toLowerCase()}.
+                                </DropdownListItem>
+                              ))}
+                            </ul>
+                          )}
+                        </NavigationMenuContent>
+                      </NavigationMenuItem>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
               </div>
               
               <div className="md:hidden flex items-center">

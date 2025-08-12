@@ -80,6 +80,8 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        // New color for navbar hover/active
+        'brand-red': '#e03a2f', 
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
