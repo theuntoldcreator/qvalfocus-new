@@ -81,8 +81,6 @@ export function Header() {
     ...navLinks.slice(1),
   ];
 
-  const isServicesActive = location.pathname.startsWith('/services');
-
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-white dark:bg-slate-900">
@@ -107,9 +105,9 @@ export function Header() {
                             "header-nav-trigger", // Custom class for CSS override
                             "p-0 rounded-none", // Basic style resets
                             "h-full flex items-center border-b-4 transition-colors text-base font-medium", // Link-like appearance
-                            isServicesActive 
-                              ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" 
-                              : "border-transparent hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300"
+                            // The trigger is no longer styled as "active" based on the URL.
+                            // It only shows an underline on hover.
+                            "border-transparent hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300"
                           )}
                         >
                           Services
