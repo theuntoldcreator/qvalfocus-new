@@ -102,10 +102,10 @@ export function Header() {
                       <NavigationMenuItem>
                         <NavigationMenuTrigger 
                           className={cn(
+                            "services-nav-trigger", // Custom class for aggressive override
                             "p-0 rounded-none", // Basic style resets
                             "h-full flex items-center border-b-4 text-base font-medium", // Link-like appearance
-                            "border-transparent text-slate-700 dark:text-slate-300 hover:bg-transparent", // Default state, explicitly no hover background
-                            "data-[state=open]:bg-white data-[state=open]:text-slate-900 data-[state=open]:border-slate-900" // Open state
+                            "border-transparent text-slate-700 dark:text-slate-300" // Default state
                           )}
                         >
                           Services
