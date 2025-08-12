@@ -92,6 +92,13 @@
   .header-nav-trigger[data-state='open'] {
     color: hsl(var(--foreground)) !important;
   }
+
+  /* Ensure NavigationMenuTrigger has no default background or border */
+  .header-nav-trigger {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
 }
 
 @layer utilities {
