@@ -137,8 +137,12 @@ export function Header() {
                                   "bg-transparent shadow-none ring-0",
                                   "hover:bg-transparent hover:border-slate-900 hover:text-slate-900 hover:shadow-none hover:ring-0",
                                   "data-[state=open]:bg-transparent data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:shadow-none data-[state=open]:ring-0",
+                                  // Ensure both :focus and :focus-visible have white background
+                                  "focus:bg-white dark:focus:bg-white",
                                   "focus-visible:bg-white dark:focus-visible:bg-white",
+                                  "focus:text-primary dark:focus:text-primary",
                                   "focus-visible:text-primary dark:focus-visible:text-primary",
+                                  "focus:border-primary dark:focus:border-primary",
                                   "focus-visible:border-primary dark:focus-visible:border-primary"
                                 )}
                               >
