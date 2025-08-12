@@ -87,8 +87,8 @@ export function Header() {
   return (
     <>
       {/* Top Bar */}
-      <div className="fixed top-0 w-full z-50 bg-white border-b border-gray-200 text-sm text-gray-700 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 flex justify-end items-center">
+      <div className="fixed top-0 w-full z-50 bg-white border-b border-gray-200 text-sm text-gray-700 hidden md:block h-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-end items-center">
           <div className="flex items-center space-x-4">
             <Link to="/admin/login" className="flex items-center hover:text-primary">
               <User className="h-4 w-4 mr-1" /> Sign in
@@ -105,7 +105,7 @@ export function Header() {
       </div>
 
       {/* Main Header */}
-      <header className="fixed top-10 w-full z-50 bg-white dark:bg-slate-900">
+      <header className="fixed top-8 w-full z-50 bg-white dark:bg-slate-900">
         <div className="border-b border-slate-200 dark:border-slate-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
