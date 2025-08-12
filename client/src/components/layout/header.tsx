@@ -136,7 +136,7 @@ export function Header() {
                                   "text-slate-900 dark:text-slate-300", // Default text color
                                   "bg-transparent shadow-none ring-0", // General resets
                                   // Hover states (not open)
-                                  "hover:bg-transparent hover:border-slate-900 hover:shadow-none hover:ring-0",
+                                  "hover:bg-transparent hover:border-slate-900 hover:text-slate-900 hover:shadow-none hover:ring-0",
                                   // Open state (data-state=open)
                                   "data-[state=open]:bg-slate-900 dark:data-[state=open]:bg-slate-900", // Ensure dark background when open
                                   "data-[state=open]:border-slate-900 dark:data-[state=open]:border-slate-900", // Ensure dark border when open
@@ -149,12 +149,14 @@ export function Header() {
                                   "focus-visible:text-primary dark:focus-visible:text-primary",
                                   "focus:border-primary dark:focus:border-primary",
                                   "focus-visible:border-primary dark:focus-visible:border-primary"
-                                  // Removed specific data-[state=open]:hover/focus text color changes
                                 )}
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
-                              <NavigationMenuContent>
+                              <NavigationMenuContent 
+                                // Removed animation classes
+                                className="data-[motion=from-start]:animate-in data-[motion=from-end]:animate-in data-[motion=to-start]:animate-out data-[motion=to-end]:animate-out data-[motion=from-start]:slide-in-from-left-8 data-[motion=from-end]:slide-in-from-right-8 data-[motion=to-start]:slide-out-to-left-8 data-[motion=to-end]:slide-out-to-right-8 md:data-[motion=from-start]:slide-in-from-top-full md:data-[motion=from-end]:slide-in-from-top-full md:data-[motion=to-start]:slide-out-to-top-full md:data-[motion=to-end]:slide-out-to-top-full"
+                              >
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
                                   {servicesLinks.map((service) => (
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
