@@ -3,13 +3,14 @@ import history from "connect-history-api-fallback";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import type { UrlWithParsedQuery } from 'url'; // Import UrlWithParsedQuery from 'url'
+import type { ParsedUrlQuery } from 'querystring'; // Import ParsedUrlQuery for the query object
 
-// Define the RewriteContext interface locally as it's not exported by the module
+// Define the RewriteContext interface locally to match the expected structure
+// This ensures 'parsedUrl.query' is always 'ParsedUrlQuery' as expected by the 'to' function
 interface RewriteContext {
-  parsedUrl: UrlWithParsedQuery;
-  // Add other properties if needed, e.g., match, request
-  // match: RegExpMatchArray;
-  // request: Request;
+  match: RegExpMatchArray;
+  parsedUrl: UrlWithParsedQuery & { query: ParsedUrlQuery };
+  request: Request; // Assuming Request from express
 }
 
 const app = express();
