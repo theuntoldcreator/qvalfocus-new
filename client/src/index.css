@@ -93,10 +93,8 @@
     opacity: 1 !important;
     transform: none !important;
     
-    /* Only allow transitions for color and border-color */
-    transition-property: color, border-color !important;
-    transition-duration: 0.3s !important; /* Match existing transition duration */
-    transition-timing-function: ease-in-out !important; /* Match existing timing function */
+    /* Explicitly define transitions to prevent unwanted animations */
+    transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out !important;
   }
 
   /* When hovered or open, ensure specific styles */
