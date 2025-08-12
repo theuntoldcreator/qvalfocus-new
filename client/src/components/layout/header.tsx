@@ -122,7 +122,7 @@ export function Header() {
   return (
     <>
       {/* Top Bar */}
-      <div className="fixed top-0 w-full z-50 bg-white border-b border-gray-200 text-sm text-slate-600 hidden md:block h-10">
+      <div className="fixed top-0 w-full z-50 navbar-glass text-sm text-slate-600 hidden md:block h-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-end items-center space-x-6">
           <Link to="/contact" className="hover:text-brand-red">CONTACT</Link>
           <div className="flex items-center space-x-1 cursor-pointer hover:text-brand-red">
@@ -137,7 +137,7 @@ export function Header() {
       </div>
 
       {/* Main Header */}
-      <header className="fixed top-10 w-full z-50 bg-white dark:bg-slate-900">
+      <header className="fixed top-10 w-full z-50 navbar-glass">
         <div className="border-b border-slate-200 dark:border-slate-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
