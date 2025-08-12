@@ -70,7 +70,7 @@
   input[type="password"],
   input[type="search"],
   input[type="url"],
-  input[type="tel"],
+  type="tel",
   input[type="number"],
   textarea {
     cursor: text;

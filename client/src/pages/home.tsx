@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-[120px]"> {/* Adjusted padding-top: 10px (top bar) + 80px (main header) = 90px. Using 120px for extra buffer. */}
+      <main className="pt-[112px]"> {/* Adjusted padding-top to account for fixed header (8px + 80px = 112px) */}
         <Hero />
         <WhyWorkWithUs />
         <Services />
