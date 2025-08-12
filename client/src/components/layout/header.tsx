@@ -31,7 +31,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="flex-shrink-0 mt-1">
-            <Icon className="h-6 w-6 text-primary" />
+            <Icon className="h-6 w-6 text-slate-700 dark:text-slate-300" /> {/* Changed icon color to slate */}
           </div>
           <div>
             <div className="text-base font-semibold text-slate-900 dark:text-white">{title}</div>
@@ -122,19 +122,24 @@ export function Header() {
                             <NavigationMenuItem>
                               <NavigationMenuTrigger 
                                 className={cn(
-                                  "p-0 rounded-none", // Basic style resets
-                                  "h-full flex items-center", // Base link appearance
-                                  "text-slate-900 dark:text-slate-300", // Default text color
-                                  // Remove all hover/active styles for the trigger itself
-                                  "data-[state=open]:bg-transparent data-[state=open]:text-slate-900 dark:data-[state=open]:text-slate-300",
-                                  "hover:bg-transparent hover:text-slate-900 dark:hover:text-slate-300",
-                                  "focus:bg-transparent focus:text-slate-900 dark:focus:text-slate-300",
-                                  "shadow-none ring-0 border-none" // Ensure no border/ring/shadow
+                                  "p-0 rounded-none",
+                                  "h-full flex items-center",
+                                  "text-slate-900 dark:text-slate-300",
+                                  // Force transparent background and no border/ring/shadow on all states
+                                  "bg-transparent hover:bg-transparent focus:bg-transparent",
+                                  "data-[state=open]:bg-transparent data-[active]:bg-transparent",
+                                  "border-none shadow-none ring-0",
+                                  // Ensure text color remains consistent
+                                  "text-slate-900 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-300",
+                                  "data-[state=open]:text-slate-900 dark:data-[state=open]:text-slate-300",
+                                  "data-[active]:text-slate-900 dark:data-[active]:text-slate-300",
+                                  // Remove the default shadcn/ui underline/border
+                                  "after:hidden"
                                 )}
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
-                              <NavigationMenuContent className="bg-white"> {/* Changed bg-accent to bg-white */}
+                              <NavigationMenuContent className="bg-white rounded-xl shadow-lg"> {/* Added rounded-xl and shadow-lg */}
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
                                   {servicesDropdownLinks.map((service) => (
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
