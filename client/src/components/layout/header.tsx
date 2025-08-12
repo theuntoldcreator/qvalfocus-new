@@ -31,7 +31,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="flex-shrink-0 mt-1">
-            <Icon className="h-6 w-6 text-slate-700 dark:text-slate-300" /> {/* Changed icon color to slate */}
+            <Icon className="h-6 w-6 text-primary" />
           </div>
           <div>
             <div className="text-base font-semibold text-slate-900 dark:text-white">{title}</div>
@@ -50,10 +50,11 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Updated navLinks to match the image and new dropdown structure
+  // Updated navLinks to match the image
   const navLinks = [
+    { to: "/", label: "Home" }, // Keeping Home for consistency, not in image
     { to: "/blogs", label: "Featured insights" },
-    { to: "/services", label: "Services", isDropdown: true }, // Mark as dropdown trigger
+    { to: "#", label: "Services" }, // This will be the dropdown trigger
     { to: "/industries", label: "Industries" },
     { to: "#", label: "Technology" }, // Placeholder for Technology page
     { to: "/about", label: "About us" },
@@ -61,7 +62,7 @@ export function Header() {
   ];
 
   // Content for the "Services" dropdown
-  const servicesDropdownLinks = [
+  const servicesLinks = [
     { 
       to: "/services/staffing-solution", 
       title: "Staffing Solution", 
@@ -76,11 +77,12 @@ export function Header() {
     }
   ];
 
-  // All links for mobile navigation, including expanded dropdown items
   const allNavLinksForMobile = [
-    { to: "/", label: "Home" }, // Keep Home for mobile for easy access
-    ...servicesDropdownLinks.map(item => ({ to: item.to, label: item.title })), // Add dropdown items directly
-    ...navLinks.filter(link => !link.isDropdown).map(link => ({ to: link.to, label: link.label })), // Add other main links
+    { to: "/", label: "Home" },
+    { to: "/services/staffing-solution", label: "Staffing Solution" }, // For mobile, list dropdown items directly
+    { to: "/services/project-solution", label: "Project Solution" },
+    // Filter out the 'Services' placeholder from navLinks for mobile
+    ...navLinks.filter(link => link.label !== "Services" && link.label !== "Home").map(link => ({ to: link.to, label: link.label })),
   ];
 
   return (
@@ -115,33 +117,25 @@ export function Header() {
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
                   {navLinks.map((link) => {
-                    if (link.isDropdown) {
+                    if (link.label === "Services") { // Changed from "Capabilities"
                       return (
                         <NavigationMenu key={link.label}>
                           <NavigationMenuList>
                             <NavigationMenuItem>
                               <NavigationMenuTrigger 
                                 className={cn(
-                                  "p-0 rounded-none",
-                                  "h-full flex items-center",
-                                  "text-slate-900 dark:text-slate-300",
-                                  // Force transparent background and no border/ring/shadow on all states
-                                  "bg-transparent hover:bg-transparent focus:bg-transparent",
-                                  "data-[state=open]:bg-transparent data-[active]:bg-transparent",
-                                  "border-none shadow-none ring-0",
-                                  // Ensure text color remains consistent
-                                  "text-slate-900 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-300",
-                                  "data-[state=open]:text-slate-900 dark:data-[state=open]:text-slate-300",
-                                  "data-[active]:text-slate-900 dark:data-[active]:text-slate-300",
-                                  // Remove the default shadcn/ui underline/border
-                                  "after:hidden"
+                                  "p-0 rounded-none", // Basic style resets
+                                  "h-full flex items-center border-b-4 border-transparent", // Base link appearance
+                                  "text-slate-900 dark:text-slate-300", // Default text color
+                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent", // Open state: black underline, black text, transparent background
+                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent" // Hover state: black underline, black text, transparent background
                                 )}
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
-                              <NavigationMenuContent className="bg-white rounded-xl shadow-lg"> {/* Added rounded-xl and shadow-lg */}
+                              <NavigationMenuContent>
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                                  {servicesDropdownLinks.map((service) => (
+                                  {servicesLinks.map((service) => ( // Changed from capabilitiesLinks
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
                                       {service.description}
                                     </ListItem>
