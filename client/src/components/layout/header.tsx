@@ -50,19 +50,18 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  // Updated navLinks to match the image
+  // Updated navLinks to match the image and new dropdown structure
   const navLinks = [
-    { to: "/", label: "Home" }, // Keeping Home for consistency, not in image
     { to: "/blogs", label: "Featured insights" },
-    // Capabilities will be a dropdown
+    { to: "/services", label: "Services", isDropdown: true }, // Mark as dropdown trigger
     { to: "/industries", label: "Industries" },
     { to: "#", label: "Technology" }, // Placeholder for Technology page
     { to: "/about", label: "About us" },
     { to: "/jobs", label: "Careers" },
   ];
 
-  // Content for the "Capabilities" dropdown
-  const capabilitiesLinks = [
+  // Content for the "Services" dropdown
+  const servicesDropdownLinks = [
     { 
       to: "/services/staffing-solution", 
       title: "Staffing Solution", 
@@ -77,11 +76,11 @@ export function Header() {
     }
   ];
 
+  // All links for mobile navigation, including expanded dropdown items
   const allNavLinksForMobile = [
-    { to: "/", label: "Home" },
-    { to: "/services/staffing-solution", label: "Staffing Solution" }, // For mobile, list dropdown items directly
-    { to: "/services/project-solution", label: "Project Solution" },
-    ...navLinks.slice(1), // Exclude Home, add others
+    { to: "/", label: "Home" }, // Keep Home for mobile for easy access
+    ...servicesDropdownLinks.map(item => ({ to: item.to, label: item.title })), // Add dropdown items directly
+    ...navLinks.filter(link => !link.isDropdown).map(link => ({ to: link.to, label: link.label })), // Add other main links
   ];
 
   return (
@@ -116,7 +115,7 @@ export function Header() {
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
                   {navLinks.map((link) => {
-                    if (link.label === "Capabilities") {
+                    if (link.isDropdown) {
                       return (
                         <NavigationMenu key={link.label}>
                           <NavigationMenuList>
@@ -124,17 +123,20 @@ export function Header() {
                               <NavigationMenuTrigger 
                                 className={cn(
                                   "p-0 rounded-none", // Basic style resets
-                                  "h-full flex items-center border-b-4 border-transparent", // Base link appearance
+                                  "h-full flex items-center", // Base link appearance
                                   "text-slate-900 dark:text-slate-300", // Default text color
-                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent", // Open state: black underline, black text, transparent background
-                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent" // Hover state: black underline, black text, transparent background
+                                  // Remove all hover/active styles for the trigger itself
+                                  "data-[state=open]:bg-transparent data-[state=open]:text-slate-900 dark:data-[state=open]:text-slate-300",
+                                  "hover:bg-transparent hover:text-slate-900 dark:hover:text-slate-300",
+                                  "focus:bg-transparent focus:text-slate-900 dark:focus:text-slate-300",
+                                  "shadow-none ring-0 border-none" // Ensure no border/ring/shadow
                                 )}
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
                               <NavigationMenuContent>
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                                  {capabilitiesLinks.map((service) => (
+                                  {servicesDropdownLinks.map((service) => (
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
                                       {service.description}
                                     </ListItem>
