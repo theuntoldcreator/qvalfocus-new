@@ -48,22 +48,22 @@ export default function AboutPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden bg-slate-50 dark:bg-slate-900">
+        <section className="relative pt-32 pb-20 overflow-hidden bg-white dark:bg-slate-900">
           <div className="absolute inset-0">
             <img 
               src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
               alt="Diverse team collaborating in a modern office"
-              className="w-full h-full object-cover opacity-10"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/80"></div>
           </div>
           
           <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <Badge className="mb-6">About Us</Badge>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-slate-900 dark:text-white">
               Flexible, Scalable Talent Solutions
             </h1>
-            <p className="text-xl text-white md:text-slate-600 mb-8 max-w-3xl mx-auto"> {/* Changed text color */}
+            <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
               At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
             </p>
             <Button size="lg" asChild>
