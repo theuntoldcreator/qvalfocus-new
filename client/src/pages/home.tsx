@@ -4,7 +4,7 @@ import { Hero } from "@/components/sections/hero";
 import { Services } from "@/components/sections/services";
 import { Industries } from "@/components/sections/industries";
 import { FeaturedJobs } from "@/components/sections/featured-jobs";
-import { Blogs } from "@/components/sections/blogs";
+import { Testimonials } from "@/components/sections/testimonials";
 import { Newsletter } from "@/components/sections/newsletter";
 import { WhyWorkWithUs } from "@/components/sections/why-work-with-us";
 
@@ -12,13 +12,13 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-20"> {/* Added pt-20 */}
+      <main>
         <Hero />
         <WhyWorkWithUs />
         <Services />
         <Industries />
         <FeaturedJobs />
-        <Blogs />
+        <Testimonials />
         <Newsletter />
       </main>
       <Footer />

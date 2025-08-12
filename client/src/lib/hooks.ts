@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { Job, Application, InsertJob, InsertApplication, Blog, Contact, InsertContact } from "@shared/schema";
-import { blogs as mockBlogs } from './data';
+import type { Job, Application, InsertJob, InsertApplication, Blog, Contact, InsertContact, Testimonial } from "@shared/schema";
+import { blogs as mockBlogs, testimonials as mockTestimonials } from './data';
 
 // Helper to generate a URL-friendly slug
 function toSlug(text: string) {
@@ -177,6 +177,17 @@ export function useCreateContact() {
             queryClient.invalidateQueries({ queryKey: ['contacts'] });
         },
     });
+}
+
+// Testimonials
+export function useTestimonials() {
+  return useQuery<Testimonial[]>({
+    queryKey: ['testimonials'],
+    queryFn: async () => {
+      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
+      return mockTestimonials;
+    },
+  });
 }
 
 // Blog Hooks (unchanged)

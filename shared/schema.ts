@@ -96,6 +96,15 @@ export const blogSchema = z.object({
   createdAt: z.string(),
 });
 
+export const testimonialSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  role: z.string(),
+  avatar: z.string(),
+  content: z.string(),
+  company: z.string(),
+});
+
 export type Job = z.infer<typeof jobSchema>;
 export type InsertJob = z.infer<typeof insertJobSchema>;
 export type Application = z.infer<typeof applicationSchema>;
@@ -103,6 +112,7 @@ export type InsertApplication = z.infer<typeof insertApplicationSchema>;
 export type Contact = z.infer<typeof contactSchema>;
 export type InsertContact = z.infer<typeof insertContactSchema>;
 export type Blog = z.infer<typeof blogSchema>;
+export type Testimonial = z.infer<typeof testimonialSchema>;
 
 // The other schemas are no longer backed by a database, so they are removed for now.
 // I can add them back if needed.
