@@ -117,25 +117,26 @@ export function Header() {
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
                   {navLinks.map((link) => {
-                    if (link.label === "Services") { // Changed from "Capabilities"
+                    if (link.label === "Services") {
                       return (
                         <NavigationMenu key={link.label}>
                           <NavigationMenuList>
                             <NavigationMenuItem>
                               <NavigationMenuTrigger 
                                 className={cn(
-                                  "p-0 rounded-none", // Basic style resets
-                                  "h-full flex items-center border-b-4 border-transparent", // Base link appearance
-                                  "text-slate-900 dark:text-slate-300", // Default text color
-                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent", // Open state: black underline, black text, transparent background
-                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent" // Hover state: black underline, black text, transparent background
+                                  "p-0 rounded-none",
+                                  "h-full flex items-center border-b-4 border-transparent",
+                                  "text-slate-900 dark:text-slate-300",
+                                  "bg-transparent shadow-none ring-0", // Ensure no default background, shadow, or ring
+                                  "hover:bg-transparent hover:border-slate-900 hover:text-slate-900 hover:shadow-none hover:ring-0", // Ensure hover is transparent
+                                  "data-[state=open]:bg-transparent data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:shadow-none data-[state=open]:ring-0" // Ensure open state is transparent
                                 )}
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
                               <NavigationMenuContent>
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                                  {servicesLinks.map((service) => ( // Changed from capabilitiesLinks
+                                  {servicesLinks.map((service) => (
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
                                       {service.description}
                                     </ListItem>
