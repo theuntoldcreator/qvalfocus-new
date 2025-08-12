@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 export function Hero() {
   return (
-    <section className="bg-[#0a0a43] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-screen py-20 lg:py-0">
+    <section className="bg-[#0a0a43] text-white min-h-screen flex items-center"> {/* Ensure section takes full height and centers content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-16 lg:py-0"> {/* Removed min-h-screen here, adjusted padding */}
           {/* Left Column */}
           <div className="text-left">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight font-sans">
