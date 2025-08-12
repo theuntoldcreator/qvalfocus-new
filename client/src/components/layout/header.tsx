@@ -54,15 +54,15 @@ export function Header() {
   const navLinks = [
     { to: "/", label: "Home" }, // Keeping Home for consistency, not in image
     { to: "/blogs", label: "Featured insights" },
-    // Capabilities will be a dropdown
+    { to: "#", label: "Services" }, // This will be the dropdown trigger
     { to: "/industries", label: "Industries" },
     { to: "#", label: "Technology" }, // Placeholder for Technology page
     { to: "/about", label: "About us" },
     { to: "/jobs", label: "Careers" },
   ];
 
-  // Content for the "Capabilities" dropdown
-  const capabilitiesLinks = [
+  // Content for the "Services" dropdown
+  const servicesLinks = [
     { 
       to: "/services/staffing-solution", 
       title: "Staffing Solution", 
@@ -81,7 +81,8 @@ export function Header() {
     { to: "/", label: "Home" },
     { to: "/services/staffing-solution", label: "Staffing Solution" }, // For mobile, list dropdown items directly
     { to: "/services/project-solution", label: "Project Solution" },
-    ...navLinks.slice(1), // Exclude Home, add others
+    // Filter out the 'Services' placeholder from navLinks for mobile
+    ...navLinks.filter(link => link.label !== "Services" && link.label !== "Home").map(link => ({ to: link.to, label: link.label })),
   ];
 
   return (
@@ -116,7 +117,7 @@ export function Header() {
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
                   {navLinks.map((link) => {
-                    if (link.label === "Capabilities") {
+                    if (link.label === "Services") { // Changed from "Capabilities"
                       return (
                         <NavigationMenu key={link.label}>
                           <NavigationMenuList>
@@ -134,7 +135,7 @@ export function Header() {
                               </NavigationMenuTrigger>
                               <NavigationMenuContent>
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                                  {capabilitiesLinks.map((service) => (
+                                  {servicesLinks.map((service) => ( // Changed from capabilitiesLinks
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
                                       {service.description}
                                     </ListItem>
