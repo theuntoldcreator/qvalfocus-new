@@ -70,7 +70,7 @@
   input[type="password"],
   input[type="search"],
   input[type="url"],
-  input[type="tel"],
+  type="tel",
   input[type="number"],
   textarea {
     cursor: text;
@@ -82,32 +82,7 @@
 }
 
 @layer components {
-  /* Custom override for the NavigationMenuTrigger */
-  .services-nav-trigger {
-    /* Remove all transitions */
-    transition: none !important;
-    
-    /* Ensure no default background, border, or box-shadow */
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    
-    /* Ensure it's always fully visible and not transformed */
-    opacity: 1 !important;
-    transform: none !important;
-  }
-
-  /* Ensure no background on hover for the trigger */
-  .services-nav-trigger:hover {
-    background-color: transparent !important;
-  }
-
-  /* When open, set background to white, text to black, and border to black */
-  .services-nav-trigger[data-state='open'] {
-    background-color: white !important;
-    color: hsl(var(--foreground)) !important; /* Black text */
-    border-bottom-color: hsl(var(--foreground)) !important; /* Black underline */
-  }
+  /* No custom navbar components here for a clean slate */
 }
 
 @layer utilities {

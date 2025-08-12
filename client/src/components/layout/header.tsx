@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Users, ClipboardCheck } from "lucide-react";
+import { Menu, X, Users, ClipboardCheck, MapPin, ChevronDown, Search, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -50,16 +50,19 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
+  // Updated navLinks to match the image
   const navLinks = [
-    { to: "/", label: "Home" },
+    { to: "/", label: "Home" }, // Keeping Home for consistency, not in image
+    { to: "/blogs", label: "Featured insights" },
+    // Capabilities will be a dropdown
     { to: "/industries", label: "Industries" },
-    { to: "/about", label: "About Us" },
+    { to: "#", label: "Technology" }, // Placeholder for Technology page
+    { to: "/about", label: "About us" },
     { to: "/jobs", label: "Careers" },
-    { to: "/blogs", label: "Blogs" },
-    { to: "/contact", label: "Contact Us" },
   ];
 
-  const servicesLinks = [
+  // Content for the "Capabilities" dropdown
+  const capabilitiesLinks = [
     { 
       to: "/services/staffing-solution", 
       title: "Staffing Solution", 
@@ -76,14 +79,33 @@ export function Header() {
 
   const allNavLinksForMobile = [
     { to: "/", label: "Home" },
-    { to: "/services/staffing-solution", label: "Staffing Solution" },
+    { to: "/services/staffing-solution", label: "Staffing Solution" }, // For mobile, list dropdown items directly
     { to: "/services/project-solution", label: "Project Solution" },
-    ...navLinks.slice(1),
+    ...navLinks.slice(1), // Exclude Home, add others
   ];
 
   return (
     <>
-      <header className="fixed top-0 w-full z-50 bg-white dark:bg-slate-900">
+      {/* Top Bar */}
+      <div className="fixed top-0 w-full z-50 bg-white border-b border-gray-200 text-sm text-gray-700 hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-10 flex justify-end items-center">
+          <div className="flex items-center space-x-4">
+            <Link to="/admin/login" className="flex items-center hover:text-primary">
+              <User className="h-4 w-4 mr-1" /> Sign in
+            </Link>
+            <span>|</span>
+            <Link to="/admin/register" className="hover:text-primary">Register</Link> {/* Assuming a register page */}
+          </div>
+          <div className="flex items-center space-x-1 ml-6 cursor-pointer hover:text-primary">
+            <MapPin className="h-4 w-4" />
+            <span>United States</span>
+            <ChevronDown className="h-4 w-4" />
+          </div>
+        </div>
+      </div>
+
+      {/* Main Header */}
+      <header className="fixed top-10 w-full z-50 bg-white dark:bg-slate-900">
         <div className="border-b border-slate-200 dark:border-slate-700">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
@@ -92,43 +114,56 @@ export function Header() {
               </Link>
               
               <div className="hidden md:flex items-center space-x-8">
-                <nav className="flex items-center space-x-8 text-base font-medium text-slate-700 dark:text-slate-300 h-full">
-                  <Link to="/" className={cn("h-full flex items-center border-b-4", location.pathname === "/" ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : "border-transparent")}>
-                    Home
-                  </Link>
-
-                  <NavigationMenu>
-                    <NavigationMenuList>
-                      <NavigationMenuItem>
-                        <NavigationMenuTrigger 
-                          className={cn(
-                            "services-nav-trigger", // Custom class for aggressive override
-                            "p-0 rounded-none", // Basic style resets
-                            "h-full flex items-center border-b-4 text-base font-medium", // Link-like appearance
-                            "border-transparent text-slate-700 dark:text-slate-300" // Default state
-                          )}
-                        >
-                          Services
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent>
-                          <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                            {servicesLinks.map((service) => (
-                              <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
-                                {service.description}
-                              </ListItem>
-                            ))}
-                          </ul>
-                        </NavigationMenuContent>
-                      </NavigationMenuItem>
-                    </NavigationMenuList>
-                  </NavigationMenu>
-
-                  {navLinks.slice(1).map((link) => (
-                    <Link key={link.to} to={link.to} className={cn("h-full flex items-center border-b-4", location.pathname === link.to ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : "border-transparent")}>
-                      {link.label}
-                    </Link>
-                  ))}
+                <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
+                  {navLinks.map((link) => {
+                    if (link.label === "Capabilities") {
+                      return (
+                        <NavigationMenu key={link.label}>
+                          <NavigationMenuList>
+                            <NavigationMenuItem>
+                              <NavigationMenuTrigger 
+                                className={cn(
+                                  "p-0 rounded-none", // Basic style resets
+                                  "h-full flex items-center border-b-4 border-transparent", // Base link appearance
+                                  "text-slate-900 dark:text-slate-300", // Default text color
+                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent", // Open state: black underline, black text, transparent background
+                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent" // Hover state: black underline, black text, transparent background
+                                )}
+                              >
+                                {link.label}
+                              </NavigationMenuTrigger>
+                              <NavigationMenuContent>
+                                <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
+                                  {capabilitiesLinks.map((service) => (
+                                    <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
+                                      {service.description}
+                                    </ListItem>
+                                  ))}
+                                </ul>
+                              </NavigationMenuContent>
+                            </NavigationMenuItem>
+                          </NavigationMenuList>
+                        </NavigationMenu>
+                      );
+                    }
+                    return (
+                      <Link 
+                        key={link.to} 
+                        to={link.to} 
+                        className={cn(
+                          "h-full flex items-center border-b-4 border-transparent", 
+                          location.pathname === link.to ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : ""
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
                 </nav>
+                <div className="flex items-center space-x-2 text-slate-900 dark:text-slate-300 cursor-pointer hover:text-primary">
+                  <Search className="h-5 w-5" />
+                  <span>Search</span>
+                </div>
               </div>
               
               <div className="md:hidden flex items-center">
