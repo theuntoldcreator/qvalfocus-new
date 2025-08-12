@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search, Globe } from "lucide-react"; // Removed Users, ClipboardCheck, MapPin, ChevronDown, User
+import { Menu, X, Search, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -146,9 +146,9 @@ export function Header() {
                 {/* If you want text logo: <span className="text-2xl font-bold text-slate-900 dark:text-white">CREDERA</span> */}
               </Link>
               
-              <div className="hidden md:flex items-center">
-                <NavigationMenu>
-                  <NavigationMenuList>
+              <div className="hidden md:flex items-center flex-grow justify-end"> {/* Added flex-grow justify-end */}
+                <NavigationMenu className="flex-grow"> {/* Added flex-grow */}
+                  <NavigationMenuList className="w-full justify-between"> {/* Added w-full justify-between */}
                     {navLinks.map((link) => (
                       <NavigationMenuItem key={link.key}>
                         <NavigationMenuTrigger 
@@ -162,46 +162,48 @@ export function Header() {
                         >
                           {link.label}
                         </NavigationMenuTrigger>
-                        <NavigationMenuContent>
+                        <NavigationMenuContent className="w-screen"> {/* Changed to w-screen */}
                           {link.key === "services" ? (
-                            <div className="flex p-6 w-[1000px] max-w-[1000px]"> {/* Adjust width as needed */}
-                              {/* Left section: Services overview */}
-                              <div className="w-1/4 pr-6 border-r border-slate-200 dark:border-slate-700">
-                                <h2 className="text-3xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Services</h2>
-                                <p className="text-slate-600 dark:text-slate-300 mb-6">
-                                  Our global expertise and experience partnered with deep relationships unlocks extraordinary results.
-                                </p>
-                                <Link to="/services/staffing-solution" className="font-semibold text-brand-red hover:text-brand-red/80 transition-colors flex items-center">
-                                  READ OVERVIEW →
-                                </Link>
-                                <div className="mt-6 w-full h-32 overflow-hidden rounded-lg">
-                                  <img 
-                                    src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" 
-                                    alt="Services overview" 
-                                    className="w-full h-full object-cover"
-                                  />
-                                </div>
-                              </div>
-                              {/* Right sections: Grid of categories */}
-                              <div className="flex-1 pl-6 grid grid-cols-4 gap-x-8 gap-y-4">
-                                {Object.entries(servicesDropdownContent).map(([category, items]) => (
-                                  <div key={category}>
-                                    <h3 className="text-lg font-semibold mb-3 text-slate-900 dark:text-white">{category}</h3>
-                                    <ul className="space-y-2">
-                                      {items.map((item, idx) => (
-                                        <li key={idx}>
-                                          <Link to={item.to} className="text-slate-600 dark:text-slate-300 hover:text-brand-red text-sm">
-                                            {item.label}
-                                          </Link>
-                                        </li>
-                                      ))}
-                                    </ul>
+                            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> {/* Added wrapper for content centering */}
+                              <div className="flex py-6"> {/* Adjusted padding */}
+                                {/* Left section: Services overview */}
+                                <div className="w-1/4 pr-6 border-r border-slate-200 dark:border-slate-700">
+                                  <h2 className="text-3xl font-serif font-bold mb-4 text-slate-900 dark:text-white">Services</h2>
+                                  <p className="text-slate-600 dark:text-slate-300 mb-6">
+                                    Our global expertise and experience partnered with deep relationships unlocks extraordinary results.
+                                  </p>
+                                  <Link to="/services/staffing-solution" className="font-semibold text-brand-red hover:text-brand-red/80 transition-colors flex items-center">
+                                    READ OVERVIEW →
+                                  </Link>
+                                  <div className="mt-6 w-full h-32 overflow-hidden rounded-lg">
+                                    <img 
+                                      src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250" 
+                                      alt="Services overview" 
+                                      className="w-full h-full object-cover"
+                                    />
                                   </div>
-                                ))}
+                                </div>
+                                {/* Right sections: Grid of categories */}
+                                <div className="flex-1 pl-6 grid grid-cols-4 gap-x-8 gap-y-4">
+                                  {Object.entries(servicesDropdownContent).map(([category, items]) => (
+                                    <div key={category}>
+                                      <h3 className="text-lg font-semibold mb-3 text-slate-900 dark:text-white">{category}</h3>
+                                      <ul className="space-y-2">
+                                        {items.map((item, idx) => (
+                                          <li key={idx}>
+                                            <Link to={item.to} className="text-slate-600 dark:text-slate-300 hover:text-brand-red text-sm">
+                                              {item.label}
+                                            </Link>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
                             </div>
                           ) : (
-                            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] grid-cols-1">
+                            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] max-w-full grid-cols-1"> {/* Added max-w-full */}
                               {placeholderDropdownContent.map((item, index) => (
                                 <DropdownListItem key={index} to={item.to} title={item.label}>
                                   Description for {item.label.toLowerCase()}.
@@ -214,6 +216,10 @@ export function Header() {
                     ))}
                   </NavigationMenuList>
                 </NavigationMenu>
+                <div className="flex items-center space-x-1 cursor-pointer hover:text-brand-red ml-8"> {/* Added ml-8 for spacing */}
+                  <Search className="h-4 w-4" />
+                  <span>SEARCH</span>
+                </div>
               </div>
               
               <div className="md:hidden flex items-center">
