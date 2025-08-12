@@ -2,7 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import history from "connect-history-api-fallback";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-import type { RewriteContext } from "connect-history-api-fallback"; // Import RewriteContext
+import * as historyApiFallback from "connect-history-api-fallback"; // Import as namespace
 
 const app = express();
 app.use(express.json());
@@ -44,7 +44,7 @@ app.use(
   history({
     disableDotRule: true,
     rewrites: [
-      { from: /^\/api\/.*$/, to: (ctx: RewriteContext) => ctx.parsedUrl.path || "/api" },
+      { from: /^\/api\/.*$/, to: (ctx: historyApiFallback.RewriteContext) => ctx.parsedUrl.path || "/api" },
     ],
   })
 );
