@@ -83,7 +83,8 @@
 
 @layer components {
   /* Custom override to prevent background color on open+hovered nav trigger */
-  .header-nav-trigger[data-state='open']:hover {
+  .header-nav-trigger:hover,
+  .header-nav-trigger[data-state='open'] {
     background-color: transparent !important;
   }
 }

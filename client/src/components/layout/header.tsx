@@ -104,15 +104,12 @@ export function Header() {
                       <NavigationMenuItem>
                         <NavigationMenuTrigger 
                           className={cn(
-                            "header-nav-trigger", // Add custom class for CSS override
-                            // Reset button styles from shadcn
-                            "p-0 rounded-none bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent data-[active]:bg-transparent",
-                            // Apply link styles
-                            "h-full flex items-center border-b-4 transition-colors text-base font-medium text-slate-700 dark:text-slate-300",
-                            // Conditional active/hover underline
+                            "header-nav-trigger", // Custom class for CSS override
+                            "p-0 rounded-none", // Basic style resets
+                            "h-full flex items-center border-b-4 transition-colors text-base font-medium", // Link-like appearance
                             isServicesActive 
                               ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" 
-                              : "border-transparent hover:border-slate-300 dark:hover:border-slate-600"
+                              : "border-transparent hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300"
                           )}
                         >
                           Services
