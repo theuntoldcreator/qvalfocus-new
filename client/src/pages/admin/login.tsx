@@ -2,9 +2,10 @@ import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/providers/auth-provider';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { useEffect } from 'react';
+import { ArrowLeft } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const { session } = useAuth();
@@ -44,6 +45,12 @@ export default function AdminLoginPage() {
               theme="light"
               view="sign_in"
             />
+            <div className="mt-6 text-center">
+              <Link to="/" className="text-sm text-slate-600 hover:text-primary transition-colors inline-flex items-center">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+              </Link>
+            </div>
           </CardContent>
         </Card>
       </div>
