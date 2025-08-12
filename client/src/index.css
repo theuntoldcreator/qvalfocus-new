@@ -87,6 +87,11 @@
   .header-nav-trigger[data-state='open'] {
     background-color: transparent !important;
   }
+
+  /* Custom override for text color on open state to keep it black */
+  .header-nav-trigger[data-state='open'] {
+    color: hsl(var(--foreground)) !important;
+  }
 }
 
 @layer utilities {
