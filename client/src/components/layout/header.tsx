@@ -14,9 +14,16 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
+interface ListItemProps extends React.ComponentPropsWithoutRef<"a"> {
+  to: string;
+  icon: React.ElementType;
+  title: string;
+  children?: React.ReactNode;
+}
+
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { to: string; icon: React.ElementType }
+  ListItemProps
 >(({ className, title, children, to, icon: Icon, ...props }, ref) => {
   return (
     <li>
@@ -127,9 +134,12 @@ export function Header() {
                                   "p-0 rounded-none",
                                   "h-full flex items-center border-b-4 border-transparent",
                                   "text-slate-900 dark:text-slate-300",
-                                  "bg-transparent shadow-none ring-0", // Ensure no default background, shadow, or ring
-                                  "hover:bg-transparent hover:border-slate-900 hover:text-slate-900 hover:shadow-none hover:ring-0", // Ensure hover is transparent
-                                  "data-[state=open]:bg-transparent data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:shadow-none data-[state=open]:ring-0" // Ensure open state is transparent
+                                  "bg-transparent shadow-none ring-0",
+                                  "hover:bg-transparent hover:border-slate-900 hover:text-slate-900 hover:shadow-none hover:ring-0",
+                                  "data-[state=open]:bg-transparent data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:shadow-none data-[state=open]:ring-0",
+                                  "focus-visible:bg-white dark:focus-visible:bg-white",
+                                  "focus-visible:text-primary dark:focus-visible:text-primary",
+                                  "focus-visible:border-primary dark:focus-visible:border-primary"
                                 )}
                               >
                                 {link.label}
