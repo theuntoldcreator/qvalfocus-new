@@ -104,6 +104,7 @@ export function Header() {
                       <NavigationMenuItem>
                         <NavigationMenuTrigger 
                           className={cn(
+                            "header-nav-trigger", // Add custom class for CSS override
                             // Reset button styles from shadcn
                             "p-0 rounded-none bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent data-[active]:bg-transparent",
                             // Apply link styles

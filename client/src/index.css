@@ -81,6 +81,13 @@
   }
 }
 
+@layer components {
+  /* Custom override to prevent background color on open+hovered nav trigger */
+  .header-nav-trigger[data-state='open']:hover {
+    background-color: transparent !important;
+  }
+}
+
 @layer utilities {
   .glass {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
