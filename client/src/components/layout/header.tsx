@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
+import { AnimatePresence } from "framer-motion";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,11 +67,14 @@ export function Header() {
         </div>
       </header>
 
-      <MobileNav 
-        isOpen={isMobileMenuOpen} 
-        onClose={() => setIsMobileMenuOpen(false)} 
-        navLinks={navLinks}
-      />
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <MobileNav 
+            onClose={() => setIsMobileMenuOpen(false)} 
+            navLinks={navLinks}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }
