@@ -102,7 +102,18 @@ export function Header() {
                   <NavigationMenu>
                     <NavigationMenuList>
                       <NavigationMenuItem>
-                        <NavigationMenuTrigger className={cn("h-full flex items-center border-b-4 transition-colors bg-transparent text-base hover:bg-transparent", isServicesActive ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : "border-transparent hover:border-slate-300 dark:hover:border-slate-600")}>
+                        <NavigationMenuTrigger 
+                          className={cn(
+                            // Reset button styles from shadcn
+                            "p-0 rounded-none bg-transparent hover:bg-transparent focus:bg-transparent data-[state=open]:bg-transparent data-[active]:bg-transparent",
+                            // Apply link styles
+                            "h-full flex items-center border-b-4 transition-colors text-base font-medium text-slate-700 dark:text-slate-300",
+                            // Conditional active/hover underline
+                            isServicesActive 
+                              ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" 
+                              : "border-transparent hover:border-slate-300 dark:hover:border-slate-600"
+                          )}
+                        >
                           Services
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
