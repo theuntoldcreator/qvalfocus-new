@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const serviceData = [
@@ -43,7 +43,7 @@ export function Services() {
                   {service.description}
                 </p>
                 <Link 
-                  href={service.link} 
+                  to={service.link} 
                   className="font-semibold text-primary hover:text-primary/80 transition-colors self-start mt-auto"
                 >
                   Read More <ArrowRight className="inline-block ml-1 h-4 w-4" />

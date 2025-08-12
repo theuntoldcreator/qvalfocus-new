@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { JobCard } from "@/components/job/job-card";
 import { JobFilters } from "@/components/job/job-filters";
@@ -20,7 +20,7 @@ export function FeaturedJobs() {
           </div>
           <div className="mt-6 md:mt-0">
             <Button asChild>
-              <Link href="/jobs">View All Jobs</Link>
+              <Link to="/jobs">View All Jobs</Link>
             </Button>
           </div>
         </div>

@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { 
   Users, 
   Briefcase, 
@@ -61,7 +61,7 @@ export default function StaffingSolutionPage() {
               At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly, address seasonal hiring spikes, or build a long-term workforce strategy, we ensure you have access to the right talent when and where you need it.
             </p>
             <Button size="lg" asChild>
-              <Link href="/contact?type=client">Get In Touch</Link>
+              <Link to="/contact?type=client">Get In Touch</Link>
             </Button>
           </div>
         </section>
@@ -148,7 +148,7 @@ export default function StaffingSolutionPage() {
               Connect with our talent specialists to find the right professionals for your organization.
             </p>
             <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
-              <Link href="/contact?type=client">Find Talent Now</Link>
+              <Link to="/contact?type=client">Find Talent Now</Link>
             </Button>
           </div>
         </section>

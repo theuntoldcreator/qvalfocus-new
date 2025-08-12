@@ -5,7 +5,7 @@ import { JobCard } from "@/components/job/job-card";
 import { useJobs } from "@/lib/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Briefcase } from "lucide-react";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/providers/auth-provider";
 
 export default function JobsPage() {
@@ -23,9 +23,9 @@ export default function JobsPage() {
             </h1>
             <Button variant="outline" asChild>
               {session ? (
-                <Link href="/admin/dashboard">Admin Portal</Link>
+                <Link to="/admin/dashboard">Admin Portal</Link>
               ) : (
-                <Link href="/admin/login">Admin Login</Link>
+                <Link to="/admin/login">Admin Login</Link>
               )}
             </Button>
           </div>

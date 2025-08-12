@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { industries } from "@/lib/data";
 import { 
   Cpu, 
@@ -55,10 +55,10 @@ export default function IndustriesPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>
-                  <Link href="/contact?type=client">Discuss Your Industry</Link>
+                  <Link to="/contact?type=client">Discuss Your Industry</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link href="/case-studies">View Success Stories</Link>
+                  <Link to="/case-studies">View Success Stories</Link>
                 </Button>
               </div>
             </div>
@@ -77,7 +77,7 @@ export default function IndustriesPage() {
                 const Icon = iconMap[industry.id];
                 
                 return (
-                  <Link key={industry.id} href={`/industries/${industry.slug}`}>
+                  <Link key={industry.id} to={`/industries/${industry.slug}`}>
                     <div className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300 group h-full">
                       <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Icon className="w-8 h-8 text-white" />
@@ -108,10 +108,10 @@ export default function IndustriesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
-                <Link href="/contact?type=client">Contact Industry Expert</Link>
+                <Link to="/contact?type=client">Contact Industry Expert</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>
-                <Link href="/case-studies">View Industry Cases</Link>
+                <Link to="/case-studies">View Industry Cases</Link>
               </Button>
             </div>
           </div>

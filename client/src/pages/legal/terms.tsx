@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { ArrowLeft, FileText, Scale, AlertTriangle, CheckCircle } from "lucide-react";
 
 export default function TermsPage() {
@@ -17,7 +17,7 @@ export default function TermsPage() {
         <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <Link href="/">
+              <Link to="/">
                 <Button variant="ghost" className="mb-6">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Home
@@ -265,7 +265,7 @@ export default function TermsPage() {
               <ul>
                 <li>Claims for intellectual property infringement</li>
                 <li>Claims for breach of confidentiality</li>
-                <li>Claims seeking injunctive relief</li>
+                <li>Claims for seeking injunctive relief</li>
               </ul>
 
               <h3>Class Action Waiver</h3>
@@ -347,10 +347,10 @@ export default function TermsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild>
-                <Link href="/contact">Contact Legal Team</Link>
+                <Link to="/contact">Contact Legal Team</Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="/legal/privacy">View Privacy Policy</Link>
+                <Link to="/legal/privacy">View Privacy Policy</Link>
               </Button>
             </div>
           </div>

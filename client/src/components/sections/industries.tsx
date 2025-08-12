@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { industries } from "@/lib/data";
 import { Cpu, FlaskConical } from "lucide-react";
 
@@ -23,7 +23,7 @@ export function Industries() {
             const Icon = iconMap[industry.id];
             
             return (
-              <Link key={industry.id} href={`/industries/${industry.slug}`} className="text-center group">
+              <Link key={industry.id} to={`/industries/${industry.slug}`} className="text-center group">
                 <div className="w-20 h-20 mx-auto mb-4 glass dark:glass-dark rounded-2xl flex items-center justify-center group-hover:scale-110 transition-all duration-300">
                   <Icon className="w-10 h-10 text-primary" />
                 </div>

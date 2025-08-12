@@ -1,4 +1,4 @@
-import { useParams } from "wouter";
+import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ApplyForm } from "@/components/job/apply-form";
 import { useJobBySlug } from "@/lib/hooks";
-import { Link } from "wouter";
 import { 
   MapPin, 
   Clock, 
@@ -35,7 +34,7 @@ export default function JobPage() {
             <p className="text-slate-600 dark:text-slate-300 mb-6">
               The job you're looking for doesn't exist or has been removed.
             </p>
-            <Link href="/jobs">
+            <Link to="/jobs">
               <Button>
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Jobs
@@ -104,7 +103,7 @@ export default function JobPage() {
         <section className="py-12 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-6">
-              <Link href="/jobs">
+              <Link to="/jobs">
                 <Button variant="ghost" className="mb-4">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Jobs
@@ -304,7 +303,7 @@ export default function JobPage() {
                 Discover more opportunities that match your skills and interests.
               </p>
               <Button asChild>
-                <Link href="/jobs">View All Jobs</Link>
+                <Link to="/jobs">View All Jobs</Link>
               </Button>
             </div>
           </div>

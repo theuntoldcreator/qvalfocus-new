@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { 
   FlaskConical, 
   Thermometer, 
@@ -118,7 +118,7 @@ export default function ProjectSolutionPage() {
               We deliver end-to-end project execution for both IT and Life Sciences sectors. Our goal is to help you accelerate delivery, improve efficiency, and meet technical or regulatory requirements with precision.
             </p>
             <Button size="lg" asChild>
-              <Link href="/contact?type=client">Get In Touch</Link>
+              <Link to="/contact?type=client">Get In Touch</Link>
             </Button>
           </div>
         </section>
@@ -185,7 +185,7 @@ export default function ProjectSolutionPage() {
               Let's discuss how our project solutions can help you achieve your business objectives.
             </p>
             <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
-              <Link href="/contact?type=client">Schedule a Consultation</Link>
+              <Link to="/contact?type=client">Schedule a Consultation</Link>
             </Button>
           </div>
         </section>

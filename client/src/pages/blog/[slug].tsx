@@ -1,11 +1,10 @@
-import { useParams } from "wouter";
+import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useBlogPostBySlug } from "@/lib/hooks";
-import { Link } from "wouter";
 import { 
   ArrowLeft,
   Calendar,
@@ -27,7 +26,7 @@ export default function BlogPostPage() {
             <p className="text-slate-600 dark:text-slate-300 mb-6">
               The blog post you're looking for doesn't exist or has been removed.
             </p>
-            <Link href="/blogs">
+            <Link to="/blogs">
               <Button>
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Blog
@@ -73,7 +72,7 @@ export default function BlogPostPage() {
         <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <Link href="/blogs">
+              <Link to="/blogs">
                 <Button variant="ghost" className="mb-6">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Blog
@@ -167,7 +166,7 @@ export default function BlogPostPage() {
             
             <div className="text-center">
               <Button size="lg" asChild>
-                <Link href="/blogs">View All Blog Posts</Link>
+                <Link to="/blogs">View All Blog Posts</Link>
               </Button>
             </div>
           </div>
@@ -184,10 +183,10 @@ export default function BlogPostPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
-                <Link href="/contact">Subscribe Now</Link>
+                <Link to="/contact">Subscribe Now</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>
-                <Link href="/jobs">View Open Positions</Link>
+                <Link to="/jobs">View Open Positions</Link>
               </Button>
             </div>
           </div>

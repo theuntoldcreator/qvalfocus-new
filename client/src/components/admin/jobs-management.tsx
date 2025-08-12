@@ -6,7 +6,7 @@ import { Trash2, Eye, PlusCircle } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 
 export function JobsManagement() {
   const { data: jobs, isLoading: isLoadingJobs } = useJobs();
@@ -26,7 +26,7 @@ export function JobsManagement() {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Manage Job Listings</CardTitle>
           <Button asChild>
-            <Link href="/jobs/new"> {/* Relative path */}
+            <Link to="/admin/dashboard/jobs/new">
               <PlusCircle className="mr-2 h-4 w-4" />
               Post a New Job
             </Link>

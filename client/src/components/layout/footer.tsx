@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { companyInfo } from "@/lib/data";
 
 export function Footer() {
@@ -32,8 +32,8 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
-              <li><Link href="/services/staffing-solution" className="hover:text-white transition-colors">Staffing Solutions</Link></li>
-              <li><Link href="/services/project-solution" className="hover:text-white transition-colors">Project Solutions</Link></li>
+              <li><Link to="/services/staffing-solution" className="hover:text-white transition-colors">Staffing Solutions</Link></li>
+              <li><Link to="/services/project-solution" className="hover:text-white transition-colors">Project Solutions</Link></li>
             </ul>
           </div>
           
@@ -41,8 +41,8 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Industries</h3>
             <ul className="space-y-2">
-              <li><Link href="/industries/life-sciences" className="hover:text-white transition-colors">Life Sciences</Link></li>
-              <li><Link href="/industries/information-technology" className="hover:text-white transition-colors">Information Technology</Link></li>
+              <li><Link to="/industries/life-sciences" className="hover:text-white transition-colors">Life Sciences</Link></li>
+              <li><Link to="/industries/information-technology" className="hover:text-white transition-colors">Information Technology</Link></li>
             </ul>
           </div>
           
@@ -50,10 +50,10 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
-              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="/jobs" className="hover:text-white transition-colors">Careers</Link></li>
-              <li><Link href="/blogs" className="hover:text-white transition-colors">Blogs</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/jobs" className="hover:text-white transition-colors">Careers</Link></li>
+              <li><Link to="/blogs" className="hover:text-white transition-colors">Blogs</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
         </div>
@@ -61,8 +61,8 @@ export function Footer() {
         <div className="border-t border-slate-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex space-x-6 mb-4 md:mb-0">
-              <Link href="/legal/privacy" className="text-sm hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="/legal/terms" className="text-sm hover:text-white transition-colors">Terms of Service</Link>
+              <Link to="/legal/privacy" className="text-sm hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/legal/terms" className="text-sm hover:text-white transition-colors">Terms of Service</Link>
               <a href="#" className="text-sm hover:text-white transition-colors">Accessibility</a>
               <a href="#" className="text-sm hover:text-white transition-colors">Cookie Policy</a>
             </div>

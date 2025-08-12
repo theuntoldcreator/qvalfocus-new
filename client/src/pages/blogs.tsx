@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useBlogs } from "@/lib/hooks";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { ArrowRight, BookOpen, Calendar, Clock } from "lucide-react";
 
 export default function BlogsPage() {
@@ -46,10 +46,10 @@ export default function BlogsPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>
-                  <Link href="/contact">Suggest a Topic</Link>
+                  <Link to="/contact">Suggest a Topic</Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10" asChild>
-                  <Link href="/jobs">Explore Careers</Link>
+                  <Link to="/jobs">Explore Careers</Link>
                 </Button>
               </div>
             </div>
@@ -112,7 +112,7 @@ export default function BlogsPage() {
             ) : blogs && blogs.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {blogs.map((blog) => (
-                  <Link key={blog.id} href={`/blogs/${blog.slug}`}>
+                  <Link key={blog.id} to={`/blogs/${blog.slug}`}>
                     <div className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300 group h-full">
                       <div className="w-full h-48 rounded-xl mb-6 overflow-hidden">
                         {blog.imageUrl ? (
@@ -171,7 +171,7 @@ export default function BlogsPage() {
                   We're currently preparing new content. Check back soon for fresh insights!
                 </p>
                 <Button asChild>
-                  <Link href="/contact">Suggest a Topic</Link>
+                  <Link to="/contact">Suggest a Topic</Link>
                 </Button>
               </div>
             )}
@@ -217,10 +217,10 @@ export default function BlogsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
-                <Link href="/contact">Subscribe Now</Link>
+                <Link to="/contact">Subscribe Now</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>
-                <Link href="/jobs">View Open Positions</Link>
+                <Link to="/jobs">View Open Positions</Link>
               </Button>
             </div>
           </div>

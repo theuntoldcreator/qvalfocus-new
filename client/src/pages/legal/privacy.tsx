@@ -2,7 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { ArrowLeft, Shield, Eye, Lock, UserCheck } from "lucide-react";
 
 export default function PrivacyPage() {
@@ -17,7 +17,7 @@ export default function PrivacyPage() {
         <section className="py-16 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <Link href="/">
+              <Link to="/">
                 <Button variant="ghost" className="mb-6">
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Back to Home
@@ -304,10 +304,10 @@ export default function PrivacyPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild>
-                <Link href="/contact">Contact Privacy Team</Link>
+                <Link to="/contact">Contact Privacy Team</Link>
               </Button>
               <Button variant="outline" asChild>
-                <Link href="/legal/terms">View Terms of Service</Link>
+                <Link to="/legal/terms">View Terms of Service</Link>
               </Button>
             </div>
           </div>

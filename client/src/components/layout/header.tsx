@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
@@ -8,16 +8,16 @@ import { AnimatePresence } from "framer-motion";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
+  const location = useLocation();
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/services/staffing-solution", label: "Services" },
-    { href: "/industries", label: "Industries" },
-    { href: "/about", label: "About Us" },
-    { href: "/jobs", label: "Careers" },
-    { href: "/blogs", label: "Blogs" },
-    { href: "/contact", label: "Contact Us" },
+    { to: "/", label: "Home" },
+    { to: "/services/staffing-solution", label: "Services" },
+    { to: "/industries", label: "Industries" },
+    { to: "/about", label: "About Us" },
+    { to: "/jobs", label: "Careers" },
+    { to: "/blogs", label: "Blogs" },
+    { to: "/contact", label: "Contact Us" },
   ];
 
   return (
@@ -28,7 +28,7 @@ export function Header() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               {/* Logo */}
-              <Link href="/" className="flex items-center space-x-2">
+              <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
               </Link>
               
@@ -37,11 +37,11 @@ export function Header() {
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-700 dark:text-slate-300 h-full">
                   {navLinks.map((link) => (
                     <Link
-                      key={link.href}
-                      href={link.href}
+                      key={link.to}
+                      to={link.to}
                       className={cn(
                         "h-full flex items-center border-b-4 transition-colors",
-                        location === link.href
+                        location.pathname === link.to
                           ? "border-slate-900 dark:border-white text-slate-900 dark:text-white"
                           : "border-transparent hover:border-slate-300 dark:hover:border-slate-600 hover:text-slate-900 dark:hover:text-white"
                       )}

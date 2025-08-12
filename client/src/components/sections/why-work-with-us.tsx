@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const reasons = [
@@ -55,7 +55,7 @@ export function WhyWorkWithUs() {
                   {reason.description}
                 </p>
                 <Link 
-                  href={reason.link} 
+                  to={reason.link} 
                   className="font-semibold text-primary hover:text-primary/80 transition-colors self-start mt-auto flex items-center"
                 >
                   More Details <ArrowRight className="ml-2 h-4 w-4" />

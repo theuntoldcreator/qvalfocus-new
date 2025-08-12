@@ -1,4 +1,4 @@
-import { Link, useLocation } from "wouter";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -6,11 +6,11 @@ import { X } from "lucide-react";
 
 interface MobileNavProps {
   onClose: () => void;
-  navLinks: { href: string; label: string }[];
+  navLinks: { to: string; label: string }[];
 }
 
 export function MobileNav({ onClose, navLinks }: MobileNavProps) {
-  const [location] = useLocation();
+  const location = useLocation();
 
   const sidebarVariants = {
     hidden: { x: "100%" },
@@ -43,7 +43,7 @@ export function MobileNav({ onClose, navLinks }: MobileNavProps) {
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800">
-          <Link href="/" onClick={onClose}>
+          <Link to="/" onClick={onClose}>
             <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-8" />
           </Link>
           <Button variant="ghost" size="icon" onClick={onClose}>
@@ -56,12 +56,12 @@ export function MobileNav({ onClose, navLinks }: MobileNavProps) {
           <div className="flex flex-col space-y-1">
             {navLinks.map((link) => (
               <Link
-                key={link.href}
-                href={link.href}
+                key={link.to}
+                to={link.to}
                 onClick={onClose}
                 className={cn(
                   "block py-3 px-4 rounded-lg text-base font-medium transition-colors",
-                  location === link.href
+                  location.pathname === link.to
                     ? "bg-primary text-primary-foreground"
                     : "hover:bg-slate-100 dark:hover:bg-slate-800"
                 )}
@@ -75,7 +75,7 @@ export function MobileNav({ onClose, navLinks }: MobileNavProps) {
         {/* Footer */}
         <div className="p-4 border-t border-slate-200 dark:border-slate-800">
           <Button className="w-full" size="lg" asChild>
-            <Link href="/contact" onClick={onClose}>Contact Us</Link>
+            <Link to="/contact" onClick={onClose}>Contact Us</Link>
           </Button>
         </div>
       </motion.div>

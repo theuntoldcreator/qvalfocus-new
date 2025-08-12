@@ -1,9 +1,8 @@
-import { useParams } from "wouter";
+import { useParams, Link } from "react-router-dom";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "wouter";
 import { industries } from "@/lib/data";
 import { 
   Cpu, 
@@ -63,7 +62,7 @@ export default function IndustryPage() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold mb-4">Industry Not Found</h1>
-          <Link href="/industries">
+          <Link to="/industries">
             <Button>Back to Industries</Button>
           </Link>
         </div>
@@ -103,10 +102,10 @@ export default function IndustryPage() {
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg" asChild>
-                  <Link href="/contact?type=client">Discuss Your Needs</Link>
+                  <Link to="/contact?type=client">Discuss Your Needs</Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10" asChild>
-                  <Link href="/jobs">View Open Positions</Link>
+                  <Link to="/jobs">View Open Positions</Link>
                 </Button>
               </div>
             </div>
@@ -158,10 +157,10 @@ export default function IndustryPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
-                <Link href="/contact?type=client">Contact Industry Expert</Link>
+                <Link to="/contact?type=client">Contact Industry Expert</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>
-                <Link href="/jobs">View {industry.name} Jobs</Link>
+                <Link to="/jobs">View {industry.name} Jobs</Link>
               </Button>
             </div>
           </div>
