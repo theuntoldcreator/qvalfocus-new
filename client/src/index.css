@@ -84,6 +84,9 @@
 @layer components {
   /* Custom override for the NavigationMenuTrigger */
   .services-nav-trigger {
+    /* Remove all transitions */
+    transition: none !important;
+    
     /* Ensure no default background, border, or box-shadow */
     background-color: transparent !important;
     border: none !important;
@@ -92,9 +95,6 @@
     /* Ensure it's always fully visible and not transformed */
     opacity: 1 !important;
     transform: none !important;
-    
-    /* Remove all transitions for a static look */
-    transition: none !important;
   }
 
   /* Ensure no background on hover for the trigger */
