@@ -1,5 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const serviceData = [
   {
@@ -17,6 +24,14 @@ const serviceData = [
 ];
 
 export function Services() {
+  const navigate = useNavigate();
+
+  const handleServiceSelect = (value: string) => {
+    if (value) {
+      navigate(value);
+    }
+  };
+
   return (
     <section id="services" className="py-20 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,6 +40,20 @@ export function Services() {
           <p className="text-xl text-slate-600">
             At QvalFocus, we understand that no two organizations are the same. Your business has unique goals, challenges, and timelines — and your staffing and project needs deserve equally unique solutions. We provide comprehensive, scalable, and flexible services that help you attract the right talent, execute high-priority projects, and stay ahead of industry demands.
           </p>
+          <div className="mt-8 max-w-xs mx-auto">
+            <Select onValueChange={handleServiceSelect}>
+              <SelectTrigger>
+                <SelectValue placeholder="Explore Our Services" />
+              </SelectTrigger>
+              <SelectContent>
+                {serviceData.map((service) => (
+                  <SelectItem key={service.link} value={service.link}>
+                    {service.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
