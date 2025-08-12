@@ -82,22 +82,30 @@
 }
 
 @layer components {
-  /* Custom override to prevent background color on open+hovered nav trigger */
-  .header-nav-trigger:hover,
-  .header-nav-trigger[data-state='open'] {
-    background-color: transparent !important;
-  }
-
-  /* Custom override for text color on open state to keep it black */
-  .header-nav-trigger[data-state='open'] {
-    color: hsl(var(--foreground)) !important;
-  }
-
-  /* Ensure NavigationMenuTrigger has no default background or border */
+  /* Custom override for the NavigationMenuTrigger */
   .header-nav-trigger {
+    /* Ensure no default background, border, or box-shadow */
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    
+    /* Ensure it's always fully visible and not transformed */
+    opacity: 1 !important;
+    transform: none !important;
+    
+    /* Only allow transitions for color and border-color */
+    transition-property: color, border-color !important;
+    transition-duration: 0.3s !important; /* Match existing transition duration */
+    transition-timing-function: ease-in-out !important; /* Match existing timing function */
+  }
+
+  /* When hovered or open, ensure specific styles */
+  .header-nav-trigger:hover,
+  .header-nav-trigger[data-state='open'] {
+    /* Keep text color as foreground (black in light mode) */
+    color: hsl(var(--foreground)) !important;
+    /* Ensure the underline appears on hover/open */
+    border-bottom-color: hsl(var(--foreground)) !important; /* Or whatever color the active underline should be */
   }
 }
 
