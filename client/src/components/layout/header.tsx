@@ -133,26 +133,23 @@ export function Header() {
                                 className={cn(
                                   "p-0 rounded-none",
                                   "h-full flex items-center border-b-4 border-transparent",
-                                  "text-slate-900 dark:text-slate-300",
+                                  "text-slate-900 dark:text-slate-300", // Default text color
                                   "bg-transparent shadow-none ring-0", // General resets
-                                  // Hover states
-                                  "hover:bg-transparent hover:border-slate-900 hover:text-slate-900 hover:shadow-none hover:ring-0",
+                                  // Hover states (not open)
+                                  "hover:bg-transparent hover:border-slate-900 hover:shadow-none hover:ring-0",
                                   // Open state (data-state=open)
-                                  "data-[state=open]:bg-transparent data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:shadow-none data-[state=open]:ring-0",
+                                  "data-[state=open]:bg-slate-900 dark:data-[state=open]:bg-slate-900", // Ensure dark background when open
+                                  "data-[state=open]:border-slate-900 dark:data-[state=open]:border-slate-900", // Ensure dark border when open
+                                  "data-[state=open]:text-white dark:data-[state=open]:text-white", // Ensure white text when open
+                                  "data-[state=open]:shadow-none data-[state=open]:ring-0", // Remove shadow/ring when open
                                   // Focus states (general)
                                   "focus:bg-white dark:focus:bg-white",
                                   "focus-visible:bg-white dark:focus-visible:bg-white",
                                   "focus:text-primary dark:focus:text-primary",
                                   "focus-visible:text-primary dark:focus-visible:text-primary",
                                   "focus:border-primary dark:focus:border-primary",
-                                  "focus-visible:border-primary dark:focus-visible:border-primary",
-                                  // Specific overrides for when data-state=open AND hovered/focused
-                                  "data-[state=open]:hover:bg-slate-900 dark:data-[state=open]:hover:bg-slate-900",
-                                  "data-[state=open]:focus:bg-slate-900 dark:data-[state=open]:focus:bg-slate-900",
-                                  "data-[state=open]:focus-visible:bg-slate-900 dark:data-[state=open]:focus-visible:bg-slate-900",
-                                  "data-[state=open]:hover:text-white dark:data-[state=open]:hover:text-white",
-                                  "data-[state=open]:focus:text-white dark:data-[state=open]:focus:text-white",
-                                  "data-[state=open]:focus-visible:text-white dark:data-[state=open]:focus-visible:text-white"
+                                  "focus-visible:border-primary dark:focus-visible:border-primary"
+                                  // Removed specific data-[state=open]:hover/focus text color changes
                                 )}
                               >
                                 {link.label}
