@@ -93,7 +93,7 @@ export function Header() {
               
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-700 dark:text-slate-300 h-full">
-                  <Link to="/" className={cn("h-full flex items-center border-b-4 transition-colors", location.pathname === "/" ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : "border-transparent hover:border-slate-300 dark:hover:border-slate-600")}>
+                  <Link to="/" className={cn("h-full flex items-center border-b-4", location.pathname === "/" ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : "border-transparent")}>
                     Home
                   </Link>
 
@@ -102,12 +102,9 @@ export function Header() {
                       <NavigationMenuItem>
                         <NavigationMenuTrigger 
                           className={cn(
-                            "header-nav-trigger", // Custom class for CSS override
                             "p-0 rounded-none", // Basic style resets
-                            "h-full flex items-center border-b-4 transition-colors text-base font-medium", // Link-like appearance
-                            // The trigger is no longer styled as "active" based on the URL.
-                            // It only shows an underline on hover.
-                            "border-transparent hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300"
+                            "h-full flex items-center border-b-4 text-base font-medium", // Link-like appearance
+                            "border-transparent text-slate-700 dark:text-slate-300" // No hover/active border or color change
                           )}
                         >
                           Services
@@ -126,7 +123,7 @@ export function Header() {
                   </NavigationMenu>
 
                   {navLinks.slice(1).map((link) => (
-                    <Link key={link.to} to={link.to} className={cn("h-full flex items-center border-b-4 transition-colors", location.pathname === link.to ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : "border-transparent hover:border-slate-300 dark:hover:border-slate-600")}>
+                    <Link key={link.to} to={link.to} className={cn("h-full flex items-center border-b-4", location.pathname === link.to ? "border-slate-900 dark:border-white text-slate-900 dark:text-white" : "border-transparent")}>
                       {link.label}
                     </Link>
                   ))}

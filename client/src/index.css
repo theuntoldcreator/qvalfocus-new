@@ -82,29 +82,7 @@
 }
 
 @layer components {
-  /* Custom override for the NavigationMenuTrigger */
-  .header-nav-trigger {
-    /* Ensure no default background, border, or box-shadow */
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    
-    /* Ensure it's always fully visible and not transformed */
-    opacity: 1 !important;
-    transform: none !important;
-    
-    /* Explicitly define transitions to prevent unwanted animations */
-    transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out !important;
-  }
-
-  /* When hovered or open, ensure specific styles */
-  .header-nav-trigger:hover,
-  .header-nav-trigger[data-state='open'] {
-    /* Keep text color as foreground (black in light mode) */
-    color: hsl(var(--foreground)) !important;
-    /* Ensure the underline appears on hover/open */
-    border-bottom-color: hsl(var(--foreground)) !important; /* Or whatever color the active underline should be */
-  }
+  /* Removed custom override for the NavigationMenuTrigger as it's no longer needed */
 }
 
 @layer utilities {
