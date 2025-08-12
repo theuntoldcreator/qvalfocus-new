@@ -1,4 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
+import history from "connect-history-api-fallback";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -35,6 +36,17 @@ app.use((req, res, next) => {
 
   next();
 });
+
+// SPA history fallback (exclude /api/*)
+// This must be placed before any static file serving or Vite middleware
+app.use(
+  history({
+    disableDotRule: true,
+    rewrites: [
+      { from: /^\/api\/.*$/, to: (ctx) => ctx.parsedUrl.path || "/api" },
+    ],
+  })
+);
 
 (async () => {
   const server = await registerRoutes(app);

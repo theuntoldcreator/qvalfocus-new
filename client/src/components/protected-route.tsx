@@ -1,16 +1,19 @@
-import { useAuth } from '@/providers/auth-provider';
-import { Redirect } from 'wouter';
-import { useEffect } from 'react';
+import { ReactNode } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/providers/auth-provider";
 
-export function ProtectedRoute({ children }: { children: React.ReactNode }) {
+type Props = { children: ReactNode };
+
+export default function ProtectedRoute({ children }: Props) {
   const { session, loading } = useAuth();
+  const location = useLocation();
 
   if (loading) {
     return <div>Loading authentication...</div>; // Or a spinner component
   }
 
   if (!session) {
-    return <Redirect to="/admin/login" />;
+    return <Navigate to="/admin/login" replace state={{ from: location }} />;
   }
 
   return <>{children}</>;

@@ -1,14 +1,17 @@
-import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { AuthProvider } from "@/providers/auth-provider";
-import { ProtectedRoute } from "@/components/protected-route";
-import ScrollToTop from "@/components/scroll-to-top"; // Import the new component
+import { queryClient } from "./lib/queryClient";
+import ScrollToTop from "@/components/scroll-to-top";
 
-import NotFound from "@/pages/not-found";
+// Layouts
+import AdminDashboardLayout from "@/components/layout/admin-dashboard-layout";
+import ProtectedRoute from "@/components/protected-route";
+
+// Public Pages
 import Home from "@/pages/home";
 import StaffingSolutionPage from "@/pages/services/staffing-solution";
 import ProjectSolutionPage from "@/pages/services/project-solution";
@@ -22,38 +25,59 @@ import AboutPage from "@/pages/about";
 import ContactPage from "@/pages/contact";
 import PrivacyPage from "@/pages/legal/privacy";
 import TermsPage from "@/pages/legal/terms";
-import AdminLoginPage from "@/pages/admin/login";
-import AdminDashboardPage from "@/pages/admin/dashboard";
+import NotFound from "@/pages/not-found";
 
-function Router() {
+// Admin Pages
+import AdminLoginPage from "@/pages/admin/login";
+import { DashboardOverview } from "@/components/admin/dashboard-overview";
+import { JobsManagement } from "@/components/admin/jobs-management";
+import { ContactsManagement } from "@/components/admin/contacts-management";
+import NewJobPage from "@/pages/admin/new-job";
+
+function AppRoutes() {
   return (
     <>
       <ScrollToTop />
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route path="/services/staffing-solution" component={StaffingSolutionPage} />
-        <Route path="/services/project-solution" component={ProjectSolutionPage} />
-        <Route path="/industries" component={IndustriesPage} />
-        <Route path="/industries/:slug" component={IndustryPage} />
-        <Route path="/jobs" component={JobsPage} />
-        <Route path="/jobs/:slug" component={JobPage} />
-        <Route path="/blogs" component={BlogsPage} />
-        <Route path="/blogs/:slug" component={BlogPostPage} />
-        <Route path="/about" component={AboutPage} />
-        <Route path="/contact" component={ContactPage} />
-        <Route path="/legal/privacy" component={PrivacyPage} />
-        <Route path="/legal/terms" component={TermsPage} />
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Home />} />
+        <Route path="/services/staffing-solution" element={<StaffingSolutionPage />} />
+        <Route path="/services/project-solution" element={<ProjectSolutionPage />} />
+        <Route path="/industries" element={<IndustriesPage />} />
+        <Route path="/industries/:slug" element={<IndustryPage />} />
+        <Route path="/jobs" element={<JobsPage />} />
+        <Route path="/jobs/:slug" element={<JobPage />} />
+        <Route path="/blogs" element={<BlogsPage />} />
+        <Route path="/blogs/:slug" element={<BlogPostPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/legal/privacy" element={<PrivacyPage />} />
+        <Route path="/legal/terms" element={<TermsPage />} />
         
-        {/* Admin Routes */}
-        <Route path="/admin/login" component={AdminLoginPage} />
-        <Route path="/admin/dashboard/:rest*"> {/* Catch-all for admin dashboard and its sub-routes */}
-          <ProtectedRoute>
-            <AdminDashboardPage />
-          </ProtectedRoute>
-        </Route>
+        {/* Admin Auth */}
+        <Route path="/admin/login" element={<AdminLoginPage />} />
 
-        <Route component={NotFound} />
-      </Switch>
+        {/* Protected Admin Segment */}
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboardLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<DashboardOverview />} />
+          <Route path="jobs" element={<JobsManagement />} />
+          <Route path="jobs/new" element={<NewJobPage />} />
+          <Route path="contacts" element={<ContactsManagement />} />
+        </Route>
+        
+        {/* Redirect for base /admin path */}
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+
+        {/* 404 Not Found */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }
@@ -65,7 +89,7 @@ function App() {
         <AuthProvider>
           <TooltipProvider>
             <Toaster />
-            <Router />
+            <AppRoutes />
           </TooltipProvider>
         </AuthProvider>
       </ThemeProvider>

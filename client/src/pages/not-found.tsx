@@ -1,13 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
-import { Header } from "@/components/layout/header"; // Import Header
-import { Footer } from "@/components/layout/footer"; // Import Footer
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col"> {/* Use flex-col for layout */}
-      <Header /> {/* Add Header */}
-      <main className="pt-20 flex-grow flex items-center justify-center bg-gray-50 dark:bg-slate-900"> {/* Added pt-20 and flex-grow */}
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="pt-20 flex-grow flex items-center justify-center bg-gray-50 dark:bg-slate-900">
         <Card className="w-full max-w-md mx-4">
           <CardContent className="pt-6">
             <div className="flex mb-4 gap-2">
@@ -16,12 +16,12 @@ export default function NotFound() {
             </div>
 
             <p className="mt-4 text-sm text-gray-600 dark:text-slate-300">
-              Did you forget to add the page to the router?
+              The page you are looking for does not exist.
             </p>
           </CardContent>
         </Card>
       </main>
-      <Footer /> {/* Add Footer */}
+      <Footer />
     </div>
   );
 }
