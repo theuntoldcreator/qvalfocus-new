@@ -37,6 +37,22 @@ export const testimonials = [
     avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
     content: "Their consulting team helped us modernize our entire tech stack. The roadmap they created has been our north star for digital transformation over the past 18 months.",
     company: "MedTech Corp",
+  },
+  {
+    id: 4,
+    name: "David Lee",
+    role: "Hiring Manager, QuantumLeap",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+    content: "The quality of candidates we received was exceptional. QvalFocus saved us countless hours of sourcing and screening, allowing us to focus on finding the perfect cultural fit.",
+    company: "QuantumLeap",
+  },
+  {
+    id: 5,
+    name: "Jessica Miller",
+    role: "Product Manager",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150",
+    content: "The recruiters at QvalFocus were incredibly supportive throughout the entire interview process. They provided valuable insights and feedback that helped me land my current role.",
+    company: "NextGen Solutions",
   }
 ];
 

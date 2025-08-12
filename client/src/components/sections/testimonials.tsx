@@ -70,8 +70,10 @@ export function Testimonials() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-[-50px] top-1/2 -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20" />
-            <CarouselNext className="absolute right-[-50px] top-1/2 -translate-y-1/2 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+            <div className="flex justify-center mt-8 gap-4">
+              <CarouselPrevious className="static translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+              <CarouselNext className="static translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
+            </div>
           </Carousel>
         )}
       </div>
