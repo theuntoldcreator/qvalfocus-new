@@ -14,16 +14,9 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
-interface ListItemProps extends React.ComponentPropsWithoutRef<"a"> {
-  to: string;
-  icon: React.ElementType;
-  title: string;
-  children?: React.ReactNode;
-}
-
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  ListItemProps
+  React.ComponentPropsWithoutRef<"a"> & { to: string; icon: React.ElementType }
 >(({ className, title, children, to, icon: Icon, ...props }, ref) => {
   return (
     <li>
@@ -61,15 +54,15 @@ export function Header() {
   const navLinks = [
     { to: "/", label: "Home" }, // Keeping Home for consistency, not in image
     { to: "/blogs", label: "Featured insights" },
-    { to: "#", label: "Services" }, // This will be the dropdown trigger
+    // Capabilities will be a dropdown
     { to: "/industries", label: "Industries" },
     { to: "#", label: "Technology" }, // Placeholder for Technology page
     { to: "/about", label: "About us" },
     { to: "/jobs", label: "Careers" },
   ];
 
-  // Content for the "Services" dropdown
-  const servicesLinks = [
+  // Content for the "Capabilities" dropdown
+  const capabilitiesLinks = [
     { 
       to: "/services/staffing-solution", 
       title: "Staffing Solution", 
@@ -88,8 +81,7 @@ export function Header() {
     { to: "/", label: "Home" },
     { to: "/services/staffing-solution", label: "Staffing Solution" }, // For mobile, list dropdown items directly
     { to: "/services/project-solution", label: "Project Solution" },
-    // Filter out the 'Services' placeholder from navLinks for mobile
-    ...navLinks.filter(link => link.label !== "Services" && link.label !== "Home").map(link => ({ to: link.to, label: link.label })),
+    ...navLinks.slice(1), // Exclude Home, add others
   ];
 
   return (
@@ -124,41 +116,25 @@ export function Header() {
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
                   {navLinks.map((link) => {
-                    if (link.label === "Services") {
+                    if (link.label === "Capabilities") {
                       return (
                         <NavigationMenu key={link.label}>
                           <NavigationMenuList>
                             <NavigationMenuItem>
                               <NavigationMenuTrigger 
                                 className={cn(
-                                  "p-0 rounded-none",
-                                  "h-full flex items-center border-b-4 border-transparent",
+                                  "p-0 rounded-none", // Basic style resets
+                                  "h-full flex items-center border-b-4 border-transparent", // Base link appearance
                                   "text-slate-900 dark:text-slate-300", // Default text color
-                                  "bg-transparent shadow-none ring-0", // General resets
-                                  // Hover states (not open)
-                                  "hover:bg-transparent hover:border-slate-900 hover:text-slate-900 hover:shadow-none hover:ring-0",
-                                  // Open state (data-state=open)
-                                  "data-[state=open]:bg-slate-900 dark:data-[state=open]:bg-slate-900", // Ensure dark background when open
-                                  "data-[state=open]:border-slate-900 dark:data-[state=open]:border-slate-900", // Ensure dark border when open
-                                  "data-[state=open]:text-white dark:data-[state=open]:text-white", // Ensure white text when open
-                                  "data-[state=open]:shadow-none data-[state=open]:ring-0", // Remove shadow/ring when open
-                                  // Focus states (general)
-                                  "focus:bg-white dark:focus:bg-white",
-                                  "focus-visible:bg-white dark:focus-visible:bg-white",
-                                  "focus:text-primary dark:focus:text-primary",
-                                  "focus-visible:text-primary dark:focus-visible:text-primary",
-                                  "focus:border-primary dark:focus:border-primary",
-                                  "focus-visible:border-primary dark:focus-visible:border-primary"
+                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent", // Open state: black underline, black text, transparent background
+                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent" // Hover state: black underline, black text, transparent background
                                 )}
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
-                              <NavigationMenuContent 
-                                // Removed animation classes
-                                className="data-[motion=from-start]:animate-in data-[motion=from-end]:animate-in data-[motion=to-start]:animate-out data-[motion=to-end]:animate-out data-[motion=from-start]:slide-in-from-left-8 data-[motion=from-end]:slide-in-from-right-8 data-[motion=to-start]:slide-out-to-left-8 data-[motion=to-end]:slide-out-to-right-8 md:data-[motion=from-start]:slide-in-from-top-full md:data-[motion=from-end]:slide-in-from-top-full md:data-[motion=to-start]:slide-out-to-top-full md:data-[motion=to-end]:slide-out-to-top-full"
-                              >
+                              <NavigationMenuContent>
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                                  {servicesLinks.map((service) => (
+                                  {capabilitiesLinks.map((service) => (
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
                                       {service.description}
                                     </ListItem>
