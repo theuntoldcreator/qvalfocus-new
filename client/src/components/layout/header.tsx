@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Users, ClipboardCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -16,8 +16,8 @@ import {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { to: string }
->(({ className, title, children, to, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { to: string; icon: React.ElementType }
+>(({ className, title, children, to, icon: Icon, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -25,15 +25,20 @@ const ListItem = React.forwardRef<
           to={to}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "flex items-start space-x-4 rounded-md p-3 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800",
             className
           )}
           {...props}
         >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
+          <div className="flex-shrink-0 mt-1">
+            <Icon className="h-6 w-6 text-primary" />
+          </div>
+          <div>
+            <div className="text-base font-semibold text-slate-900 dark:text-white">{title}</div>
+            <p className="text-sm text-slate-500 dark:text-slate-400">
+              {children}
+            </p>
+          </div>
         </Link>
       </NavigationMenuLink>
     </li>
@@ -55,8 +60,18 @@ export function Header() {
   ];
 
   const servicesLinks = [
-    { to: "/services/staffing-solution", title: "Staffing Solution", description: "Flexible and scalable staffing services tailored to your organization’s goals." },
-    { to: "/services/project-solution", title: "Project Solution", description: "End-to-end project-based solutions to accelerate delivery and improve efficiency." }
+    { 
+      to: "/services/staffing-solution", 
+      title: "Staffing Solution", 
+      description: "Flexible and scalable staffing services.",
+      icon: Users 
+    },
+    { 
+      to: "/services/project-solution", 
+      title: "Project Solution", 
+      description: "End-to-end project-based solutions.",
+      icon: ClipboardCheck
+    }
   ];
 
   const allNavLinksForMobile = [
@@ -91,9 +106,9 @@ export function Header() {
                           Services
                         </NavigationMenuTrigger>
                         <NavigationMenuContent>
-                          <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] grid-cols-2">
+                          <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
                             {servicesLinks.map((service) => (
-                              <ListItem key={service.title} to={service.to} title={service.title}>
+                              <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
                                 {service.description}
                               </ListItem>
                             ))}
