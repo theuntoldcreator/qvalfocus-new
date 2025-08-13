@@ -1,5 +1,14 @@
 {
   "type": "module",
+  "scripts": {
+    "dev": "tsx watch server/index.ts",
+    "build": "vite build",
+    "start": "tsx server/index.ts",
+    "preview": "vite preview",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@jridgewell/trace-mapping": "^0.3.25",
