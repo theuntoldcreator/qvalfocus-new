@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "tsx watch server/index.ts",
+    "dev": "vite",
     "build": "vite build",
     "start": "tsx server/index.ts",
     "preview": "vite preview",
