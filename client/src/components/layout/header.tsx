@@ -82,7 +82,7 @@ export function Header() {
             "flex h-20 items-center justify-between px-6 transition-all duration-300",
             isScrolled 
               ? "rounded-none bg-white shadow-lg dark:bg-slate-900" 
-              : "rounded-lg bg-white/5 backdrop-blur-sm border border-white/10"
+              : "rounded-lg bg-white/10 backdrop-blur-md border border-white/20"
           )}>
             <Link to="/" className="flex items-center space-x-2">
               <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
