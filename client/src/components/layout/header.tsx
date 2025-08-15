@@ -13,6 +13,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { useScroll } from "@/hooks/use-scroll";
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -59,6 +60,7 @@ const aboutUsLinks = [
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isScrolled = useScroll(50);
 
   const allNavLinksForMobile = [
     { to: "/", label: "Home" },
@@ -71,9 +73,17 @@ export function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 pt-4 bg-transparent">
+      <header className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled ? "pt-0" : "pt-4"
+      )}>
         <div className="container mx-auto">
-          <div className="flex h-20 items-center justify-between rounded-lg bg-white px-6 shadow-lg dark:bg-slate-900">
+          <div className={cn(
+            "flex h-20 items-center justify-between px-6 transition-all duration-300",
+            isScrolled 
+              ? "rounded-none bg-white shadow-lg dark:bg-slate-900" 
+              : "rounded-lg bg-white/5 backdrop-blur-sm border border-white/10"
+          )}>
             <Link to="/" className="flex items-center space-x-2">
               <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
             </Link>
@@ -83,15 +93,19 @@ export function Header() {
                 <NavigationMenuList>
                   <NavigationMenuItem>
                     <Link to="/" className={cn(
-                      "px-4 py-2 text-base font-medium text-slate-700 dark:text-slate-300",
-                      location.pathname === "/" && "text-slate-900 dark:text-white font-semibold"
+                      "px-4 py-2 text-base font-medium rounded-md transition-colors",
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      location.pathname === "/" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Home</NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-base">Services</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className={cn(
+                      "bg-transparent text-base transition-colors",
+                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                    )}>Services</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                         {servicesLinks.map((item) => (
@@ -102,7 +116,10 @@ export function Header() {
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-base">Industries</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className={cn(
+                      "bg-transparent text-base transition-colors",
+                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                    )}>Industries</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                         {industriesLinks.map((item) => (
@@ -113,7 +130,10 @@ export function Header() {
                   </NavigationMenuItem>
 
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="bg-transparent text-base">About Us</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className={cn(
+                      "bg-transparent text-base transition-colors",
+                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                    )}>About Us</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                         {aboutUsLinks.map((item) => (
@@ -125,8 +145,9 @@ export function Header() {
 
                   <NavigationMenuItem>
                     <Link to="/jobs" className={cn(
-                      "px-4 py-2 text-base font-medium text-slate-700 dark:text-slate-300",
-                      location.pathname === "/jobs" && "text-slate-900 dark:text-white font-semibold"
+                      "px-4 py-2 text-base font-medium rounded-md transition-colors",
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      location.pathname === "/jobs" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Careers</NavigationMenuLink>
                     </Link>
@@ -134,8 +155,9 @@ export function Header() {
 
                   <NavigationMenuItem>
                     <Link to="/contact" className={cn(
-                      "px-4 py-2 text-base font-medium text-slate-700 dark:text-slate-300",
-                      location.pathname === "/contact" && "text-slate-900 dark:text-white font-semibold"
+                      "px-4 py-2 text-base font-medium rounded-md transition-colors",
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      location.pathname === "/contact" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Contact Us</NavigationMenuLink>
                     </Link>
@@ -145,7 +167,7 @@ export function Header() {
             </nav>
             
             <div className="md:hidden flex items-center">
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn(!isScrolled && "text-white hover:text-white hover:bg-white/10")}>
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
