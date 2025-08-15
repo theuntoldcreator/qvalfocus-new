@@ -91,7 +91,7 @@ export function Header() {
                   {navLinks.map((link) => (
                     link.dropdown ? (
                       <NavigationMenuItem key={link.label}>
-                        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent text-base font-medium text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white">
+                        <NavigationMenuTrigger className="bg-transparent hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent text-base font-medium text-slate-700 hover:text-slate-900 focus:text-slate-900 data-[state=open]:text-slate-900 dark:text-slate-300 dark:hover:text-white dark:focus:text-white dark:data-[state=open]:text-white">
                           {link.label}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent className="mt-2 border-t-4 border-green-500 shadow-lg">
