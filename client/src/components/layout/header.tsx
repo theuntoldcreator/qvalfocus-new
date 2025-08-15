@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, Target } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -16,8 +16,8 @@ import {
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { to: string; }
->(({ className, title, to, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a"> & { to: string; description: string }
+>(({ className, title, to, description, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
@@ -25,13 +25,15 @@ const ListItem = React.forwardRef<
           to={to}
           ref={ref}
           className={cn(
-            "flex items-center space-x-3 rounded-md p-3 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-800 dark:focus:bg-slate-800",
             className
           )}
           {...props}
         >
-          <Target className="h-5 w-5 flex-shrink-0 text-green-500" />
-          <span className="text-sm font-medium text-slate-900 dark:text-white">{title}</span>
+          <div className="text-sm font-medium leading-none text-slate-900 dark:text-white">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-slate-500 dark:text-slate-400">
+            {description}
+          </p>
         </Link>
       </NavigationMenuLink>
     </li>
@@ -40,32 +42,23 @@ const ListItem = React.forwardRef<
 ListItem.displayName = "ListItem";
 
 const servicesLinks = [
-  { to: "/services/staffing-solution", title: "Staffing Solutions" },
-  { to: "/services/project-solution", title: "Project Solutions" }
+  { to: "/services/staffing-solution", title: "Staffing Solutions", description: "Flexible and scalable talent services." },
+  { to: "/services/project-solution", title: "Project Solutions", description: "End-to-end project delivery and execution." }
 ];
 
 const industriesLinks = [
-  { to: "/industries/life-sciences", title: "Life Sciences" },
-  { to: "/industries/information-technology", title: "Information Technology" }
+  { to: "/industries/life-sciences", title: "Life Sciences", description: "Expertise in biotech, pharma, and medical devices." },
+  { to: "/industries/information-technology", title: "Information Technology", description: "Covering software, cloud, data, and cybersecurity." }
 ];
 
 const aboutUsLinks = [
-  { to: "/about", title: "Our Story" },
-  { to: "/blogs", title: "Blog / Insights" }
+  { to: "/about", title: "Our Story", description: "Learn about our mission, vision, and values." },
+  { to: "/blogs", title: "Blog / Insights", description: "Stay updated with industry trends and news." }
 ];
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  const navLinks = [
-    { to: "/", label: "Home" },
-    { label: "Services", dropdown: servicesLinks },
-    { label: "Industries", dropdown: industriesLinks },
-    { label: "About Us", dropdown: aboutUsLinks },
-    { to: "/jobs", label: "Careers" },
-    { to: "/contact", label: "Contact Us" },
-  ];
 
   const allNavLinksForMobile = [
     { to: "/", label: "Home" },
@@ -88,31 +81,65 @@ export function Header() {
             <nav className="hidden md:flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {navLinks.map((link) => (
-                    link.dropdown ? (
-                      <NavigationMenuItem key={link.label}>
-                        <NavigationMenuTrigger className="bg-transparent rounded-none hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent text-base font-medium text-slate-700 focus:text-slate-900 data-[state=open]:text-slate-900 dark:text-slate-300 dark:focus:text-white dark:data-[state=open]:text-white">
-                          {link.label}
-                        </NavigationMenuTrigger>
-                        <NavigationMenuContent className="mt-2 border-t-4 border-green-500 shadow-lg">
-                          <ul className="grid w-[350px] gap-1 p-2">
-                            {link.dropdown.map((item) => (
-                              <ListItem key={item.title} to={item.to} title={item.title} />
-                            ))}
-                          </ul>
-                        </NavigationMenuContent>
-                      </NavigationMenuItem>
-                    ) : (
-                      <NavigationMenuItem key={link.label}>
-                        <Link to={link.to!} className={cn(
-                          "px-4 py-2 text-base font-medium text-slate-700 dark:text-slate-300",
-                          location.pathname === link.to && "text-slate-900 dark:text-white font-semibold"
-                        )}>
-                          <NavigationMenuLink>{link.label}</NavigationMenuLink>
-                        </Link>
-                      </NavigationMenuItem>
-                    )
-                  ))}
+                  <NavigationMenuItem>
+                    <Link to="/" className={cn(
+                      "px-4 py-2 text-base font-medium text-slate-700 dark:text-slate-300",
+                      location.pathname === "/" && "text-slate-900 dark:text-white font-semibold"
+                    )}>
+                      <NavigationMenuLink>Home</NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="bg-transparent text-base">Services</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {servicesLinks.map((item) => (
+                          <ListItem key={item.title} to={item.to} title={item.title} description={item.description} />
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="bg-transparent text-base">Industries</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {industriesLinks.map((item) => (
+                          <ListItem key={item.title} to={item.to} title={item.title} description={item.description} />
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="bg-transparent text-base">About Us</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {aboutUsLinks.map((item) => (
+                          <ListItem key={item.title} to={item.to} title={item.title} description={item.description} />
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <Link to="/jobs" className={cn(
+                      "px-4 py-2 text-base font-medium text-slate-700 dark:text-slate-300",
+                      location.pathname === "/jobs" && "text-slate-900 dark:text-white font-semibold"
+                    )}>
+                      <NavigationMenuLink>Careers</NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
+
+                  <NavigationMenuItem>
+                    <Link to="/contact" className={cn(
+                      "px-4 py-2 text-base font-medium text-slate-700 dark:text-slate-300",
+                      location.pathname === "/contact" && "text-slate-900 dark:text-white font-semibold"
+                    )}>
+                      <NavigationMenuLink>Contact Us</NavigationMenuLink>
+                    </Link>
+                  </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
             </nav>
