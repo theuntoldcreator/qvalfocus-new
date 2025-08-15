@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Target } from "lucide-react";
+import { Menu, X, ChevronDown, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { cn } from "@/lib/utils";
@@ -39,6 +39,11 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
+const servicesLinks = [
+  { to: "/services/staffing-solution", title: "Staffing Solutions" },
+  { to: "/services/project-solution", title: "Project Solutions" }
+];
+
 const industriesLinks = [
   { to: "/industries/life-sciences", title: "Life Sciences" },
   { to: "/industries/information-technology", title: "Information Technology" }
@@ -55,6 +60,7 @@ export function Header() {
 
   const navLinks = [
     { to: "/", label: "Home" },
+    { label: "Services", dropdown: servicesLinks },
     { label: "Industries", dropdown: industriesLinks },
     { label: "About Us", dropdown: aboutUsLinks },
     { to: "/jobs", label: "Careers" },
@@ -63,6 +69,7 @@ export function Header() {
 
   const allNavLinksForMobile = [
     { to: "/", label: "Home" },
+    ...servicesLinks.map(l => ({ to: l.to, label: l.title })),
     ...industriesLinks.map(l => ({ to: l.to, label: l.title })),
     ...aboutUsLinks.map(l => ({ to: l.to, label: l.title })),
     { to: "/jobs", label: "Careers" },
@@ -75,7 +82,7 @@ export function Header() {
         <div className="container mx-auto">
           <div className="flex h-20 items-center justify-between rounded-lg bg-white px-6 shadow-lg dark:bg-slate-900">
             <Link to="/" className="flex items-center space-x-2">
-              <img src="/images/qvalfocus.png" alt="QvalFocus Logo" className="h-10" />
+              <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
             </Link>
             
             <nav className="hidden md:flex items-center">
