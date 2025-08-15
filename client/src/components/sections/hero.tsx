@@ -5,20 +5,12 @@ import { Link } from "react-router-dom";
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
-      >
-        <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-people-walking-on-a-street-in-the-city-4259-large.mp4"
-          type="video/mp4"
-        />
-        Your browser does not support the video tag.
-      </video>
+      {/* Image Background */}
+      <img
+        src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+        alt="Professional working on a laptop in a modern office"
+        className="absolute z-0 w-full h-full object-cover"
+      />
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50 z-0"></div>
