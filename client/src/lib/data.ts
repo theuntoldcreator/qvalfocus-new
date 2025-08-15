@@ -1,5 +1,3 @@
-import { Users, Briefcase } from "lucide-react";
-
 export const industries = [
   {
     id: "life-sciences",
@@ -13,21 +11,6 @@ export const industries = [
     description: "Software, Cloud, Data, Cybersecurity",
     slug: "information-technology"
   }
-];
-
-export const servicesLinks = [
-  {
-    to: "/services/staffing-solution",
-    title: "Staffing Solutions",
-    description: "Flexible, scalable staffing for contract, direct hire, and FSP models.",
-    icon: Users,
-  },
-  {
-    to: "/services/project-solution",
-    title: "Project Solutions",
-    description: "End-to-end project delivery for IT and Life Sciences initiatives.",
-    icon: Briefcase,
-  },
 ];
 
 export const testimonials = [
