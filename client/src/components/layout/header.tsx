@@ -127,8 +127,6 @@ export function Header() {
                                   "p-0 rounded-none bg-transparent",
                                   "h-full flex items-center border-b-4 border-transparent",
                                   "text-slate-900 dark:text-slate-300",
-                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900",
-                                  "hover:border-slate-900 hover:text-slate-900",
                                   "hover:bg-transparent focus:bg-transparent data-[active]:bg-transparent data-[state=open]:bg-transparent"
                                 )}
                               >
