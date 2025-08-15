@@ -94,7 +94,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <Link to="/" className={cn(
                       "px-4 py-2 text-base font-medium rounded-md transition-colors",
-                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-primary hover:bg-primary/10",
                       location.pathname === "/" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Home</NavigationMenuLink>
@@ -104,7 +104,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(
                       "bg-transparent text-base transition-colors",
-                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                      isScrolled ? "text-slate-700" : "text-primary hover:bg-primary/10 focus:bg-primary/10 data-[state=open]:bg-primary/10"
                     )}>Services</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -118,7 +118,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(
                       "bg-transparent text-base transition-colors",
-                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                      isScrolled ? "text-slate-700" : "text-primary hover:bg-primary/10 focus:bg-primary/10 data-[state=open]:bg-primary/10"
                     )}>Industries</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -132,7 +132,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(
                       "bg-transparent text-base transition-colors",
-                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                      isScrolled ? "text-slate-700" : "text-primary hover:bg-primary/10 focus:bg-primary/10 data-[state=open]:bg-primary/10"
                     )}>About Us</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -146,7 +146,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <Link to="/jobs" className={cn(
                       "px-4 py-2 text-base font-medium rounded-md transition-colors",
-                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-primary hover:bg-primary/10",
                       location.pathname === "/jobs" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Careers</NavigationMenuLink>
@@ -156,7 +156,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <Link to="/contact" className={cn(
                       "px-4 py-2 text-base font-medium rounded-md transition-colors",
-                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-primary hover:bg-primary/10",
                       location.pathname === "/contact" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Contact Us</NavigationMenuLink>
@@ -167,7 +167,7 @@ export function Header() {
             </nav>
             
             <div className="md:hidden flex items-center">
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn(!isScrolled && "text-white hover:text-white hover:bg-white/10")}>
+              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn(!isScrolled && "text-primary hover:text-primary hover:bg-primary/10")}>
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
