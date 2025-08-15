@@ -14,7 +14,7 @@ export function Hero() {
         className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
       >
         <source
-          src="https://assets.mixkit.co/videos/preview/mixkit-fast-flying-through-the-city-at-night-4334-large.mp4"
+          src="https://assets.mixkit.co/videos/preview/mixkit-people-walking-on-a-street-in-the-city-4259-large.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.
