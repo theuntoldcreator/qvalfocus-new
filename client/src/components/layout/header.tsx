@@ -52,7 +52,7 @@ export function Header() {
 
   // Updated navLinks to match the image
   const navLinks = [
-    { to: "/", label: "Home" }, // Keeping Home for consistency, not in image
+    { to: "/", label: "Home" },
     { to: "/blogs", label: "Featured insights" },
     { to: "#", label: "Services" }, // This will be the dropdown trigger
     { to: "/industries", label: "Industries" },
@@ -79,7 +79,7 @@ export function Header() {
 
   const allNavLinksForMobile = [
     { to: "/", label: "Home" },
-    { to: "/services/staffing-solution", label: "Staffing Solution" }, // For mobile, list dropdown items directly
+    { to: "/services/staffing-solution", label: "Staffing Solution" },
     { to: "/services/project-solution", label: "Project Solution" },
     // Filter out the 'Services' placeholder from navLinks for mobile
     ...navLinks.filter(link => link.label !== "Services" && link.label !== "Home").map(link => ({ to: link.to, label: link.label })),
@@ -95,7 +95,7 @@ export function Header() {
               <User className="h-4 w-4 mr-1" /> Sign in
             </Link>
             <span>|</span>
-            <Link to="/admin/register" className="hover:text-primary">Register</Link> {/* Assuming a register page */}
+            <Link to="/admin/register" className="hover:text-primary">Register</Link>
           </div>
           <div className="flex items-center space-x-1 ml-6 cursor-pointer hover:text-primary">
             <MapPin className="h-4 w-4" />
@@ -117,25 +117,25 @@ export function Header() {
               <div className="hidden md:flex items-center space-x-8">
                 <nav className="flex items-center space-x-8 text-base font-medium text-slate-900 dark:text-slate-300 h-full">
                   {navLinks.map((link) => {
-                    if (link.label === "Services") { // Changed from "Capabilities"
+                    if (link.label === "Services") {
                       return (
                         <NavigationMenu key={link.label}>
                           <NavigationMenuList>
                             <NavigationMenuItem>
                               <NavigationMenuTrigger 
                                 className={cn(
-                                  "p-0 rounded-none", // Basic style resets
-                                  "h-full flex items-center border-b-4 border-transparent", // Base link appearance
-                                  "text-slate-900 dark:text-slate-300", // Default text color
-                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent", // Open state: black underline, black text, transparent background
-                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent" // Hover state: black underline, black text, transparent background
+                                  "p-0 rounded-none",
+                                  "h-full flex items-center border-b-4 border-transparent",
+                                  "text-slate-900 dark:text-slate-300",
+                                  "data-[state=open]:border-slate-900 data-[state=open]:text-slate-900 data-[state=open]:bg-transparent",
+                                  "hover:border-slate-900 hover:text-slate-900 hover:bg-transparent"
                                 )}
                               >
                                 {link.label}
                               </NavigationMenuTrigger>
                               <NavigationMenuContent>
                                 <ul className="grid w-[350px] gap-3 p-4 md:w-[400px] grid-cols-1">
-                                  {servicesLinks.map((service) => ( // Changed from capabilitiesLinks
+                                  {servicesLinks.map((service) => (
                                     <ListItem key={service.title} to={service.to} title={service.title} icon={service.icon}>
                                       {service.description}
                                     </ListItem>
