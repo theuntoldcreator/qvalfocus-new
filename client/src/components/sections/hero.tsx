@@ -17,7 +17,7 @@ export function Hero() {
             </p>
             <Button 
               size="lg" 
-              className="bg-cyan-400 text-slate-900 hover:bg-cyan-300 font-bold rounded-full px-8 py-6 text-lg"
+              className="bg-accent-500 text-white hover:bg-accent-600 font-bold rounded-full px-8 py-6 text-lg"
               asChild
             >
               <Link to="/services/staffing-solution">

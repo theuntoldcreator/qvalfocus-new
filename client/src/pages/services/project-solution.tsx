@@ -163,7 +163,7 @@ export default function ProjectSolutionPage() {
                 const Icon = solution.icon;
                 return (
                   <div key={index} className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300">
-                    <div className="w-16 h-16 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mb-6">
+                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mb-6">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold mb-4">{solution.title}</h3>

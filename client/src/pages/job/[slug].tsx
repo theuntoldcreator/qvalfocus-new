@@ -119,7 +119,7 @@ export default function JobPage() {
                       {job.companyLogo ? (
                         <AvatarImage src={job.companyLogo} alt={`${job.company} logo`} />
                       ) : (
-                        <AvatarFallback className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xl font-bold">
+                        <AvatarFallback className="bg-gradient-to-r from-primary to-accent text-white text-xl font-bold">
                           {companyInitial || <Building className="w-8 h-8" />}
                         </AvatarFallback>
                       )}
