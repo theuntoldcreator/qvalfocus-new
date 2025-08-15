@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="pt-20 flex-grow flex items-center justify-center bg-gray-50 dark:bg-slate-900">
+      <main className="pt-20 md:pt-28 flex-grow flex items-center justify-center bg-gray-50 dark:bg-slate-900">
         <Card className="w-full max-w-md mx-4">
           <CardContent className="pt-6">
             <div className="flex mb-4 gap-2">

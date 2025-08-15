@@ -40,7 +40,7 @@ export default function StaffingSolutionPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden bg-slate-50 dark:bg-slate-900">
+        <section className="relative pt-24 md:pt-32 pb-20 overflow-hidden bg-slate-50 dark:bg-slate-900">
           <div 
             className="absolute inset-0"
           >

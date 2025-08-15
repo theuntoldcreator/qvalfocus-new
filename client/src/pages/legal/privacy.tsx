@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       
       <main> {/* Removed pt-20 */}
         {/* Header */}
-        <section className="py-16 bg-slate-50 dark:bg-slate-900">
+        <section className="pt-20 md:pt-28 pb-16 bg-slate-50 dark:bg-slate-900">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
               <Link to="/">

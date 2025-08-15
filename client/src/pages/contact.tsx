@@ -29,7 +29,7 @@ export default function ContactPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-20 pb-16 overflow-hidden">
+        <section className="relative pt-20 md:pt-28 pb-16 overflow-hidden">
           <div 
             className="absolute inset-0"
             style={{

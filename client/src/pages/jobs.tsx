@@ -15,7 +15,7 @@ export default function JobsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <Header />
-      <main className="pt-20"> {/* Added pt-20 */}
+      <main className="pt-20 md:pt-28"> {/* Added pt-20 */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold text-primary font-sans">

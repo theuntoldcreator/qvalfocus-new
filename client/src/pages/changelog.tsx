@@ -8,7 +8,7 @@ export default function ChangelogPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="pt-16 flex-grow flex items-center justify-center bg-slate-50 dark:bg-slate-900">
+      <main className="pt-20 md:pt-28 flex-grow flex items-center justify-center bg-slate-50 dark:bg-slate-900">
         <div className="text-center p-8">
           <ListChecks className="w-16 h-16 text-primary mx-auto mb-6" />
           <h1 className="text-4xl font-bold mb-4">Changelog</h1>

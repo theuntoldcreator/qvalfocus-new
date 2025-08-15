@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="pt-[112px]"> {/* Adjusted padding-top to account for fixed header (8px + 80px = 112px) */}
+      <main className="pt-20 md:pt-28"> {/* Adjusted padding-top to account for fixed header */}
         <Hero />
         <WhyWorkWithUs />
         <Services />

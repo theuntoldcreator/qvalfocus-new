@@ -48,7 +48,7 @@ export default function AboutPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 overflow-hidden bg-white dark:bg-slate-900">
+        <section className="relative pt-24 md:pt-32 pb-20 overflow-hidden bg-white dark:bg-slate-900">
           <div className="absolute inset-0">
             <img 
               src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
