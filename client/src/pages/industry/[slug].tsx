@@ -91,7 +91,7 @@ export default function IndustryPage() {
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center text-white">
-              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-primary to-accent-500 rounded-full flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
                 <Icon className="w-10 h-10 text-white" />
               </div>
               <Badge className="mb-6 bg-white/20 text-white border-white/30">
@@ -147,7 +147,7 @@ export default function IndustryPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-accent-500">
+        <section className="py-20 bg-gradient-to-r from-primary to-accent">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Ready to Build Your {industry.name} Team?

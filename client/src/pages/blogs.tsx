@@ -64,7 +64,7 @@ export default function BlogsPage() {
                 const Icon = stat.icon;
                 return (
                   <div key={index} className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-primary to-accent-500 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                     <div className="text-3xl font-bold text-primary mb-2">{stat.value}</div>
@@ -207,7 +207,7 @@ export default function BlogsPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-accent-500">
+        <section className="py-20 bg-gradient-to-r from-primary to-accent">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Never Miss an Update
