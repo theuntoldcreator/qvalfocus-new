@@ -95,7 +95,7 @@ export function Header() {
                           {link.label}
                         </NavigationMenuTrigger>
                         <NavigationMenuContent className="mt-2 border-t-4 border-green-500 shadow-lg">
-                          <ul className="grid w-[250px] gap-1 p-2">
+                          <ul className="grid w-[350px] gap-1 p-2">
                             {link.dropdown.map((item) => (
                               <ListItem key={item.title} to={item.to} title={item.title} />
                             ))}
