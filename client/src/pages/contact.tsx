@@ -96,7 +96,7 @@ export default function ContactPage() {
                 <div className="mb-6">
                   {contactType === "client" ? (
                     <div className="flex items-center mb-4">
-                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary-600 rounded-xl flex items-center justify-center mr-4">
+                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent-500 rounded-xl flex items-center justify-center mr-4">
                         <Building className="w-8 h-8 text-white" />
                       </div>
                       <div>
@@ -106,7 +106,7 @@ export default function ContactPage() {
                     </div>
                   ) : (
                     <div className="flex items-center mb-4">
-                      <div className="w-16 h-16 bg-gradient-to-r from-accent to-accent-600 rounded-xl flex items-center justify-center mr-4">
+                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent-500 rounded-xl flex items-center justify-center mr-4">
                         <Users className="w-8 h-8 text-white" />
                       </div>
                       <div>

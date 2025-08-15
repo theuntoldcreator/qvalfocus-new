@@ -79,7 +79,7 @@ export default function IndustriesPage() {
                 return (
                   <Link key={industry.id} to={`/industries/${industry.slug}`}>
                     <div className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300 group h-full">
-                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                         <Icon className="w-8 h-8 text-white" />
                       </div>
                       
@@ -98,7 +98,7 @@ export default function IndustriesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-accent">
+        <section className="py-20 bg-gradient-to-r from-primary to-accent-500">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Ready to Leverage Industry Expertise?

@@ -173,7 +173,7 @@ export default function BlogPostPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-primary to-accent">
+        <section className="py-20 bg-gradient-to-r from-primary to-accent-500">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Never Miss an Update
