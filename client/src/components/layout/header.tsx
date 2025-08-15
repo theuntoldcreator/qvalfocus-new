@@ -61,7 +61,6 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
   const isScrolled = useScroll(50);
-  const isHomePage = location.pathname === '/';
 
   const allNavLinksForMobile = [
     { to: "/", label: "Home" },
@@ -83,7 +82,7 @@ export function Header() {
             "flex h-20 items-center justify-between px-6 transition-all duration-300",
             isScrolled 
               ? "rounded-none bg-white shadow-lg dark:bg-slate-900" 
-              : "rounded-lg bg-white/10 backdrop-blur-md border border-white/20"
+              : "rounded-lg bg-transparent"
           )}>
             <Link to="/" className="flex items-center space-x-2">
               <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
@@ -95,8 +94,8 @@ export function Header() {
                   <NavigationMenuItem>
                     <Link to="/" className={cn(
                       "px-4 py-2 text-base font-medium rounded-md transition-colors",
-                      (isScrolled || isHomePage) ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
-                      location.pathname === "/" && "text-primary font-semibold"
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      location.pathname === "/" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Home</NavigationMenuLink>
                     </Link>
@@ -105,7 +104,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(
                       "bg-transparent text-base transition-colors",
-                      (isScrolled || isHomePage) ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
                     )}>Services</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -119,7 +118,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(
                       "bg-transparent text-base transition-colors",
-                      (isScrolled || isHomePage) ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
                     )}>Industries</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -133,7 +132,7 @@ export function Header() {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={cn(
                       "bg-transparent text-base transition-colors",
-                      (isScrolled || isHomePage) ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
+                      isScrolled ? "text-slate-700" : "text-white hover:bg-white/10 focus:bg-white/10 data-[state=open]:bg-white/10"
                     )}>About Us</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -147,8 +146,8 @@ export function Header() {
                   <NavigationMenuItem>
                     <Link to="/jobs" className={cn(
                       "px-4 py-2 text-base font-medium rounded-md transition-colors",
-                      (isScrolled || isHomePage) ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
-                      location.pathname === "/jobs" && "text-primary font-semibold"
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      location.pathname === "/jobs" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Careers</NavigationMenuLink>
                     </Link>
@@ -157,8 +156,8 @@ export function Header() {
                   <NavigationMenuItem>
                     <Link to="/contact" className={cn(
                       "px-4 py-2 text-base font-medium rounded-md transition-colors",
-                      (isScrolled || isHomePage) ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
-                      location.pathname === "/contact" && "text-primary font-semibold"
+                      isScrolled ? "text-slate-700 dark:text-slate-300 hover:text-primary" : "text-white hover:bg-white/10",
+                      location.pathname === "/contact" && (isScrolled ? "text-primary font-semibold" : "font-semibold")
                     )}>
                       <NavigationMenuLink>Contact Us</NavigationMenuLink>
                     </Link>
@@ -168,7 +167,7 @@ export function Header() {
             </nav>
             
             <div className="md:hidden flex items-center">
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn(!(isScrolled || isHomePage) && "text-white hover:text-white hover:bg-white/10")}>
+              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn(!isScrolled && "text-white hover:text-white hover:bg-white/10")}>
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
