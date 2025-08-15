@@ -14,7 +14,7 @@ export function Hero() {
         className="absolute z-0 w-auto min-w-full min-h-full max-w-none"
       >
         <source
-          src="https://res.cloudinary.com/div5rg0md/video/upload/v1754902644/production_id_4143013_1080p_b3x6ds.mp4"
+          src="https://assets.mixkit.co/videos/preview/mixkit-fast-flying-through-the-city-at-night-4334-large.mp4"
           type="video/mp4"
         />
         Your browser does not support the video tag.
