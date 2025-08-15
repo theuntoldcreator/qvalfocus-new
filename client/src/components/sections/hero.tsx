@@ -27,7 +27,7 @@ export function Hero() {
             
             {/* Bottom Links */}
             <div className="mt-16 flex items-center space-x-6 text-slate-300">
-              <ChevronsDown className="h-6 w-6 flex-shrink-0" />
+              <ChevronsDown className="h-6 w-6 flex-shrink-0 animate-float" />
               <div className="flex flex-wrap gap-x-6 gap-y-2">
                 <Link to="/services/staffing-solution" className="pb-1 border-b-2 border-white text-white font-semibold">Staffing</Link>
                 <Link to="/services/project-solution" className="pb-1 border-b-2 border-transparent hover:border-slate-400">Projects</Link>
