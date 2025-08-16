@@ -108,7 +108,6 @@ export function ServiceCard({ service }: ServiceCardProps) {
           className="absolute inset-0 w-full h-full object-cover"
         />
       </AnimatePresence>
-      {!isHovered && <img src={service.images[0]} alt={service.title} className="absolute inset-0 w-full h-full object-cover" />}
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent"></div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-transparent"></div>
