@@ -5,21 +5,19 @@ import { Services } from "@/components/sections/services";
 import { Industries } from "@/components/sections/industries";
 import { FeaturedJobs } from "@/components/sections/featured-jobs";
 import { Testimonials } from "@/components/sections/testimonials";
-import { Newsletter } from "@/components/sections/newsletter";
 import { WhyWorkWithUs } from "@/components/sections/why-work-with-us";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       <Header />
       <main>
         <Hero />
-        <WhyWorkWithUs />
         <Services />
+        <WhyWorkWithUs />
         <Industries />
         <FeaturedJobs />
         <Testimonials />
-        <Newsletter />
       </main>
       <Footer />
     </div>
