@@ -19,7 +19,7 @@ export function Services() {
   return (
     <section className="py-12 bg-slate-50 -mt-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {serviceCards.map((service) => (
             <Link key={service.title} to={service.link} className="relative rounded-3xl overflow-hidden h-96 group block">
               <img src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
