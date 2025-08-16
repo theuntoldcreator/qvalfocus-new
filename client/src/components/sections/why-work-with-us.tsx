@@ -5,25 +5,25 @@ const reasons = [
   {
     title: "Domain Expertise",
     description: "We specialize in Information Technology and Life Sciences and we live and breathe these industries our recruiters...",
-    imageUrl: "https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
+    imageUrl: "https://images.unsplash.com/photo-1573496774439-fe3923b02da5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
     link: "/industries",
   },
   {
     title: "Flexible Engagements",
     description: "Your business isn't one-size-fits-all, and neither are our solutions. From contract and contract-to-hire to direct placement...",
-    imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
+    imageUrl: "https://images.unsplash.com/photo-1542744173-05336fcc7ad4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
     link: "/services/staffing-solution",
   },
   {
     title: "Quality & Speed",
     description: "We move fast but never at the cost of quality. Our vetting process ensures every candidate we deliver is technically proficient...",
-    imageUrl: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
+    imageUrl: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
     link: "/about",
   },
   {
     title: "Client-Centric Approach",
     description: "We believe partnerships are built on trust, not transactions. That's why we take a consultative approach listening first...",
-    imageUrl: "https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250", // Placeholder, consider a more abstract image
+    imageUrl: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
     link: "/contact",
   },
 ];

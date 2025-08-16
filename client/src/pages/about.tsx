@@ -86,7 +86,7 @@ export default function AboutPage() {
               </div>
               <div className="relative order-1 lg:order-2">
                 <img 
-                  src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                   alt="Professional team in a discussion"
                   className="w-full h-auto object-cover rounded-2xl shadow-lg"
                 />
@@ -124,7 +124,7 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="relative">
                 <img 
-                  src="https://images.unsplash.com/photo-1587560699334-cc4262401233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                  src="https://images.unsplash.com/photo-1531539134685-27d854339120?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                   alt="Team looking at a bright future"
                   className="w-full h-auto object-cover rounded-2xl shadow-lg"
                 />

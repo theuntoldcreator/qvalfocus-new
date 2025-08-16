@@ -67,9 +67,9 @@ export default function BlogPostPage() {
     <div className="min-h-screen">
       <Header />
       
-      <main> {/* Removed pt-20 */}
+      <main className="pt-20 md:pt-28">
         {/* Hero Section */}
-        <section className="pt-20 md:pt-28 pb-16 bg-slate-50 dark:bg-slate-900">
+        <section className="pb-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
               <Link to="/blogs">
@@ -80,13 +80,13 @@ export default function BlogPostPage() {
               </Link>
             </div>
 
-            <div className="text-center mb-12 text-white"> {/* Added text-white here */}
-              <Badge className="mb-4 bg-white/20 text-white border-white/30"> {/* Adjusted badge for white text */}
+            <div className="text-center mb-12">
+              <Badge className="mb-4">
                 {blogPost.category}
               </Badge>
               
               {blogPost.subtitle && (
-                <div className="text-sm font-semibold mb-2 uppercase tracking-wide">
+                <div className="text-sm font-semibold text-primary mb-2 uppercase tracking-wide">
                   {blogPost.subtitle}
                 </div>
               )}
@@ -95,7 +95,7 @@ export default function BlogPostPage() {
                 {blogPost.title}
               </h1>
               
-              <div className="flex items-center justify-center gap-6"> {/* Removed text-slate-600 dark:text-slate-300 */}
+              <div className="flex items-center justify-center gap-6 text-slate-600 dark:text-slate-300">
                 <div className="flex items-center">
                   {blogPost.authorAvatar ? (
                     <img src={blogPost.authorAvatar} alt={blogPost.author} className="w-6 h-6 rounded-full mr-2" />
@@ -132,7 +132,7 @@ export default function BlogPostPage() {
         </section>
 
         {/* Blog Post Content */}
-        <section className="py-20 bg-slate-50 dark:bg-slate-900">
+        <section className="pb-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="prose prose-slate dark:prose-invert max-w-none">
               {blogPost.content.split('\n').map((paragraph: string, index: number) => (

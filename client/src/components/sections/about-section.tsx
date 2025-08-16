@@ -37,7 +37,7 @@ export function AboutSection() {
             {/* Card 2: Bottom Left Image */}
             <div className="rounded-3xl overflow-hidden h-64">
               <img 
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
                 alt="Our team in a modern office" 
                 className="w-full h-full object-cover"
               />

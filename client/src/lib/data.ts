@@ -130,7 +130,7 @@ export const blogs = [
     author: 'Dr. Emily White',
     authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150',
     publishDate: '2024-07-15',
-    imageUrl: 'https://images.unsplash.com/photo-1550592704-cc9b8b707880?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    imageUrl: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
     category: 'Artificial Intelligence',
     content: `
       The integration of Artificial Intelligence (AI) into the staffing industry is rapidly moving beyond simple automation. While AI has already streamlined tasks like resume screening and initial candidate outreach, its true potential lies in its ability to enhance human decision-making, predict future talent needs, and create more personalized experiences for both candidates and clients.
@@ -154,7 +154,7 @@ export const blogs = [
     author: 'Dr. John Smith',
     authorAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150',
     publishDate: '2024-06-28',
-    imageUrl: 'https://images.unsplash.com/photo-1530026405186-5e11f8f9ee7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    imageUrl: 'https://images.unsplash.com/photo-1554435493-93422e822011?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
     category: 'Life Sciences',
     content: `
       For life sciences startups, navigating the complex landscape of regulatory compliance can be daunting. From FDA regulations to cGMP guidelines, adherence is not just a legal requirement but a cornerstone of product quality and patient safety. Establishing a robust compliance framework from day one is critical for long-term success and avoiding costly pitfalls.
@@ -178,7 +178,7 @@ export const blogs = [
     author: 'Sarah Lee',
     authorAvatar: 'https://images.unsplash.com/photo-1520813792240-56ff4269802a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150',
     publishDate: '2024-06-10',
-    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
+    imageUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400',
     category: 'Cybersecurity',
     content: `
       The digital threat landscape continues to evolve at an alarming pace, making robust cybersecurity more critical than ever for businesses of all sizes. In 2024, several key trends are shaping how organizations approach their digital defense strategies. Understanding these trends is the first step towards protecting valuable digital assets.
