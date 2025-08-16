@@ -23,6 +23,7 @@ import TermsPage from "./pages/legal/terms";
 import AdminLoginPage from "./pages/admin/login";
 import AdminRegisterPage from "./pages/admin/register";
 import NewJobPage from "./pages/admin/new-job";
+import EditJobPage from "./pages/admin/edit-job";
 import NotFound from "./pages/not-found";
 import CaseStudiesPage from "./pages/case-studies";
 import ChangelogPage from "./pages/changelog";
@@ -84,6 +85,7 @@ const router = createBrowserRouter([
           { index: true, element: <DashboardOverview /> },
           { path: "jobs", element: <JobsManagement /> },
           { path: "jobs/new", element: <NewJobPage /> },
+          { path: "jobs/edit/:slug", element: <EditJobPage /> },
           { path: "applications", element: <ApplicationsManagement /> },
           { path: "contacts", element: <ContactsManagement /> },
           { path: "newsletter", element: <NewsletterManagement /> },

@@ -1,12 +1,13 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertJobSchema, type InsertJob } from "@shared/schema";
+import { insertJobSchema, type InsertJob, type Job } from "@shared/schema";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { useCreateJob } from "@/lib/hooks";
+import { useCreateJob, useUpdateJob } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { useNavigate } from "react-router-dom";
@@ -25,10 +26,17 @@ const jobFormSchema = insertJobSchema.extend({
 });
 type JobFormData = z.infer<typeof jobFormSchema>;
 
-export function JobForm() {
+interface JobFormProps {
+  job?: Job;
+}
+
+export function JobForm({ job }: JobFormProps) {
   const createJob = useCreateJob();
+  const updateJob = useUpdateJob();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  const isEditing = !!job;
 
   const form = useForm<JobFormData>({
     resolver: zodResolver(jobFormSchema),
@@ -57,6 +65,16 @@ export function JobForm() {
     },
   });
 
+  useEffect(() => {
+    if (isEditing && job) {
+      form.reset({
+        ...job,
+        skills: job.skills?.join(', ') || '',
+        tags: job.tags?.join(', ') || '',
+      });
+    }
+  }, [isEditing, job, form]);
+
   const application_type = form.watch("application_type");
 
   const onSubmit = async (data: JobFormData) => {
@@ -84,16 +102,28 @@ export function JobForm() {
         tags: data.tags ? data.tags.split(',').map(t => t.trim()).filter(Boolean) : null,
     };
 
-    await createJob.mutateAsync(payload, {
-      onSuccess: () => {
-        toast({ title: "Job posted successfully!" });
-        form.reset();
-        navigate("/admin/dashboard/jobs");
-      },
-      onError: (error) => {
-        toast({ title: "Error posting job", description: error.message, variant: "destructive" });
-      },
-    });
+    if (isEditing && job) {
+      await updateJob.mutateAsync({ id: job.id, updatedJob: payload }, {
+        onSuccess: () => {
+          toast({ title: "Job updated successfully!" });
+          navigate("/admin/dashboard/jobs");
+        },
+        onError: (error) => {
+          toast({ title: "Error updating job", description: error.message, variant: "destructive" });
+        },
+      });
+    } else {
+      await createJob.mutateAsync(payload, {
+        onSuccess: () => {
+          toast({ title: "Job posted successfully!" });
+          form.reset();
+          navigate("/admin/dashboard/jobs");
+        },
+        onError: (error) => {
+          toast({ title: "Error posting job", description: error.message, variant: "destructive" });
+        },
+      });
+    }
   };
 
   return (
@@ -139,8 +169,8 @@ export function JobForm() {
                 <FormItem><FormLabel>External URL</FormLabel><FormControl><Input {...field} value={field.value || ''} placeholder="https://example.com/apply" /></FormControl><FormMessage /></FormItem>
             )} />
         )}
-        <Button type="submit" disabled={createJob.isPending} className="w-full">
-          {createJob.isPending ? "Posting..." : "Post Job"}
+        <Button type="submit" disabled={createJob.isPending || updateJob.isPending} className="w-full">
+          {isEditing ? (updateJob.isPending ? "Updating..." : "Update Job") : (createJob.isPending ? "Posting..." : "Post Job")}
         </Button>
       </form>
     </Form>

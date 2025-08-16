@@ -1,11 +1,33 @@
-import { useContacts } from "@/lib/hooks";
+import { useContacts, useDeleteContact } from "@/lib/hooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
-import { Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Mail, Trash2 } from "lucide-react";
 
 export function ContactsManagement() {
   const { data: contacts, isLoading } = useContacts();
+  const deleteContact = useDeleteContact();
+  const { toast } = useToast();
+
+  const handleDelete = (id: string) => {
+    deleteContact.mutate(id, {
+      onSuccess: () => toast({ title: "Contact deleted successfully!" }),
+      onError: (error) => toast({ title: "Error deleting contact", description: error.message, variant: "destructive" }),
+    });
+  };
 
   if (isLoading) return <p>Loading contacts...</p>;
 
@@ -26,6 +48,7 @@ export function ContactsManagement() {
                   <TableHead>Company/Role</TableHead>
                   <TableHead>Submitted At</TableHead>
                   <TableHead>Message</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -39,6 +62,29 @@ export function ContactsManagement() {
                     </TableCell>
                     <TableCell>{format(new Date(contact.created_at), 'PPP')}</TableCell>
                     <TableCell className="max-w-[200px] truncate">{contact.message}</TableCell>
+                    <TableCell className="text-right">
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="destructive" size="icon">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This will permanently delete the contact submission.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDelete(contact.id)}>
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

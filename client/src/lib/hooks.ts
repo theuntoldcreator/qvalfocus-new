@@ -72,6 +72,31 @@ export function useCreateJob() {
     });
 }
 
+export function useUpdateJob() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async ({ id, updatedJob }: { id: string, updatedJob: Partial<InsertJob> }) => {
+            const { data, error } = await supabase
+                .from('jobs')
+                .update(updatedJob)
+                .eq('id', id)
+                .select()
+                .single();
+            if (error) {
+                console.error("Supabase update error:", error);
+                throw new Error(error.message);
+            }
+            return data;
+        },
+        onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ['jobs'] });
+            if (data) {
+                queryClient.invalidateQueries({ queryKey: ['jobs', 'slug', data.slug] });
+            }
+        },
+    });
+}
+
 export function useDeleteJob() {
     const queryClient = useQueryClient();
     return useMutation({
@@ -191,6 +216,19 @@ export function useCreateContact() {
     });
 }
 
+export function useDeleteContact() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (id: string) => {
+            const { error } = await supabase.from('contacts').delete().eq('id', id);
+            if (error) throw new Error(error.message);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['contacts'] });
+        },
+    });
+}
+
 // Testimonials
 export function useTestimonials() {
   return useQuery<Testimonial[]>({
@@ -269,6 +307,19 @@ export function useNewsletterSubscriptions() {
                 .order('created_at', { ascending: false });
             if (error) throw new Error(error.message);
             return data || [];
+        },
+    });
+}
+
+export function useDeleteNewsletterSubscription() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (id: string) => {
+            const { error } = await supabase.from('newsletter_subscriptions').delete().eq('id', id);
+            if (error) throw new Error(error.message);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['newsletter_subscriptions'] });
         },
     });
 }

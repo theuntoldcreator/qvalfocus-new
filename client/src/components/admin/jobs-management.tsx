@@ -2,7 +2,7 @@ import { useJobs, useDeleteJob } from "@/lib/hooks";
 import { ApplicationList } from "@/components/admin/application-list";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2, Eye, PlusCircle, Briefcase } from "lucide-react";
+import { Trash2, Eye, PlusCircle, Briefcase, Edit } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
@@ -70,6 +70,11 @@ export function JobsManagement() {
                           <ApplicationList jobId={job.id} />
                         </DialogContent>
                       </Dialog>
+                      <Button asChild variant="ghost" size="icon">
+                        <Link to={`/admin/dashboard/jobs/edit/${job.slug}`}>
+                          <Edit className="h-4 w-4" />
+                        </Link>
+                      </Button>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
                           <Button variant="destructive" size="icon">
