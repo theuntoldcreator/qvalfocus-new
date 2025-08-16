@@ -116,7 +116,7 @@ export function ApplyForm({ job }: ApplyFormProps) {
       </Dialog>
 
       <div className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-slate-200 dark:border-slate-700">
-        <h3 className="text-xl font-bold mb-2">Apply to Job Opening.</h3>
+        <h3 className="text-xl font-bold mb-2">Apply to Job Opening</h3>
         <p className="text-slate-600 dark:text-slate-300 mb-6">Fill the information below to apply for this job</p>
         
         <Form {...form}>
@@ -140,9 +140,9 @@ export function ApplyForm({ job }: ApplyFormProps) {
             {isUploading && <Progress value={uploadProgress} className="w-full" />}
 
             <FormField control={form.control} name="portfolio_link" render={({ field }) => ( <FormItem><FormLabel>Portfolio link, Github url</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
-            <FormField control={form.control} name="linkedin_profile" render={({ field }) => ( <FormItem><FormLabel>LinkedIn profile (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="linkedin_profile" render={({ field }) => ( <FormItem><FormLabel>LinkedIn profile (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormMessage>)} />
 
-            <Button type="submit" className="w-full bg-violet-600 hover:bg-violet-700" disabled={createApplication.isPending || isUploading}>
+            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700" disabled={createApplication.isPending || isUploading}>
               {isUploading ? `Uploading...` : createApplication.isPending ? "Submitting..." : 'Submit application'}
             </Button>
           </form>
