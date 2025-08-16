@@ -44,7 +44,7 @@ export const applicationSchema = z.object({
     email: z.string().email(),
     phone: z.string().nullable(),
     current_role: z.string().nullable(),
-    experience_level: z.string(),
+    experience_level: z.string().nullable(),
     linkedin: z.string().url().nullable().or(z.literal("")),
     github: z.string().url().nullable().or(z.literal("")),
     portfolio: z.string().url().nullable().or(z.literal("")),
