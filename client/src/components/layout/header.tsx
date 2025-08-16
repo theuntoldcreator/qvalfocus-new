@@ -49,7 +49,7 @@ export function Header() {
             
             <nav className="hidden md:flex items-center gap-6 justify-self-center">
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">
+                <DropdownMenuTrigger className="flex items-center text-sm font-medium text-slate-900 dark:text-slate-200 hover:text-primary transition-colors">
                   Services <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -63,7 +63,7 @@ export function Header() {
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">
+                <DropdownMenuTrigger className="flex items-center text-sm font-medium text-slate-900 dark:text-slate-200 hover:text-primary transition-colors">
                   Industries <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -80,7 +80,7 @@ export function Header() {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors",
+                    "text-sm font-medium text-slate-900 dark:text-slate-200 hover:text-primary transition-colors",
                     location.pathname === link.to && "text-primary"
                   )}
                 >
