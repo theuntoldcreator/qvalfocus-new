@@ -7,13 +7,20 @@ export function Hero() {
       <div 
         className="absolute inset-0"
       >
+        {/* Video for medium screens and up */}
         <video
           src="https://res.cloudinary.com/dbf2pscbn/video/upload/210797_tiny_hfni18.mp4"
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover opacity-30"
+          className="hidden md:block w-full h-full object-cover opacity-30"
+        />
+        {/* Static image for mobile */}
+        <img
+          src="https://res.cloudinary.com/dbf2pscbn/video/upload/210797_tiny_hfni18.jpg"
+          alt="Team working in an office"
+          className="block md:hidden w-full h-full object-cover opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/80 to-transparent dark:from-slate-900 dark:via-slate-900/80"></div>
       </div>
