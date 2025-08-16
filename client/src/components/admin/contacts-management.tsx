@@ -1,8 +1,8 @@
 import { useContacts } from "@/lib/hooks";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
+import { Mail } from "lucide-react";
 
 export function ContactsManagement() {
   const { data: contacts, isLoading } = useContacts();
@@ -44,7 +44,13 @@ export function ContactsManagement() {
               </TableBody>
             </Table>
           ) : (
-            <p>No contact submissions yet.</p>
+            <div className="text-center py-20">
+              <Mail className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-4 text-lg font-semibold">No contact submissions</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Submissions from the contact form will appear here.
+              </p>
+            </div>
           )}
         </CardContent>
       </Card>

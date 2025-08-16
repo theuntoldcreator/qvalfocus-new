@@ -16,7 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Trash2 } from "lucide-react";
+import { Trash2, FileText } from "lucide-react";
 
 export function ApplicationsManagement() {
   const { data: applications, isLoading } = useAllApplications();
@@ -107,7 +107,13 @@ export function ApplicationsManagement() {
               </TableBody>
             </Table>
           ) : (
-            <p>No applications submitted yet.</p>
+            <div className="text-center py-20">
+              <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-4 text-lg font-semibold">No applications found</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                When candidates apply for jobs, their applications will appear here.
+              </p>
+            </div>
           )}
         </CardContent>
       </Card>

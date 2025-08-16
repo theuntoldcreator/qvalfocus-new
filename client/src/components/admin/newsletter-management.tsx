@@ -2,6 +2,7 @@ import { useNewsletterSubscriptions } from "@/lib/hooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
+import { Newspaper } from "lucide-react";
 
 export function NewsletterManagement() {
   const { data: subscriptions, isLoading } = useNewsletterSubscriptions();
@@ -33,7 +34,13 @@ export function NewsletterManagement() {
               </TableBody>
             </Table>
           ) : (
-            <p>No newsletter subscriptions yet.</p>
+            <div className="text-center py-20">
+              <Newspaper className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-4 text-lg font-semibold">No newsletter subscriptions</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                New subscribers will be listed here.
+              </p>
+            </div>
           )}
         </CardContent>
       </Card>

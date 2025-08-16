@@ -2,7 +2,7 @@ import { useJobs, useDeleteJob } from "@/lib/hooks";
 import { ApplicationList } from "@/components/admin/application-list";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2, Eye, PlusCircle } from "lucide-react";
+import { Trash2, Eye, PlusCircle, Briefcase } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
@@ -33,7 +33,7 @@ export function JobsManagement() {
           </Button>
         </CardHeader>
         <CardContent>
-          {isLoadingJobs ? <p>Loading jobs...</p> : (
+          {isLoadingJobs ? <p>Loading jobs...</p> : jobs && jobs.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
@@ -67,6 +67,20 @@ export function JobsManagement() {
                 ))}
               </TableBody>
             </Table>
+          ) : (
+            <div className="text-center py-20">
+              <Briefcase className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-4 text-lg font-semibold">No jobs posted yet</h3>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Get started by posting a new job.
+              </p>
+              <Button asChild className="mt-4">
+                <Link to="/admin/dashboard/jobs/new">
+                  <PlusCircle className="mr-2 h-4 w-4" />
+                  Post a New Job
+                </Link>
+              </Button>
+            </div>
           )}
         </CardContent>
       </Card>
