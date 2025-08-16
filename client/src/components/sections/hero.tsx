@@ -1,6 +1,6 @@
 export function Hero() {
   return (
-    <section className="pt-32 pb-12 bg-slate-50">
+    <section className="pt-28 pb-12 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative bg-[#3b6aed] rounded-3xl overflow-hidden">
           <div className="grid lg:grid-cols-2">
