@@ -90,16 +90,15 @@ export function useCreateApplication() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (newApplication: InsertApplication) => {
-            const { data, error } = await supabase
+            const { error } = await supabase
                 .from('applications')
-                .insert([newApplication])
-                .select()
-                .single();
+                .insert([newApplication]);
+            
             if (error) throw new Error(error.message);
-            return data;
+            return newApplication;
         },
-        onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['applications', 'job', data.job_id] });
+        onSuccess: (newApplication) => {
+            queryClient.invalidateQueries({ queryKey: ['applications', 'job', newApplication.job_id] });
             queryClient.invalidateQueries({ queryKey: ['applications', 'all'] });
         },
     });
