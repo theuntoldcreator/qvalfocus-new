@@ -1,10 +1,10 @@
 export function Hero() {
   return (
-    <section className="pt-24 pb-12 bg-slate-50">
+    <section className="pt-24 pb-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Left Layout: Text Content */}
-          <div className="bg-blue-100 rounded-3xl p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+          <div className="bg-slate-100 rounded-3xl p-8 md:p-12 lg:p-16 flex flex-col justify-center">
             <div className="inline-block bg-white rounded-full px-4 py-1 text-sm font-medium text-slate-700 mb-4 self-start">
               Staffing & Project Solutions
             </div>
