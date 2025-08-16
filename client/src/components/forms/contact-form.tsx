@@ -84,10 +84,10 @@ export function ContactForm({ type, onSuccess }: ContactFormProps) {
 
       form.reset();
       onSuccess?.();
-    } catch (error) {
+    } catch (error: any) {
       toast({
         title: "Error submitting form",
-        description: "Please try again later.",
+        description: error.message || "Please try again later.",
         variant: "destructive",
       });
     }
