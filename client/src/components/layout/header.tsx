@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
@@ -10,16 +10,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useScroll } from "@/hooks/use-scroll";
-import { cn } from "@/lib/utils";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
-  const isScrolled = useScroll(50);
-
-  const isHomePage = location.pathname === "/";
-  const isTransparent = isHomePage && !isScrolled;
 
   const navLinks = [
     { to: "/industries", label: "Industries" },
@@ -29,17 +22,9 @@ export function Header() {
 
   return (
     <>
-      <header className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isTransparent ? "py-6" : "py-4"
-      )}>
+      <header className="fixed top-0 left-0 right-0 z-50 py-4">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={cn(
-            "flex h-16 items-center justify-between px-6 rounded-xl transition-all duration-300",
-            isTransparent 
-              ? "bg-black/20 backdrop-blur-sm" 
-              : "bg-white/80 backdrop-blur-sm shadow-sm"
-          )}>
+          <div className="flex h-16 items-center justify-between px-6 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm">
             <Link to="/" className="flex items-center space-x-2">
               <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-8" />
             </Link>
@@ -47,7 +32,7 @@ export function Header() {
             <nav className="hidden md:flex items-center space-x-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className={cn(isTransparent && "text-white hover:bg-white/10 hover:text-white")}>
+                  <Button variant="ghost">
                     Services <ChevronDown className="ml-1 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -62,17 +47,17 @@ export function Header() {
               </DropdownMenu>
 
               {navLinks.map((link) => (
-                <Button key={link.to} variant="ghost" asChild className={cn(isTransparent && "text-white hover:bg-white/10 hover:text-white")}>
+                <Button key={link.to} variant="ghost" asChild>
                   <Link to={link.to}>{link.label}</Link>
                 </Button>
               ))}
-              <Button asChild className={cn(isTransparent && "bg-white/90 text-slate-900 hover:bg-white")}>
+              <Button asChild>
                 <Link to="/contact">Contact Us</Link>
               </Button>
             </nav>
             
             <div className="md:hidden flex items-center">
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={cn(isTransparent && "text-white hover:bg-white/10 hover:text-white")}>
+              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
