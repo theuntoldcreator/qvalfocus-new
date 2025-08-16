@@ -43,10 +43,10 @@ export const industryData: { [key: string]: any } = {
       { title: "Infrastructure", description: "We design, deploy, and manage reliable IT infrastructure, from network architecture to servers and storage, ensuring your systems are robust, scalable, and future-ready." }
     ],
     workforceSolutions: [
-      "Contract & Contract-to-Hire",
-      "Direct Hire & Executive Search",
-      "FSP (Functional Service Provider) Teams",
-      "Project-Based Outsourcing"
+      { title: "Contract & Contract-to-Hire", description: "We provide flexible staffing solutions with professionals available for short-term contracts or evaluation through contract-to-hire arrangements." },
+      { title: "Direct Hire & Executive Search", description: "We help you secure high-quality permanent talent, including specialized executive placements through targeted, strategic searches." },
+      { title: "FSP (Functional Service Provider) Teams", description: "Our FSP model delivers dedicated functional teams that integrate with your operations, offering scalability and consistent expertise." },
+      { title: "Project-Based Outsourcing", description: "We manage complete project teams and deliverables, allowing you to outsource defined initiatives with confidence and efficiency." }
     ],
     whyUsTitle: "Build your Future Workforce with Qval Focus",
     whyUs: "Qval Focus brings experience in Information Technology staffing and project solutions, combining deep industry expertise with a client-centric approach. Our agile and scalable delivery model allows us to quickly ramp up or scale down teams based on project demands. We prioritize quality through rigorously vetted candidates and outcome-driven execution, ensuring solutions that align with your business goals."

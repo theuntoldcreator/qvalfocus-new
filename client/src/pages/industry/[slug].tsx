@@ -123,11 +123,14 @@ export default function IndustryPage() {
                   QvalFocus delivers flexible workforce solutions that adapt to shifting industry needs:
                 </p>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                {data.workforceSolutions.map((solution: string, index: number) => (
-                  <div key={index} className="flex items-center">
-                    <PlusCircle className="w-6 h-6 text-primary mr-3 flex-shrink-0" />
-                    <span className="text-lg font-medium">{solution}</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {data.workforceSolutions.map((solution: { title: string; description: string }, index: number) => (
+                  <div key={index} className="flex items-start">
+                    <PlusCircle className="w-6 h-6 text-primary mr-4 mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="text-lg font-semibold mb-1">{solution.title}</h3>
+                      <p className="text-slate-600 dark:text-slate-300">{solution.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>
