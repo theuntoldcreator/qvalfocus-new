@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 
 export function Hero() {
@@ -20,12 +19,11 @@ export function Hero() {
       </div>
       
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <Badge className="mb-6">Industry Expertise</Badge>
         <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-slate-900 dark:text-white">
-          Deep <span className="text-primary">Industry Knowledge</span>
+          Driving Operational Excellence Through Deep Domain Expertise.
         </h1>
         <p className="text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-3xl mx-auto">
-          We specialize in Life Sciences and Information Technology — delivering industry-aligned staffing and project solutions that produce measurable results.
+          Merging your vision & our expertise, We help you achieve Excellence.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" asChild>
