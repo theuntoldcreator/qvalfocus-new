@@ -65,6 +65,7 @@ export default function JobsPage() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
+                <Button size="lg" className="h-12">Search</Button>
                 <Button size="lg" variant="outline" className="h-12" onClick={() => setIsModalOpen(true)}>
                   <Upload className="w-5 h-5 mr-2" />
                   Upload your resume
