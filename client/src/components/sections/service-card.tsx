@@ -40,11 +40,13 @@ export function ServiceCard({ service }: ServiceCardProps) {
         width: "100%",
         transition: { duration: IMAGE_DURATION / 1000, ease: "linear" },
       });
-      // Fill the previous bar instantly
-      const prevIndex = currentIndex === 0 ? controls.length - 1 : currentIndex - 1;
-      controls[prevIndex].start({ width: "100%", transition: { duration: 0 } });
       
-      // Reset all bars when looping back to the start
+      // If it's not the first image, fill the previous bar instantly
+      if (currentIndex > 0) {
+        controls[currentIndex - 1].start({ width: "100%", transition: { duration: 0 } });
+      }
+      
+      // When looping back to the start, reset all bars except the first one
       if (currentIndex === 0) {
         for (let i = 1; i < controls.length; i++) {
           controls[i].start({ width: "0%", transition: { duration: 0 } });
