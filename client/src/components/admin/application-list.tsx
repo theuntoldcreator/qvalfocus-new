@@ -27,13 +27,13 @@ export function ApplicationList({ jobId }: { jobId: string }) {
       {applications.map((app) => (
         <li key={app.id} className="flex justify-between items-center p-4 border rounded-lg">
           <div>
-            <p className="font-semibold">{app.firstName} {app.lastName}</p>
+            <p className="font-semibold">{app.first_name} {app.last_name}</p>
             <p className="text-sm text-slate-500">{app.email}</p>
           </div>
           <div className="space-x-2">
-            {app.resumeUrl && (
+            {app.resume_url && (
               <Button asChild variant="outline" size="sm">
-                <a href={app.resumeUrl} target="_blank" rel="noopener noreferrer">View Resume</a>
+                <a href={app.resume_url} target="_blank" rel="noopener noreferrer">View Resume</a>
               </Button>
             )}
             <Button variant="destructive" size="sm" onClick={() => handleDelete(app.id)}>

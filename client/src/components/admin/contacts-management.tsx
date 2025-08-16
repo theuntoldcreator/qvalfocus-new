@@ -32,12 +32,12 @@ export function ContactsManagement() {
                 {contacts.map((contact) => (
                   <TableRow key={contact.id}>
                     <TableCell className="font-medium capitalize">{contact.type}</TableCell>
-                    <TableCell>{contact.firstName} {contact.lastName}</TableCell>
+                    <TableCell>{contact.first_name} {contact.last_name}</TableCell>
                     <TableCell>{contact.email}</TableCell>
                     <TableCell>
-                      {contact.type === 'client' ? contact.company : contact.currentRole}
+                      {contact.type === 'client' ? contact.company : contact.current_role}
                     </TableCell>
-                    <TableCell>{format(new Date(contact.createdAt), 'PPP')}</TableCell>
+                    <TableCell>{format(new Date(contact.created_at), 'PPP')}</TableCell>
                     <TableCell className="max-w-[200px] truncate">{contact.message}</TableCell>
                   </TableRow>
                 ))}

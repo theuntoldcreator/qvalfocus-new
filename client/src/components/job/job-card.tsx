@@ -17,8 +17,8 @@ export function JobCard({ job }: JobCardProps) {
       <div className="flex-grow">
         <div className="flex justify-between items-start mb-4">
           <Avatar className="w-12 h-12 rounded-lg">
-            {job.companyLogo ? (
-              <AvatarImage src={job.companyLogo} alt={`${job.company} logo`} />
+            {job.company_logo ? (
+              <AvatarImage src={job.company_logo} alt={`${job.company} logo`} />
             ) : (
               <AvatarFallback className="bg-primary text-white text-lg font-bold">
                 {companyInitial || <Building className="w-6 h-6" />}

@@ -14,14 +14,14 @@ import { useNavigate } from "react-router-dom";
 const jobFormSchema = insertJobSchema.extend({
   skills: z.string().optional(),
   tags: z.string().optional(),
-  companyLogo: z.string().optional(),
+  company_logo: z.string().optional(),
   salary: z.string().optional(),
   benefits: z.string().optional(),
   remote: z.boolean().optional(),
   featured: z.boolean().optional(),
-  recruiterName: z.string().optional(),
-  recruiterEmail: z.string().optional(),
-  recruiterPhone: z.string().optional(),
+  recruiter_name: z.string().optional(),
+  recruiter_email: z.string().optional(),
+  recruiter_phone: z.string().optional(),
 });
 type JobFormData = z.infer<typeof jobFormSchema>;
 
@@ -42,22 +42,22 @@ export function JobForm() {
       description: "",
       requirements: "",
       responsibilities: "",
-      applicationType: "internal",
-      externalApplicationUrl: "",
+      application_type: "internal",
+      external_application_url: "",
       tags: "",
       skills: "",
-      companyLogo: "",
+      company_logo: "",
       salary: "",
       benefits: "",
       remote: false,
       featured: false,
-      recruiterName: "",
-      recruiterEmail: "",
-      recruiterPhone: "",
+      recruiter_name: "",
+      recruiter_email: "",
+      recruiter_phone: "",
     },
   });
 
-  const applicationType = form.watch("applicationType");
+  const application_type = form.watch("application_type");
 
   const onSubmit = async (data: JobFormData) => {
     const payload: InsertJob = {
@@ -70,16 +70,16 @@ export function JobForm() {
         description: data.description,
         requirements: data.requirements,
         responsibilities: data.responsibilities,
-        applicationType: data.applicationType,
-        companyLogo: data.companyLogo || null,
+        application_type: data.application_type,
+        company_logo: data.company_logo || null,
         salary: data.salary || null,
         benefits: data.benefits || null,
         remote: data.remote ?? false,
         featured: data.featured ?? false,
-        recruiterName: data.recruiterName || null,
-        recruiterEmail: data.recruiterEmail || null,
-        recruiterPhone: data.recruiterPhone || null,
-        externalApplicationUrl: data.externalApplicationUrl || null,
+        recruiter_name: data.recruiter_name || null,
+        recruiter_email: data.recruiter_email || null,
+        recruiter_phone: data.recruiter_phone || null,
+        external_application_url: data.external_application_url || null,
         skills: data.skills ? data.skills.split(',').map(s => s.trim()).filter(Boolean) : null,
         tags: data.tags ? data.tags.split(',').map(t => t.trim()).filter(Boolean) : null,
     };
@@ -131,11 +131,11 @@ export function JobForm() {
         <FormField name="skills" control={form.control} render={({ field }) => (
           <FormItem><FormLabel>Skills (comma-separated)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
         )} />
-        <FormField name="applicationType" control={form.control} render={({ field }) => (
+        <FormField name="application_type" control={form.control} render={({ field }) => (
             <FormItem><FormLabel>Application Type</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl><SelectContent><SelectItem value="internal">Internal</SelectItem><SelectItem value="external">External</SelectItem></SelectContent></Select><FormMessage /></FormItem>
         )} />
-        {applicationType === 'external' && (
-            <FormField name="externalApplicationUrl" control={form.control} render={({ field }) => (
+        {application_type === 'external' && (
+            <FormField name="external_application_url" control={form.control} render={({ field }) => (
                 <FormItem><FormLabel>External URL</FormLabel><FormControl><Input {...field} value={field.value || ''} placeholder="https://example.com/apply" /></FormControl><FormMessage /></FormItem>
             )} />
         )}

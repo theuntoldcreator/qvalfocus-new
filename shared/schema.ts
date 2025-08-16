@@ -6,7 +6,7 @@ export const jobSchema = z.object({
   title: z.string(),
   slug: z.string(),
   company: z.string(),
-  companyLogo: z.string().nullable(),
+  company_logo: z.string().nullable(),
   location: z.string(),
   type: z.string(),
   level: z.string(),
@@ -20,62 +20,62 @@ export const jobSchema = z.object({
   remote: z.boolean().nullable(),
   featured: z.boolean().nullable(),
   industry: z.string(),
-  recruiterName: z.string().nullable(),
-  recruiterEmail: z.string().nullable(),
-  recruiterPhone: z.string().nullable(),
-  applicationType: z.string(),
-  externalApplicationUrl: z.string().nullable(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  recruiter_name: z.string().nullable(),
+  recruiter_email: z.string().nullable(),
+  recruiter_phone: z.string().nullable(),
+  application_type: z.string(),
+  external_application_url: z.string().nullable(),
+  created_at: z.string(),
+  updated_at: z.string(),
 });
 
 export const insertJobSchema = jobSchema.omit({
   id: true,
   slug: true,
-  createdAt: true,
-  updatedAt: true,
+  created_at: true,
+  updated_at: true,
 });
 
 export const applicationSchema = z.object({
     id: z.string().uuid(),
-    jobId: z.string().uuid(),
-    firstName: z.string(),
-    lastName: z.string(),
+    job_id: z.string().uuid(),
+    first_name: z.string(),
+    last_name: z.string(),
     email: z.string().email(),
     phone: z.string().nullable(),
-    currentRole: z.string().nullable(),
-    experienceLevel: z.string(),
+    current_role: z.string().nullable(),
+    experience_level: z.string(),
     linkedin: z.string().url().nullable().or(z.literal("")),
     github: z.string().url().nullable().or(z.literal("")),
     portfolio: z.string().url().nullable().or(z.literal("")),
-    coverLetter: z.string().nullable(),
-    resumeUrl: z.string().url().nullable(),
-    createdAt: z.string(),
+    cover_letter: z.string().nullable(),
+    resume_url: z.string().url().nullable(),
+    created_at: z.string(),
 });
 
 export const insertApplicationSchema = applicationSchema.omit({
     id: true,
-    createdAt: true,
+    created_at: true,
 });
 
 export const contactSchema = z.object({
     id: z.string().uuid(),
     type: z.enum(['client', 'candidate']),
-    firstName: z.string(),
-    lastName: z.string(),
+    first_name: z.string(),
+    last_name: z.string(),
     email: z.string().email(),
     company: z.string().nullable(),
-    hiringNeed: z.string().nullable(),
+    hiring_need: z.string().nullable(),
     message: z.string().nullable(),
-    currentRole: z.string().nullable(),
-    experienceLevel: z.string().nullable(),
-    resumeUrl: z.string().url().nullable(),
-    createdAt: z.string(),
+    current_role: z.string().nullable(),
+    experience_level: z.string().nullable(),
+    resume_url: z.string().url().nullable(),
+    created_at: z.string(),
 });
 
 export const insertContactSchema = contactSchema.omit({
     id: true,
-    createdAt: true,
+    created_at: true,
 });
 
 // New Blog Schema

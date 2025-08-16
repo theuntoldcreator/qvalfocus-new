@@ -116,8 +116,8 @@ export default function JobPage() {
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center mb-4">
                     <Avatar className="w-16 h-16 rounded-xl mr-6">
-                      {job.companyLogo ? (
-                        <AvatarImage src={job.companyLogo} alt={`${job.company} logo`} />
+                      {job.company_logo ? (
+                        <AvatarImage src={job.company_logo} alt={`${job.company} logo`} />
                       ) : (
                         <AvatarFallback className="bg-gradient-to-r from-primary to-accent text-white text-xl font-bold">
                           {companyInitial || <Building className="w-8 h-8" />}
@@ -195,30 +195,30 @@ export default function JobPage() {
                   <div className="space-y-4 text-sm">
                     <div className="flex items-center text-slate-600 dark:text-slate-300">
                       <Clock className="w-4 h-4 mr-2" />
-                      Posted {new Date(job.createdAt!).toLocaleDateString()}
+                      Posted {new Date(job.created_at!).toLocaleDateString()}
                     </div>
                     
-                    {job.recruiterName && (
+                    {job.recruiter_name && (
                       <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
                         <h4 className="font-semibold mb-2">Recruiter Contact</h4>
                         <div className="space-y-2">
                           <div className="flex items-center text-slate-600 dark:text-slate-300">
                             <Users className="w-4 h-4 mr-2" />
-                            {job.recruiterName}
+                            {job.recruiter_name}
                           </div>
-                          {job.recruiterEmail && (
+                          {job.recruiter_email && (
                             <div className="flex items-center text-slate-600 dark:text-slate-300">
                               <Mail className="w-4 h-4 mr-2" />
-                              <a href={`mailto:${job.recruiterEmail}`} className="hover:text-primary">
-                                {job.recruiterEmail}
+                              <a href={`mailto:${job.recruiter_email}`} className="hover:text-primary">
+                                {job.recruiter_email}
                               </a>
                             </div>
                           )}
-                          {job.recruiterPhone && (
+                          {job.recruiter_phone && (
                             <div className="flex items-center text-slate-600 dark:text-slate-300">
                               <Phone className="w-4 h-4 mr-2" />
-                              <a href={`tel:${job.recruiterPhone}`} className="hover:text-primary">
-                                {job.recruiterPhone}
+                              <a href={`tel:${job.recruiter_phone}`} className="hover:text-primary">
+                                {job.recruiter_phone}
                               </a>
                             </div>
                           )}
