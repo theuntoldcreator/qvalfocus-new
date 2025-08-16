@@ -31,7 +31,7 @@ export function Hero() {
           <Button size="lg" asChild>
             <Link to="/jobs">Find Job</Link>
           </Button>
-          <Button size="lg" variant="outline" asChild>
+          <Button size="lg" variant="outline" asChild className="hover:bg-emerald-600 hover:text-white hover:border-emerald-600">
             <Link to="/contact?type=client">Find Talent</Link>
           </Button>
         </div>
