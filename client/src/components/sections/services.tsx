@@ -3,12 +3,12 @@ import { ArrowRight } from "lucide-react";
 
 const serviceCards = [
   {
-    title: "Staffing Solutions",
+    title: "Staffings",
     link: "/services/staffing-solution",
     image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
-    title: "Project Solutions",
+    title: "Projects",
     link: "/services/project-solution",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
@@ -18,7 +18,7 @@ const serviceCards = [
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
-    title: "Information Technology",
+    title: "IT",
     link: "/industries/information-technology",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   }
