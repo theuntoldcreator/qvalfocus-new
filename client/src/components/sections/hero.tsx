@@ -8,7 +8,7 @@ export function Hero() {
         className="absolute inset-0"
       >
         <video
-          src="https://ik.imagekit.io/theuntoldcreator/210797_tiny.mp4"
+          src="https://res.cloudinary.com/dbf2pscbn/video/upload/210797_tiny_hfni18.mp4"
           autoPlay
           loop
           muted
