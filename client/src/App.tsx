@@ -33,6 +33,8 @@ import { DashboardOverview } from "@/components/admin/dashboard-overview";
 import { JobsManagement } from "@/components/admin/jobs-management";
 import { ContactsManagement } from "@/components/admin/contacts-management";
 import NewJobPage from "@/pages/admin/new-job";
+import { ApplicationsManagement } from "@/components/admin/applications-management";
+import { NewsletterManagement } from "@/components/admin/newsletter-management";
 
 function AppRoutes() {
   return (
@@ -69,7 +71,9 @@ function AppRoutes() {
           <Route index element={<DashboardOverview />} />
           <Route path="jobs" element={<JobsManagement />} />
           <Route path="jobs/new" element={<NewJobPage />} />
+          <Route path="applications" element={<ApplicationsManagement />} />
           <Route path="contacts" element={<ContactsManagement />} />
+          <Route path="newsletter" element={<NewsletterManagement />} />
         </Route>
         
         {/* Redirect for base /admin path */}

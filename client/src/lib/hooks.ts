@@ -100,6 +100,7 @@ export function useCreateApplication() {
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ['applications', 'job', data.job_id] });
+            queryClient.invalidateQueries({ queryKey: ['applications', 'all'] });
         },
     });
 }
@@ -133,15 +134,29 @@ export function useDeleteApplication() {
     });
 }
 
+type ApplicationWithJob = Application & {
+  jobs: {
+    title: string;
+    slug: string;
+  } | null;
+};
+
 export function useAllApplications() {
-    return useQuery<{ id: string }[]>({
+    return useQuery<ApplicationWithJob[]>({
         queryKey: ['applications', 'all'],
         queryFn: async () => {
             const { data, error } = await supabase
                 .from('applications')
-                .select('id');
+                .select(`
+                    *,
+                    jobs (
+                        title,
+                        slug
+                    )
+                `)
+                .order('created_at', { ascending: false });
             if (error) throw new Error(error.message);
-            return data || [];
+            return data as ApplicationWithJob[];
         },
     });
 }
@@ -225,11 +240,36 @@ export function useBlogPostBySlug(slug: string) {
 }
 
 export function useSubscribeNewsletter() {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: { email: string }) => {
-      console.log("Subscribing to newsletter:", data.email);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert([{ email: data.email }]);
+      if (error) {
+        if (error.code === '23505') {
+          throw new Error('This email is already subscribed.');
+        }
+        throw new Error(error.message);
+      }
       return { success: true };
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['newsletter_subscriptions'] });
+    },
   });
+}
+
+export function useNewsletterSubscriptions() {
+    return useQuery<{ id: string; email: string; created_at: string }[]>({
+        queryKey: ['newsletter_subscriptions'],
+        queryFn: async () => {
+            const { data, error } = await supabase
+                .from('newsletter_subscriptions')
+                .select('*')
+                .order('created_at', { ascending: false });
+            if (error) throw new Error(error.message);
+            return data || [];
+        },
+    });
 }

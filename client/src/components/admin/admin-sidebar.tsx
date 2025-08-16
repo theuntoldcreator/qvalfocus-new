@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { Briefcase, Mail, LogOut, LayoutDashboard } from "lucide-react";
+import { Briefcase, Mail, LogOut, LayoutDashboard, FileText, Newspaper } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,9 @@ export function AdminSidebar() {
   const navLinks = [
     { to: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { to: "/admin/dashboard/jobs", label: "Jobs", icon: Briefcase },
+    { to: "/admin/dashboard/applications", label: "Applications", icon: FileText },
     { to: "/admin/dashboard/contacts", label: "Contacts", icon: Mail },
+    { to: "/admin/dashboard/newsletter", label: "Newsletter", icon: Newspaper },
   ];
 
   return (
@@ -31,7 +33,7 @@ export function AdminSidebar() {
           <NavLink
             key={link.to}
             to={link.to}
-            end // Important for the base dashboard link to not stay active on sub-routes
+            end={link.to === "/admin/dashboard"} // end prop only for dashboard
             className={({ isActive }) => cn(
               "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors cursor-pointer",
               isActive
