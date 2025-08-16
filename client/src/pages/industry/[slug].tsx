@@ -3,54 +3,18 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { industries } from "@/lib/data";
+import { industries, industryData } from "@/lib/data";
 import { 
   Cpu, 
   FlaskConical,
   CheckCircle,
-  Users
+  Users,
+  PlusCircle
 } from "lucide-react";
 
 const iconMap: { [key: string]: React.ElementType } = {
   "life-sciences": FlaskConical,
   "information-technology": Cpu,
-};
-
-const industryData: { [key: string]: any } = {
-  "life-sciences": {
-    title: "Life Sciences",
-    expertise: [
-      "Aseptic Manufacturing: Contamination control, environmental monitoring, and cleanroom validation.",
-      "Biologics/Therapeutics & CAR-T Facilities: Process validation, chain-of-identity compliance.",
-      "API/Bulk Manufacturing: cGMP compliance, equipment qualification, and process control.",
-      "Analytical & Laboratory Instrumentation: End-to-end validation for QC and R&D labs.",
-      "Clinical Research Organizations (CROs): Regulatory compliance, computerized system validation.",
-      "Microbiology Testing: Method validation for sterility, bioburden, and endotoxin testing."
-    ],
-    whyUs: [
-      "Domain-driven specialists",
-      "Audit-ready compliance culture",
-      "Agile deployment models",
-      "Long-term strategic partnerships"
-    ]
-  },
-  "information-technology": {
-    title: "Information Technology",
-    expertise: [
-      "Software Development: Java, .NET, Python, JavaScript, Node.js, React, Angular.",
-      "Quality Engineering: Automation testing, SDET roles, performance testing.",
-      "Cloud & DevOps: AWS, Azure, GCP, Kubernetes, Docker, CI/CD pipelines.",
-      "Data & Analytics: Data science, ETL, BI tools like Power BI, Tableau, Snowflake.",
-      "Cybersecurity: Risk management, SOC, compliance frameworks.",
-      "Infrastructure: Network and systems administration, IT support."
-    ],
-    whyUs: [
-      "Deep technical expertise",
-      "Scalable and flexible teams",
-      "Focus on modern technology stacks",
-      "Proven project delivery methodologies"
-    ]
-  }
 };
 
 export default function IndustryPage() {
@@ -112,6 +76,17 @@ export default function IndustryPage() {
           </div>
         </section>
 
+        {/* Main Description Section */}
+        {data.mainDescription && (
+          <section className="py-20 bg-white dark:bg-slate-800">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+              <p className="text-xl text-slate-700 dark:text-slate-300 leading-relaxed">
+                {data.mainDescription}
+              </p>
+            </div>
+          </section>
+        )}
+
         {/* Expertise */}
         <section className="py-20 bg-slate-100 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -119,30 +94,69 @@ export default function IndustryPage() {
               <h2 className="text-3xl font-serif font-bold mb-4">Areas of Expertise</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {data.expertise.map((item: string, index: number) => (
+              {data.expertise.map((item: any, index: number) => (
                 <div key={index} className="glass dark:glass-dark rounded-xl p-6">
-                  <h3 className="font-semibold text-lg">{item.split(':')[0]}</h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-sm">{item.split(':')[1]}</p>
+                  {typeof item === 'object' ? (
+                    <>
+                      <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                      <p className="text-slate-600 dark:text-slate-300 text-sm">{item.description}</p>
+                    </>
+                  ) : (
+                    <>
+                      <h3 className="font-semibold text-lg">{item.split(':')[0]}</h3>
+                      <p className="text-slate-600 dark:text-slate-300 text-sm">{item.split(':')[1]}</p>
+                    </>
+                  )}
                 </div>
               ))}
             </div>
           </div>
         </section>
 
+        {/* Workforce Solutions Section */}
+        {data.workforceSolutions && (
+          <section className="py-20 bg-white dark:bg-slate-800">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl font-serif font-bold mb-4">Flexible Workforce Solutions</h2>
+                <p className="text-lg text-slate-600 dark:text-slate-300">
+                  QvalFocus delivers flexible workforce solutions that adapt to shifting industry needs:
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                {data.workforceSolutions.map((solution: string, index: number) => (
+                  <div key={index} className="flex items-center">
+                    <PlusCircle className="w-6 h-6 text-primary mr-3 flex-shrink-0" />
+                    <span className="text-lg font-medium">{solution}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Why Choose Us */}
-        <section className="py-20 bg-white dark:bg-slate-800">
+        <section className="py-20 bg-slate-100 dark:bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Why Choose Us</h2>
+              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
+                {data.whyUsTitle || "Why Choose Us"}
+              </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {data.whyUs.map((item: string, index: number) => (
-                <div key={index} className="glass dark:glass-dark rounded-xl p-6 text-center">
-                  <CheckCircle className="w-8 h-8 text-primary mx-auto mb-4" />
-                  <h3 className="font-semibold">{item}</h3>
-                </div>
-              ))}
-            </div>
+            {typeof data.whyUs === 'string' ? (
+              <div className="max-w-4xl mx-auto text-center">
+                <p className="text-xl text-slate-700 dark:text-slate-300 leading-relaxed">{data.whyUs}</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {data.whyUs.map((item: string, index: number) => (
+                  <div key={index} className="glass dark:glass-dark rounded-xl p-6 text-center">
+                    <CheckCircle className="w-8 h-8 text-primary mx-auto mb-4" />
+                    <h3 className="font-semibold">{item}</h3>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

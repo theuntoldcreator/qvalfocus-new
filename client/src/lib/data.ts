@@ -13,6 +13,46 @@ export const industries = [
   }
 ];
 
+export const industryData: { [key: string]: any } = {
+  "life-sciences": {
+    title: "Life Sciences",
+    expertise: [
+      "Aseptic Manufacturing: Contamination control, environmental monitoring, and cleanroom validation.",
+      "Biologics/Therapeutics & CAR-T Facilities: Process validation, chain-of-identity compliance.",
+      "API/Bulk Manufacturing: cGMP compliance, equipment qualification, and process control.",
+      "Analytical & Laboratory Instrumentation: End-to-end validation for QC and R&D labs.",
+      "Clinical Research Organizations (CROs): Regulatory compliance, computerized system validation.",
+      "Microbiology Testing: Method validation for sterility, bioburden, and endotoxin testing."
+    ],
+    whyUs: [
+      "Domain-driven specialists",
+      "Audit-ready compliance culture",
+      "Agile deployment models",
+      "Long-term strategic partnerships"
+    ]
+  },
+  "information-technology": {
+    title: "Information Technology",
+    mainDescription: "At QvalFocus, we provide end-to-end IT staffing and project-based solutions to help our clients accelerate digital transformation, enhance operational efficiency, and meet evolving technical demands. Whether you're developing a new platform, enhancing cybersecurity, or modernizing legacy systems, we deliver the skilled teams, tools, and oversight needed to ensure success.",
+    expertise: [
+      { title: "Software Development", description: "We build robust, scalable, and secure applications tailored to your business needs, ensuring high performance, user-friendly interfaces, and efficient workflows across platforms." },
+      { title: "Quality Engineering", description: "Our quality engineers design and implement rigorous testing strategies, automation frameworks, and compliance processes to deliver reliable, defect-free software at scale." },
+      { title: "Cloud & DevOps", description: "We help modernize your infrastructure with cloud migration, CI/CD pipelines, and automated deployment solutions, enabling rapid delivery and high availability of your applications." },
+      { title: "Data & Analytics", description: "We transform raw data into actionable insights with advanced analytics, business intelligence dashboards, and predictive models to drive smarter, data-driven decisions." },
+      { title: "Cybersecurity", description: "We secure your digital assets with end-to-end protection, including threat assessments, compliance audits, vulnerability management, and incident response planning." },
+      { title: "Infrastructure", description: "We design, deploy, and manage reliable IT infrastructure, from network architecture to servers and storage, ensuring your systems are robust, scalable, and future-ready." }
+    ],
+    workforceSolutions: [
+      "Contract & Contract-to-Hire",
+      "Direct Hire & Executive Search",
+      "FSP (Functional Service Provider) Teams",
+      "Project-Based Outsourcing"
+    ],
+    whyUsTitle: "Build your Future Workforce with Qval Focus",
+    whyUs: "Qval Focus brings experience in Information Technology staffing and project solutions, combining deep industry expertise with a client-centric approach. Our agile and scalable delivery model allows us to quickly ramp up or scale down teams based on project demands. We prioritize quality through rigorously vetted candidates and outcome-driven execution, ensuring solutions that align with your business goals."
+  }
+};
+
 export const testimonials = [
   {
     id: 1,
