@@ -17,11 +17,11 @@ const serviceCards = [
 
 export function Services() {
   return (
-    <section className="relative z-10 pb-12 -mt-16">
+    <section className="py-12 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {serviceCards.map((service) => (
-            <Link key={service.title} to={service.link} className="relative rounded-3xl overflow-hidden h-96 group block shadow-xl">
+            <Link key={service.title} to={service.link} className="relative rounded-3xl overflow-hidden h-96 group block">
               <img src={service.image} alt={service.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
@@ -35,7 +35,7 @@ export function Services() {
             </Link>
           ))}
 
-          <div className="relative rounded-3xl overflow-hidden h-96 lg:col-span-1 shadow-xl">
+          <div className="relative rounded-3xl overflow-hidden h-96 lg:col-span-1">
             <img src="https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stay Ahead" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-black/50 flex flex-col justify-center p-8 text-white">
               <h3 className="text-2xl font-bold mb-2">Stay Ahead of the Curve</h3>
