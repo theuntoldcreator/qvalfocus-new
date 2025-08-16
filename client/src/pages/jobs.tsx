@@ -6,9 +6,8 @@ import { Input } from "@/components/ui/input";
 import { JobCard } from "@/components/job/job-card";
 import { useJobs } from "@/lib/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Briefcase, Search, Upload } from "lucide-react";
+import { Briefcase, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ResumeUploadModal } from "@/components/job/resume-upload-modal";
 
 const jobCategories = [
   "All",
@@ -24,7 +23,6 @@ export default function JobsPage() {
   const { data: jobs, isLoading } = useJobs({ poll: true });
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredJobs = jobs?.filter(job => {
     const searchLower = searchQuery.toLowerCase();
@@ -66,10 +64,6 @@ export default function JobsPage() {
                   />
                 </div>
                 <Button size="lg" className="h-12">Search</Button>
-                <Button size="lg" variant="outline" className="h-12" onClick={() => setIsModalOpen(true)}>
-                  <Upload className="w-5 h-5 mr-2" />
-                  Upload your resume
-                </Button>
               </div>
             </div>
           </section>
@@ -128,7 +122,6 @@ export default function JobsPage() {
         </main>
         <Footer />
       </div>
-      <ResumeUploadModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }
