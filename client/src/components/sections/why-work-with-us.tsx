@@ -5,7 +5,7 @@ const reasons = [
   {
     title: "Domain Expertise",
     description: "We specialize in Information Technology and Life Sciences and we live and breathe these industries our recruiters...",
-    imageUrl: "https://images.unsplash.com/photo-1573496774439-fe3923b02da5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
+    imageUrl: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
     link: "/industries",
   },
   {
@@ -23,7 +23,7 @@ const reasons = [
   {
     title: "Client-Centric Approach",
     description: "We believe partnerships are built on trust, not transactions. That's why we take a consultative approach listening first...",
-    imageUrl: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
+    imageUrl: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=250",
     link: "/contact",
   },
 ];
