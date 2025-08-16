@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useCreateApplication } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -18,6 +19,7 @@ const applicationFormSchema = z.object({
   full_name: z.string().min(1, "Full name is required"),
   email: z.string().email("Invalid email address"),
   phone: z.string().optional(),
+  experience_level: z.string().min(1, "Experience level is required"),
   resumeFile: z.instanceof(File).optional(),
   portfolio_link: z.string().url().optional().or(z.literal("")),
   linkedin_profile: z.string().url().optional().or(z.literal("")),
@@ -42,6 +44,7 @@ export function ApplyForm({ job }: ApplyFormProps) {
       full_name: "",
       email: "",
       phone: "",
+      experience_level: "",
       portfolio_link: "",
       linkedin_profile: "",
     },
@@ -58,7 +61,7 @@ export function ApplyForm({ job }: ApplyFormProps) {
         first_name,
         last_name,
         email: data.email,
-        experience_level: null,
+        experience_level: data.experience_level,
         phone: data.phone || null,
         current_role: null,
         linkedin: data.linkedin_profile || null,
@@ -148,6 +151,26 @@ export function ApplyForm({ job }: ApplyFormProps) {
             <FormField control={form.control} name="email" render={({ field }) => ( <FormItem><FormLabel>Email address</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>)} />
             <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>Phone number (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
             
+            <FormField control={form.control} name="experience_level" render={({ field }) => (
+              <FormItem>
+                <FormLabel>Experience Level</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your experience level" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Entry Level">Entry Level (0-2 years)</SelectItem>
+                    <SelectItem value="Mid Level">Mid Level (3-7 years)</SelectItem>
+                    <SelectItem value="Senior Level">Senior Level (8-15 years)</SelectItem>
+                    <SelectItem value="Executive Level">Executive Level (15+ years)</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )} />
+
             <FormField control={form.control} name="resumeFile" render={({ field: { onChange, value, ...rest } }) => (
               <FormItem>
                 <FormLabel>Resume</FormLabel>
