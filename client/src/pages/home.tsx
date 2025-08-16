@@ -2,6 +2,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
 import { Services } from "@/components/sections/services";
+import { AboutSection } from "@/components/sections/about-section";
 import { Industries } from "@/components/sections/industries";
 import { FeaturedJobs } from "@/components/sections/featured-jobs";
 import { Testimonials } from "@/components/sections/testimonials";
@@ -14,6 +15,7 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <AboutSection />
         <WhyWorkWithUs />
         <Industries />
         <FeaturedJobs />
