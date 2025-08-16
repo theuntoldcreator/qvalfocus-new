@@ -13,7 +13,7 @@ export function Hero() {
       />
 
       {/* White Gradient Overlay */}
-      <div className="absolute inset-0 [background:radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-white via-white/90 to-transparent z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent z-0"></div>
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
