@@ -11,7 +11,7 @@ interface ServiceCardProps {
   };
 }
 
-const IMAGE_DURATION = 3000; // 3 seconds per image
+const IMAGE_DURATION = 500; // 0.5 seconds per image
 
 export function ServiceCard({ service }: ServiceCardProps) {
   const [isHovered, setIsHovered] = useState(false);
