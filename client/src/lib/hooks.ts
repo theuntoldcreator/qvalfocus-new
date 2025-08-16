@@ -167,9 +167,7 @@ export function useCreateContact() {
         mutationFn: async (newContact: InsertContact) => {
             const { data, error } = await supabase
                 .from('contacts')
-                .insert([newContact])
-                .select()
-                .single();
+                .insert([newContact]);
             if (error) throw new Error(error.message);
             return data;
         },
