@@ -9,10 +9,10 @@ export function AboutSection() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 font-sans text-slate-900 dark:text-white">
-            Pioneering Connections, Driving Progress
+            Who We Are
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-300">
-            We are a dedicated team of industry experts passionate about bridging the gap between exceptional talent and innovative companies.
+            We are a forward-thinking recruitment agency specializing in the Life Sciences and IT sectors. Our journey began with a simple mission: to connect exceptional talent with pioneering companies shaping the future.
           </p>
         </div>
 
@@ -20,12 +20,12 @@ export function AboutSection() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column */}
           <div className="space-y-8 flex flex-col">
-            {/* Card 1: Our Mission */}
+            {/* Card 1: Our Philosophy */}
             <div className="bg-slate-100 dark:bg-slate-800 rounded-3xl p-8 flex-grow flex flex-col justify-between">
               <div>
-                <p className="text-3xl font-bold mb-2 text-slate-900 dark:text-white">Our Mission</p>
+                <p className="text-3xl font-bold mb-2 text-slate-900 dark:text-white">Our Philosophy</p>
                 <p className="text-slate-600 dark:text-slate-300">
-                  To empower businesses and professionals by creating synergistic matches that drive innovation and success in the Life Sciences and IT sectors.
+                  We believe in building lasting relationships. For us, recruitment is about fostering growth and creating opportunities for both our clients and candidates.
                 </p>
               </div>
               <Button variant="ghost" asChild className="self-start p-0 h-auto text-primary hover:text-primary/80 mt-4">
@@ -37,8 +37,8 @@ export function AboutSection() {
             {/* Card 2: Bottom Left Image */}
             <div className="rounded-3xl overflow-hidden h-64">
               <img 
-                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Team collaborating" 
+                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Our team in a modern office" 
                 className="w-full h-full object-cover"
               />
             </div>
@@ -47,16 +47,16 @@ export function AboutSection() {
           {/* Center Column (Tall Card) */}
           <div className="relative bg-slate-800 rounded-3xl overflow-hidden text-white p-8 flex flex-col justify-between min-h-[30rem] lg:min-h-full">
             <img 
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-              alt="Integrity and Expertise" 
+              src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+              alt="Commitment to collaboration" 
               className="absolute inset-0 w-full h-full object-cover opacity-30"
             />
             <div className="relative z-10">
-              <p className="text-5xl font-bold">Integrity & Expertise</p>
+              <p className="text-5xl font-bold">Our Commitment</p>
             </div>
             <div className="relative z-10">
               <p className="text-slate-200 text-lg">
-                These are the pillars of our approach. We operate with transparency and leverage deep industry knowledge to deliver unparalleled results.
+                We are committed to excellence. Our rigorous process and deep industry knowledge ensure we deliver results that exceed expectations.
               </p>
             </div>
           </div>
@@ -66,17 +66,17 @@ export function AboutSection() {
             {/* Card 4: Top Right Image */}
             <div className="rounded-3xl overflow-hidden h-64">
               <img 
-                src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Strategic planning" 
+                src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Diverse team discussion" 
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* Card 5: Our Approach */}
+            {/* Card 5: Our Team */}
             <div className="bg-slate-800 dark:bg-slate-700 rounded-3xl p-8 text-white flex-grow flex flex-col justify-between">
               <div>
-                <p className="text-3xl font-bold mb-2">A Partnership Approach</p>
+                <p className="text-3xl font-bold mb-2">Our Expert Team</p>
                 <p className="text-slate-300">
-                  We go beyond transactional recruiting, investing time to understand your unique needs, culture, and goals to ensure a perfect, long-term fit.
+                  Our team is our greatest asset. Comprised of seasoned recruiters and industry specialists, we bring a wealth of experience to every search.
                 </p>
               </div>
               <Button variant="ghost" asChild className="self-start p-0 h-auto text-white hover:text-slate-200 mt-4">
