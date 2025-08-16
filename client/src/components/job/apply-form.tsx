@@ -125,7 +125,7 @@ export function ApplyForm({ job }: ApplyFormProps) {
             <FormField control={form.control} name="email" render={({ field }) => ( <FormItem><FormLabel>Email address</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>)} />
             <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>Phone number (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
             
-            <FormField control={form.control} name="resumeFile" render={({ field: { onChange, ...rest } }) => (
+            <FormField control={form.control} name="resumeFile" render={({ field: { onChange, value, ...rest } }) => (
               <FormItem>
                 <FormLabel>Resume</FormLabel>
                 <FormControl>
@@ -140,7 +140,7 @@ export function ApplyForm({ job }: ApplyFormProps) {
             {isUploading && <Progress value={uploadProgress} className="w-full" />}
 
             <FormField control={form.control} name="portfolio_link" render={({ field }) => ( <FormItem><FormLabel>Portfolio link, Github url</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
-            <FormField control={form.control} name="linkedin_profile" render={({ field }) => ( <FormItem><FormLabel>LinkedIn profile (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormMessage>)} />
+            <FormField control={form.control} name="linkedin_profile" render={({ field }) => ( <FormItem><FormLabel>LinkedIn profile (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
 
             <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700" disabled={createApplication.isPending || isUploading}>
               {isUploading ? `Uploading...` : createApplication.isPending ? "Submitting..." : 'Submit application'}
