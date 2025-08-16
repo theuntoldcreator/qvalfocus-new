@@ -29,10 +29,10 @@ export function Hero() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" asChild>
-            <Link to="/contact?type=client">Discuss Your Industry</Link>
+            <Link to="/jobs">Find Job</Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <Link to="/case-studies">View Success Stories</Link>
+            <Link to="/contact?type=client">Find Talent</Link>
           </Button>
         </div>
       </div>
