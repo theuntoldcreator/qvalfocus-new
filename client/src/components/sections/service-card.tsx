@@ -17,7 +17,25 @@ export function ServiceCard({ service }: ServiceCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const cardRef = useRef<HTMLAnchorElement>(null);
   const controls = service.images.map(() => useAnimation());
+
+  // Effect for handling clicks/taps outside the card to reset hover state
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent | TouchEvent) => {
+      if (cardRef.current && !cardRef.current.contains(event.target as Node)) {
+        setIsHovered(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, []);
 
   useEffect(() => {
     if (isHovered) {
@@ -58,12 +76,24 @@ export function ServiceCard({ service }: ServiceCardProps) {
     }
   }, [isHovered, currentIndex, controls]);
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLAnchorElement>) => {
+    // On first tap, prevent navigation and activate hover state
+    if (!isHovered) {
+      e.preventDefault();
+      setIsHovered(true);
+    }
+    // On second tap, isHovered is true, so this block is skipped,
+    // and the subsequent 'click' event will trigger navigation.
+  };
+
   return (
     <Link
+      ref={cardRef}
       to={service.link}
       className="relative rounded-3xl overflow-hidden h-96 group block"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleTouchStart}
     >
       {/* Images */}
       <AnimatePresence initial={false}>
