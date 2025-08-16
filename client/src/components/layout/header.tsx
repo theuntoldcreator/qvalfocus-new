@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
+import { industries } from "@/lib/data";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,9 +20,15 @@ export function Header() {
   const location = useLocation();
 
   const navLinks = [
-    { to: "/industries", label: "Industries" },
     { to: "/about", label: "About" },
     { to: "/jobs", label: "Careers" },
+  ];
+
+  const mobileNavLinks = [
+    { to: "/services/staffing-solution", label: "Staffing Solutions" },
+    { to: "/services/project-solution", label: "Project Solutions" },
+    ...industries.map(industry => ({ to: `/industries/${industry.slug}`, label: industry.name })),
+    ...navLinks,
   ];
 
   return (
@@ -52,6 +59,19 @@ export function Header() {
                   <DropdownMenuItem asChild>
                     <Link to="/services/project-solution">Project Solutions</Link>
                   </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-primary transition-colors">
+                  Industries <ChevronDown className="ml-1 h-4 w-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {industries.map((industry) => (
+                    <DropdownMenuItem key={industry.id} asChild>
+                      <Link to={`/industries/${industry.slug}`}>{industry.name}</Link>
+                    </DropdownMenuItem>
+                  ))}
                 </DropdownMenuContent>
               </DropdownMenu>
 
@@ -88,11 +108,7 @@ export function Header() {
         {isMobileMenuOpen && (
           <MobileNav 
             onClose={() => setIsMobileMenuOpen(false)} 
-            navLinks={[
-              { to: "/services/staffing-solution", label: "Staffing Solutions" },
-              { to: "/services/project-solution", label: "Project Solutions" },
-              ...navLinks
-            ]}
+            navLinks={mobileNavLinks}
           />
         )}
       </AnimatePresence>
