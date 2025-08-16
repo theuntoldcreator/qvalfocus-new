@@ -21,6 +21,7 @@ export function Hero() {
                 alt="Team of professionals collaborating"
                 className="absolute inset-0 w-full h-full object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#3b6aed] to-transparent lg:bg-gradient-to-r"></div>
             </div>
           </div>
         </div>
