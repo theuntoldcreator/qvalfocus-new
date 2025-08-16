@@ -1,12 +1,42 @@
-import { useAllApplications } from "@/lib/hooks";
+import { useAllApplications, useDeleteApplication } from "@/lib/hooks";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Trash2 } from "lucide-react";
 
 export function ApplicationsManagement() {
   const { data: applications, isLoading } = useAllApplications();
+  const deleteApplication = useDeleteApplication();
+  const { toast } = useToast();
+
+  const handleDelete = (id: string) => {
+    deleteApplication.mutate(id, {
+      onSuccess: () => {
+        toast({ title: "Application deleted successfully!" });
+      },
+      onError: (error) => {
+        toast({
+          title: "Error deleting application",
+          description: error.message,
+          variant: "destructive",
+        });
+      },
+    });
+  };
 
   if (isLoading) return <p>Loading applications...</p>;
 
@@ -43,12 +73,34 @@ export function ApplicationsManagement() {
                       )}
                     </TableCell>
                     <TableCell>{format(new Date(app.created_at), 'PPP')}</TableCell>
-                    <TableCell className="text-right">
+                    <TableCell className="text-right space-x-2">
                       {app.resume_url && (
                         <Button asChild variant="outline" size="sm">
                           <a href={app.resume_url} target="_blank" rel="noopener noreferrer">View Resume</a>
                         </Button>
                       )}
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button variant="destructive" size="sm">
+                            <Trash2 className="h-4 w-4 mr-2" />
+                            Delete
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              This action cannot be undone. This will permanently delete the application from the database.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction onClick={() => handleDelete(app.id)}>
+                              Delete
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
                     </TableCell>
                   </TableRow>
                 ))}
