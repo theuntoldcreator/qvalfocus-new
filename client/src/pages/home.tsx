@@ -7,6 +7,7 @@ import { Industries } from "@/components/sections/industries";
 import { FeaturedJobs } from "@/components/sections/featured-jobs";
 import { Testimonials } from "@/components/sections/testimonials";
 import { WhyWorkWithUs } from "@/components/sections/why-work-with-us";
+import { Newsletter } from "@/components/sections/newsletter";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <Industries />
         <FeaturedJobs />
         <Testimonials />
+        <Newsletter />
       </main>
       <Footer />
     </div>

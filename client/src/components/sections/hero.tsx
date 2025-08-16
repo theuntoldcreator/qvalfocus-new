@@ -1,29 +1,36 @@
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+
 export function Hero() {
   return (
-    <section className="pt-24 pb-12 bg-slate-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-[#3b6aed] rounded-3xl overflow-hidden">
-          <div className="grid lg:grid-cols-2">
-            <div className="p-8 md:p-12 lg:p-16 z-10">
-              <div className="inline-block bg-white rounded-full px-4 py-1 text-sm font-medium text-slate-700 mb-4">
-                Staffing & Project Solutions
-              </div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight font-sans text-white">
-                Achieve Your Goals with Expert Talent
-              </h1>
-              <p className="text-lg text-slate-100 mb-10 max-w-md">
-                We connect visionary companies with exceptional talent in Life Sciences and IT, driving innovation and success.
-              </p>
-            </div>
-            <div className="relative h-64 lg:h-auto">
-              <img
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                alt="Team of professionals collaborating"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#3b6aed] to-transparent lg:bg-gradient-to-r"></div>
-            </div>
-          </div>
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-50 dark:bg-slate-900">
+      <div 
+        className="absolute inset-0"
+      >
+        <img 
+          src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+          alt="Modern architecture background"
+          className="w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/80 to-transparent dark:from-slate-900 dark:via-slate-900/80"></div>
+      </div>
+      
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <Badge className="mb-6">Industry Expertise</Badge>
+        <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-slate-900 dark:text-white">
+          Deep <span className="text-primary">Industry Knowledge</span>
+        </h1>
+        <p className="text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-3xl mx-auto">
+          We specialize in Life Sciences and Information Technology — delivering industry-aligned staffing and project solutions that produce measurable results.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" asChild>
+            <Link to="/contact?type=client">Discuss Your Industry</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link to="/case-studies">View Success Stories</Link>
+          </Button>
         </div>
       </div>
     </section>
