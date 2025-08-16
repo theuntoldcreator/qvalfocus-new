@@ -25,7 +25,7 @@ const serviceCards = [
     images: [
       "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
       "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1628891433833-778f8840155a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      "https://images.unsplash.com/photo-1581093458791-9a6685b3599a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
     ]
   },
   {
