@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion, useAnimation, AnimationControls } from "framer-motion";
 
 interface ServiceCardProps {
   service: {
@@ -16,48 +16,51 @@ const IMAGE_DURATION = 750; // 0.75 seconds per image
 export function ServiceCard({ service }: ServiceCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const controls = service.images.map(() => useAnimation());
+  const controls = useMemo(() => service.images.map(() => new AnimationControls()), [service.images]);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    if (isHovered) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % service.images.length);
-      }, IMAGE_DURATION);
-    } else {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      setCurrentIndex(0);
-    }
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isHovered, service.images.length]);
-
-  useEffect(() => {
-    if (isHovered) {
-      // Animate the current bar. We first set its width to 0% instantly
-      // to ensure it starts from the beginning, then start the animation.
-      controls[currentIndex].set({ width: "0%" });
-      controls[currentIndex].start({
-        width: "100%",
-        transition: { duration: IMAGE_DURATION / 1000, ease: "linear" },
+    // This function orchestrates the animation for a single step in the cycle
+    const runAnimationStep = (index: number) => {
+      // Animate the current bar
+      controls[index].start({
+        width: '100%',
+        transition: { duration: IMAGE_DURATION / 1000, ease: 'linear' }
       });
 
-      // Instantly fill any previous bars.
-      for (let i = 0; i < currentIndex; i++) {
-        controls[i].set({ width: "100%" });
-      }
-      
-      // Reset bars that are ahead in the cycle. This is key for the loop reset.
-      for (let i = currentIndex + 1; i < controls.length; i++) {
-        controls[i].set({ width: "0%" });
-      }
+      // Set a timer to advance to the next state after the animation duration
+      timerRef.current = setTimeout(() => {
+        // Fill the bar that just finished
+        controls[index].start({ width: '100%', transition: { duration: 0 } });
+        
+        const nextIndex = (index + 1) % service.images.length;
+        
+        // If we've completed a full cycle, reset all bars before the next state update
+        if (nextIndex === 0) {
+          setTimeout(() => {
+            controls.forEach(c => c.start({ width: '0%', transition: { duration: 0 } }));
+            setCurrentIndex(nextIndex);
+          }, 50); // Brief pause to show all bars full
+        } else {
+          setCurrentIndex(nextIndex);
+        }
+      }, IMAGE_DURATION);
+    };
 
+    if (isHovered) {
+      runAnimationStep(currentIndex);
     } else {
-      // On mouse leave, instantly reset all bars.
-      controls.forEach(control => control.set({ width: "0%" }));
+      // Cleanup on unhover: clear timer, reset index, and reset bars
+      if (timerRef.current) clearTimeout(timerRef.current);
+      setCurrentIndex(0);
+      controls.forEach(c => c.start({ width: '0%', transition: { duration: 0.2 } }));
     }
-  }, [isHovered, currentIndex, controls]);
+
+    // Cleanup function to clear the timer when the component unmounts or dependencies change
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [isHovered, currentIndex, controls, service.images.length]);
 
   return (
     <Link
