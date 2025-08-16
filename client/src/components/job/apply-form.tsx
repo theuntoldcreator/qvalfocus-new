@@ -12,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import type { Job, InsertApplication } from "@shared/schema";
 import { CheckCircle } from "lucide-react";
+import * as tus from "tus-js-client";
 
 const applicationFormSchema = z.object({
   full_name: z.string().min(1, "Full name is required"),
@@ -46,31 +47,7 @@ export function ApplyForm({ job }: ApplyFormProps) {
     },
   });
 
-  const onSubmit = async (data: ApplicationFormData) => {
-    let resume_url: string | null = null;
-    if (data.resumeFile) {
-      setIsUploading(true);
-      setUploadProgress(0);
-      const file = data.resumeFile;
-      const filePath = `public/${Date.now()}-${file.name}`;
-      
-      const { error: uploadError } = await supabase.storage.from('resumes').upload(filePath, file, {
-        cacheControl: '3600',
-        upsert: false,
-      });
-
-      if (uploadError) {
-        toast({ title: "Resume Upload Failed", description: uploadError.message, variant: "destructive" });
-        setIsUploading(false);
-        return;
-      }
-      
-      const { data: { publicUrl } } = supabase.storage.from('resumes').getPublicUrl(filePath);
-      resume_url = publicUrl;
-      setUploadProgress(100);
-      setIsUploading(false);
-    }
-
+  const submitApplicationWithResume = async (data: ApplicationFormData, resume_url: string | null) => {
     const nameParts = data.full_name.trim().split(/\s+/);
     const first_name = nameParts.shift() || "";
     const last_name = nameParts.join(" ");
@@ -94,8 +71,54 @@ export function ApplyForm({ job }: ApplyFormProps) {
       await createApplication.mutateAsync(payload);
       setIsSuccess(true);
       form.reset();
-    } catch (error) {
-      toast({ title: "Error submitting application", description: "Please try again later.", variant: "destructive" });
+    } catch (error: any) {
+      toast({ title: "Error submitting application", description: error.message || "Please try again later.", variant: "destructive" });
+    } finally {
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
+  };
+
+  const onSubmit = async (data: ApplicationFormData) => {
+    if (data.resumeFile) {
+      setIsUploading(true);
+      setUploadProgress(0);
+      const file = data.resumeFile;
+      const fileName = `${Date.now()}-${file.name}`;
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://ojmiaheeooffjberilkr.supabase.co';
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qbWlhaGVlb29mZmpiZXJpbGtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ4OTAyNDcsImV4cCI6MjA3MDQ2NjI0N30.XID76y57mLUrlmQxNMZKpV6cO54KbVP5e0c8u-GdlAo';
+
+      const upload = new tus.Upload(file, {
+        endpoint: `${supabaseUrl}/storage/v1/upload/resumable`,
+        retryDelays: [0, 3000, 5000, 10000, 20000],
+        headers: {
+          authorization: `Bearer ${supabaseAnonKey}`,
+          'x-upsert': 'true',
+        },
+        metadata: {
+          bucketName: 'resumes',
+          objectName: `public/${fileName}`,
+          contentType: file.type,
+          cacheControl: '3600',
+        },
+        onError: (error) => {
+          console.error("Upload failed:", error);
+          toast({ title: "Resume Upload Failed", description: "Please try again.", variant: "destructive" });
+          setIsUploading(false);
+        },
+        onProgress: (bytesUploaded, bytesTotal) => {
+          const percentage = (bytesUploaded / bytesTotal * 100);
+          setUploadProgress(percentage);
+        },
+        onSuccess: () => {
+          const { data: { publicUrl } } = supabase.storage.from('resumes').getPublicUrl(`public/${fileName}`);
+          submitApplicationWithResume(data, publicUrl);
+        },
+      });
+
+      upload.start();
+    } else {
+      submitApplicationWithResume(data, null);
     }
   };
 
@@ -130,14 +153,19 @@ export function ApplyForm({ job }: ApplyFormProps) {
                 <FormLabel>Resume</FormLabel>
                 <FormControl>
                   <label htmlFor="resume-upload" className="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700">
-                    <span className="text-primary font-semibold">Upload resume/CV</span>
+                    <span className="text-primary font-semibold">{value?.name || "Upload resume/CV"}</span>
                     <Input id="resume-upload" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => onChange(e.target.files?.[0])} {...rest} />
                   </label>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )} />
-            {isUploading && <Progress value={uploadProgress} className="w-full" />}
+            {isUploading && (
+              <div className="flex items-center gap-2">
+                <Progress value={uploadProgress} className="w-full" />
+                <span className="text-sm font-semibold min-w-[40px] text-right">{Math.round(uploadProgress)}%</span>
+              </div>
+            )}
 
             <FormField control={form.control} name="portfolio_link" render={({ field }) => ( <FormItem><FormLabel>Portfolio link, Github url</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
             <FormField control={form.control} name="linkedin_profile" render={({ field }) => ( <FormItem><FormLabel>LinkedIn profile (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
