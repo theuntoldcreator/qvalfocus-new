@@ -17,7 +17,7 @@ export function Hero() {
             </div>
             <div className="relative h-64 lg:h-auto">
               <img
-                src="https://images.unsplash.com/photo-1556761175-4b46a-572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
                 alt="Team of professionals collaborating"
                 className="absolute inset-0 w-full h-full object-cover"
               />
