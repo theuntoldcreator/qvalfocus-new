@@ -2,7 +2,7 @@ export function Hero() {
   return (
     <section className="pt-32 pb-12 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative bg-violet-100 rounded-3xl overflow-hidden">
+        <div className="relative bg-blue-100 rounded-3xl overflow-hidden">
           <div className="grid lg:grid-cols-2">
             <div className="p-8 md:p-12 lg:p-16 z-10">
               <div className="inline-block bg-white rounded-full px-4 py-1 text-sm font-medium text-slate-700 mb-4">
