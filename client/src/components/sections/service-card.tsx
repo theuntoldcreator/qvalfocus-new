@@ -35,26 +35,27 @@ export function ServiceCard({ service }: ServiceCardProps) {
 
   useEffect(() => {
     if (isHovered) {
-      // When the cycle restarts, reset all bars instantly before animating the first one.
-      if (currentIndex === 0) {
-        controls.forEach(control => {
-          control.start({ width: "0%", transition: { duration: 0 } });
-        });
-      }
-
-      // Animate the current bar to 100% width.
+      // Animate the current bar. We first set its width to 0% instantly
+      // to ensure it starts from the beginning, then start the animation.
+      controls[currentIndex].set({ width: "0%" });
       controls[currentIndex].start({
         width: "100%",
         transition: { duration: IMAGE_DURATION / 1000, ease: "linear" },
       });
 
-      // Instantly fill any previous bars to show the progress within the cycle.
+      // Instantly fill any previous bars.
       for (let i = 0; i < currentIndex; i++) {
-        controls[i].start({ width: "100%", transition: { duration: 0 } });
+        controls[i].set({ width: "100%" });
       }
+      
+      // Reset bars that are ahead in the cycle. This is key for the loop reset.
+      for (let i = currentIndex + 1; i < controls.length; i++) {
+        controls[i].set({ width: "0%" });
+      }
+
     } else {
-      // On mouse leave, reset all bars.
-      controls.forEach(control => control.start({ width: "0%", transition: { duration: 0 } }));
+      // On mouse leave, instantly reset all bars.
+      controls.forEach(control => control.set({ width: "0%" }));
     }
   }, [isHovered, currentIndex, controls]);
 
