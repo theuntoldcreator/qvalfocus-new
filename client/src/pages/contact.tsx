@@ -12,8 +12,14 @@ import {
   MapPin
 } from "lucide-react";
 
+const mapUrls = {
+  usa: "https://maps.google.com/maps?q=666%20Plainsboro%20Rd%20%23615%2C%20Plainsboro%20Township%2C%20NJ%2008536&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  india: "https://maps.google.com/maps?q=Plot%20No%20383%2C%20Bachpally%2C%20Hyderabad%20500090%2C%20India&t=&z=15&ie=UTF8&iwloc=&output=embed"
+};
+
 export default function ContactPage() {
   const [contactType, setContactType] = useState<"client" | "candidate">("client");
+  const [activeTab, setActiveTab] = useState<"usa" | "india">("usa");
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -107,7 +113,11 @@ export default function ContactPage() {
               <div className="space-y-8">
                 <div className="glass dark:glass-dark rounded-2xl p-8">
                   <h3 className="text-2xl font-bold mb-6">Our Global Offices</h3>
-                  <Tabs defaultValue="usa" className="w-full">
+                  <Tabs 
+                    defaultValue={activeTab} 
+                    onValueChange={(value) => setActiveTab(value as "usa" | "india")} 
+                    className="w-full"
+                  >
                     <TabsList className="grid w-full grid-cols-2">
                       <TabsTrigger value="usa">United States</TabsTrigger>
                       <TabsTrigger value="india">India</TabsTrigger>
@@ -166,7 +176,8 @@ export default function ContactPage() {
                 </div>
                 <div className="rounded-2xl overflow-hidden h-80">
                   <iframe
-                    src="https://maps.google.com/maps?q=666%20Plainsboro%20Rd%20%23615%2C%20Plainsboro%20Township%2C%20NJ%2008536&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    key={activeTab}
+                    src={mapUrls[activeTab]}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
