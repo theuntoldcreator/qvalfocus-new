@@ -7,9 +7,6 @@ import { industries, industryData } from "@/lib/data";
 import { 
   Cpu, 
   FlaskConical,
-  CheckCircle,
-  Users,
-  PlusCircle
 } from "lucide-react";
 
 const iconMap: { [key: string]: React.ElementType } = {
@@ -116,7 +113,7 @@ export default function IndustryPage() {
         {/* Workforce Solutions Section */}
         {data.workforceSolutions && (
           <section className="py-20 bg-white dark:bg-slate-800">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="text-3xl font-serif font-bold mb-4">Flexible Workforce Solutions</h2>
                 <p className="text-lg text-slate-600 dark:text-slate-300">
@@ -124,12 +121,13 @@ export default function IndustryPage() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {data.workforceSolutions.map((solution: { title: string; description: string }, index: number) => (
-                  <div key={index} className="flex items-start">
-                    <PlusCircle className="w-6 h-6 text-primary mr-4 mt-1 flex-shrink-0" />
-                    <div>
-                      <h3 className="text-lg font-semibold mb-1">{solution.title}</h3>
-                      <p className="text-slate-600 dark:text-slate-300">{solution.description}</p>
+                {data.workforceSolutions.map((solution: { title: string; description: string, imageUrl: string }, index: number) => (
+                  <div key={index} className="relative rounded-2xl overflow-hidden h-80 group flex items-end text-left">
+                    <img src={solution.imageUrl} alt={solution.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                    <div className="relative z-10 p-6">
+                      <h3 className="text-xl font-bold text-white mb-2">{solution.title}</h3>
+                      <p className="text-slate-200 text-sm">{solution.description}</p>
                     </div>
                   </div>
                 ))}
@@ -152,10 +150,13 @@ export default function IndustryPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {data.whyUs.map((item: string, index: number) => (
-                  <div key={index} className="glass dark:glass-dark rounded-xl p-6 text-center">
-                    <CheckCircle className="w-8 h-8 text-primary mx-auto mb-4" />
-                    <h3 className="font-semibold">{item}</h3>
+                {data.whyUs.map((item: { title: string, imageUrl: string }, index: number) => (
+                  <div key={index} className="relative rounded-2xl overflow-hidden h-64 group flex items-end text-center">
+                    <img src={item.imageUrl} alt={item.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    <div className="absolute inset-0 bg-black/50"></div>
+                    <div className="relative z-10 p-4 w-full">
+                      <h3 className="font-semibold text-white">{item.title}</h3>
+                    </div>
                   </div>
                 ))}
               </div>

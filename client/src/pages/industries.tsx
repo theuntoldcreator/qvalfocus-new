@@ -5,27 +5,13 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { industries } from "@/lib/data";
 import { 
-  Cpu, 
-  FlaskConical,
   ArrowRight,
   TrendingUp,
   Users,
   Shield
 } from "lucide-react";
 
-const iconMap: { [key: string]: React.ElementType } = {
-  "life-sciences": FlaskConical,
-  "information-technology": Cpu,
-};
-
 export default function IndustriesPage() {
-  const stats = [
-    { label: "Industries Served", value: "2", icon: TrendingUp },
-    { label: "Active Clients", value: "500+", icon: Users },
-    { label: "Compliance Rate", value: "100%", icon: Shield },
-    { label: "Success Rate", value: "95%", icon: ArrowRight }
-  ];
-
   return (
     <div className="min-h-screen">
       <Header />
@@ -73,26 +59,19 @@ export default function IndustriesPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {industries.map((industry) => {
-                const Icon = iconMap[industry.id];
-                
-                return (
-                  <Link key={industry.id} to={`/industries/${industry.slug}`}>
-                    <div className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300 group h-full">
-                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <Icon className="w-8 h-8 text-white" />
-                      </div>
-                      
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{industry.name}</h3>
-                      <p className="text-slate-600 dark:text-slate-300 mb-6">{industry.description}</p>
-                      
-                      <div className="flex justify-end items-center">
-                        <ArrowRight className="w-5 h-5 text-primary group-hover:translate-x-1 transition-transform" />
-                      </div>
+              {industries.map((industry) => (
+                <Link key={industry.id} to={`/industries/${industry.slug}`} className="relative rounded-2xl overflow-hidden h-96 group block">
+                  <img src={industry.imageUrl} alt={industry.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"></div>
+                  <div className="relative z-10 flex flex-col justify-end h-full p-8 text-white">
+                    <h3 className="text-3xl font-bold mb-2">{industry.name}</h3>
+                    <p className="text-slate-200 mb-4">{industry.description}</p>
+                    <div className="flex items-center font-semibold group-hover:underline">
+                      Learn More <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </div>
-                  </Link>
-                );
-              })}
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>

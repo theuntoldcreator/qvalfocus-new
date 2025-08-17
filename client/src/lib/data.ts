@@ -3,13 +3,15 @@ export const industries = [
     id: "life-sciences",
     name: "Life Sciences",
     description: "Aseptic Manufacturing, Biologics, Validation",
-    slug: "life-sciences"
+    slug: "life-sciences",
+    imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "information-technology",
     name: "Information Technology", 
     description: "Software, Cloud, Data, Cybersecurity",
-    slug: "information-technology"
+    slug: "information-technology",
+    imageUrl: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   }
 ];
 
@@ -25,10 +27,10 @@ export const industryData: { [key: string]: any } = {
       "Microbiology Testing: Method validation for sterility, bioburden, and endotoxin testing."
     ],
     whyUs: [
-      "Domain-driven specialists",
-      "Audit-ready compliance culture",
-      "Agile deployment models",
-      "Long-term strategic partnerships"
+      { title: "Domain-driven specialists", imageUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+      { title: "Audit-ready compliance culture", imageUrl: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+      { title: "Agile deployment models", imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+      { title: "Long-term strategic partnerships", imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
     ]
   },
   "information-technology": {
@@ -43,10 +45,10 @@ export const industryData: { [key: string]: any } = {
       { title: "Infrastructure", description: "We design, deploy, and manage reliable IT infrastructure, from network architecture to servers and storage, ensuring your systems are robust, scalable, and future-ready." }
     ],
     workforceSolutions: [
-      { title: "Contract & Contract-to-Hire", description: "We provide flexible staffing solutions with professionals available for short-term contracts or evaluation through contract-to-hire arrangements." },
-      { title: "Direct Hire & Executive Search", description: "We help you secure high-quality permanent talent, including specialized executive placements through targeted, strategic searches." },
-      { title: "FSP (Functional Service Provider) Teams", description: "Our FSP model delivers dedicated functional teams that integrate with your operations, offering scalability and consistent expertise." },
-      { title: "Project-Based Outsourcing", description: "We manage complete project teams and deliverables, allowing you to outsource defined initiatives with confidence and efficiency." }
+      { title: "Contract & Contract-to-Hire", description: "We provide flexible staffing solutions with professionals available for short-term contracts or evaluation through contract-to-hire arrangements.", imageUrl: "https://images.unsplash.com/photo-1556742044-538a3c1a1498?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+      { title: "Direct Hire & Executive Search", description: "We help you secure high-quality permanent talent, including specialized executive placements through targeted, strategic searches.", imageUrl: "https://images.unsplash.com/photo-1600880292203-943bb4522542?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+      { title: "FSP (Functional Service Provider) Teams", description: "Our FSP model delivers dedicated functional teams that integrate with your operations, offering scalability and consistent expertise.", imageUrl: "https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
+      { title: "Project-Based Outsourcing", description: "We manage complete project teams and deliverables, allowing you to outsource defined initiatives with confidence and efficiency.", imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
     ],
     whyUsTitle: "Build your Future Workforce with Qval Focus",
     whyUs: "Qval Focus brings experience in Information Technology staffing and project solutions, combining deep industry expertise with a client-centric approach. Our agile and scalable delivery model allows us to quickly ramp up or scale down teams based on project demands. We prioritize quality through rigorously vetted candidates and outcome-driven execution, ensuring solutions that align with your business goals."
