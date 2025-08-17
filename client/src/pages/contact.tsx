@@ -177,6 +177,7 @@ export default function ContactPage() {
                 <div className="rounded-2xl overflow-hidden h-80">
                   <iframe
                     key={activeTab}
+                    className="animate-fade-in"
                     src={mapUrls[activeTab]}
                     width="100%"
                     height="100%"
