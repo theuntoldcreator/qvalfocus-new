@@ -35,14 +35,15 @@ export default function ContactPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-20 md:pt-28 pb-16 overflow-hidden">
+        <section className="relative pt-20 md:pt-28 pb-16 overflow-hidden bg-white dark:bg-slate-800">
           <div 
             className="absolute inset-0"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib-rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
+              backgroundImage: "url('https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
             }}
           >
             <div className="absolute inset-0 bg-slate-900/70"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-slate-800 dark:via-slate-800/80"></div>
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
