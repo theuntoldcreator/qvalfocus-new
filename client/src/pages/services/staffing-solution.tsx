@@ -3,35 +3,21 @@ import { Footer } from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { 
-  Users, 
-  Briefcase, 
-  Handshake,
-  FlaskConical,
-  CheckSquare,
-  Wrench,
-  UserCheck,
-  Laptop,
-  FileText,
-  Search,
-  Users2,
-  Building2
-} from "lucide-react";
 
 export default function StaffingSolutionPage() {
   const coreOfferings = [
-    { icon: Briefcase, title: "Contract & Contract-to-Hire", description: "Short-term or evaluation-based hires for maximum flexibility." },
-    { icon: Search, title: "Direct Hire & Executive Search", description: "Targeted recruitment for permanent and leadership roles." },
-    { icon: Users2, title: "FSP (Functional Service Provider) Teams", description: "Dedicated, embedded teams for consistent service delivery." },
-    { icon: Building2, title: "Project-Based Outsourcing", description: "Full project teams managed and delivered by QvalFocus." }
+    { imageUrl: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Contract & Contract-to-Hire" },
+    { imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Direct Hire & Executive Search" },
+    { imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "FSP (Functional Service Provider) Teams" },
+    { imageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Project-Based Outsourcing" }
   ];
 
   const expertiseAreas = [
-    { icon: FlaskConical, title: "Commissioning, Qualification & Validation (CQV)" },
-    { icon: CheckSquare, title: "Quality Control (QC) & Quality Assurance (QA)" },
-    { icon: Wrench, title: "Cleaning Validation" },
-    { icon: Laptop, title: "Computer System Validation (CSV)" },
-    { icon: Users, title: "Manufacturing & Process Engineers" },
+    { imageUrl: "https://images.unsplash.com/photo-1578493593483-26274f838a45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Commissioning, Qualification & Validation (CQV)" },
+    { imageUrl: "https://images.unsplash.com/photo-1581092916378-03b01dae62c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Quality Control (QC) & Quality Assurance (QA)" },
+    { imageUrl: "https://images.unsplash.com/photo-1628912129353-b755b6a7a36a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Cleaning Validation" },
+    { imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Computer System Validation (CSV)" },
+    { imageUrl: "https://images.unsplash.com/photo-1567942712680-08cfb7a4a52d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Manufacturing & Process Engineers" },
   ];
 
   return (
@@ -100,18 +86,18 @@ export default function StaffingSolutionPage() {
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Core Staffing Offerings</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {coreOfferings.map((offering, index) => {
-                const Icon = offering.icon;
-                return (
-                  <div key={index} className="glass dark:glass-dark rounded-2xl p-8 text-center">
-                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center">
-                      <Icon className="w-8 h-8 text-white" />
+              {coreOfferings.map((offering, index) => (
+                <div key={index} className="relative rounded-2xl overflow-hidden h-64 group flex items-center justify-center text-center">
+                  <img src={offering.imageUrl} alt={offering.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-black/50"></div>
+                  <div className="relative z-10 p-4">
+                    <div className="bg-slate-900/80 backdrop-blur-sm py-3 px-6 rounded-lg inline-block">
+                      <h3 className="text-lg font-bold text-white">{offering.title}</h3>
+                      <div className="h-0.5 bg-primary mt-2 w-1/2 mx-auto"></div>
                     </div>
-                    <h3 className="text-xl font-bold mb-4">{offering.title}</h3>
-                    <p className="text-slate-600 dark:text-slate-300">{offering.description}</p>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -123,17 +109,18 @@ export default function StaffingSolutionPage() {
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Specialized Resource Areas</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {expertiseAreas.map((area, index) => {
-                const Icon = area.icon;
-                return (
-                  <div key={index} className="glass dark:glass-dark rounded-2xl p-8 text-center hover:scale-105 transition-all duration-300">
-                    <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-primary to-accent rounded-xl flex items-center justify-center">
-                      <Icon className="w-8 h-8 text-white" />
+              {expertiseAreas.map((area, index) => (
+                <div key={index} className="relative rounded-2xl overflow-hidden h-64 group flex items-center justify-center text-center">
+                  <img src={area.imageUrl} alt={area.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-black/50"></div>
+                  <div className="relative z-10 p-4">
+                    <div className="bg-slate-900/80 backdrop-blur-sm py-3 px-6 rounded-lg inline-block">
+                      <h3 className="text-lg font-bold text-white">{area.title}</h3>
+                      <div className="h-0.5 bg-primary mt-2 w-1/2 mx-auto"></div>
                     </div>
-                    <h3 className="text-xl font-bold">{area.title}</h3>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
           </div>
         </section>
