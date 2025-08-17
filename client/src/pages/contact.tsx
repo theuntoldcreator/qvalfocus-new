@@ -36,25 +36,24 @@ export default function ContactPage() {
       <main>
         {/* Hero Section */}
         <section className="relative pt-20 md:pt-28 pb-16 overflow-hidden bg-white dark:bg-slate-800">
-          <div 
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
-            }}
-          >
-            <div className="absolute inset-0 bg-slate-900/70"></div>
-            <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent dark:from-slate-800 dark:via-slate-800/80"></div>
+          <div className="absolute inset-0">
+            <img 
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
+              alt="Team collaborating in a modern office"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/80 dark:from-slate-800 dark:via-slate-800/95 dark:to-slate-800/80"></div>
           </div>
           
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center text-white">
-              <Badge className="mb-6 bg-white/20 text-white border-white/30">
+            <div className="text-center">
+              <Badge className="mb-6">
                 Get In Touch
               </Badge>
-              <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
+              <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-slate-900 dark:text-white">
                 Ready to <span className="text-gradient">Connect?</span>
               </h1>
-              <p className="text-xl md:text-2xl text-slate-200 mb-8 max-w-3xl mx-auto">
+              <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
                 Whether you're seeking exceptional talent or your next career opportunity, 
                 we're here to forge meaningful connections.
               </p>
