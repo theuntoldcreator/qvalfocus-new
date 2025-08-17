@@ -6,18 +6,18 @@ import { Link } from "react-router-dom";
 
 export default function StaffingSolutionPage() {
   const coreOfferings = [
-    { imageUrl: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Contract & Contract-to-Hire" },
-    { imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Direct Hire & Executive Search" },
-    { imageUrl: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "FSP (Functional Service Provider) Teams" },
-    { imageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Project-Based Outsourcing" }
+    { imageUrl: "https://images.unsplash.com/photo-1556742044-538a3c1a1498?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Contract & Contract-to-Hire" },
+    { imageUrl: "https://images.unsplash.com/photo-1600880292203-943bb4522542?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Direct Hire & Executive Search" },
+    { imageUrl: "https://images.unsplash.com/photo-1573496799652-408c2ac9fe98?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "FSP (Functional Service Provider) Teams" },
+    { imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Project-Based Outsourcing" }
   ];
 
   const expertiseAreas = [
-    { imageUrl: "https://images.unsplash.com/photo-1578493593483-26274f838a45?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Commissioning, Qualification & Validation (CQV)" },
-    { imageUrl: "https://images.unsplash.com/photo-1581092916378-03b01dae62c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Quality Control (QC) & Quality Assurance (QA)" },
-    { imageUrl: "https://images.unsplash.com/photo-1628912129353-b755b6a7a36a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Cleaning Validation" },
-    { imageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Computer System Validation (CSV)" },
-    { imageUrl: "https://images.unsplash.com/photo-1567942712680-08cfb7a4a52d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Manufacturing & Process Engineers" },
+    { imageUrl: "https://images.unsplash.com/photo-1581092921447-c2a013a4d009?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Commissioning, Qualification & Validation (CQV)" },
+    { imageUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Quality Control (QC) & Quality Assurance (QA)" },
+    { imageUrl: "https://images.unsplash.com/photo-1616432525091-5052414051de?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Cleaning Validation" },
+    { imageUrl: "https://images.unsplash.com/photo-1614064641938-3bbee5293462?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Computer System Validation (CSV)" },
+    { imageUrl: "https://images.unsplash.com/photo-1633421822522-0584d645755e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80", title: "Manufacturing & Process Engineers" },
   ];
 
   return (
