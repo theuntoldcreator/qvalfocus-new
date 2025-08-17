@@ -39,7 +39,7 @@ export default function ContactPage() {
           <div 
             className="absolute inset-0"
             style={{
-              backgroundImage: "url('https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')"
+              backgroundImage: "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"
             }}
           >
             <div className="absolute inset-0 bg-slate-900/70"></div>
