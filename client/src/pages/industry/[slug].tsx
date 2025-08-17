@@ -7,11 +7,30 @@ import { industries, industryData } from "@/lib/data";
 import { 
   Cpu, 
   FlaskConical,
+  BrainCircuit,
+  ShieldCheck,
+  Zap,
+  Handshake,
+  Users,
+  TrendingUp,
+  Award,
+  Goal
 } from "lucide-react";
 
 const iconMap: { [key: string]: React.ElementType } = {
   "life-sciences": FlaskConical,
   "information-technology": Cpu,
+};
+
+const whyUsIconMap: { [key: string]: React.ElementType } = {
+  BrainCircuit,
+  ShieldCheck,
+  Zap,
+  Handshake,
+  Users,
+  TrendingUp,
+  Award,
+  Goal
 };
 
 export default function IndustryPage() {
@@ -137,30 +156,38 @@ export default function IndustryPage() {
         )}
 
         {/* Why Choose Us */}
-        <section className="py-20 bg-slate-100 dark:bg-slate-900">
+        <section className="py-20 bg-white dark:bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
                 {data.whyUsTitle || "Why Choose Us"}
               </h2>
             </div>
-            {typeof data.whyUs === 'string' ? (
-              <div className="max-w-4xl mx-auto text-center">
-                <p className="text-xl text-slate-700 dark:text-slate-300 leading-relaxed">{data.whyUs}</p>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="relative">
+                <img 
+                  src={data.whyUsImage}
+                  alt={data.whyUsTitle || "Why Choose Us"}
+                  className="w-full h-auto object-cover rounded-2xl shadow-lg"
+                />
               </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {data.whyUs.map((item: { title: string, imageUrl: string }, index: number) => (
-                  <div key={index} className="relative rounded-2xl overflow-hidden h-64 group flex items-end text-center">
-                    <img src={item.imageUrl} alt={item.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                    <div className="absolute inset-0 bg-black/50"></div>
-                    <div className="relative z-10 p-4 w-full">
-                      <h3 className="font-semibold text-white">{item.title}</h3>
+              <div className="space-y-8">
+                {data.whyUs.map((item: { icon: string; title: string; description: string }, index: number) => {
+                  const Icon = whyUsIconMap[item.icon];
+                  return (
+                    <div key={index} className="flex items-start">
+                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center mr-6">
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                        <p className="text-slate-600 dark:text-slate-300">{item.description}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
-            )}
+            </div>
           </div>
         </section>
 

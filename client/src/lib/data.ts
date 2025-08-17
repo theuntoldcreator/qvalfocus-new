@@ -26,11 +26,12 @@ export const industryData: { [key: string]: any } = {
       "Clinical Research Organizations (CROs): Regulatory compliance, computerized system validation.",
       "Microbiology Testing: Method validation for sterility, bioburden, and endotoxin testing."
     ],
+    whyUsImage: "https://images.unsplash.com/photo-1579154204601-01588f351e67?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     whyUs: [
-      { title: "Domain-driven specialists", imageUrl: "https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-      { title: "Audit-ready compliance culture", imageUrl: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-      { title: "Agile deployment models", imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" },
-      { title: "Long-term strategic partnerships", imageUrl: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
+      { icon: "BrainCircuit", title: "Domain-Driven Specialists", description: "Our team consists of industry veterans who understand the nuances of life sciences." },
+      { icon: "ShieldCheck", title: "Audit-Ready Compliance", description: "We ensure all our solutions meet stringent regulatory standards like GAMP 5 and 21 CFR Part 11." },
+      { icon: "Zap", title: "Agile Deployment Models", description: "We offer flexible engagement models to quickly scale your teams and projects up or down." },
+      { icon: "Handshake", title: "Strategic Partnerships", description: "We build long-term relationships, acting as an extension of your team to drive success." }
     ]
   },
   "information-technology": {
@@ -51,7 +52,13 @@ export const industryData: { [key: string]: any } = {
       { title: "Project-Based Outsourcing", description: "We manage complete project teams and deliverables, allowing you to outsource defined initiatives with confidence and efficiency.", imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" }
     ],
     whyUsTitle: "Build your Future Workforce with Qval Focus",
-    whyUs: "Qval Focus brings experience in Information Technology staffing and project solutions, combining deep industry expertise with a client-centric approach. Our agile and scalable delivery model allows us to quickly ramp up or scale down teams based on project demands. We prioritize quality through rigorously vetted candidates and outcome-driven execution, ensuring solutions that align with your business goals."
+    whyUsImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    whyUs: [
+      { icon: "Users", title: "Deep Industry Expertise", description: "Our client-centric approach is backed by extensive experience in IT staffing and project solutions." },
+      { icon: "TrendingUp", title: "Agile & Scalable Delivery", description: "Quickly ramp up or scale down teams based on your project demands with our flexible model." },
+      { icon: "Award", title: "Quality-Driven Execution", description: "We prioritize quality through rigorously vetted candidates and outcome-driven project management." },
+      { icon: "Goal", title: "Aligned with Your Goals", description: "Our solutions are designed to align with your business objectives, ensuring measurable success." }
+    ]
   }
 };
 
