@@ -35,7 +35,7 @@ export default function ContactPage() {
       
       <main>
         {/* Hero Section */}
-        <section className="relative pt-20 md:pt-28 pb-16 overflow-hidden bg-white dark:bg-slate-800">
+        <section className="relative pt-20 md:pt-28 pb-32 overflow-hidden bg-white dark:bg-slate-800">
           <div className="absolute inset-0">
             <img 
               src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
@@ -62,7 +62,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Form & Info Section */}
-        <section className="py-20 bg-white dark:bg-slate-800">
+        <section className="relative pb-20 mt-[-8rem]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Form Section */}
