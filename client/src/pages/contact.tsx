@@ -3,13 +3,13 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { ContactForm } from "@/components/forms/contact-form";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Building, 
   Users, 
   Phone, 
   Mail, 
-  MapPin,
-  Globe
+  MapPin
 } from "lucide-react";
 
 export default function ContactPage() {
@@ -55,109 +55,125 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Contact Type Selection */}
-        <section className="py-12 bg-slate-50 dark:bg-slate-900">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-center mb-8">
-              <div className="glass dark:glass-dark rounded-xl p-2 inline-flex">
-                <button
-                  onClick={() => setContactType("client")}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                    contactType === "client" 
-                      ? "bg-primary text-white shadow-lg" 
-                      : "text-slate-600 dark:text-slate-300 hover:text-primary"
-                  }`}
-                >
-                  <Building className="w-5 h-5 inline-block mr-2" />
-                  For Companies
-                </button>
-                <button
-                  onClick={() => setContactType("candidate")}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all ${
-                    contactType === "candidate" 
-                      ? "bg-primary text-white shadow-lg" 
-                      : "text-slate-600 dark:text-slate-300 hover:text-primary"
-                  }`}
-                >
-                  <Users className="w-5 h-5 inline-block mr-2" />
-                  For Professionals
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact Forms & Info */}
-        <section className="py-12 bg-white dark:bg-slate-800">
+        {/* Contact Form & Info Section */}
+        <section className="py-20 bg-white dark:bg-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              {/* Form */}
+              {/* Form Section */}
               <div className="glass dark:glass-dark rounded-2xl p-8">
+                <div className="flex justify-center mb-8">
+                  <div className="glass dark:glass-dark rounded-xl p-2 inline-flex">
+                    <button
+                      onClick={() => setContactType("client")}
+                      className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                        contactType === "client" 
+                          ? "bg-primary text-white shadow-lg" 
+                          : "text-slate-600 dark:text-slate-300 hover:text-primary"
+                      }`}
+                    >
+                      <Building className="w-5 h-5 inline-block mr-2" />
+                      For Companies
+                    </button>
+                    <button
+                      onClick={() => setContactType("candidate")}
+                      className={`px-6 py-3 rounded-lg font-semibold transition-all ${
+                        contactType === "candidate" 
+                          ? "bg-primary text-white shadow-lg" 
+                          : "text-slate-600 dark:text-slate-300 hover:text-primary"
+                      }`}
+                    >
+                      <Users className="w-5 h-5 inline-block mr-2" />
+                      For Professionals
+                    </button>
+                  </div>
+                </div>
                 <div className="mb-6">
                   {contactType === "client" ? (
-                    <div className="flex items-center mb-4">
-                      <div className="w-16 h-16 bg-gradient-to-r from-primary to-primary-600 rounded-xl flex items-center justify-center mr-4">
-                        <Building className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold">For Companies</h2>
-                        <p className="text-slate-600 dark:text-slate-300">Build your dream team with top talent</p>
-                      </div>
+                    <div className="text-center">
+                      <h2 className="text-2xl font-bold">For Companies</h2>
+                      <p className="text-slate-600 dark:text-slate-300">Build your dream team with top talent</p>
                     </div>
                   ) : (
-                    <div className="flex items-center mb-4">
-                      <div className="w-16 h-16 bg-gradient-to-r from-accent to-accent-600 rounded-xl flex items-center justify-center mr-4">
-                        <Users className="w-8 h-8 text-white" />
-                      </div>
-                      <div>
-                        <h2 className="text-2xl font-bold">For Professionals</h2>
-                        <p className="text-slate-600 dark:text-slate-300">Discover opportunities that accelerate your career</p>
-                      </div>
+                    <div className="text-center">
+                      <h2 className="text-2xl font-bold">For Professionals</h2>
+                      <p className="text-slate-600 dark:text-slate-300">Discover opportunities that accelerate your career</p>
                     </div>
                   )}
                 </div>
                 <ContactForm type={contactType} />
               </div>
 
-              {/* Contact Information */}
+              {/* Map & Details Section */}
               <div className="space-y-8">
                 <div className="glass dark:glass-dark rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold mb-6">Our Offices</h3>
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <MapPin className="w-6 h-6 text-primary mr-4 mt-1 flex-shrink-0" />
-                      <div>
-                        <div className="font-semibold mb-1">United States</div>
-                        <div className="text-slate-600 dark:text-slate-300">666 Plainsboro Rd #615, Plainsboro Township, NJ 08536</div>
+                  <h3 className="text-2xl font-bold mb-6">Our Global Offices</h3>
+                  <Tabs defaultValue="usa" className="w-full">
+                    <TabsList className="grid w-full grid-cols-2">
+                      <TabsTrigger value="usa">United States</TabsTrigger>
+                      <TabsTrigger value="india">India</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="usa" className="mt-6">
+                      <div className="space-y-4">
+                        <div className="flex items-start">
+                          <MapPin className="w-5 h-5 text-primary mr-4 mt-1 flex-shrink-0" />
+                          <div>
+                            <div className="font-semibold">United States</div>
+                            <div className="text-slate-600 dark:text-slate-300">666 Plainsboro Rd #615, Plainsboro Township, NJ 08536</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <Phone className="w-5 h-5 text-primary mr-4 mt-1" />
+                          <div>
+                            <div className="font-semibold">Phone</div>
+                            <div className="text-slate-600 dark:text-slate-300">+1 (609) 701-9988</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <Mail className="w-5 h-5 text-primary mr-4 mt-1" />
+                          <div>
+                            <div className="font-semibold">Email</div>
+                            <div className="text-slate-600 dark:text-slate-300">info@qvalfocus.com</div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-start">
-                      <MapPin className="w-6 h-6 text-primary mr-4 mt-1 flex-shrink-0" />
-                      <div>
-                        <div className="font-semibold mb-1">India</div>
-                        <div className="text-slate-600 dark:text-slate-300">Plot No 383, Bachpally, Hyderabad 500090</div>
+                    </TabsContent>
+                    <TabsContent value="india" className="mt-6">
+                      <div className="space-y-4">
+                        <div className="flex items-start">
+                          <MapPin className="w-5 h-5 text-primary mr-4 mt-1 flex-shrink-0" />
+                          <div>
+                            <div className="font-semibold">India</div>
+                            <div className="text-slate-600 dark:text-slate-300">Plot No 383, Bachpally, Hyderabad 500090, India</div>
+                          </div>
+                        </div>
+                         <div className="flex items-start">
+                          <Phone className="w-5 h-5 text-primary mr-4 mt-1" />
+                          <div>
+                            <div className="font-semibold">Phone</div>
+                            <div className="text-slate-600 dark:text-slate-300">+1 (609) 701-9988</div>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <Mail className="w-5 h-5 text-primary mr-4 mt-1" />
+                          <div>
+                            <div className="font-semibold">Email</div>
+                            <div className="text-slate-600 dark:text-slate-300">info@qvalfocus.com</div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    </TabsContent>
+                  </Tabs>
                 </div>
-                <div className="glass dark:glass-dark rounded-2xl p-8">
-                  <h3 className="text-2xl font-bold mb-6">Contact Details</h3>
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <Phone className="w-6 h-6 text-primary mr-4 mt-1" />
-                      <div>
-                        <div className="font-semibold mb-1">Phone</div>
-                        <div className="text-slate-600 dark:text-slate-300">+1 (609) 701-9988</div>
-                      </div>
-                    </div>
-                    <div className="flex items-start">
-                      <Mail className="w-6 h-6 text-primary mr-4 mt-1" />
-                      <div>
-                        <div className="font-semibold mb-1">Email</div>
-                        <div className="text-slate-600 dark:text-slate-300">info@qvalfocus.com</div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="rounded-2xl overflow-hidden h-80">
+                  <iframe
+                    src="https://maps.google.com/maps?q=666%20Plainsboro%20Rd%20%23615%2C%20Plainsboro%20Township%2C%20NJ%2008536&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
                 </div>
               </div>
             </div>
