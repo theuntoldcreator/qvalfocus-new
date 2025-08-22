@@ -42,7 +42,6 @@ export function MobileNav({ onClose, navLinks }: MobileNavProps) {
             <Link to="/" className="flex items-center space-x-2" onClick={onClose}>
               <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
             </Link>
-            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1 ml-12">The Global Recruitment Solutions</p>
           </div>
           <button onClick={onClose} className="text-slate-900 dark:text-white hover:text-primary">
             <X className="h-7 w-7" />
