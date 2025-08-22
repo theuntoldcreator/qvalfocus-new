@@ -143,7 +143,9 @@ export const companyInfo = {
   email: "info@qvalfocus.com",
   phone: "+1 (609) 701-9988",
   linkedin: "https://linkedin.com/company/qvalfocus",
-  twitter: "https://twitter.com/qvalfocus"
+  twitter: "https://twitter.com/qvalfocus",
+  facebook: "https://facebook.com/qvalfocus", // Added Facebook
+  instagram: "https://instagram.com/qvalfocus" // Added Instagram
 };
 
 export const leadership = [

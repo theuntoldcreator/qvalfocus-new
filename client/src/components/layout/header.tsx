@@ -10,46 +10,63 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useScroll } from "@/hooks/use-scroll";
 import { cn } from "@/lib/utils";
 import { industries } from "@/lib/data";
+import { TopBar } from "./TopBar"; // Import the new TopBar
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const isScrolled = useScroll();
   const location = useLocation();
 
   const navLinks = [
-    { to: "/about", label: "About" },
-    { to: "/jobs", label: "Careers" },
+    { to: "/", label: "Home" },
+    { to: "/about", label: "About Us" },
+    { to: "/contact", label: "Contact" },
   ];
 
   const mobileNavLinks = [
-    { to: "/services/staffing-solution", label: "Staffing Solutions" },
-    { to: "/services/project-solution", label: "Project Solutions" },
-    ...industries.map(industry => ({ to: `/industries/${industry.slug}`, label: industry.name })),
-    ...navLinks,
+    { to: "/", label: "Recruitment Home" },
+    { to: "/jobs", label: "Recruitment Home Alt" }, // Mapping to Jobs page
+    { to: "/about", label: "About Us" },
+    { to: "/services/staffing-solution", label: "Our Services" }, // Grouping services under one link for mobile
+    { to: "/case-studies", label: "Case Studies" },
+    { to: "/blogs", label: "News & Insights" },
+    { to: "/contact", label: "Contact Us" },
   ];
 
   return (
     <>
+      <TopBar /> {/* Integrate the new TopBar */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled ? "py-2 bg-white/95 backdrop-blur-sm shadow-sm dark:bg-slate-900/95" : "py-6"
+          "sticky top-0 left-0 right-0 z-50 bg-slate-900 text-white shadow-md" // Always dark, no scroll effect
         )}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between md:grid md:grid-cols-3">
-            <div className="md:justify-self-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-8" />
+                <span className="text-lg font-semibold text-white hidden sm:block">QvalFocus</span>
               </Link>
             </div>
             
-            <nav className="hidden md:flex items-center gap-6 justify-self-center">
+            <nav className="hidden md:flex items-center gap-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={cn(
+                    "text-sm font-medium hover:text-primary transition-colors",
+                    location.pathname === link.to && "text-primary"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-sm font-medium text-slate-900 dark:text-slate-200 hover:text-primary transition-colors">
+                <DropdownMenuTrigger className="flex items-center text-sm font-medium hover:text-primary transition-colors">
                   Services <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -63,40 +80,26 @@ export function Header() {
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-sm font-medium text-slate-900 dark:text-slate-200 hover:text-primary transition-colors">
-                  Industries <ChevronDown className="ml-1 h-4 w-4" />
+                <DropdownMenuTrigger className="flex items-center text-sm font-medium hover:text-primary transition-colors">
+                  Pages <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  {industries.map((industry) => (
-                    <DropdownMenuItem key={industry.id} asChild>
-                      <Link to={`/industries/${industry.slug}`}>{industry.name}</Link>
-                    </DropdownMenuItem>
-                  ))}
+                  <DropdownMenuItem asChild><Link to="/blogs">Blogs</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/case-studies">Case Studies</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/customers">Customers</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/guides">Guides</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/pricing">Pricing</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/legal/privacy">Privacy Policy</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/legal/terms">Terms of Service</Link></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-
-              {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={cn(
-                    "text-sm font-medium text-slate-900 dark:text-slate-200 hover:text-primary transition-colors",
-                    location.pathname === link.to && "text-primary"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
             </nav>
             
-            <div className="hidden md:flex items-center justify-self-end">
-              <Button asChild>
-                <Link to="/contact">Contact Us</Link>
+            <div className="flex items-center space-x-4">
+              <Button asChild className="bg-yellow-400 text-slate-950 hover:bg-yellow-500 hidden md:inline-flex">
+                <Link to="/contact?type=client">Hire A Talent</Link>
               </Button>
-            </div>
-
-            <div className="md:hidden flex items-center justify-end md:col-start-3">
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white">
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
