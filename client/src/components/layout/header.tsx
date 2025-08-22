@@ -109,7 +109,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
 
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild>
-                        <Link to="/about" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/about"))}>
+                        <Link to="/about" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/about"), "bg-slate-100")}>
                           About Us
                         </Link>
                       </NavigationMenuLink>
@@ -164,7 +164,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
 
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild>
-                        <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/contact"))}>
+                        <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/contact"), "bg-slate-100")}>
                           Contact
                         </Link>
                       </NavigationMenuLink>
