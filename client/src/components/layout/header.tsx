@@ -132,7 +132,7 @@ export function Header() {
                 <DropdownMenuTrigger asChild>
                   <Button asChild className={cn(
                     "hidden md:inline-flex",
-                    "bg-brand-blue text-white hover:bg-blue-700" // Always blue
+                    "bg-brand-blue text-white" // Removed hover:bg-blue-700
                   )}>
                     <span className="flex items-center">
                       Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
