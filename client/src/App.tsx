@@ -6,6 +6,7 @@ import { AuthProvider } from "./providers/auth-provider";
 import { ThemeProvider } from "./providers/theme-provider";
 import ScrollToTop from "./components/scroll-to-top";
 import { Toaster } from "./components/ui/toaster";
+import { services, pagesLinks } from "./lib/data"; // Import services and pagesLinks
 
 // Layout Components
 import { Header } from "./components/layout/header";
@@ -49,19 +50,9 @@ import { NewsletterManagement } from "./components/admin/newsletter-management";
 const publicNavLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Us" },
-  { to: "/services/staffing-solution", label: "Staffing Solutions" },
-  { to: "/services/project-solution", label: "Project Solutions" },
-  { to: "/industries", label: "Industries" },
-  { to: "/jobs", label: "Careers" },
-  { to: "/blogs", label: "Blogs" },
+  ...services.map(service => ({ to: service.link, label: service.title })),
+  ...pagesLinks.map(page => ({ to: page.link, label: page.title })),
   { to: "/contact", label: "Contact" },
-  { to: "/case-studies", label: "Case Studies" },
-  { to: "/changelog", label: "Changelog" },
-  { to: "/customers", label: "Customers" },
-  { to: "/guides", label: "Guides" },
-  { to: "/pricing", label: "Pricing" },
-  { to: "/legal/privacy", label: "Privacy Policy" },
-  { to: "/legal/terms", label: "Terms of Service" },
 ];
 
 const RootLayout = () => {

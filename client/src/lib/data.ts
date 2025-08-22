@@ -143,6 +143,59 @@ export const services = [
   }
 ];
 
+export const pagesLinks = [
+  {
+    title: "Industries",
+    description: "Explore our specialized industry expertise.",
+    link: "/industries",
+  },
+  {
+    title: "Careers",
+    description: "Find your next opportunity with us.",
+    link: "/jobs",
+  },
+  {
+    title: "Blogs",
+    description: "Stay informed with our latest insights.",
+    link: "/blogs",
+  },
+  {
+    title: "Case Studies",
+    description: "Discover our success stories.",
+    link: "/case-studies",
+  },
+  {
+    title: "Changelog",
+    description: "See our latest updates and features.",
+    link: "/changelog",
+  },
+  {
+    title: "Customers",
+    description: "Hear from our valued partners.",
+    link: "/customers",
+  },
+  {
+    title: "Guides",
+    description: "In-depth resources and tutorials.",
+    link: "/guides",
+  },
+  {
+    title: "Pricing",
+    description: "Understand our service models.",
+    link: "/pricing",
+  },
+  {
+    title: "Privacy Policy",
+    description: "Learn how we protect your data.",
+    link: "/legal/privacy",
+  },
+  {
+    title: "Terms of Service",
+    description: "Our terms and conditions.",
+    link: "/legal/terms",
+  },
+];
+
 export const companyInfo = {
   name: "QvalFocus",
   tagline: "Driving Operational Excellence Through Deep Domain Expertise.",

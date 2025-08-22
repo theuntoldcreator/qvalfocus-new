@@ -16,7 +16,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { services } from "@/lib/data"; // Import services data
+import { services, pagesLinks } from "@/lib/data"; // Import services and pagesLinks data
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
@@ -47,6 +47,10 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
+                <div className="flex flex-col leading-none">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">QvalFocus</span>
+                  <span className="text-base font-bold text-slate-900 dark:text-white">Staffing & Consulting</span>
+                </div>
               </Link>
             </div>
 
@@ -94,19 +98,31 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <Link to="/industries" className={navLinkClasses("/industries")}>
-                        Industries
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <Link to="/jobs" className={navLinkClasses("/jobs")}>
-                        Careers
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <Link to="/blogs" className={navLinkClasses("/blogs")}>
-                        Blogs
-                      </Link>
+                      <NavigationMenuTrigger className={navLinkClasses("/pages")}>
+                        Pages
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                          {pagesLinks.map((page) => (
+                            <li key={page.link}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={page.link}
+                                  className={cn(
+                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                                    location.pathname.startsWith(page.link) && "bg-accent text-accent-foreground"
+                                  )}
+                                >
+                                  <div className="text-sm font-medium leading-none">{page.title}</div>
+                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                    {page.description}
+                                  </p>
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <Link to="/contact" className={navLinkClasses("/contact")}>
@@ -117,8 +133,8 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                 </NavigationMenu>
               </nav>
 
-              <div className="flex items-center space-x-4">
-                <Button asChild className="hidden md:inline-flex">
+              <div className="flex items-center space-x-4 ml-8"> {/* Added ml-8 for spacing */}
+                <Button asChild className="hidden md:inline-flex bg-avada-yellow text-slate-900 hover:bg-avada-yellow/90">
                   <Link to="/contact?type=client">
                     Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Link>
