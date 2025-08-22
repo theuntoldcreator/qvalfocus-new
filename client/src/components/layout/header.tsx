@@ -41,6 +41,31 @@ export function Header() {
     { to: "/legal/terms", label: "Terms of Service" },
   ];
 
+  // Base classes for all nav items
+  const baseNavLinkClasses = "text-base font-medium transition-colors";
+
+  // Function to get conditional classes for each nav item
+  const getNavLinkClasses = (path: string) => cn(
+    baseNavLinkClasses,
+    // Default idle color (black)
+    "text-slate-900",
+    // Hover color
+    isScrolled ? "hover:text-primary" : "hover:text-white/80",
+    // Active color
+    (location.pathname === path || location.pathname.startsWith(path + '/')) && "text-primary"
+  );
+
+  // Function to get conditional classes for dropdown triggers
+  const getDropdownTriggerClasses = (paths: string[]) => cn(
+    baseNavLinkClasses,
+    // Default idle color (black)
+    "text-slate-900",
+    // Hover color
+    isScrolled ? "hover:text-primary" : "hover:text-white/80",
+    // Active color (if any of the paths match)
+    paths.some(path => location.pathname.startsWith(path)) && "text-primary"
+  );
+
   return (
     <>
       <TopBar />
@@ -48,8 +73,8 @@ export function Header() {
         className={cn(
           "sticky top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
-            ? "navbar-glass shadow-md text-slate-900" // Scrolled state
-            : "bg-transparent text-white" // Top state (assuming dark hero background)
+            ? "navbar-glass shadow-md" // Scrolled state
+            : "bg-transparent" // Top state
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,36 +89,18 @@ export function Header() {
             
             <nav className="hidden md:flex items-center gap-6">
               {/* Home Link */}
-              <Link
-                to="/"
-                className={cn(
-                  "text-base font-medium transition-colors",
-                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
-                  location.pathname === "/" && (isScrolled ? "text-primary" : "text-white")
-                )}
-              >
+              <Link to="/" className={getNavLinkClasses("/")}>
                 Home
               </Link>
 
               {/* About Us Link */}
-              <Link
-                to="/about"
-                className={cn(
-                  "text-base font-medium transition-colors",
-                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
-                  location.pathname === "/about" && (isScrolled ? "text-primary" : "text-white")
-                )}
-              >
+              <Link to="/about" className={getNavLinkClasses("/about")}>
                 About Us
               </Link>
 
               {/* Services Dropdown */}
               <DropdownMenu>
-                <DropdownMenuTrigger className={cn(
-                  "flex items-center text-base font-medium transition-colors",
-                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
-                  location.pathname.startsWith("/services") && (isScrolled ? "text-primary" : "text-white")
-                )}>
+                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/services"])}>
                   Services <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="p-0 w-auto">
@@ -103,11 +110,7 @@ export function Header() {
 
               {/* Pages Dropdown */}
               <DropdownMenu>
-                <DropdownMenuTrigger className={cn(
-                  "flex items-center text-base font-medium transition-colors",
-                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
-                  (location.pathname.startsWith("/blogs") || location.pathname.startsWith("/case-studies") || location.pathname.startsWith("/customers") || location.pathname.startsWith("/guides") || location.pathname.startsWith("/pricing") || location.pathname.startsWith("/legal")) && (isScrolled ? "text-primary" : "text-white")
-                )}>
+                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/blogs", "/case-studies", "/customers", "/guides", "/pricing", "/legal"])}>
                   Pages <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -122,14 +125,7 @@ export function Header() {
               </DropdownMenu>
 
               {/* Contact Link */}
-              <Link
-                to="/contact"
-                className={cn(
-                  "text-base font-medium transition-colors",
-                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
-                  location.pathname === "/contact" && (isScrolled ? "text-primary" : "text-white")
-                )}
-              >
+              <Link to="/contact" className={getNavLinkClasses("/contact")}>
                 Contact
               </Link>
             </nav>
