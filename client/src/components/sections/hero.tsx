@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // New image from Unsplash
+  "https://images.unsplash.com/photos/people-sitting-on-chair-5U_28ojjgms", // Updated image from Unsplash
 ];
 
 export function Hero() {
@@ -31,12 +31,12 @@ export function Hero() {
             <motion.img
               key={currentImageIndex}
               src={heroImages[currentImageIndex]}
-              alt="Team working in an office"
+              alt="People sitting on chairs in a modern office"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover object-right" // Added object-right
+              className="absolute inset-0 w-full h-full object-cover object-right"
             />
           </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-transparent flex flex-col items-start justify-center text-left p-8 md:p-12">
