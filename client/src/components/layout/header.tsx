@@ -85,7 +85,6 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
                 <div className="flex flex-col leading-none">
                   <span className="text-base font-bold text-slate-900 dark:text-white">{companyInfo.name}</span>
-                  <span className="text-sm text-slate-500 dark:text-slate-400">{companyInfo.tagline}</span>
                 </div>
               </Link>
             </div>
