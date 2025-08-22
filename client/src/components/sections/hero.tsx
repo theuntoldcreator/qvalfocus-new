@@ -39,7 +39,7 @@ export function Hero() {
               className="absolute inset-0 w-full h-full object-cover object-left"
             />
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-transparent flex flex-col items-start justify-center text-left p-8 md:p-12">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-transparent flex flex-col items-start justify-end text-left p-8 md:p-12 pb-16 md:pb-24">
             <p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 animate-fade-in font-freigeist">
               Helping Job Seekers Get Working Opportunities!
             </p>
