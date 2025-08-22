@@ -21,11 +21,11 @@ export default {
           foreground: "var(--popover-foreground)",
         },
         primary: {
-          DEFAULT: "var(--primary)", // Avada Yellow
-          foreground: "var(--primary-foreground)",
+          DEFAULT: "var(--primary)", // Now Avada Green
+          foreground: "var(--primary-foreground)", // Now White
         },
         secondary: {
-          DEFAULT: "var(--secondary)", // Avada Dark Green
+          DEFAULT: "var(--secondary)", // Keep as Avada Light Green or similar
           foreground: "var(--secondary-foreground)",
         },
         muted: {
@@ -33,8 +33,8 @@ export default {
           foreground: "var(--muted-foreground)",
         },
         accent: {
-          DEFAULT: "var(--accent)", // Avada Dark Green
-          foreground: "var(--accent-foreground)",
+          DEFAULT: "var(--accent)", // Now Avada Yellow
+          foreground: "var(--accent-foreground)", // Now Dark text on yellow
         },
         destructive: {
           DEFAULT: "var(--destructive)",
@@ -66,7 +66,7 @@ export default {
         // Avada specific colors
         'avada-yellow': '#fcdb00',
         'avada-green': '#1a4731',
-        'avada-green-darker': '#103020', // Added darker green for borders/hovers
+        'avada-green-darker': '#103020',
         'avada-light-green': '#e6f2ed',
         'avada-light-purple': '#f5f3ff',
       },

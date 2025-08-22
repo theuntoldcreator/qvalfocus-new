@@ -14,14 +14,14 @@ export function ServicesDropdownContent() {
   return (
     <div className="grid grid-cols-2 gap-0 w-[600px] p-0">
       {/* Left Column: Recruitment Services Description */}
-      <div className="bg-avada-green text-white p-8 flex flex-col justify-between rounded-l-md">
+      <div className="bg-primary text-primary-foreground p-8 flex flex-col justify-between rounded-l-md">
         <div>
           <h3 className="text-2xl font-bold mb-4">Recruitment Services</h3>
-          <p className="text-avada-light-green text-sm leading-relaxed">
+          <p className="text-primary-foreground/80 text-sm leading-relaxed">
             Lumattis element cum semps honec mare. Dolor auctor urna dignissim sed nunc sit plateas uellentesque tempor.
           </p>
         </div>
-        <Button variant="link" asChild className="text-avada-yellow hover:text-yellow-300 p-0 h-auto justify-start">
+        <Button variant="link" asChild className="text-accent hover:text-accent/80 p-0 h-auto justify-start">
           <Link to="/services/staffing-solution" className="flex items-center">
             Learn More <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
@@ -37,7 +37,7 @@ export function ServicesDropdownContent() {
             className="flex items-center justify-between p-4 border-b border-slate-100 dark:border-slate-700 last:border-b-0 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
           >
             <div className="flex items-center">
-              <ArrowRight className="h-4 w-4 text-avada-green rotate-45 mr-3" />
+              <ArrowRight className="h-4 w-4 text-primary rotate-45 mr-3" />
               <span className="font-medium text-slate-900 dark:text-white">{service.label}</span>
             </div>
             <div

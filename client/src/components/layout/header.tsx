@@ -125,7 +125,7 @@ export function Header() {
             <div className="flex items-center space-x-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button asChild className="bg-avada-yellow text-slate-950 hover:bg-yellow-500 hidden md:inline-flex">
+                  <Button asChild className="bg-primary text-primary-foreground hover:bg-avada-green-darker hidden md:inline-flex">
                     <span className="flex items-center">
                       Hire A Talent <ChevronDown className="ml-2 h-4 w-4" />
                     </span>
