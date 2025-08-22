@@ -14,36 +14,27 @@ import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
 import { ServicesDropdownContent } from "./services-dropdown-content";
 import { useScroll } from "@/hooks/use-scroll"; // Import useScroll
-import { ChatButton } from "@/components/ChatButton"; // Import the new ChatButton
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isPagesDropdownOpen, setIsPagesDropdownOpen] = useState(false);
-  const [isHireTalentDropdownOpen, setIsHireTalentDropdownOpen] = useState(false);
+  // Removed isHireTalentDropdownOpen as it's no longer a dropdown
 
   const location = useLocation();
   const isScrolled = useScroll(50); // Detect scroll after 50px
 
-  const navLinks = [
-    { to: "/", label: "Home" },
-    { to: "/about", label: "About Us" },
-    { to: "/contact", label: "Contact" },
-  ];
+  // Removed navLinks as they are now handled by mobileNavLinks for the sidebar
+  // and directly in the desktop nav structure.
 
   const mobileNavLinks = [
-    { to: "/", label: "Home" },
+    { to: "/", label: "Recruitment Home" },
+    { to: "/", label: "Recruitment Home Alt" }, // Assuming this also links to home for now
     { to: "/about", label: "About Us" },
-    { to: "/services/staffing-solution", label: "Services" },
-    { to: "/industries", label: "Industries" },
-    { to: "/blogs", label: "Blogs" },
-    { to: "/contact", label: "Contact" },
+    { to: "/services/staffing-solution", label: "Our Services" }, // General services link
     { to: "/case-studies", label: "Case Studies" },
-    { to: "/customers", label: "Customers" },
-    { to: "/guides", label: "Guides" },
-    { to: "/pricing", label: "Pricing" },
-    { to: "/legal/privacy", label: "Privacy Policy" },
-    { to: "/legal/terms", label: "Terms of Service" },
+    { to: "/blogs", label: "News & Insights" }, // Blogs are news & insights
+    { to: "/contact", label: "Contact Us" },
   ];
 
   // Base classes for all nav items
@@ -127,28 +118,26 @@ export function Header() {
             </nav>
             
             <div className="flex items-center space-x-4">
-              <DropdownMenu onOpenChange={setIsHireTalentDropdownOpen}>
-                <DropdownMenuTrigger asChild>
-                  <Button asChild className="inline-flex bg-avada-yellow text-accent-foreground hover:bg-avada-yellow">
-                    <span className="flex items-center">
-                      Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
-                    </span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild><Link to="/contact?type=client">Client Inquiry</Link></DropdownMenuItem>
-                  <DropdownMenuItem asChild><Link to="/admin/dashboard/jobs/new">Post a Job</Link></DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              {/* New "Hire A Talent" button that opens the mobile nav */}
+              <Button 
+                asChild 
+                className="inline-flex bg-avada-yellow text-accent-foreground hover:bg-avada-yellow"
+                onClick={() => setIsMobileMenuOpen(true)} // Opens the mobile nav
+              >
+                <span className="flex items-center">
+                  Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
+                </span>
+              </Button>
 
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-                className={cn(
-                  "text-slate-900" // Always dark text on white header
-                )}
+              {/* Hamburger menu button - always visible */}
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+                className="text-slate-900" // Always dark text on white header
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
-              <ChatButton /> {/* Add the new ChatButton here */}
             </div>
           </div>
         </div>
