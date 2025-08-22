@@ -4,14 +4,20 @@ export const industries = [
     name: "Life Sciences",
     description: "Aseptic Manufacturing, Biologics, Validation",
     slug: "life-sciences",
-    imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initialImage: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    hoverImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    icon: "FlaskConical"
   },
   {
     id: "information-technology",
     name: "Information Technology", 
     description: "Software, Cloud, Data, Cybersecurity",
     slug: "information-technology",
-    imageUrl: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+    imageUrl: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    initialImage: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    hoverImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    icon: "Cpu"
   }
 ];
 
@@ -118,18 +124,22 @@ export const services = [
     title: "Staffing Solution",
     description: "Flexible and scalable staffing services tailored to your organization’s goals, from filling critical roles to building long-term hiring strategies.",
     features: [],
-    icon: "👥",
+    icon: "Users",
     color: "primary",
-    link: "/services/staffing-solution"
+    link: "/services/staffing-solution",
+    initialImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    hoverImage: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "project-solution", 
     title: "Project Solution",
     description: "End-to-end project-based solutions to accelerate delivery, improve efficiency, and meet regulatory or technical demands.",
     features: [],
-    icon: "📊",
+    icon: "HardHat",
     color: "accent",
-    link: "/services/project-solution"
+    link: "/services/project-solution",
+    initialImage: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    hoverImage: "https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
   }
 ];
 
@@ -144,8 +154,8 @@ export const companyInfo = {
   phone: "+1 (609) 701-9988",
   linkedin: "https://linkedin.com/company/qvalfocus",
   twitter: "https://twitter.com/qvalfocus",
-  facebook: "https://facebook.com/qvalfocus", // Added Facebook
-  instagram: "https://instagram.com/qvalfocus" // Added Instagram
+  facebook: "https://facebook.com/qvalfocus",
+  instagram: "https://instagram.com/qvalfocus"
 };
 
 export const leadership = [
