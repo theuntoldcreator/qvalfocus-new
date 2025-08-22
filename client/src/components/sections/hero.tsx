@@ -5,11 +5,11 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1556761175-5973dd30399d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80&q=80&object-position=right", // New image 1, focus right
-  "https://images.unsplash.com/photo-1557804506-669a67965da0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // Updated image 2
-  "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80&object-position=right", // New image 3, focus right
-  "https://images.unsplash.com/photo-1504384308090-c894fd241d81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80&object-position=right", // Added new image 4
-  "https://images.unsplash.com/photo-1504384308090-c894fd241d81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80&object-position=right", // Added new image 5
+  "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+  "https://images.unsplash.com/photo-1517245386807-bb43f82c33d3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+  "https://images.unsplash.com/photo-1504384308090-c894fd241d81?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+  "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
+  "https://images.unsplash.com/photo-1556761175-5973dd30399d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80",
 ];
 
 export function Hero() {
