@@ -83,9 +83,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
-                <div className="flex flex-col leading-none">
-                  <span className="text-base font-bold text-slate-900 dark:text-white">{companyInfo.name}</span>
-                </div>
+                {/* Removed the company name span */}
               </Link>
             </div>
 
