@@ -23,20 +23,13 @@ export function Header() {
   const location = useLocation();
   const isScrolled = useScroll(50); // Detect scroll after 50px
 
-  // Updated mobileNavLinks to include all main pages and services
+  // Updated mobileNavLinks to include all main pages and services as per the image
   const mobileNavLinks = [
-    { to: "/", label: "Home" },
+    { to: "/", label: "Recruitment Home" },
     { to: "/about", label: "About Us" },
-    { to: "/services/staffing-solution", label: "Staffing Solutions" },
-    { to: "/services/project-solution", label: "Project Solutions" },
-    { to: "/industries", label: "Industries" },
-    { to: "/blogs", label: "Blogs" },
+    { to: "/services/staffing-solution", label: "Our Services" }, // General services link
     { to: "/case-studies", label: "Case Studies" },
-    { to: "/customers", label: "Customers" },
-    { to: "/guides", label: "Guides" },
-    { to: "/pricing", label: "Pricing" },
-    { to: "/legal/privacy", label: "Privacy Policy" },
-    { to: "/legal/terms", label: "Terms of Service" },
+    { to: "/blogs", label: "News & Insights" }, // Blogs as News & Insights
     { to: "/contact", label: "Contact Us" },
   ];
 
