@@ -32,7 +32,7 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}
@@ -61,7 +61,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
   const location = useLocation();
 
   const navLinkClasses = (path: string) => cn(
-    "text-base font-medium transition-colors hover:text-primary",
+    "text-base font-medium transition-colors hover:underline decoration-slate-300 underline-offset-4",
     (path === '/' ? location.pathname === path : location.pathname.startsWith(path)) 
       ? "text-primary" 
       : "text-slate-700 dark:text-slate-300"
