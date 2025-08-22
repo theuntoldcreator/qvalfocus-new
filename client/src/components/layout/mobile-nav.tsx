@@ -15,8 +15,8 @@ export function MobileNav({ onClose, navLinks }: MobileNavProps) {
   const location = useLocation();
 
   const sidebarVariants = {
-    hidden: { x: "-100%" }, // Slide from left
-    visible: { x: "0%" },
+    hidden: { x: "-100%", opacity: 0 }, // Start invisible and off-screen
+    visible: { x: "0%", opacity: 1 }, // Fade in and slide to screen
   };
 
   // Hardcoded details from the provided image

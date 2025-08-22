@@ -19,21 +19,24 @@ export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isPagesDropdownOpen, setIsPagesDropdownOpen] = useState(false);
-  // Removed isHireTalentDropdownOpen as it's no longer a dropdown
 
   const location = useLocation();
   const isScrolled = useScroll(50); // Detect scroll after 50px
 
-  // Removed navLinks as they are now handled by mobileNavLinks for the sidebar
-  // and directly in the desktop nav structure.
-
+  // Updated mobileNavLinks to include all main pages and services
   const mobileNavLinks = [
-    { to: "/", label: "Recruitment Home" },
-    { to: "/", label: "Recruitment Home Alt" }, // Assuming this also links to home for now
+    { to: "/", label: "Home" },
     { to: "/about", label: "About Us" },
-    { to: "/services/staffing-solution", label: "Our Services" }, // General services link
+    { to: "/services/staffing-solution", label: "Staffing Solutions" },
+    { to: "/services/project-solution", label: "Project Solutions" },
+    { to: "/industries", label: "Industries" },
+    { to: "/blogs", label: "Blogs" },
     { to: "/case-studies", label: "Case Studies" },
-    { to: "/blogs", label: "News & Insights" }, // Blogs are news & insights
+    { to: "/customers", label: "Customers" },
+    { to: "/guides", label: "Guides" },
+    { to: "/pricing", label: "Pricing" },
+    { to: "/legal/privacy", label: "Privacy Policy" },
+    { to: "/legal/terms", label: "Terms of Service" },
     { to: "/contact", label: "Contact Us" },
   ];
 
