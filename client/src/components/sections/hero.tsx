@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1557804506-669a67965da9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // A person working on a laptop, with the focus on the right side
+  "https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // A team collaborating with a whiteboard, good for business analysis
 ];
 
 export function Hero() {
@@ -31,7 +31,7 @@ export function Hero() {
             <motion.img
               key={currentImageIndex}
               src={heroImages[currentImageIndex]}
-              alt="Person working on a laptop"
+              alt="Team working in an office"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
