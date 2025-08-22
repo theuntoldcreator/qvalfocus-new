@@ -16,7 +16,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/custom-navigation-menu";
-import { pagesLinks, services } from "@/lib/data";
+import { pagesLinks, services, industries } from "@/lib/data";
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
@@ -65,6 +65,8 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
     (location.pathname === path || (path !== "/" && location.pathname.startsWith(path))) ? "text-primary active" : "text-slate-700 dark:text-slate-300"
   );
 
+  const resourceLinks = pagesLinks.filter(p => ['/blogs', '/case-studies', '/guides'].includes(p.link));
+
   return (
     <>
       <TopBar />
@@ -96,13 +98,57 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                         <span className="nav-link-underline">About Us</span>
                       </Link>
                     </NavigationMenuItem>
-                    {services.map((service) => (
-                      <NavigationMenuItem key={service.id}>
-                        <Link to={service.link} className={cn(navLinkClasses(service.link), "inline-flex h-10 items-center justify-center px-4 py-2")}>
-                          <span className="nav-link-underline">{service.title}</span>
-                        </Link>
-                      </NavigationMenuItem>
-                    ))}
+                    
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className={navLinkClasses("/services")}>
+                        <span className="nav-link-underline">Services</span>
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                          {services.map((service) => (
+                            <ListItem key={service.title} title={service.title} href={service.link}>
+                              {service.description}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className={navLinkClasses("/industries")}>
+                        <span className="nav-link-underline">Industries</span>
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                          {industries.map((industry) => (
+                            <ListItem key={industry.name} title={industry.name} href={`/industries/${industry.slug}`}>
+                              {industry.description}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className={navLinkClasses("/resources")}>
+                        <span className="nav-link-underline">Resources</span>
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px]">
+                          {resourceLinks.map((page) => (
+                            <ListItem key={page.title} title={page.title} href={page.link}>
+                              {page.description}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
+                      <Link to="/jobs" className={cn(navLinkClasses("/jobs"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
+                        <span className="nav-link-underline">Careers</span>
+                      </Link>
+                    </NavigationMenuItem>
                     <NavigationMenuItem>
                       <Link to="/contact" className={cn(navLinkClasses("/contact"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
                         <span className="nav-link-underline">Contact</span>
