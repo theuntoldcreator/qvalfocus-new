@@ -87,48 +87,7 @@ export function Header() {
               </Link>
             </div>
             
-            <nav className="hidden md:flex items-center gap-6">
-              {/* Home Link */}
-              <Link to="/" className={getNavLinkClasses("/")}>
-                Home
-              </Link>
-
-              {/* About Us Link */}
-              <Link to="/about" className={getNavLinkClasses("/about")}>
-                About Us
-              </Link>
-
-              {/* Services Dropdown */}
-              <DropdownMenu onOpenChange={setIsServicesDropdownOpen}>
-                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/services"], isServicesDropdownOpen)}>
-                  Services <ChevronDown className={cn("ml-1 h-4 w-4 transition-transform", isServicesDropdownOpen && "rotate-180")} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="p-0 w-auto">
-                  <ServicesDropdownContent />
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Pages Dropdown */}
-              <DropdownMenu onOpenChange={setIsPagesDropdownOpen}>
-                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/blogs", "/case-studies", "/customers", "/guides", "/pricing", "/legal"], isPagesDropdownOpen)}>
-                  Pages <ChevronDown className={cn("ml-1 h-4 w-4 transition-transform", isPagesDropdownOpen && "rotate-180")} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild><Link to="/blogs">Blogs</Link></DropdownMenuItem>
-                  <DropdownMenuItem asChild><Link to="/case-studies">Case Studies</Link></DropdownMenuItem>
-                  <DropdownMenuItem asChild><Link to="/customers">Customers</Link></DropdownMenuItem>
-                  <DropdownMenuItem asChild><Link to="/guides">Guides</Link></DropdownMenuItem>
-                  <DropdownMenuItem asChild><Link to="/pricing">Pricing</Link></DropdownMenuItem>
-                  <DropdownMenuItem asChild><Link to="/legal/privacy">Privacy Policy</Link></DropdownMenuItem>
-                  <DropdownMenuItem asChild><Link to="/legal/terms">Terms of Service</Link></DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Contact Link */}
-              <Link to="/contact" className={getNavLinkClasses("/contact")}>
-                Contact
-              </Link>
-            </nav>
+            {/* Main navigation removed as requested */}
             
             <div className="flex items-center space-x-4">
               <DropdownMenu onOpenChange={setIsHireTalentDropdownOpen}>
