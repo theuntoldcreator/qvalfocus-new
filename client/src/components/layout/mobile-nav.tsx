@@ -58,7 +58,7 @@ export function MobileNav({ onClose, navLinks }: MobileNavProps) {
         animate="visible"
         exit="hidden"
         transition={{ type: "spring", stiffness: 400, damping: 40 }}
-        className="fixed inset-y-0 left-0 w-full max-w-xs bg-avada-green text-white shadow-lg flex flex-col" // Dark green background
+        className="fixed inset-y-0 left-0 w-full max-w-xs bg-avada-green text-white shadow-lg flex flex-col rounded-r-3xl" // Dark green background with rounded right corners
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -89,7 +89,7 @@ export function MobileNav({ onClose, navLinks }: MobileNavProps) {
                 to={link.to}
                 onClick={onClose}
                 className={cn(
-                  "block py-3 px-4 rounded-lg text-base font-medium transition-colors",
+                  "block py-3 px-4 rounded-xl text-base font-medium transition-colors", // Changed to rounded-xl
                   location.pathname === link.to
                     ? "bg-avada-green-darker text-avada-yellow" // Active link style
                     : "hover:bg-avada-green-darker"
