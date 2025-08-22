@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, ArrowUpRight, ChevronDown } from "lucide-react";
+import { Menu, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
@@ -16,13 +16,12 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { services, pagesLinks, companyInfo, recruitmentDropdownServices } from "@/lib/data"; // Import new data
+import { pagesLinks, recruitmentDropdownServices } from "@/lib/data";
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
 }
 
-// Helper component for list items in dropdowns
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a"> & { icon?: React.ElementType; image?: string }
@@ -42,7 +41,7 @@ const ListItem = React.forwardRef<
             {Icon && <Icon className="mr-2 h-4 w-4 text-primary group-hover:text-accent-foreground" />}
             <div className="text-sm font-medium leading-none">{title}</div>
             {image && (
-              <img src={image} alt={title} className="ml-auto h-10 w-20 object-cover rounded-md" />
+              <img src={image} alt={title || ""} className="ml-auto h-10 w-20 object-cover rounded-md" />
             )}
           </div>
           {children && (
@@ -57,14 +56,15 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-
 export function Header({ onToggleMobileMenu }: HeaderProps) {
   const isScrolled = useScroll(50);
   const location = useLocation();
 
   const navLinkClasses = (path: string) => cn(
     "text-base font-medium transition-colors hover:text-primary",
-    (location.pathname === path || location.pathname.startsWith(path + '/')) ? "text-primary" : "text-slate-700 dark:text-slate-300"
+    (path === '/' ? location.pathname === path : location.pathname.startsWith(path)) 
+      ? "text-primary" 
+      : "text-slate-700 dark:text-slate-300"
   );
 
   return (
@@ -82,38 +82,48 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
-                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
-                {/* Removed the company name span */}
+                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
               </Link>
             </div>
 
-            {/* Group Desktop Navigation and Action Buttons */}
             <div className="flex items-center">
-              {/* Desktop Navigation */}
-              <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+              <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
                 <NavigationMenu>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <Link to="/" className={navLinkClasses("/")}>
-                        Home
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <Link to="/about" className={navLinkClasses("/about")}>
-                        About Us
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/services")}>
-                        Services
-                      </NavigationMenuTrigger>
+                      <NavigationMenuTrigger className={navLinkClasses("/")}>Home</NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0"> {/* Adjusted width and grid */}
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
+                          <ListItem href="/#about" title="About Us">
+                            Learn more about our mission and values.
+                          </ListItem>
+                          <ListItem href="/#services" title="Our Services">
+                            Explore our staffing and project solutions.
+                          </ListItem>
+                          <ListItem href="/#jobs" title="Featured Jobs">
+                            Find your next career opportunity.
+                          </ListItem>
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link to="/about" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/about"))}>
+                          About Us
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className={navLinkClasses("/services")}>Services</NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0">
                           <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
                             <div>
                               <h4 className="text-2xl font-bold mb-3">Recruitment Services</h4>
                               <p className="text-primary-100 text-sm leading-relaxed">
-                                Lumattis element cum semps honec rnar. Dolor auctor urna dignissim sed nunc sit plateas uellenttesque tempor.
+                                We provide comprehensive recruitment services to connect top talent with leading companies.
                               </p>
                             </div>
                             <Button variant="link" asChild className="text-avada-light-green hover:text-white p-0 h-auto justify-start">
@@ -128,7 +138,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                                 key={item.title}
                                 title={item.title}
                                 href={item.link}
-                                icon={ArrowUpRight} // Using ArrowUpRight as per image
+                                icon={ArrowUpRight}
                                 image={item.image}
                               >
                                 {item.description}
@@ -138,55 +148,44 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                         </div>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
+
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/pages")}>
-                        Pages
-                      </NavigationMenuTrigger>
+                      <NavigationMenuTrigger className={navLinkClasses("/pages")}>Pages</NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                           {pagesLinks.map((page) => (
-                            <li key={page.link}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={page.link}
-                                  className={cn(
-                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                                    location.pathname.startsWith(page.link) && "bg-accent text-accent-foreground"
-                                  )}
-                                >
-                                  <div className="text-sm font-medium leading-none">{page.title}</div>
-                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                    {page.description}
-                                  </p>
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
+                            <ListItem key={page.link} title={page.title} href={page.link}>
+                              {page.description}
+                            </ListItem>
                           ))}
                         </ul>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
+
                     <NavigationMenuItem>
-                      <Link to="/contact" className={navLinkClasses("/contact")}>
-                        Contact
-                      </Link>
+                      <NavigationMenuLink asChild>
+                        <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/contact"))}>
+                          Contact
+                        </Link>
+                      </NavigationMenuLink>
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
               </nav>
 
-              <div className="flex items-center space-x-4 ml-8"> {/* Added ml-8 for spacing */}
+              <div className="flex items-center space-x-4 ml-8">
                 <Button asChild className="hidden md:inline-flex bg-avada-yellow text-slate-900 hover:bg-avada-yellow/90">
                   <Link to="/contact?type=client">
                     Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
 
-                {/* Mobile menu button */}
                 <Button
                   variant="ghost"
                   size="icon"
                   onClick={onToggleMobileMenu}
                   className="md:hidden text-slate-900 dark:text-white"
+                  aria-label="Open mobile menu"
                 >
                   <Menu className="h-6 w-6" />
                 </Button>
