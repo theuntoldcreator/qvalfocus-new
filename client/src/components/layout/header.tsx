@@ -61,7 +61,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
   const location = useLocation();
 
   const navLinkClasses = (path: string) => cn(
-    "text-base font-medium transition-colors hover:underline decoration-slate-300 underline-offset-4",
+    "text-base font-medium transition-colors",
     (path === '/' ? location.pathname === path : location.pathname.startsWith(path)) 
       ? "text-primary" 
       : "text-slate-700 dark:text-slate-300"
