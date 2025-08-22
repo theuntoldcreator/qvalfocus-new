@@ -1,13 +1,16 @@
+import * as React from "react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { MoveUpRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
 const searchServices = [
   {
@@ -34,10 +37,32 @@ const searchServices = [
 ];
 
 export function ExecutiveSearch() {
+  const [api, setApi] = React.useState<CarouselApi>();
+  const [current, setCurrent] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    setCurrent(api.selectedScrollSnap());
+
+    const onSelect = () => {
+      setCurrent(api.selectedScrollSnap());
+    };
+
+    api.on("select", onSelect);
+
+    return () => {
+      api.off("select", onSelect);
+    };
+  }, [api]);
+
   return (
     <section className="py-20 bg-white dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Carousel
+          setApi={setApi}
           opts={{
             align: "start",
             loop: true,
@@ -48,7 +73,14 @@ export function ExecutiveSearch() {
             {searchServices.map((service, index) => (
               <CarouselItem key={index}>
                 <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
+                  <div
+                    className={cn(
+                      "grid grid-cols-1 lg:grid-cols-2 items-center transition-all duration-500 ease-out",
+                      current === index
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-8"
+                    )}
+                  >
                     <div className="p-8 md:p-12">
                       <MoveUpRight className="w-12 h-12 text-slate-300 dark:text-slate-600 mb-6" />
                       <p className="text-sm font-semibold text-primary mb-2 uppercase tracking-wider">
