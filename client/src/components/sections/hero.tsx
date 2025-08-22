@@ -24,7 +24,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative pt-8 pb-20 md:pb-32 bg-white dark:bg-slate-900 overflow-hidden">
+    <section className="relative pb-20 md:pb-32 bg-white dark:bg-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden">
           <AnimatePresence initial={false}>
