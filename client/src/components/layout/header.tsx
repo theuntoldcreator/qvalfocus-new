@@ -47,23 +47,23 @@ export function Header() {
   // Function to get conditional classes for each nav item
   const getNavLinkClasses = (path: string) => cn(
     baseNavLinkClasses,
-    // Default idle color (black)
-    "text-slate-900",
-    // Hover color
-    isScrolled ? "hover:text-primary" : "hover:text-white/80",
+    // Default idle color (white when transparent, dark when scrolled)
+    isScrolled ? "text-slate-900 dark:text-white" : "text-white",
+    // Hover color (accent when transparent, primary when scrolled)
+    isScrolled ? "hover:text-primary" : "hover:text-accent",
     // Active color
-    (location.pathname === path || location.pathname.startsWith(path + '/')) && "text-primary"
+    (location.pathname === path || location.pathname.startsWith(path + '/')) && (isScrolled ? "text-primary" : "text-accent")
   );
 
   // Function to get conditional classes for dropdown triggers
   const getDropdownTriggerClasses = (paths: string[]) => cn(
     baseNavLinkClasses,
-    // Default idle color (black)
-    "text-slate-900",
-    // Hover color
-    isScrolled ? "hover:text-primary" : "hover:text-white/80",
+    // Default idle color (white when transparent, dark when scrolled)
+    isScrolled ? "text-slate-900 dark:text-white" : "text-white",
+    // Hover color (accent when transparent, primary when scrolled)
+    isScrolled ? "hover:text-primary" : "hover:text-accent",
     // Active color (if any of the paths match)
-    paths.some(path => location.pathname.startsWith(path)) && "text-primary"
+    paths.some(path => location.pathname.startsWith(path)) && (isScrolled ? "text-primary" : "text-accent")
   );
 
   return (
@@ -81,9 +81,11 @@ export function Header() {
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
-                {/* The logo is dark. If it's not visible against the transparent header, 
-                    you might need to provide a white version or apply a CSS filter. */}
-                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
+                <img 
+                  src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" 
+                  alt="QvalFocus Logo" 
+                  className={cn("h-10 transition-all duration-300", !isScrolled && "filter invert")} // Invert for white logo when transparent
+                />
               </Link>
             </div>
             
@@ -153,7 +155,7 @@ export function Header() {
               <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
                 className={cn(
                   "md:hidden",
-                  isScrolled ? "text-slate-900" : "text-white"
+                  isScrolled ? "text-slate-900 dark:text-white" : "text-white" // Mobile menu icon color
                 )}
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
