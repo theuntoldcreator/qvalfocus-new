@@ -38,7 +38,7 @@ export function Header() {
     { to: "/blogs", label: "Blogs" },
     { to: "/contact", label: "Contact" },
     { to: "/case-studies", label: "Case Studies" },
-    { to: "/customers", label: "Customers" },
+    { to: "/customers", "label": "Customers" },
     { to: "/guides", label: "Guides" },
     { to: "/pricing", label: "Pricing" },
     { to: "/legal/privacy", label: "Privacy Policy" },
@@ -132,9 +132,9 @@ export function Header() {
                 <DropdownMenuTrigger asChild>
                   <Button asChild className={cn(
                     "hidden md:inline-flex",
-                    "bg-brand-blue text-white shadow-sm hover:bg-brand-blue" // Added shadow-sm and explicit hover:bg-brand-blue
+                    "bg-brand-blue text-white shadow-sm hover:bg-brand-blue"
                   )}>
-                    <span className="flex items-center">
+                    <span className="flex items-center text-white"> {/* Added text-white here */}
                       Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                     </span>
                   </Button>
