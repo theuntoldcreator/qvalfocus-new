@@ -47,7 +47,7 @@ export function Hero() {
               Bringing The Global Recruitment Solutions
             </h1>
             <div className="flex flex-col sm:flex-row gap-4 justify-start animate-slide-up">
-              <Button size="lg" asChild className="bg-accent text-accent-foreground hover:bg-yellow-500">
+              <Button size="lg" asChild className="bg-avada-blue text-white hover:bg-blue-700">
                 <Link to="/about">
                   Learn More <ArrowUpRight className="ml-2 h-4 w-4" />
                 </Link>
