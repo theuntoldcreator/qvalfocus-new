@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { cn } => "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
 import { ServicesDropdownContent } from "./services-dropdown-content";
 import { useScroll } from "@/hooks/use-scroll"; // Import useScroll
@@ -82,6 +82,7 @@ export function Header() {
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
                 <div className="flex flex-col">
                   <span className="text-xs text-slate-900 font-medium">QvalFocus</span>
+                  <span className="text-lg font-bold text-slate-900 leading-none">Recruitment Agency</span>
                 </div>
               </Link>
             </div>
