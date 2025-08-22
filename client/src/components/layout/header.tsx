@@ -11,7 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { TopBar } from "./TopBar"; // Import the new TopBar
+import { TopBar } from "./TopBar";
+import { ServicesDropdownContent } from "./services-dropdown-content"; // Import the new component
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -40,50 +41,63 @@ export function Header() {
 
   return (
     <>
-      <TopBar /> {/* Integrate the new TopBar */}
+      <TopBar />
       <header
         className={cn(
-          "sticky top-0 left-0 right-0 z-50 bg-white text-slate-900 shadow-md" // White background for main header
+          "sticky top-0 left-0 right-0 z-50 bg-white text-slate-900 shadow-md"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between"> {/* Increased height */}
+          <div className="flex h-20 items-center justify-between">
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
-                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" /> {/* Larger logo */}
+                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
+                <span className="text-lg font-semibold">Recruitment Agency</span>
               </Link>
             </div>
             
             <nav className="hidden md:flex items-center gap-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={cn(
-                    "text-base font-medium hover:text-primary transition-colors",
-                    location.pathname === link.to && "text-primary"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {/* Home Link (no dropdown visible in image, keeping simple) */}
+              <Link
+                to="/"
+                className={cn(
+                  "text-base font-medium hover:text-primary transition-colors",
+                  location.pathname === "/" && "text-primary"
+                )}
+              >
+                Home
+              </Link>
 
+              {/* About Us Link */}
+              <Link
+                to="/about"
+                className={cn(
+                  "text-base font-medium hover:text-primary transition-colors",
+                  location.pathname === "/about" && "text-primary"
+                )}
+              >
+                About Us
+              </Link>
+
+              {/* Services Dropdown */}
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-base font-medium hover:text-primary transition-colors">
+                <DropdownMenuTrigger className={cn(
+                  "flex items-center text-base font-medium hover:text-primary transition-colors",
+                  location.pathname.startsWith("/services") && "text-primary"
+                )}>
                   Services <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem asChild>
-                    <Link to="/services/staffing-solution">Staffing Solutions</Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/services/project-solution">Project Solutions</Link>
-                  </DropdownMenuItem>
+                <DropdownMenuContent className="p-0 w-auto">
+                  <ServicesDropdownContent />
                 </DropdownMenuContent>
               </DropdownMenu>
 
+              {/* Pages Dropdown */}
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-base font-medium hover:text-primary transition-colors">
+                <DropdownMenuTrigger className={cn(
+                  "flex items-center text-base font-medium hover:text-primary transition-colors",
+                  (location.pathname.startsWith("/blogs") || location.pathname.startsWith("/case-studies") || location.pathname.startsWith("/customers") || location.pathname.startsWith("/guides") || location.pathname.startsWith("/pricing") || location.pathname.startsWith("/legal")) && "text-primary"
+                )}>
                   Pages <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -96,12 +110,34 @@ export function Header() {
                   <DropdownMenuItem asChild><Link to="/legal/terms">Terms of Service</Link></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+
+              {/* Contact Link */}
+              <Link
+                to="/contact"
+                className={cn(
+                  "text-base font-medium hover:text-primary transition-colors",
+                  location.pathname === "/contact" && "text-primary"
+                )}
+              >
+                Contact
+              </Link>
             </nav>
             
             <div className="flex items-center space-x-4">
-              <Button asChild className="bg-avada-yellow text-slate-950 hover:bg-yellow-500 hidden md:inline-flex">
-                <Link to="/contact?type=client">Hire A Talent</Link>
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button asChild className="bg-avada-yellow text-slate-950 hover:bg-yellow-500 hidden md:inline-flex">
+                    <span className="flex items-center">
+                      Hire A Talent <ChevronDown className="ml-2 h-4 w-4" />
+                    </span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem asChild><Link to="/contact?type=client">Client Inquiry</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link to="/admin/dashboard/jobs/new">Post a Job</Link></DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
               <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-slate-900">
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>

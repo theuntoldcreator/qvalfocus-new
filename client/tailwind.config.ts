@@ -66,6 +66,7 @@ export default {
         // Avada specific colors
         'avada-yellow': '#fcdb00',
         'avada-green': '#1a4731',
+        'avada-green-darker': '#103020', // Added darker green for borders/hovers
         'avada-light-green': '#e6f2ed',
         'avada-light-purple': '#f5f3ff',
       },
