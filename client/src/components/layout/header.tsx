@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react"; // Import ArrowUpRight
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { AnimatePresence } from "framer-motion";
@@ -52,6 +52,7 @@ export function Header() {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
+                <span className="text-lg font-semibold">Recruitment Agency</span>
               </Link>
             </div>
             
@@ -125,9 +126,9 @@ export function Header() {
             <div className="flex items-center space-x-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button asChild className="bg-primary text-primary-foreground hover:bg-avada-green-darker hidden md:inline-flex">
+                  <Button asChild className="bg-accent text-accent-foreground hover:bg-yellow-500 hidden md:inline-flex">
                     <span className="flex items-center">
-                      Hire A Talent <ChevronDown className="ml-2 h-4 w-4" />
+                      Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                     </span>
                   </Button>
                 </DropdownMenuTrigger>
