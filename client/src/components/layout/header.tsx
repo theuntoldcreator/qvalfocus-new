@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react"; // Import ArrowUpRight
+import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "./mobile-nav";
 import { AnimatePresence } from "framer-motion";
@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
-import { ServicesDropdownContent } from "./services-dropdown-content"; // Import the new component
+import { ServicesDropdownContent } from "./services-dropdown-content";
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -52,7 +52,7 @@ export function Header() {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
-                <span className="text-lg font-semibold">Recruitment Agency</span>
+                {/* Removed "Recruitment Agency" text */}
               </Link>
             </div>
             
