@@ -80,10 +80,6 @@ export function Header() {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
-                <div className="flex flex-col">
-                  <span className="text-xs text-slate-900 font-medium">QvalFocus</span>
-                  <span className="text-lg font-bold text-slate-900 leading-none">Recruitment Agency</span>
-                </div>
               </Link>
             </div>
             
