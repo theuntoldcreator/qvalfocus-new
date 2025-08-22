@@ -119,12 +119,11 @@ export function Header() {
             
             <div className="flex items-center space-x-4">
               {/* New "Hire A Talent" button that opens the mobile nav */}
-              <Button 
-                asChild 
-                className="inline-flex bg-avada-yellow text-accent-foreground hover:bg-avada-yellow"
-                onClick={() => setIsMobileMenuOpen(true)} // Opens the mobile nav
+              <Button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="inline-flex items-center justify-center p-1 rounded-full bg-avada-blue hover:bg-avada-blue" // Outer blue button
               >
-                <span className="flex items-center">
+                <span className="flex items-center px-4 py-2 rounded-full bg-avada-yellow text-accent-foreground"> {/* Inner yellow "button" look */}
                   Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                 </span>
               </Button>

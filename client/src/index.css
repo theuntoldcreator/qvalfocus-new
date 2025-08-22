@@ -49,7 +49,8 @@
     --shadow-2xl: 0px 25px 50px -12px hsl(222, 84%, 5%, 0.25);
     --tracking-normal: 0em;
     --spacing: 0.25rem;
-    --avada-light-blue: #bfdbfe; /* Added light blue color */
+    --avada-light-blue: #bfdbfe;
+    --avada-blue: #3b82f6; /* New custom blue color */
 }
 
 @layer base {

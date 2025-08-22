@@ -69,7 +69,8 @@ export default {
         'avada-green-darker': '#103020',
         'avada-light-green': '#e6f2ed',
         'avada-light-purple': '#f5f3ff',
-        'avada-light-blue': '#bfdbfe', // Added light blue color
+        'avada-light-blue': '#bfdbfe',
+        'avada-blue': '#3b82f6', // New custom blue color
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
