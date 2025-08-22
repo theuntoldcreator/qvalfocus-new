@@ -130,12 +130,7 @@ export function Header() {
             <div className="flex items-center space-x-4">
               <DropdownMenu onOpenChange={setIsHireTalentDropdownOpen}>
                 <DropdownMenuTrigger asChild>
-                  <Button asChild className={cn(
-                    "hidden md:inline-flex",
-                    isScrolled 
-                      ? "bg-accent text-accent-foreground hover:bg-yellow-500" 
-                      : "bg-white text-primary hover:bg-slate-200" // White button when transparent
-                  )}>
+                  <Button asChild className="hidden md:inline-flex bg-avada-light-blue text-primary hover:bg-avada-light-blue">
                     <span className="flex items-center">
                       Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                     </span>
