@@ -90,7 +90,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
             {/* Group Desktop Navigation and Action Buttons */}
             <div className="flex items-center">
               {/* Desktop Navigation */}
-              <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
                 <NavigationMenu>
                   <NavigationMenuList>
                     <NavigationMenuItem>
