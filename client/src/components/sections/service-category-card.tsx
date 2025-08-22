@@ -20,7 +20,8 @@ export function ServiceCategoryCard({
   link,
 }: ServiceCategoryCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const Icon: React.ElementType = LucideIcons[iconName]; // Dynamically get the icon component and type it
+  // Explicitly cast to React.ElementType to resolve the JSX element type error
+  const Icon = LucideIcons[iconName] as React.ElementType; 
 
   return (
     <Link
