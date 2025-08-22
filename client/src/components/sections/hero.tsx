@@ -39,6 +39,8 @@ export function Hero() {
               className="absolute inset-0 w-full h-full object-cover object-left"
             />
           </AnimatePresence>
+          {/* Inner shadow overlay */}
+          <div className="absolute inset-0 rounded-3xl shadow-[inset_0_0_30px_rgba(0,0,0,0.4)]"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-transparent flex flex-col items-start justify-end text-left p-8 md:p-12 pb-16 md:pb-24">
             <p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 animate-fade-in font-freigeist">
               Helping Job Seekers Get Working Opportunities!
