@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
-  "https://assets.replit.com/images/1721747682000-pasted-image-2025-08-22T13-54-42-969Z.jpeg", // New image from attachment
+  "/images/hero.webp", // Using the local hero.webp image
 ];
 
 export function Hero() {
