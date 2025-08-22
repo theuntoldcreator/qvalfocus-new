@@ -6,11 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast"; // Corrected import path
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2 } from "lucide-react";
+import type { Job } from "@shared/schema"; // Import Job type
 
-export default function ApplyModal({ open, onOpenChange, job }) {
+interface ApplyModalProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  job: Job; // Explicitly type job prop
+}
+
+export default function ApplyModal({ open, onOpenChange, job }: ApplyModalProps) {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -21,7 +28,7 @@ export default function ApplyModal({ open, onOpenChange, job }) {
     }
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => { // Explicitly type event
     event.preventDefault();
     if (!resumeFile) {
       toast({
@@ -34,7 +41,7 @@ export default function ApplyModal({ open, onOpenChange, job }) {
 
     setIsSubmitting(true);
     try {
-      const formData = new FormData(event.target);
+      const formData = new FormData(event.currentTarget); // Use currentTarget for form elements
       const formValues = Object.fromEntries(formData.entries());
 
       // 1. Upload resume to Supabase Storage
@@ -63,16 +70,16 @@ export default function ApplyModal({ open, onOpenChange, job }) {
       const { error: insertError } = await supabase.from('applications').insert([
         {
           job_id: job.id,
-          first_name: formValues.first_name,
-          last_name: formValues.last_name,
-          email: formValues.email,
-          phone: formValues.phone,
-          current_role: formValues.current_role,
-          experience_level: formValues.experience_level,
-          linkedin: formValues.linkedin,
-          github: formValues.github,
-          portfolio: formValues.portfolio,
-          cover_letter: formValues.cover_letter,
+          first_name: formValues.first_name as string,
+          last_name: formValues.last_name as string,
+          email: formValues.email as string,
+          phone: (formValues.phone as string) || null,
+          current_role: (formValues.current_role as string) || null,
+          experience_level: formValues.experience_level as string,
+          linkedin: (formValues.linkedin as string) || null,
+          github: (formValues.github as string) || null,
+          portfolio: (formValues.portfolio as string) || null,
+          cover_letter: (formValues.cover_letter as string) || null,
           resume_url: urlData.publicUrl,
         },
       ]);
@@ -86,10 +93,10 @@ export default function ApplyModal({ open, onOpenChange, job }) {
         description: "Your application has been submitted successfully.",
       });
       onOpenChange(false);
-    } catch (error) {
+    } catch (error: unknown) { // Explicitly type error as unknown
       toast({
         title: "An Error Occurred",
-        description: error.message,
+        description: error instanceof Error ? error.message : "An unexpected error occurred.", // Safely access error message
         variant: "destructive",
       });
     } finally {

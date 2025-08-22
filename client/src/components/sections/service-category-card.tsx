@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import * as LucideIcons from "lucide-react"; // Import all Lucide icons
+import React from "react"; // Import React for React.ElementType
 
 interface ServiceCategoryCardProps {
   title: string;
@@ -19,7 +20,7 @@ export function ServiceCategoryCard({
   link,
 }: ServiceCategoryCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const Icon = LucideIcons[iconName]; // Dynamically get the icon component
+  const Icon: React.ElementType = LucideIcons[iconName]; // Dynamically get the icon component and type it
 
   return (
     <Link
