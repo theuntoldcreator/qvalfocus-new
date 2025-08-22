@@ -9,19 +9,19 @@
     --card-foreground: hsl(222, 47%, 11%);
     --popover: hsl(0, 0%, 100%);
     --popover-foreground: hsl(222, 47%, 11%);
-    --primary: hsl(224, 83%, 58%);
-    --primary-foreground: hsl(0, 0%, 100%);
-    --secondary: hsl(222, 83%, 97%);
-    --secondary-foreground: hsl(222, 83%, 58%);
+    --primary: #fcdb00; /* Avada Yellow */
+    --primary-foreground: hsl(222, 47%, 11%); /* Dark text on yellow */
+    --secondary: #1a4731; /* Avada Dark Green */
+    --secondary-foreground: hsl(0, 0%, 100%); /* White text on dark green */
     --muted: hsl(222, 40%, 96%);
     --muted-foreground: hsl(222, 30%, 50%);
-    --accent: hsl(224, 83%, 58%);
+    --accent: #1a4731; /* Avada Dark Green */
     --accent-foreground: hsl(0, 0%, 100%);
     --destructive: hsl(356, 90%, 54%);
     --destructive-foreground: hsl(0, 0%, 100%);
     --border: hsl(222, 40%, 91%);
     --input: hsl(222, 40%, 97%);
-    --ring: hsl(222, 83%, 58%);
+    --ring: #fcdb00; /* Avada Yellow */
     --chart-1: hsl(222, 83%, 58%);
     --chart-2: hsl(173, 80%, 36%);
     --chart-3: hsl(222, 47%, 51%);

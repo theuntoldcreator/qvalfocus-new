@@ -6,7 +6,7 @@ import { companyInfo } from '@/lib/data';
 
 export function TopBar() {
   return (
-    <div className="bg-slate-950 text-slate-300 text-sm py-2 hidden md:block">
+    <div className="bg-avada-green text-slate-300 text-sm py-2 hidden md:block">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         <div className="flex items-center space-x-6">
           <a href={`tel:${companyInfo.phone}`} className="flex items-center hover:text-white transition-colors">
@@ -19,7 +19,7 @@ export function TopBar() {
           </a>
         </div>
         <div className="flex items-center space-x-4">
-          <Link to="/contact?type=candidate" className="flex items-center text-yellow-400 hover:text-yellow-300 transition-colors">
+          <Link to="/contact?type=candidate" className="flex items-center text-avada-yellow hover:text-yellow-300 transition-colors">
             Drop Your CV
           </Link>
           <div className="h-4 w-px bg-slate-700" />

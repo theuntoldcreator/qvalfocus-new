@@ -21,21 +21,11 @@ export default {
           foreground: "var(--popover-foreground)",
         },
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          DEFAULT: "var(--primary)",
+          DEFAULT: "var(--primary)", // Avada Yellow
           foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
+          DEFAULT: "var(--secondary)", // Avada Dark Green
           foreground: "var(--secondary-foreground)",
         },
         muted: {
@@ -43,17 +33,7 @@ export default {
           foreground: "var(--muted-foreground)",
         },
         accent: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          DEFAULT: "var(--accent)",
+          DEFAULT: "var(--accent)", // Avada Dark Green
           foreground: "var(--accent-foreground)",
         },
         destructive: {
@@ -82,7 +62,12 @@ export default {
         },
         violet: {
           100: '#f5f3ff',
-        }
+        },
+        // Avada specific colors
+        'avada-yellow': '#fcdb00',
+        'avada-green': '#1a4731',
+        'avada-light-green': '#e6f2ed',
+        'avada-light-purple': '#f5f3ff',
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

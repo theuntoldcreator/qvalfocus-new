@@ -11,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { industries } from "@/lib/data";
 import { TopBar } from "./TopBar"; // Import the new TopBar
 
 export function Header() {
@@ -25,13 +24,18 @@ export function Header() {
   ];
 
   const mobileNavLinks = [
-    { to: "/", label: "Recruitment Home" },
-    { to: "/jobs", label: "Recruitment Home Alt" }, // Mapping to Jobs page
+    { to: "/", label: "Home" },
     { to: "/about", label: "About Us" },
-    { to: "/services/staffing-solution", label: "Our Services" }, // Grouping services under one link for mobile
+    { to: "/services/staffing-solution", label: "Services" },
+    { to: "/industries", label: "Industries" },
+    { to: "/blogs", label: "Blogs" },
+    { to: "/contact", label: "Contact" },
     { to: "/case-studies", label: "Case Studies" },
-    { to: "/blogs", label: "News & Insights" },
-    { to: "/contact", label: "Contact Us" },
+    { to: "/customers", label: "Customers" },
+    { to: "/guides", label: "Guides" },
+    { to: "/pricing", label: "Pricing" },
+    { to: "/legal/privacy", label: "Privacy Policy" },
+    { to: "/legal/terms", label: "Terms of Service" },
   ];
 
   return (
@@ -39,15 +43,15 @@ export function Header() {
       <TopBar /> {/* Integrate the new TopBar */}
       <header
         className={cn(
-          "sticky top-0 left-0 right-0 z-50 bg-slate-900 text-white shadow-md" // Always dark, no scroll effect
+          "sticky top-0 left-0 right-0 z-50 bg-white text-slate-900 shadow-md" // White background for main header
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-20 items-center justify-between"> {/* Increased height */}
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
-                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-8" />
-                <span className="text-lg font-semibold text-white hidden sm:block">QvalFocus</span>
+                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" /> {/* Larger logo */}
+                <span className="text-2xl font-bold text-slate-900 hidden sm:block">Recruitment Agency</span> {/* Avada text logo */}
               </Link>
             </div>
             
@@ -57,7 +61,7 @@ export function Header() {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "text-sm font-medium hover:text-primary transition-colors",
+                    "text-base font-medium hover:text-primary transition-colors",
                     location.pathname === link.to && "text-primary"
                   )}
                 >
@@ -66,7 +70,7 @@ export function Header() {
               ))}
 
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-sm font-medium hover:text-primary transition-colors">
+                <DropdownMenuTrigger className="flex items-center text-base font-medium hover:text-primary transition-colors">
                   Services <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -80,7 +84,7 @@ export function Header() {
               </DropdownMenu>
 
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center text-sm font-medium hover:text-primary transition-colors">
+                <DropdownMenuTrigger className="flex items-center text-base font-medium hover:text-primary transition-colors">
                   Pages <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
@@ -96,10 +100,10 @@ export function Header() {
             </nav>
             
             <div className="flex items-center space-x-4">
-              <Button asChild className="bg-yellow-400 text-slate-950 hover:bg-yellow-500 hidden md:inline-flex">
+              <Button asChild className="bg-avada-yellow text-slate-950 hover:bg-yellow-500 hidden md:inline-flex">
                 <Link to="/contact?type=client">Hire A Talent</Link>
               </Button>
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white">
+              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-slate-900">
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
