@@ -17,6 +17,10 @@ import { useScroll } from "@/hooks/use-scroll"; // Import useScroll
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isPagesDropdownOpen, setIsPagesDropdownOpen] = useState(false);
+  const [isHireTalentDropdownOpen, setIsHireTalentDropdownOpen] = useState(false);
+
   const location = useLocation();
   const isScrolled = useScroll(50); // Detect scroll after 50px
 
@@ -56,14 +60,14 @@ export function Header() {
   );
 
   // Function to get conditional classes for dropdown triggers
-  const getDropdownTriggerClasses = (paths: string[]) => cn(
+  const getDropdownTriggerClasses = (paths: string[], isOpen: boolean) => cn(
     baseNavLinkClasses,
     // Default idle color (black)
     "text-slate-900",
     // Hover color
     isScrolled ? "hover:text-primary" : "hover:text-white/80",
-    // Active color (if any of the paths match)
-    paths.some(path => location.pathname.startsWith(path)) && "text-primary"
+    // Active color (if any of the paths match OR if the dropdown is open)
+    (paths.some(path => location.pathname.startsWith(path)) || isOpen) && "text-primary"
   );
 
   return (
@@ -81,8 +85,6 @@ export function Header() {
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
-                {/* The logo is dark. If it's not visible against the transparent header, 
-                    you might need to provide a white version or apply a CSS filter. */}
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
               </Link>
             </div>
@@ -99,9 +101,9 @@ export function Header() {
               </Link>
 
               {/* Services Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/services"])}>
-                  Services <ChevronDown className="ml-1 h-4 w-4" />
+              <DropdownMenu onOpenChange={setIsServicesDropdownOpen}>
+                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/services"], isServicesDropdownOpen)}>
+                  Services <ChevronDown className={cn("ml-1 h-4 w-4 transition-transform", isServicesDropdownOpen && "rotate-180")} />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="p-0 w-auto">
                   <ServicesDropdownContent />
@@ -109,9 +111,9 @@ export function Header() {
               </DropdownMenu>
 
               {/* Pages Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/blogs", "/case-studies", "/customers", "/guides", "/pricing", "/legal"])}>
-                  Pages <ChevronDown className="ml-1 h-4 w-4" />
+              <DropdownMenu onOpenChange={setIsPagesDropdownOpen}>
+                <DropdownMenuTrigger className={getDropdownTriggerClasses(["/blogs", "/case-studies", "/customers", "/guides", "/pricing", "/legal"], isPagesDropdownOpen)}>
+                  Pages <ChevronDown className={cn("ml-1 h-4 w-4 transition-transform", isPagesDropdownOpen && "rotate-180")} />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem asChild><Link to="/blogs">Blogs</Link></DropdownMenuItem>
@@ -131,7 +133,7 @@ export function Header() {
             </nav>
             
             <div className="flex items-center space-x-4">
-              <DropdownMenu>
+              <DropdownMenu onOpenChange={setIsHireTalentDropdownOpen}>
                 <DropdownMenuTrigger asChild>
                   <Button asChild className={cn(
                     "hidden md:inline-flex",
