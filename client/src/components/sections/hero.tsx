@@ -6,13 +6,14 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
   "https://images.unsplash.com/photo-1556761175-5973dd30399d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // Business meeting, analysis
-  "https://images.unsplash.com/photo-1507679799977-c91849121c7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // Data analysis, charts
 ];
 
 export function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
+    // With only one image, the interval for changing images is no longer needed.
+    // We can keep the state and effect for consistency, but it won't actually cycle.
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
         (prevIndex + 1) % heroImages.length
