@@ -13,10 +13,12 @@ import {
 import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
 import { ServicesDropdownContent } from "./services-dropdown-content";
+import { useScroll } from "@/hooks/use-scroll"; // Import useScroll
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isScrolled = useScroll(50); // Detect scroll after 50px
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -44,25 +46,30 @@ export function Header() {
       <TopBar />
       <header
         className={cn(
-          "sticky top-0 left-0 right-0 z-50 bg-white text-slate-900 shadow-md"
+          "sticky top-0 left-0 right-0 z-50 transition-all duration-300",
+          isScrolled
+            ? "navbar-glass shadow-md text-slate-900" // Scrolled state
+            : "bg-transparent text-white" // Top state (assuming dark hero background)
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
+                {/* The logo is dark. If it's not visible against the transparent header, 
+                    you might need to provide a white version or apply a CSS filter. */}
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
-                {/* Removed "Recruitment Agency" text */}
               </Link>
             </div>
             
             <nav className="hidden md:flex items-center gap-6">
-              {/* Home Link (no dropdown visible in image, keeping simple) */}
+              {/* Home Link */}
               <Link
                 to="/"
                 className={cn(
-                  "text-base font-medium hover:text-primary transition-colors",
-                  location.pathname === "/" && "text-primary"
+                  "text-base font-medium transition-colors",
+                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
+                  location.pathname === "/" && (isScrolled ? "text-primary" : "text-white")
                 )}
               >
                 Home
@@ -72,8 +79,9 @@ export function Header() {
               <Link
                 to="/about"
                 className={cn(
-                  "text-base font-medium hover:text-primary transition-colors",
-                  location.pathname === "/about" && "text-primary"
+                  "text-base font-medium transition-colors",
+                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
+                  location.pathname === "/about" && (isScrolled ? "text-primary" : "text-white")
                 )}
               >
                 About Us
@@ -82,8 +90,9 @@ export function Header() {
               {/* Services Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger className={cn(
-                  "flex items-center text-base font-medium hover:text-primary transition-colors",
-                  location.pathname.startsWith("/services") && "text-primary"
+                  "flex items-center text-base font-medium transition-colors",
+                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
+                  location.pathname.startsWith("/services") && (isScrolled ? "text-primary" : "text-white")
                 )}>
                   Services <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
@@ -95,8 +104,9 @@ export function Header() {
               {/* Pages Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger className={cn(
-                  "flex items-center text-base font-medium hover:text-primary transition-colors",
-                  (location.pathname.startsWith("/blogs") || location.pathname.startsWith("/case-studies") || location.pathname.startsWith("/customers") || location.pathname.startsWith("/guides") || location.pathname.startsWith("/pricing") || location.pathname.startsWith("/legal")) && "text-primary"
+                  "flex items-center text-base font-medium transition-colors",
+                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
+                  (location.pathname.startsWith("/blogs") || location.pathname.startsWith("/case-studies") || location.pathname.startsWith("/customers") || location.pathname.startsWith("/guides") || location.pathname.startsWith("/pricing") || location.pathname.startsWith("/legal")) && (isScrolled ? "text-primary" : "text-white")
                 )}>
                   Pages <ChevronDown className="ml-1 h-4 w-4" />
                 </DropdownMenuTrigger>
@@ -115,8 +125,9 @@ export function Header() {
               <Link
                 to="/contact"
                 className={cn(
-                  "text-base font-medium hover:text-primary transition-colors",
-                  location.pathname === "/contact" && "text-primary"
+                  "text-base font-medium transition-colors",
+                  isScrolled ? "hover:text-primary" : "hover:text-white/80",
+                  location.pathname === "/contact" && (isScrolled ? "text-primary" : "text-white")
                 )}
               >
                 Contact
@@ -126,7 +137,12 @@ export function Header() {
             <div className="flex items-center space-x-4">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button asChild className="bg-accent text-accent-foreground hover:bg-yellow-500 hidden md:inline-flex">
+                  <Button asChild className={cn(
+                    "hidden md:inline-flex",
+                    isScrolled 
+                      ? "bg-accent text-accent-foreground hover:bg-yellow-500" 
+                      : "bg-white text-primary hover:bg-slate-200" // White button when transparent
+                  )}>
                     <span className="flex items-center">
                       Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                     </span>
@@ -138,7 +154,12 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-slate-900">
+              <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+                className={cn(
+                  "md:hidden",
+                  isScrolled ? "text-slate-900" : "text-white"
+                )}
+              >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
