@@ -104,33 +104,6 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                       </NavigationMenuItem>
                     ))}
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/pages")}>
-                        <span className="nav-link-underline">Pages</span>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                          {pagesLinks.map((page) => (
-                            <li key={page.link}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={page.link}
-                                  className={cn(
-                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 focus:bg-slate-100 dark:focus:bg-slate-800",
-                                    location.pathname.startsWith(page.link) && "bg-accent text-accent-foreground"
-                                  )}
-                                >
-                                  <div className="text-sm font-medium leading-none">{page.title}</div>
-                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                    {page.description}
-                                  </p>
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
                       <Link to="/contact" className={cn(navLinkClasses("/contact"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
                         <span className="nav-link-underline">Contact</span>
                       </Link>
