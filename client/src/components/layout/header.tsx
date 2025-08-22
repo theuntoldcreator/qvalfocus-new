@@ -15,7 +15,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+  NavigationMenuViewport, // Import the custom viewport
+} from "@/components/ui/custom-navigation-menu"; // Import from custom path
 import { services, pagesLinks, companyInfo, recruitmentDropdownServices } from "@/lib/data"; // Import new data
 
 interface HeaderProps {
@@ -171,6 +172,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                       </Link>
                     </NavigationMenuItem>
                   </NavigationMenuList>
+                  <NavigationMenuViewport /> {/* Use the custom viewport here */}
                 </NavigationMenu>
               </nav>
 
