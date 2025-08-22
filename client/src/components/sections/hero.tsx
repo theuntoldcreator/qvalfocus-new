@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
-  "https://images.unsplash.com/photo-1556761175-5973dd30399d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // Business meeting, analysis
+  "https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80", // A team collaborating with a whiteboard, good for business analysis
 ];
 
 export function Hero() {
