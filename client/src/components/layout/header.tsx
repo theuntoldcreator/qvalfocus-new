@@ -130,14 +130,10 @@ export function Header() {
             <div className="flex items-center space-x-4">
               <DropdownMenu onOpenChange={setIsHireTalentDropdownOpen}>
                 <DropdownMenuTrigger asChild>
-                  <Button 
-                    asChild 
-                    variant="ghost" // Use ghost variant to remove default background/hover
-                    className={cn(
-                      "hidden md:inline-flex",
-                      "bg-brand-blue text-white hover:bg-brand-blue" // Explicitly set hover to be the same blue
-                    )}
-                  >
+                  <Button asChild className={cn(
+                    "hidden md:inline-flex",
+                    "bg-brand-blue text-white" // Removed hover:bg-blue-700
+                  )}>
                     <span className="flex items-center">
                       Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                     </span>
