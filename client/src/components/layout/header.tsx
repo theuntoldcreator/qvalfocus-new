@@ -16,7 +16,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/custom-navigation-menu";
-import { pagesLinks, recruitmentDropdownServices } from "@/lib/data";
+import { pagesLinks, services } from "@/lib/data";
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
@@ -96,41 +96,13 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                         <span className="nav-link-underline">About Us</span>
                       </Link>
                     </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/services")}>
-                        <span className="nav-link-underline">Services</span>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0">
-                          <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
-                            <div>
-                              <h4 className="text-2xl font-bold mb-3">Recruitment Services</h4>
-                              <p className="text-primary-100 text-sm leading-relaxed">
-                                Lumattis element cum semps honec rnar. Dolor auctor urna dignissim sed nunc sit plateas uellenttesque tempor.
-                              </p>
-                            </div>
-                            <Button variant="link" asChild className="text-avada-light-green hover:text-white p-0 h-auto justify-start">
-                              <Link to="/services/staffing-solution">
-                                Learn More <ArrowUpRight className="ml-2 h-4 w-4" />
-                              </Link>
-                            </Button>
-                          </div>
-                          <ul className="grid gap-3 p-4">
-                            {recruitmentDropdownServices.map((item) => (
-                              <ListItem
-                                key={item.title}
-                                title={item.title}
-                                href={item.link}
-                                icon={ArrowUpRight}
-                                image={item.image}
-                              >
-                                {item.description}
-                              </ListItem>
-                            ))}
-                          </ul>
-                        </div>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
+                    {services.map((service) => (
+                      <NavigationMenuItem key={service.id}>
+                        <Link to={service.link} className={cn(navLinkClasses(service.link), "inline-flex h-10 items-center justify-center px-4 py-2")}>
+                          <span className="nav-link-underline">{service.title}</span>
+                        </Link>
+                      </NavigationMenuItem>
+                    ))}
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navLinkClasses("/pages")}>
                         <span className="nav-link-underline">Pages</span>
