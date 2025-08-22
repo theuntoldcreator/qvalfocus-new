@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
 import { ServicesDropdownContent } from "./services-dropdown-content";
 import { useScroll } from "@/hooks/use-scroll"; // Import useScroll
+import { ChatButton } from "@/components/ChatButton"; // Import the new ChatButton
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -71,16 +72,18 @@ export function Header() {
           "sticky top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
             ? "navbar-glass shadow-md" // Scrolled state
-            : "bg-transparent" // Top state
+            : "bg-white" // Top state - now always white
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
-                {/* The logo is dark. If it's not visible against the transparent header, 
-                    you might need to provide a white version or apply a CSS filter. */}
-                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
+                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
+                <div className="flex flex-col">
+                  <span className="text-xs text-slate-900 font-medium">QvalFocus</span>
+                  <span className="text-lg font-bold text-slate-900 leading-none">Recruitment Agency</span>
+                </div>
               </Link>
             </div>
             
@@ -130,7 +133,7 @@ export function Header() {
             <div className="flex items-center space-x-4">
               <DropdownMenu onOpenChange={setIsHireTalentDropdownOpen}>
                 <DropdownMenuTrigger asChild>
-                  <Button asChild className="hidden md:inline-flex bg-avada-light-blue text-primary hover:bg-avada-light-blue">
+                  <Button asChild className="inline-flex bg-avada-yellow text-accent-foreground hover:bg-avada-yellow">
                     <span className="flex items-center">
                       Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                     </span>
@@ -144,12 +147,12 @@ export function Header() {
 
               <Button variant="ghost" size="icon" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
                 className={cn(
-                  "md:hidden",
-                  isScrolled ? "text-slate-900" : "text-white"
+                  "text-slate-900" // Always dark text on white header
                 )}
               >
                 {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
+              <ChatButton /> {/* Add the new ChatButton here */}
             </div>
           </div>
         </div>
