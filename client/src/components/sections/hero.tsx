@@ -40,10 +40,10 @@ export function Hero() {
             />
           </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-transparent flex flex-col items-start justify-center text-left p-8 md:p-12">
-            <p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 animate-fade-in">
+            <p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 animate-fade-in font-freigeist">
               Helping Job Seekers Get Working Opportunities!
             </p>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight animate-slide-up max-w-3xl">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight animate-slide-up max-w-3xl font-freigeist">
               Bringing The Global Recruitment Solutions
             </h1>
             <div className="flex flex-col sm:flex-row gap-4 justify-start animate-slide-up">

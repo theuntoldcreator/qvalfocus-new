@@ -76,6 +76,7 @@ export default {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
+        freigeist: ['Freigeist', 'sans-serif'], // Added Freigeist font
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out",
