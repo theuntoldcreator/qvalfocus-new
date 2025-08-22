@@ -30,7 +30,7 @@ import AdminLoginPage from "./pages/admin/login";
 import AdminRegisterPage from "./pages/admin/register";
 import NewJobPage from "./pages/admin/new-job";
 import EditJobPage from "./pages/admin/edit-job";
-import NotFound from "./pages/pages/not-found"; // Corrected path
+import NotFound from "./pages/not-found"; // Corrected path
 import CaseStudiesPage from "./pages/case-studies";
 import ChangelogPage from "./pages/changelog";
 import CustomersPage from "./pages/customers";
