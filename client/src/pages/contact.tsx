@@ -31,7 +31,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      {/* Header and Footer are now handled by RootLayout */}
       
       <main>
         {/* Hero Section */}
@@ -192,7 +192,6 @@ export default function ContactPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 }

@@ -44,7 +44,7 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      {/* Header and Footer are now handled by RootLayout */}
       
       <main>
         {/* Hero Section */}
@@ -174,8 +174,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

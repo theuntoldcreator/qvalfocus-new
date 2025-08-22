@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
@@ -5,7 +6,11 @@ import { AuthProvider } from "./providers/auth-provider";
 import { ThemeProvider } from "./providers/theme-provider";
 import ScrollToTop from "./components/scroll-to-top";
 import { Toaster } from "./components/ui/toaster";
-import { MainLayout } from "./components/layout/MainLayout"; // Import MainLayout
+
+// Layout Components
+import { Header } from "./components/layout/header";
+import { Footer } from "./components/layout/footer";
+import { MobileNav } from "./components/layout/mobile-nav"; // Import MobileNav
 
 // Pages
 import Home from "./pages/home";
@@ -25,7 +30,7 @@ import AdminLoginPage from "./pages/admin/login";
 import AdminRegisterPage from "./pages/admin/register";
 import NewJobPage from "./pages/admin/new-job";
 import EditJobPage from "./pages/admin/edit-job";
-import NotFound from "./pages/not-found";
+import NotFound from "./pages/pages/not-found"; // Corrected path
 import CaseStudiesPage from "./pages/case-studies";
 import ChangelogPage from "./pages/changelog";
 import CustomersPage from "./pages/customers";
@@ -41,12 +46,39 @@ import { ApplicationsManagement } from "./components/admin/applications-manageme
 import { ContactsManagement } from "./components/admin/contacts-management";
 import { NewsletterManagement } from "./components/admin/newsletter-management";
 
+const publicNavLinks = [
+  { to: "/", label: "Home" },
+  { to: "/about", label: "About Us" },
+  { to: "/services/staffing-solution", label: "Staffing Solutions" },
+  { to: "/services/project-solution", label: "Project Solutions" },
+  { to: "/industries", label: "Industries" },
+  { to: "/jobs", label: "Careers" },
+  { to: "/blogs", label: "Blogs" },
+  { to: "/contact", label: "Contact" },
+  { to: "/case-studies", label: "Case Studies" },
+  { to: "/changelog", label: "Changelog" },
+  { to: "/customers", label: "Customers" },
+  { to: "/guides", label: "Guides" },
+  { to: "/pricing", label: "Pricing" },
+  { to: "/legal/privacy", label: "Privacy Policy" },
+  { to: "/legal/terms", label: "Terms of Service" },
+];
+
 const RootLayout = () => {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const toggleMobileNav = () => {
+    setIsMobileNavOpen(!isMobileNavOpen);
+  };
+
   return (
     <>
       <ScrollToTop />
+      <Header onToggleMobileMenu={toggleMobileNav} />
+      <MobileNav isOpen={isMobileNavOpen} onClose={toggleMobileNav} navLinks={publicNavLinks} />
       <Outlet />
       <Toaster />
+      <Footer />
     </>
   );
 };
@@ -55,29 +87,24 @@ const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
-      {
-        element: <MainLayout />, // Use MainLayout for all public routes
-        children: [
-          { path: "/", element: <Home /> },
-          { path: "/about", element: <AboutPage /> },
-          { path: "/jobs", element: <JobsPage /> },
-          { path: "/jobs/:slug", element: <JobPage /> },
-          { path: "/contact", element: <ContactPage /> },
-          { path: "/services/staffing-solution", element: <StaffingSolutionPage /> },
-          { path: "/services/project-solution", element: <ProjectSolutionPage /> },
-          { path: "/industries", element: <IndustriesPage /> },
-          { path: "/industries/:slug", element: <IndustryPage /> },
-          { path: "/blogs", element: <BlogsPage /> },
-          { path: "/blogs/:slug", element: <BlogPostPage /> },
-          { path: "/legal/privacy", element: <PrivacyPage /> },
-          { path: "/legal/terms", element: <TermsPage /> },
-          { path: "/case-studies", element: <CaseStudiesPage /> },
-          { path: "/changelog", element: <ChangelogPage /> },
-          { path: "/customers", element: <CustomersPage /> },
-          { path: "/guides", element: <GuidesPage /> },
-          { path: "/pricing", element: <PricingPage /> },
-        ],
-      },
+      { path: "/", element: <Home /> },
+      { path: "/about", element: <AboutPage /> },
+      { path: "/jobs", element: <JobsPage /> },
+      { path: "/jobs/:slug", element: <JobPage /> },
+      { path: "/contact", element: <ContactPage /> },
+      { path: "/services/staffing-solution", element: <StaffingSolutionPage /> },
+      { path: "/services/project-solution", element: <ProjectSolutionPage /> },
+      { path: "/industries", element: <IndustriesPage /> },
+      { path: "/industries/:slug", element: <IndustryPage /> },
+      { path: "/blogs", element: <BlogsPage /> },
+      { path: "/blogs/:slug", element: <BlogPostPage /> },
+      { path: "/legal/privacy", element: <PrivacyPage /> },
+      { path: "/legal/terms", element: <TermsPage /> },
+      { path: "/case-studies", element: <CaseStudiesPage /> },
+      { path: "/changelog", element: <ChangelogPage /> },
+      { path: "/customers", element: <CustomersPage /> },
+      { path: "/guides", element: <GuidesPage /> },
+      { path: "/pricing", element: <PricingPage /> },
       { path: "/admin/login", element: <AdminLoginPage /> },
       { path: "/admin/register", element: <AdminRegisterPage /> },
       {

@@ -11,6 +11,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { Header } from "@/components/layout/header"; // Import Header
+import { Footer } from "@/components/layout/footer"; // Import Footer
 
 export default function JobPage() {
   const { slug } = useParams();
@@ -18,22 +20,27 @@ export default function JobPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-center p-4">
-        <div>
-          <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
-          <p className="text-slate-600 dark:text-slate-300 mb-6">
-            The job you're looking for doesn't exist or has been removed.
-          </p>
-          <Link to="/jobs" className="text-primary font-semibold">
-            &larr; View all open positions
-          </Link>
+      <div className="min-h-screen flex flex-col">
+        <Header onToggleMobileMenu={() => {}} /> {/* Added onToggleMobileMenu prop */}
+        <div className="pt-20 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
+            <p className="text-slate-600 dark:text-slate-300 mb-6">
+              The job you're looking for doesn't exist or has been removed.
+            </p>
+            <Link to="/jobs" className="text-primary font-semibold">
+              &larr; View all open positions
+            </Link>
+          </div>
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      {/* Header and Footer are now handled by RootLayout */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Breadcrumb className="mb-8">
           <BreadcrumbList>

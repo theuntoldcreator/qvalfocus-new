@@ -10,7 +10,7 @@ export default function TermsPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      {/* Header and Footer are now handled by RootLayout */}
       
       <main className="pt-20 md:pt-28">
         {/* Header */}
@@ -356,8 +356,6 @@ export default function TermsPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function JobsPage() {
   return (
     <>
       <div className="min-h-screen bg-white dark:bg-slate-900">
-        <Header />
+        {/* Header and Footer are now handled by RootLayout */}
         <main className="pt-20 md:pt-28">
           {/* Hero Section */}
           <section className="py-16 md:py-24 text-center bg-slate-50 dark:bg-slate-800">
@@ -120,7 +120,6 @@ export default function JobsPage() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     </>
   );

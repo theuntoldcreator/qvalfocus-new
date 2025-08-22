@@ -19,7 +19,7 @@ export default function BlogPostPage() {
   if (error) {
     return (
       <div className="min-h-screen">
-        <Header />
+        <Header onToggleMobileMenu={() => {}} /> {/* Added onToggleMobileMenu prop */}
         <div className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Blog Post Not Found</h1>
@@ -42,7 +42,7 @@ export default function BlogPostPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen">
-        <Header />
+        <Header onToggleMobileMenu={() => {}} /> {/* Added onToggleMobileMenu prop */}
         <div className="pt-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <Skeleton className="h-8 w-32 mb-4" />
@@ -65,7 +65,7 @@ export default function BlogPostPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      {/* Header and Footer are now handled by RootLayout */}
       
       <main className="pt-20 md:pt-28">
         {/* Hero Section */}
@@ -192,8 +192,6 @@ export default function BlogPostPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
