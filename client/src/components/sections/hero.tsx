@@ -36,7 +36,7 @@ export function Hero() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover object-left scale-x-[-1]"
+              className="absolute inset-0 w-full h-full object-cover object-left"
             />
           </AnimatePresence>
           {/* Inner shadow overlay */}
