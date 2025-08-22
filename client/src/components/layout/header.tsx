@@ -32,13 +32,13 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 focus:bg-slate-100 dark:focus:bg-slate-800",
             className
           )}
           {...props}
         >
           <div className="flex items-center">
-            {Icon && <Icon className="mr-2 h-4 w-4 text-primary group-hover:text-accent-foreground" />}
+            {Icon && <Icon className="mr-2 h-4 w-4 text-primary" />}
             <div className="text-sm font-medium leading-none">{title}</div>
             {image && (
               <img src={image} alt={title} className="ml-auto h-10 w-20 object-cover rounded-md" />
@@ -143,7 +143,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                                 <Link
                                   to={page.link}
                                   className={cn(
-                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 focus:bg-slate-100 dark:focus:bg-slate-800",
                                     location.pathname.startsWith(page.link) && "bg-accent text-accent-foreground"
                                   )}
                                 >
