@@ -46,29 +46,21 @@ export function Header() {
   ];
 
   // Base classes for all nav items
-  const baseNavLinkClasses = "text-base font-medium transition-colors";
+  const baseNavLinkClasses = "text-base font-medium transition-colors text-slate-900";
 
   // Function to get conditional classes for each nav item
   const getNavLinkClasses = (path: string) => cn(
     baseNavLinkClasses,
-    // Default idle color: white when transparent, black when scrolled
-    isScrolled ? "text-slate-900" : "text-white",
-    // Hover color
-    isScrolled ? "hover:text-primary" : "hover:text-white/80",
-    // Active color
-    (location.pathname === path || location.pathname.startsWith(path + '/')) && "text-primary"
+    "hover:text-primary", // Hover color
+    (location.pathname === path || location.pathname.startsWith(path + '/')) && "text-primary" // Active color
   );
 
   // Function to get conditional classes for dropdown triggers
   const getDropdownTriggerClasses = (paths: string[], isOpen: boolean) => cn(
     baseNavLinkClasses,
     "inline-flex items-center", // Ensure inline-flex for text and icon alignment
-    // Default idle color: white when transparent, black when scrolled
-    isScrolled ? "text-slate-900" : "text-white",
-    // Hover color
-    isScrolled ? "hover:text-primary" : "hover:text-white/80",
-    // Active color (if any of the paths match OR if the dropdown is open)
-    (paths.some(path => location.pathname.startsWith(path)) || isOpen) && "text-primary"
+    "hover:text-primary", // Hover color
+    paths.some(path => location.pathname.startsWith(path)) && "text-primary" // Active color based on path, not just if open
   );
 
   return (
