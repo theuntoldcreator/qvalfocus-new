@@ -60,12 +60,24 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
   const isScrolled = useScroll(50);
   const location = useLocation();
 
-  const navLinkClasses = (path: string) => cn(
-    "text-base font-medium transition-colors",
-    (path === '/' ? location.pathname === path : location.pathname.startsWith(path)) 
-      ? "text-primary" 
-      : "text-slate-700 dark:text-slate-300"
-  );
+  const navLinkClasses = (path: string) => {
+    const isActive = (path === '/' ? location.pathname === path : location.pathname.startsWith(path));
+    return cn(
+      "text-base font-medium transition-colors",
+      isActive 
+        ? "text-primary" 
+        : "text-slate-700 dark:text-slate-300"
+    );
+  };
+
+  const navItemClasses = (path: string) => {
+    const isActive = (path === '/' ? location.pathname === path : location.pathname.startsWith(path));
+    return cn(
+      navigationMenuTriggerStyle(),
+      navLinkClasses(path),
+      isActive ? "bg-slate-100 dark:bg-slate-800" : "bg-transparent"
+    );
+  };
 
   return (
     <>
@@ -91,7 +103,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                 <NavigationMenu>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/")}>Home</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className={navItemClasses("/")}>Home</NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
                           <ListItem href="/#about" title="About Us">
@@ -109,14 +121,14 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
 
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild>
-                        <Link to="/about" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/about"), "bg-slate-100")}>
+                        <Link to="/about" className={navItemClasses("/about")}>
                           About Us
                         </Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/services")}>Services</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0">
                           <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
@@ -150,7 +162,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/pages")}>Pages</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className={navItemClasses("/pages")}>Pages</NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                           {pagesLinks.map((page) => (
@@ -164,7 +176,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
 
                     <NavigationMenuItem>
                       <NavigationMenuLink asChild>
-                        <Link to="/contact" className={cn(navigationMenuTriggerStyle(), navLinkClasses("/contact"), "bg-slate-100")}>
+                        <Link to="/contact" className={navItemClasses("/contact")}>
                           Contact
                         </Link>
                       </NavigationMenuLink>
