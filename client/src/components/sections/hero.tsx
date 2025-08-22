@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
-  "/images/hero.webp", // Using the local hero.webp image
+  "/images/hero.jpg", // Changed to hero.jpg
 ];
 
 export function Hero() {
