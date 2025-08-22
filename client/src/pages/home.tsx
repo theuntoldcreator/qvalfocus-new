@@ -8,6 +8,7 @@ import { FeaturedJobs } from "@/components/sections/featured-jobs";
 import { Testimonials } from "@/components/sections/testimonials";
 import { WhyWorkWithUs } from "@/components/sections/why-work-with-us";
 import { Newsletter } from "@/components/sections/newsletter";
+import { ExecutiveSearch } from "@/components/sections/executive-search";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
         <Hero />
         <AboutSection />
         <ServiceCategories />
+        <ExecutiveSearch />
         <WhyWorkWithUs />
         <Industries />
         <FeaturedJobs />
