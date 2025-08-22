@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, ArrowUpRight, ChevronDown } from "lucide-react";
+import { Menu, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
@@ -14,16 +14,14 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-  NavigationMenuViewport, // Import the custom viewport
-} from "@/components/ui/custom-navigation-menu"; // Import from custom path
-import { services, pagesLinks, companyInfo, recruitmentDropdownServices } from "@/lib/data"; // Import new data
+  NavigationMenuViewport,
+} from "@/components/ui/custom-navigation-menu";
+import { pagesLinks, recruitmentDropdownServices } from "@/lib/data";
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
 }
 
-// Helper component for list items in dropdowns
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a"> & { icon?: React.ElementType; image?: string }
@@ -58,14 +56,13 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-
 export function Header({ onToggleMobileMenu }: HeaderProps) {
   const isScrolled = useScroll(50);
   const location = useLocation();
 
   const navLinkClasses = (path: string) => cn(
-    "text-base font-medium transition-colors hover:text-primary",
-    (location.pathname === path || location.pathname.startsWith(path + '/')) ? "text-primary" : "text-slate-700 dark:text-slate-300"
+    "text-base font-medium transition-colors",
+    (location.pathname === path || (path !== "/" && location.pathname.startsWith(path))) ? "text-primary active" : "text-slate-700 dark:text-slate-300"
   );
 
   return (
@@ -74,9 +71,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
       <header
         className={cn(
           "sticky top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled
-            ? "navbar-glass shadow-md"
-            : "bg-white"
+          isScrolled ? "navbar-glass shadow-md" : "bg-white"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,32 +79,29 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
-                {/* Removed the company name span */}
               </Link>
             </div>
 
-            {/* Group Desktop Navigation and Action Buttons */}
             <div className="flex items-center">
-              {/* Desktop Navigation */}
-              <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
+              <nav className="hidden md:flex items-center">
                 <NavigationMenu>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <Link to="/" className={navLinkClasses("/")}>
-                        Home
+                      <Link to="/" className={cn(navLinkClasses("/"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
+                        <span className="nav-link-underline">Home</span>
                       </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <Link to="/about" className={navLinkClasses("/about")}>
-                        About Us
+                      <Link to="/about" className={cn(navLinkClasses("/about"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
+                        <span className="nav-link-underline">About Us</span>
                       </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navLinkClasses("/services")}>
-                        Services
+                        <span className="nav-link-underline">Services</span>
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0"> {/* Adjusted width and grid */}
+                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0">
                           <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
                             <div>
                               <h4 className="text-2xl font-bold mb-3">Recruitment Services</h4>
@@ -129,7 +121,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                                 key={item.title}
                                 title={item.title}
                                 href={item.link}
-                                icon={ArrowUpRight} // Using ArrowUpRight as per image
+                                icon={ArrowUpRight}
                                 image={item.image}
                               >
                                 {item.description}
@@ -141,7 +133,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navLinkClasses("/pages")}>
-                        Pages
+                        <span className="nav-link-underline">Pages</span>
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -167,23 +159,22 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <Link to="/contact" className={navLinkClasses("/contact")}>
-                        Contact
+                      <Link to="/contact" className={cn(navLinkClasses("/contact"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
+                        <span className="nav-link-underline">Contact</span>
                       </Link>
                     </NavigationMenuItem>
                   </NavigationMenuList>
-                  <NavigationMenuViewport /> {/* Use the custom viewport here */}
+                  <NavigationMenuViewport />
                 </NavigationMenu>
               </nav>
 
-              <div className="flex items-center space-x-4 ml-8"> {/* Added ml-8 for spacing */}
+              <div className="flex items-center space-x-4 ml-8">
                 <Button asChild className="hidden md:inline-flex bg-avada-yellow text-slate-900 hover:bg-avada-yellow/90">
                   <Link to="/contact?type=client">
                     Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
 
-                {/* Mobile menu button */}
                 <Button
                   variant="ghost"
                   size="icon"
