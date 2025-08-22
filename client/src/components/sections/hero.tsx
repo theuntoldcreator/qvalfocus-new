@@ -28,7 +28,7 @@ export function Hero() {
   return (
     <section className="relative pt-8 pb-20 md:pb-32 bg-white dark:bg-slate-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden">
+        <div className="relative w-full h-[450px] md:h-[550px] rounded-3xl overflow-hidden">
           <AnimatePresence initial={false}>
             <motion.img
               key={currentImageIndex}
