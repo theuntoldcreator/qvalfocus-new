@@ -5,6 +5,7 @@ import { AuthProvider } from "./providers/auth-provider";
 import { ThemeProvider } from "./providers/theme-provider";
 import ScrollToTop from "./components/scroll-to-top";
 import { Toaster } from "./components/ui/toaster";
+import { MainLayout } from "./components/layout/MainLayout"; // Import MainLayout
 
 // Pages
 import Home from "./pages/home";
@@ -54,24 +55,29 @@ const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
-      { path: "/", element: <Home /> },
-      { path: "/about", element: <AboutPage /> },
-      { path: "/jobs", element: <JobsPage /> },
-      { path: "/jobs/:slug", element: <JobPage /> },
-      { path: "/contact", element: <ContactPage /> },
-      { path: "/services/staffing-solution", element: <StaffingSolutionPage /> },
-      { path: "/services/project-solution", element: <ProjectSolutionPage /> },
-      { path: "/industries", element: <IndustriesPage /> },
-      { path: "/industries/:slug", element: <IndustryPage /> },
-      { path: "/blogs", element: <BlogsPage /> },
-      { path: "/blogs/:slug", element: <BlogPostPage /> },
-      { path: "/legal/privacy", element: <PrivacyPage /> },
-      { path: "/legal/terms", element: <TermsPage /> },
-      { path: "/case-studies", element: <CaseStudiesPage /> },
-      { path: "/changelog", element: <ChangelogPage /> },
-      { path: "/customers", element: <CustomersPage /> },
-      { path: "/guides", element: <GuidesPage /> },
-      { path: "/pricing", element: <PricingPage /> },
+      {
+        element: <MainLayout />, // Use MainLayout for all public routes
+        children: [
+          { path: "/", element: <Home /> },
+          { path: "/about", element: <AboutPage /> },
+          { path: "/jobs", element: <JobsPage /> },
+          { path: "/jobs/:slug", element: <JobPage /> },
+          { path: "/contact", element: <ContactPage /> },
+          { path: "/services/staffing-solution", element: <StaffingSolutionPage /> },
+          { path: "/services/project-solution", element: <ProjectSolutionPage /> },
+          { path: "/industries", element: <IndustriesPage /> },
+          { path: "/industries/:slug", element: <IndustryPage /> },
+          { path: "/blogs", element: <BlogsPage /> },
+          { path: "/blogs/:slug", element: <BlogPostPage /> },
+          { path: "/legal/privacy", element: <PrivacyPage /> },
+          { path: "/legal/terms", element: <TermsPage /> },
+          { path: "/case-studies", element: <CaseStudiesPage /> },
+          { path: "/changelog", element: <ChangelogPage /> },
+          { path: "/customers", element: <CustomersPage /> },
+          { path: "/guides", element: <GuidesPage /> },
+          { path: "/pricing", element: <PricingPage /> },
+        ],
+      },
       { path: "/admin/login", element: <AdminLoginPage /> },
       { path: "/admin/register", element: <AdminRegisterPage /> },
       {
