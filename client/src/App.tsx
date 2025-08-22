@@ -6,7 +6,7 @@ import { AuthProvider } from "./providers/auth-provider";
 import { ThemeProvider } from "./providers/theme-provider";
 import ScrollToTop from "./components/scroll-to-top";
 import { Toaster } from "./components/ui/toaster";
-import { services, pagesLinks } from "./lib/data"; // Import services and pagesLinks
+import { services, pagesLinks, recruitmentDropdownServices } from "./lib/data"; // Import new data
 
 // Layout Components
 import { Header } from "./components/layout/header";
@@ -26,6 +26,7 @@ import IndustryPage from "./pages/industry/[slug]";
 import BlogsPage from "./pages/blogs";
 import BlogPostPage from "./pages/blog/[slug]";
 import PrivacyPage from "./pages/legal/privacy";
+import "./pages/legal/privacy"; // Ensure this is not a duplicate import
 import TermsPage from "./pages/legal/terms";
 import AdminLoginPage from "./pages/admin/login";
 import AdminRegisterPage from "./pages/admin/register";
@@ -50,7 +51,9 @@ import { NewsletterManagement } from "./components/admin/newsletter-management";
 const publicNavLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Us" },
+  // For mobile, we can list the main service categories directly
   ...services.map(service => ({ to: service.link, label: service.title })),
+  // For mobile, we can list the main pages directly
   ...pagesLinks.map(page => ({ to: page.link, label: page.title })),
   { to: "/contact", label: "Contact" },
 ];
@@ -85,6 +88,11 @@ const router = createBrowserRouter([
       { path: "/contact", element: <ContactPage /> },
       { path: "/services/staffing-solution", element: <StaffingSolutionPage /> },
       { path: "/services/project-solution", element: <ProjectSolutionPage /> },
+      // Add routes for the new dropdown services if they have dedicated pages
+      { path: "/services/executive-search", element: <StaffingSolutionPage /> }, // Placeholder, create dedicated page if needed
+      { path: "/services/talent-sourcing", element: <StaffingSolutionPage /> }, // Placeholder
+      { path: "/services/jobs-advertising", element: <StaffingSolutionPage /> }, // Placeholder
+      { path: "/services/career-counseling", element: <StaffingSolutionPage /> }, // Placeholder
       { path: "/industries", element: <IndustriesPage /> },
       { path: "/industries/:slug", element: <IndustryPage /> },
       { path: "/blogs", element: <BlogsPage /> },

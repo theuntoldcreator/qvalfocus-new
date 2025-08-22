@@ -143,6 +143,37 @@ export const services = [
   }
 ];
 
+export const recruitmentDropdownServices = [
+  {
+    title: "Executive Search",
+    description: "Finding top-tier leadership talent.",
+    link: "/services/executive-search",
+    icon: "ArrowRight",
+    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
+  },
+  {
+    title: "Talent Sourcing",
+    description: "Proactive identification of skilled professionals.",
+    link: "/services/talent-sourcing",
+    icon: "ArrowRight",
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
+  },
+  {
+    title: "Jobs Advertising",
+    description: "Strategic placement of job openings.",
+    link: "/services/jobs-advertising",
+    icon: "ArrowRight",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
+  },
+  {
+    title: "Career Counseling",
+    description: "Guidance for professional growth.",
+    link: "/services/career-counseling",
+    icon: "ArrowRight",
+    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
+  },
+];
+
 export const pagesLinks = [
   {
     title: "Industries",
@@ -197,8 +228,8 @@ export const pagesLinks = [
 ];
 
 export const companyInfo = {
-  name: "QvalFocus",
-  tagline: "Driving Operational Excellence Through Deep Domain Expertise.",
+  name: "Avada",
+  tagline: "Recruitment Agency",
   description: "QvalFocus, Inc. is a professional services company delivering innovative solutions in Life Sciences and Information Technology.",
   founded: "2018",
   headquarters: "666 Plainsboro Rd #615, Plainsboro Township, NJ 08536",

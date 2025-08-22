@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,11 +16,47 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { services, pagesLinks } from "@/lib/data"; // Import services and pagesLinks data
+import { services, pagesLinks, companyInfo, recruitmentDropdownServices } from "@/lib/data"; // Import new data
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
 }
+
+// Helper component for list items in dropdowns
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a"> & { icon?: React.ElementType; image?: string }
+>(({ className, title, children, icon: Icon, image, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
+          )}
+          {...props}
+        >
+          <div className="flex items-center">
+            {Icon && <Icon className="mr-2 h-4 w-4 text-primary group-hover:text-accent-foreground" />}
+            <div className="text-sm font-medium leading-none">{title}</div>
+            {image && (
+              <img src={image} alt={title} className="ml-auto h-10 w-20 object-cover rounded-md" />
+            )}
+          </div>
+          {children && (
+            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+              {children}
+            </p>
+          )}
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+ListItem.displayName = "ListItem";
+
 
 export function Header({ onToggleMobileMenu }: HeaderProps) {
   const isScrolled = useScroll(50);
@@ -46,10 +82,10 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
           <div className="flex h-20 items-center justify-between">
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
-                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
+                <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
                 <div className="flex flex-col leading-none">
-                  <span className="text-xs text-slate-500 dark:text-slate-400">QvalFocus</span>
-                  <span className="text-base font-bold text-slate-900 dark:text-white">Staffing & Consulting</span>
+                  <span className="text-base font-bold text-slate-900 dark:text-white">{companyInfo.name}</span>
+                  <span className="text-sm text-slate-500 dark:text-slate-400">{companyInfo.tagline}</span>
                 </div>
               </Link>
             </div>
@@ -75,26 +111,34 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                         Services
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                          {services.map((service) => (
-                            <li key={service.id}>
-                              <NavigationMenuLink asChild>
-                                <Link
-                                  to={service.link}
-                                  className={cn(
-                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-                                    location.pathname.startsWith(service.link) && "bg-accent text-accent-foreground"
-                                  )}
-                                >
-                                  <div className="text-sm font-medium leading-none">{service.title}</div>
-                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                                    {service.description}
-                                  </p>
-                                </Link>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0"> {/* Adjusted width and grid */}
+                          <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
+                            <div>
+                              <h4 className="text-2xl font-bold mb-3">Recruitment Services</h4>
+                              <p className="text-primary-100 text-sm leading-relaxed">
+                                Lumattis element cum semps honec rnar. Dolor auctor urna dignissim sed nunc sit plateas uellenttesque tempor.
+                              </p>
+                            </div>
+                            <Button variant="link" asChild className="text-avada-light-green hover:text-white p-0 h-auto justify-start">
+                              <Link to="/services/staffing-solution">
+                                Learn More <ArrowUpRight className="ml-2 h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </div>
+                          <ul className="grid gap-3 p-4">
+                            {recruitmentDropdownServices.map((item) => (
+                              <ListItem
+                                key={item.title}
+                                title={item.title}
+                                href={item.link}
+                                icon={ArrowUpRight} // Using ArrowUpRight as per image
+                                image={item.image}
+                              >
+                                {item.description}
+                              </ListItem>
+                            ))}
+                          </ul>
+                        </div>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
