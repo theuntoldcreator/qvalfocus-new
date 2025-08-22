@@ -51,7 +51,6 @@ export function Header() {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" /> {/* Larger logo */}
-                <span className="text-2xl font-bold text-slate-900 hidden sm:block">Recruitment Agency</span> {/* Avada text logo */}
               </Link>
             </div>
             
