@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, ArrowUpRight } from "lucide-react";
+import { Menu, ArrowUpRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
@@ -14,14 +14,15 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/custom-navigation-menu";
-import { pagesLinks, services, industries } from "@/lib/data";
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { services, pagesLinks, companyInfo, recruitmentDropdownServices } from "@/lib/data"; // Import new data
 
 interface HeaderProps {
   onToggleMobileMenu: () => void;
 }
 
+// Helper component for list items in dropdowns
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a"> & { icon?: React.ElementType; image?: string }
@@ -32,13 +33,13 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 focus:bg-slate-100 dark:focus:bg-slate-800",
+            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
           )}
           {...props}
         >
           <div className="flex items-center">
-            {Icon && <Icon className="mr-2 h-4 w-4 text-primary" />}
+            {Icon && <Icon className="mr-2 h-4 w-4 text-primary group-hover:text-accent-foreground" />}
             <div className="text-sm font-medium leading-none">{title}</div>
             {image && (
               <img src={image} alt={title} className="ml-auto h-10 w-20 object-cover rounded-md" />
@@ -56,16 +57,15 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
+
 export function Header({ onToggleMobileMenu }: HeaderProps) {
   const isScrolled = useScroll(50);
   const location = useLocation();
 
   const navLinkClasses = (path: string) => cn(
-    "text-base font-medium transition-colors",
-    (location.pathname === path || (path !== "/" && location.pathname.startsWith(path))) ? "text-primary active" : "text-slate-700 dark:text-slate-300"
+    "text-base font-medium transition-colors hover:text-primary",
+    (location.pathname === path || location.pathname.startsWith(path + '/')) ? "text-primary" : "text-slate-700 dark:text-slate-300"
   );
-
-  const resourceLinks = pagesLinks.filter(p => ['/blogs', '/case-studies', '/guides'].includes(p.link));
 
   return (
     <>
@@ -73,7 +73,9 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
       <header
         className={cn(
           "sticky top-0 left-0 right-0 z-50 transition-all duration-300",
-          isScrolled ? "navbar-glass shadow-md" : "bg-white"
+          isScrolled
+            ? "navbar-glass shadow-md"
+            : "bg-white"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -81,91 +83,105 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
             <div className="flex items-center">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="Avada Logo" className="h-10" />
+                {/* Removed the company name span */}
               </Link>
             </div>
 
+            {/* Group Desktop Navigation and Action Buttons */}
             <div className="flex items-center">
-              <nav className="hidden md:flex items-center">
+              {/* Desktop Navigation */}
+              <nav className="hidden md:flex items-center space-x-4 lg:space-x-6">
                 <NavigationMenu>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <Link to="/" className={cn(navLinkClasses("/"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
-                        <span className="nav-link-underline">Home</span>
+                      <Link to="/" className={navLinkClasses("/")}>
+                        Home
                       </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <Link to="/about" className={cn(navLinkClasses("/about"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
-                        <span className="nav-link-underline">About Us</span>
+                      <Link to="/about" className={navLinkClasses("/about")}>
+                        About Us
                       </Link>
                     </NavigationMenuItem>
-                    
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navLinkClasses("/services")}>
-                        <span className="nav-link-underline">Services</span>
+                        Services
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                          {services.map((service) => (
-                            <ListItem key={service.title} title={service.title} href={service.link}>
-                              {service.description}
-                            </ListItem>
+                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0"> {/* Adjusted width and grid */}
+                          <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
+                            <div>
+                              <h4 className="text-2xl font-bold mb-3">Recruitment Services</h4>
+                              <p className="text-primary-100 text-sm leading-relaxed">
+                                Lumattis element cum semps honec rnar. Dolor auctor urna dignissim sed nunc sit plateas uellenttesque tempor.
+                              </p>
+                            </div>
+                            <Button variant="link" asChild className="text-avada-light-green hover:text-white p-0 h-auto justify-start">
+                              <Link to="/services/staffing-solution">
+                                Learn More <ArrowUpRight className="ml-2 h-4 w-4" />
+                              </Link>
+                            </Button>
+                          </div>
+                          <ul className="grid gap-3 p-4">
+                            {recruitmentDropdownServices.map((item) => (
+                              <ListItem
+                                key={item.title}
+                                title={item.title}
+                                href={item.link}
+                                icon={ArrowUpRight} // Using ArrowUpRight as per image
+                                image={item.image}
+                              >
+                                {item.description}
+                              </ListItem>
+                            ))}
+                          </ul>
+                        </div>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className={navLinkClasses("/pages")}>
+                        Pages
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                          {pagesLinks.map((page) => (
+                            <li key={page.link}>
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={page.link}
+                                  className={cn(
+                                    "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                                    location.pathname.startsWith(page.link) && "bg-accent text-accent-foreground"
+                                  )}
+                                >
+                                  <div className="text-sm font-medium leading-none">{page.title}</div>
+                                  <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                    {page.description}
+                                  </p>
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
                           ))}
                         </ul>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
-
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/industries")}>
-                        <span className="nav-link-underline">Industries</span>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
-                          {industries.map((industry) => (
-                            <ListItem key={industry.name} title={industry.name} href={`/industries/${industry.slug}`}>
-                              {industry.description}
-                            </ListItem>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navLinkClasses("/resources")}>
-                        <span className="nav-link-underline">Resources</span>
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px]">
-                          {resourceLinks.map((page) => (
-                            <ListItem key={page.title} title={page.title} href={page.link}>
-                              {page.description}
-                            </ListItem>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                      <Link to="/jobs" className={cn(navLinkClasses("/jobs"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
-                        <span className="nav-link-underline">Careers</span>
-                      </Link>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <Link to="/contact" className={cn(navLinkClasses("/contact"), "inline-flex h-10 items-center justify-center px-4 py-2")}>
-                        <span className="nav-link-underline">Contact</span>
+                      <Link to="/contact" className={navLinkClasses("/contact")}>
+                        Contact
                       </Link>
                     </NavigationMenuItem>
                   </NavigationMenuList>
-                  <NavigationMenuViewport />
                 </NavigationMenu>
               </nav>
 
-              <div className="flex items-center space-x-4 ml-8">
+              <div className="flex items-center space-x-4 ml-8"> {/* Added ml-8 for spacing */}
                 <Button asChild className="hidden md:inline-flex bg-avada-yellow text-slate-900 hover:bg-avada-yellow/90">
                   <Link to="/contact?type=client">
                     Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
 
+                {/* Mobile menu button */}
                 <Button
                   variant="ghost"
                   size="icon"
