@@ -174,7 +174,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
               </nav>
 
               <div className="flex items-center space-x-4 ml-8">
-                <Button asChild className="hidden md:inline-flex">
+                <Button asChild className="hidden md:inline-flex bg-[#264AB8] hover:bg-[#203C9A]">
                   <Link to="/contact?type=client">
                     Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Link>
