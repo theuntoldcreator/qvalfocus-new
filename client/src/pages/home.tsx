@@ -8,28 +8,29 @@ import { FeaturedJobs } from "@/components/sections/featured-jobs";
 import { Testimonials } from "@/components/sections/testimonials";
 import { WhyWorkWithUs } from "@/components/sections/why-work-with-us";
 import { Newsletter } from "@/components/sections/newsletter";
-import { ServiceCard } from "@/components/ui/ServiceCard";
+import { CardStackScroll } from "@/components/sections/card-stack-scroll";
 
-const serviceCardDemos = [
+const stackCards = [
   {
-    label: "Recruitment Services",
+    subtitle: "Recruitment Services",
     title: "Executive Search",
     description: "Mattis element semper tellus donec ornae. Eolor auctor pellen tesque urna nam lectus. Tellus risus dapibus ornare interdum tempore lorem.",
-    image: {
-      src: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "A team of professionals collaborating in a modern office.",
-    },
-    href: "/services/executive-search"
+    imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "/services/executive-search"
   },
   {
-    label: "Career Development",
+    subtitle: "Talent Acquisition",
+    title: "Talent Sourcing",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    imageUrl: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "/services/talent-sourcing"
+  },
+  {
+    subtitle: "Career Development",
     title: "Career Counseling",
     description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    image: {
-      src: "https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      alt: "A person receiving career advice in a bright, open space.",
-    },
-    href: "/services/career-counseling"
+    imageUrl: "https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "/services/career-counseling"
   }
 ];
 
@@ -42,13 +43,7 @@ export default function Home() {
         <AboutSection />
         <ServiceCategories />
         
-        {/* Demo of the new ServiceCard component */}
-        <section className="py-20 bg-white dark:bg-slate-900">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-            <ServiceCard {...serviceCardDemos[0]} />
-            <ServiceCard {...serviceCardDemos[1]} revealDelayMs={200} />
-          </div>
-        </section>
+        <CardStackScroll cards={stackCards} />
 
         <WhyWorkWithUs />
         <Industries />
