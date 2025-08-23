@@ -5,13 +5,6 @@ import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn } from 'react-icons/fa'
 export function Footer() {
   return (
     <footer className="relative bg-white text-slate-700 pt-16 pb-8 overflow-hidden">
-      {/* Background Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-9xl font-extrabold text-slate-100/50 select-none pointer-events-none">
-          QvalFocus
-        </span>
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
           {/* Logo Column */}

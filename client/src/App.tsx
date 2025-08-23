@@ -13,6 +13,7 @@ import { Header } from "./components/layout/header";
 import { Footer } from "./components/layout/footer";
 import { MobileNav } from "./components/layout/mobile-nav";
 import { ScrollToTopButton } from "./components/ui/scroll-to-top-button";
+import { FadingLogoBanner } from "./components/layout/FadingLogoBanner";
 
 // Pages
 import Home from "./pages/home";
@@ -79,6 +80,7 @@ const RootLayout = () => {
       <Header onToggleMobileMenu={toggleMobileNav} />
       <MobileNav isOpen={isMobileNavOpen} onClose={toggleMobileNav} navLinks={publicNavLinks} />
       <Outlet />
+      <FadingLogoBanner />
       <Footer />
       <Toaster />
       <ScrollToTopButton />
