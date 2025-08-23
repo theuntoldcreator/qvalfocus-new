@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./pages/layout";
-import IndexPage from "./pages/index";
+import IndexPage from "./pages/Index";
 import AboutPage from "./pages/about";
 import BlogPage from "./pages/blog";
 import BlogPostPage from "./pages/blog/[slug]";
