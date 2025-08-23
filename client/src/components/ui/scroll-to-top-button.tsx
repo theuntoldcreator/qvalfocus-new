@@ -55,7 +55,7 @@ export function ScrollToTopButton() {
     <button
       onClick={scrollToTop}
       className={cn(
-        "fixed bottom-8 right-8 z-50 transition-all duration-300 ease-in-out flex items-center justify-center rounded-full bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-lg hover:scale-110",
+        "fixed bottom-8 right-8 z-50 transition-all duration-300 ease-in-out flex items-center justify-center rounded-full bg-primary shadow-lg hover:scale-110",
         isVisible ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"
       )}
       style={{ width: size, height: size }}
@@ -74,7 +74,7 @@ export function ScrollToTopButton() {
           r={radius}
           fill="transparent"
           strokeWidth={strokeWidth}
-          className="stroke-slate-200 dark:stroke-slate-700"
+          className="stroke-primary-foreground/20"
         />
         {/* Progress Circle */}
         <circle
@@ -86,10 +86,10 @@ export function ScrollToTopButton() {
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
-          className="stroke-primary transition-all duration-100"
+          className="stroke-primary-foreground transition-all duration-100"
         />
       </svg>
-      <ArrowUp className="h-6 w-6 text-primary" />
+      <ArrowUp className="h-6 w-6 text-primary-foreground" />
     </button>
   );
 }
