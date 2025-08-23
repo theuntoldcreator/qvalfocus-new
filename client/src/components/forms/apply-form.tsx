@@ -42,6 +42,9 @@ export function ApplyForm({ job }: ApplyFormProps) {
   function onSubmit(values: z.infer<typeof applyFormSchema>) {
     const applicationData: InsertApplication = {
       ...values,
+      phone: values.phone || null,
+      resume_url: values.resume_url || null,
+      cover_letter: values.cover_letter || null,
       job_id: job.id,
       current_role: null,
       experience_level: null,
