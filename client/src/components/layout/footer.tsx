@@ -2,13 +2,18 @@ import { Link } from "react-router-dom";
 import { companyInfo } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
-import { FooterCurve } from "./footer-curve";
 
 export function Footer() {
   return (
-    <footer className="relative bg-theme-black text-white pt-20 mt-20">
-      <FooterCurve />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="relative bg-theme-black text-white pt-20 mt-8 overflow-hidden">
+      {/* Background SVG shape */}
+      <img 
+        src="/images/footer.svg" 
+        alt="Footer background shape"
+        className="absolute bottom-0 right-0 w-full md:w-1/2 max-w-2xl h-auto opacity-10 pointer-events-none"
+      />
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* 4-column grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-16">
           {/* Contact Info */}
