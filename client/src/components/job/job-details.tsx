@@ -57,7 +57,7 @@ export function JobDetails({ job }: { job: Job }) {
           <Button variant="outline" size="icon">
             <Share2 className="h-4 w-4" />
           </Button>
-          <Button className="bg-emerald-600 hover:bg-emerald-700">Apply Now</Button>
+          <Button className="bg-theme-orange hover:bg-theme-orange-dark">Apply Now</Button>
         </div>
       </div>
 
@@ -73,7 +73,7 @@ export function JobDetails({ job }: { job: Job }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
             {requirementsList.map((item, i) => (
               <div key={i} className="flex items-start">
-                <Zap className="w-4 h-4 mr-3 mt-1 text-emerald-500 flex-shrink-0" />
+                <Zap className="w-4 h-4 mr-3 mt-1 text-primary flex-shrink-0" />
                 <span className="text-slate-600 dark:text-slate-300">{item}</span>
               </div>
             ))}
@@ -86,7 +86,7 @@ export function JobDetails({ job }: { job: Job }) {
             <div className="space-y-2">
               {responsibilitiesList.map((item, i) => (
                 <div key={i} className="flex items-start">
-                  <CheckCircle2 className="w-4 h-4 mr-3 mt-1 text-emerald-500 flex-shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 mr-3 mt-1 text-primary flex-shrink-0" />
                   <span className="text-slate-600 dark:text-slate-300">{item}</span>
                 </div>
               ))}
@@ -97,7 +97,7 @@ export function JobDetails({ job }: { job: Job }) {
             <div className="space-y-2">
               {benefitsList.map((item, i) => (
                 <div key={i} className="flex items-start">
-                  <Circle className="w-2 h-2 mr-3 mt-2 text-emerald-500 flex-shrink-0 fill-current" />
+                  <Circle className="w-2 h-2 mr-3 mt-2 text-primary flex-shrink-0 fill-current" />
                   <span className="text-slate-600 dark:text-slate-300">{item}</span>
                 </div>
               ))}

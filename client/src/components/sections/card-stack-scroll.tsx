@@ -123,7 +123,7 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
                   <p className="text-slate-600 dark:text-slate-300 mb-8">
                     {card.description}
                   </p>
-                  <Button asChild className="bg-avada-yellow text-avada-green-darker hover:bg-yellow-400">
+                  <Button asChild className="bg-theme-orange text-white hover:bg-theme-orange-dark">
                     <Link to={card.link}>
                       Read More <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>

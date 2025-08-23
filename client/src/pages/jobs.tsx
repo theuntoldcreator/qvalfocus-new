@@ -63,7 +63,7 @@ export default function JobsPage() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
-                <Button size="lg" className="h-12">Search</Button>
+                <Button size="lg" className="h-12 bg-theme-orange hover:bg-theme-orange-dark">Search</Button>
               </div>
             </div>
           </section>

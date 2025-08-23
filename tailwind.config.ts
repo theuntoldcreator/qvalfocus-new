@@ -21,40 +21,20 @@ export default {
           foreground: "var(--popover-foreground)",
         },
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
+          DEFAULT: "var(--primary)", // Now a vibrant orange
+          foreground: "var(--primary-foreground)", // White text on orange
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+          DEFAULT: "var(--secondary)", // Light gray
+          foreground: "var(--secondary-foreground)", // Dark text on light gray
         },
         muted: {
           DEFAULT: "var(--muted)",
           foreground: "var(--muted-foreground)",
         },
         accent: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+          DEFAULT: "var(--accent)", // Dark gray/black
+          foreground: "var(--accent-foreground)", // White text on dark gray
         },
         destructive: {
           DEFAULT: "var(--destructive)",
@@ -80,11 +60,22 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        violet: {
+          100: '#f5f3ff',
+        },
+        // Custom theme colors
+        'theme-orange': '#FF7F00',
+        'theme-orange-dark': '#CC6600',
+        'theme-gray-light': '#F8F8F8',
+        'theme-gray-medium': '#E0E0E0',
+        'theme-gray-dark': '#333333',
+        'theme-black': '#1A1A1A',
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
+        freigeist: ['Freigeist', 'sans-serif'],
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out",

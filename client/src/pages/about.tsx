@@ -66,7 +66,7 @@ export default function AboutPage() {
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
               At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
             </p>
-            <Button size="lg" asChild>
+            <Button size="lg" asChild className="bg-theme-orange hover:bg-theme-orange-dark">
               <Link to="/contact?type=client">Get In Touch</Link>
             </Button>
           </div>
@@ -159,7 +159,7 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Let's Build the Future Together
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-xl text-primary-foreground/80 mb-8">
               Whether you're looking to build your team or advance your career, 
               we'd love to be part of your journey.
             </p>

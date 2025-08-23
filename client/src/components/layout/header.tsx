@@ -134,11 +134,11 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                           <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
                             <div>
                               <h4 className="text-2xl font-bold mb-3">Recruitment Services</h4>
-                              <p className="text-primary-100 text-sm leading-relaxed">
+                              <p className="text-primary-foreground text-sm leading-relaxed">
                                 We provide comprehensive recruitment services to connect top talent with leading companies.
                               </p>
                             </div>
-                            <Button variant="link" asChild className="text-avada-light-green hover:text-white p-0 h-auto justify-start">
+                            <Button variant="link" asChild className="text-white hover:text-primary-foreground/80 p-0 h-auto justify-start">
                               <Link to="/services/staffing-solution">
                                 Learn More <ArrowUpRight className="ml-2 h-4 w-4" />
                               </Link>
@@ -194,7 +194,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
               </nav>
 
               <div className="flex items-center space-x-4 ml-8">
-                <Button asChild className="hidden md:inline-flex bg-[#264AB8] hover:bg-[#203C9A]">
+                <Button asChild className="hidden md:inline-flex bg-theme-orange hover:bg-theme-orange-dark">
                   <Link to="/contact?type=client">
                     Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -212,8 +212,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
               </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
     </>
   );
 }

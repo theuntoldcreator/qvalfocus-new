@@ -40,7 +40,7 @@ export default function IndustriesPage() {
                 We specialize in Life Sciences and Information Technology — delivering industry-aligned staffing and project solutions that produce measurable results.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild>
+                <Button size="lg" asChild className="bg-theme-orange hover:bg-theme-orange-dark">
                   <Link to="/contact?type=client">Discuss Your Industry</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
@@ -82,7 +82,7 @@ export default function IndustriesPage() {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Ready to Leverage Industry Expertise?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-xl text-primary-foreground/80 mb-8">
               Connect with our industry specialists to discuss your specific challenges and opportunities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

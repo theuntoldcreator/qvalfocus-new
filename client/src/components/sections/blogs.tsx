@@ -1,11 +1,15 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { useFeaturedBlogs } from "@/lib/hooks";
+import { useBlogs } from "@/lib/hooks"; // Changed to useBlogs for all blogs
 import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 export function Blogs() {
-  const { data: blogs, isLoading } = useFeaturedBlogs();
+  const { data: blogs, isLoading } = useBlogs(); // Fetch all blogs
+
+  // Filter for featured and published blogs to display on the homepage section
+  const featuredPublishedBlogs = blogs?.filter(blog => blog.featured && blog.status === 'published').slice(0, 2);
 
   return (
     <section id="blogs" className="py-20 bg-slate-100 dark:bg-slate-900">
@@ -33,7 +37,7 @@ export function Blogs() {
               </div>
             ))
           ) : (
-            blogs?.slice(0, 2).map((blog) => (
+            featuredPublishedBlogs?.map((blog) => (
               <div key={blog.id} className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300">
                 <div className="w-full h-48 rounded-xl mb-6 overflow-hidden">
                   {blog.imageUrl ? (
@@ -48,7 +52,9 @@ export function Blogs() {
                     </div>
                   )}
                 </div>
-                <div className="text-sm text-primary font-semibold mb-2">{blog.category}</div>
+                <Badge className="mb-4 bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-400">
+                  {blog.category}
+                </Badge>
                 <h3 className="text-2xl font-bold mb-4">{blog.title}</h3>
                 <p className="text-slate-600 dark:text-slate-300 mb-6">
                   {blog.content.substring(0, 150)}...

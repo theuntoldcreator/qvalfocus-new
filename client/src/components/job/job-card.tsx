@@ -24,7 +24,7 @@ export function JobCard({ job }: JobCardProps) {
         </div>
       </div>
       <div className="flex-shrink-0 mt-4 sm:mt-0">
-        <Button asChild>
+        <Button asChild className="bg-theme-orange hover:bg-theme-orange-dark">
           <Link to={`/jobs/${job.slug}`}>Apply Now</Link>
         </Button>
       </div>

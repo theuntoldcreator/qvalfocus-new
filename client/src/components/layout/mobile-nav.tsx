@@ -82,29 +82,29 @@ export function MobileNav({ isOpen, onClose, navLinks }: MobileNavProps) {
             </div>
 
             {/* Call Our Helpline Section */}
-            <div className="bg-avada-green-darker text-white p-6 rounded-lg mb-6">
-              <h3 className="text-lg font-bold text-avada-light-green mb-2">Call Our Helpline</h3>
-              <a href={`tel:${companyInfo.phone}`} className="text-2xl font-bold block mb-1 hover:text-avada-light-green transition-colors">
+            <div className="bg-theme-black text-white p-6 rounded-lg mb-6">
+              <h3 className="text-lg font-bold text-primary mb-2">Call Our Helpline</h3>
+              <a href={`tel:${companyInfo.phone}`} className="text-2xl font-bold block mb-1 hover:text-primary transition-colors">
                 {companyInfo.phone}
               </a>
               <p className="text-sm text-slate-300">[Monday to Friday | 9 AM – 6 PM]</p>
             </div>
 
             {/* Social Icons */}
-            <div className="flex justify-center space-x-4 bg-avada-green-darker p-4 rounded-lg">
-              <a href={companyInfo.facebook || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-avada-light-green transition-colors">
+            <div className="flex justify-center space-x-4 bg-theme-black p-4 rounded-lg">
+              <a href={companyInfo.facebook || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
                 <FaFacebookF className="h-5 w-5" />
               </a>
-              <a href={companyInfo.twitter || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-avada-light-green transition-colors">
+              <a href={companyInfo.twitter || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
                 <FaTwitter className="h-5 w-5" />
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer" className="text-white hover:text-avada-light-green transition-colors">
+              <a href="#" target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
                 <FaYoutube className="h-5 w-5" />
               </a>
-              <a href={companyInfo.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-avada-light-green transition-colors">
+              <a href={companyInfo.linkedin || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-primary transition-colors">
                 <FaLinkedinIn className="h-5 w-5" />
               </a>
-              <a href={`mailto:${companyInfo.email}`} className="text-white hover:text-avada-light-green transition-colors">
+              <a href={`mailto:${companyInfo.email}`} className="text-white hover:text-primary transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
             </div>

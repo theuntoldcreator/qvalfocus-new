@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import * as LucideIcons from "lucide-react"; // Import all Lucide icons
-import React from "react"; // Import React for React.ElementType
+import * as LucideIcons from "lucide-react";
+import React from "react";
 
 interface ServiceCategoryCardProps {
   title: string;
   initialImage: string;
   hoverImage: string;
-  iconName: keyof typeof LucideIcons; // Type for Lucide icon names
+  iconName: keyof typeof LucideIcons;
   link: string;
 }
 
@@ -20,7 +20,6 @@ export function ServiceCategoryCard({
   link,
 }: ServiceCategoryCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  // Explicitly cast to React.ElementType to resolve the JSX element type error
   const Icon = LucideIcons[iconName] as React.ElementType; 
 
   return (
@@ -29,8 +28,8 @@ export function ServiceCategoryCard({
       className="relative block rounded-2xl overflow-hidden shadow-lg group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={() => setIsHovered(true)} // For touch devices
-      onTouchEnd={() => setIsHovered(false)} // For touch devices
+      onTouchStart={() => setIsHovered(true)}
+      onTouchEnd={() => setIsHovered(false)}
     >
       {/* Image Container */}
       <div className="relative w-full h-64">
@@ -57,7 +56,7 @@ export function ServiceCategoryCard({
       {/* Content Area */}
       <div className="p-6 bg-white dark:bg-slate-800 flex items-center justify-between">
         <h3 className="text-xl font-bold text-slate-900 dark:text-white">{title}</h3>
-        <div className="w-10 h-10 bg-avada-light-green text-avada-green rounded-full flex items-center justify-center">
+        <div className="w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center">
           {Icon && <Icon className="w-5 h-5" />}
         </div>
       </div>

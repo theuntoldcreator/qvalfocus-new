@@ -1,7 +1,7 @@
 import { useJobs, useDeleteJob } from "@/lib/hooks";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2, Eye, PlusCircle, Briefcase, Edit } from "lucide-react";
+import { Trash2, Eye, PlusCircle, Briefcase, Edit, Users } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
@@ -16,6 +16,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export function JobsManagement() {
   const { data: jobs, isLoading: isLoadingJobs } = useJobs();
@@ -31,7 +33,7 @@ export function JobsManagement() {
 
   return (
     <div className="space-y-8">
-      <Card>
+      <Card className="bg-white shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Manage Job Listings</CardTitle>
           <Button asChild>
@@ -42,12 +44,19 @@ export function JobsManagement() {
           </Button>
         </CardHeader>
         <CardContent>
-          {isLoadingJobs ? <p>Loading jobs...</p> : jobs && jobs.length > 0 ? (
+          {isLoadingJobs ? (
+            <div className="space-y-4">
+              {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
+            </div>
+          ) : jobs && jobs.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>Title</TableHead>
+                  <TableHead>Company</TableHead>
                   <TableHead>Location</TableHead>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Status</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -55,21 +64,28 @@ export function JobsManagement() {
                 {jobs?.map((job) => (
                   <TableRow key={job.id}>
                     <TableCell className="font-medium">{job.title}</TableCell>
+                    <TableCell>{job.company}</TableCell>
                     <TableCell>{job.location}</TableCell>
+                    <TableCell className="capitalize">{job.type.replace('-', ' ')}</TableCell>
+                    <TableCell>
+                      <Badge variant="secondary" className="bg-green-100 text-green-700">
+                        Open
+                      </Badge>
+                    </TableCell>
                     <TableCell className="text-right space-x-2">
-                      <Button asChild variant="ghost" size="icon">
+                      <Button asChild variant="ghost" size="icon" title="View Applications">
                         <Link to={`/admin/dashboard/jobs/${job.slug}/applications`}>
-                          <Eye className="h-4 w-4" />
+                          <Users className="h-4 w-4" />
                         </Link>
                       </Button>
-                      <Button asChild variant="ghost" size="icon">
+                      <Button asChild variant="ghost" size="icon" title="Edit Job">
                         <Link to={`/admin/dashboard/jobs/edit/${job.slug}`}>
                           <Edit className="h-4 w-4" />
                         </Link>
                       </Button>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <Button variant="destructive" size="icon">
+                          <Button variant="destructive" size="icon" title="Delete Job">
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </AlertDialogTrigger>

@@ -38,7 +38,7 @@ export function FaqAccordion() {
     <section className="py-20 bg-white dark:bg-slate-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <p className="text-avada-green font-semibold mb-2 bg-avada-light-green inline-block px-3 py-1 rounded">Know More About Recruitments</p>
+          <p className="text-primary font-semibold mb-2 bg-primary/10 inline-block px-3 py-1 rounded">Know More About Recruitments</p>
           <h2 className="text-4xl md:text-5xl font-bold font-freigeist mt-4">Frequently Asked Questions</h2>
         </div>
         <Accordion type="single" collapsible defaultValue="item-0" className="w-full space-y-4">
@@ -46,11 +46,11 @@ export function FaqAccordion() {
             <AccordionItem 
               key={index} 
               value={`item-${index}`} 
-              className="group border-b data-[state=open]:border data-[state=open]:border-avada-green data-[state=open]:rounded-lg data-[state=open]:shadow-lg transition-all"
+              className="group border-b data-[state=open]:border data-[state=open]:border-primary data-[state=open]:rounded-lg data-[state=open]:shadow-lg transition-all"
             >
               <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline p-6 [&>svg]:hidden justify-start">
                 <div className="flex items-center w-full">
-                  <div className="w-6 h-6 rounded-sm flex items-center justify-center mr-4 bg-avada-yellow group-data-[state=open]:bg-avada-green flex-shrink-0">
+                  <div className="w-6 h-6 rounded-sm flex items-center justify-center mr-4 bg-primary group-data-[state=open]:bg-primary flex-shrink-0">
                     <ArrowDownRight className="h-4 w-4 text-white" />
                   </div>
                   <span className="flex-1">{faq.question}</span>

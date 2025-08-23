@@ -7,7 +7,7 @@ import { BookOpen } from "lucide-react";
 export default function CaseStudiesPage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onToggleMobileMenu={() => {}} /> {/* Added onToggleMobileMenu prop */}
+      <Header onToggleMobileMenu={() => {}} />
       <main className="pt-20 md:pt-28 flex-grow flex items-center justify-center bg-slate-50 dark:bg-slate-900">
         <div className="text-center p-8">
           <BookOpen className="w-16 h-16 text-primary mx-auto mb-6" />
@@ -15,7 +15,7 @@ export default function CaseStudiesPage() {
           <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-md">
             Discover success stories and learn how our clients have achieved their goals with us.
           </p>
-          <Button asChild>
+          <Button asChild className="bg-theme-orange hover:bg-theme-orange-dark">
             <Link to="/">Back to Home</Link>
           </Button>
         </div>

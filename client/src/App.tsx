@@ -6,12 +6,12 @@ import { AuthProvider } from "./providers/auth-provider";
 import { ThemeProvider } from "./providers/theme-provider";
 import ScrollToTop from "./components/scroll-to-top";
 import { Toaster } from "./components/ui/toaster";
-import { services, pagesLinks, recruitmentDropdownServices } from "./lib/data"; // Import new data
+import { services, pagesLinks, recruitmentDropdownServices } from "./lib/data";
 
 // Layout Components
 import { Header } from "./components/layout/header";
 import { Footer } from "./components/layout/footer";
-import { MobileNav } from "./components/layout/mobile-nav"; // Import MobileNav
+import { MobileNav } from "./components/layout/mobile-nav";
 import { ScrollToTopButton } from "./components/ui/scroll-to-top-button";
 
 // Pages
@@ -27,13 +27,12 @@ import IndustryPage from "./pages/industry/[slug]";
 import BlogsPage from "./pages/blogs";
 import BlogPostPage from "./pages/blog/[slug]";
 import PrivacyPage from "./pages/legal/privacy";
-import "./pages/legal/privacy"; // Ensure this is not a duplicate import
 import TermsPage from "./pages/legal/terms";
 import AdminLoginPage from "./pages/admin/login";
 import AdminRegisterPage from "./pages/admin/register";
 import NewJobPage from "./pages/admin/new-job";
 import EditJobPage from "./pages/admin/edit-job";
-import NotFound from "./pages/not-found"; // Corrected path
+import NotFound from "./pages/not-found";
 import CaseStudiesPage from "./pages/case-studies";
 import ChangelogPage from "./pages/changelog";
 import CustomersPage from "./pages/customers";
@@ -50,13 +49,19 @@ import { ApplicationsManagement } from "./components/admin/applications-manageme
 import { ContactsManagement } from "./components/admin/contacts-management";
 import { NewsletterManagement } from "./components/admin/newsletter-management";
 
+// New Admin Pages (placeholders for now)
+import BlogManagementPage from "./pages/admin/blog-management";
+import NewBlogPage from "./pages/admin/new-blog";
+import EditBlogPage from "./pages/admin/edit-blog";
+import WebsiteContentManagementPage from "./pages/admin/website-content-management";
+import AdminSettingsPage from "./pages/admin/settings";
+
+
 const publicNavLinks = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About Us" },
-  // For mobile, we can list the main service categories directly
   ...services.map(service => ({ to: service.link, label: service.title })),
   { to: "/jobs", label: "Careers" },
-  // For mobile, we can list the main pages directly
   ...pagesLinks.map(page => ({ to: page.link, label: page.title })),
   { to: "/contact", label: "Contact" },
 ];
@@ -75,7 +80,6 @@ const RootLayout = () => {
       <MobileNav isOpen={isMobileNavOpen} onClose={toggleMobileNav} navLinks={publicNavLinks} />
       <Outlet />
       <Toaster />
-      <Footer />
       <ScrollToTopButton />
     </>
   );
@@ -92,11 +96,10 @@ const router = createBrowserRouter([
       { path: "/contact", element: <ContactPage /> },
       { path: "/services/staffing-solution", element: <StaffingSolutionPage /> },
       { path: "/services/project-solution", element: <ProjectSolutionPage /> },
-      // Add routes for the new dropdown services if they have dedicated pages
-      { path: "/services/executive-search", element: <StaffingSolutionPage /> }, // Placeholder, create dedicated page if needed
-      { path: "/services/talent-sourcing", element: <StaffingSolutionPage /> }, // Placeholder
-      { path: "/services/jobs-advertising", element: <StaffingSolutionPage /> }, // Placeholder
-      { path: "/services/career-counseling", element: <StaffingSolutionPage /> }, // Placeholder
+      { path: "/services/executive-search", element: <StaffingSolutionPage /> },
+      { path: "/services/talent-sourcing", element: <StaffingSolutionPage /> },
+      { path: "/services/jobs-advertising", element: <StaffingSolutionPage /> },
+      { path: "/services/career-counseling", element: <StaffingSolutionPage /> },
       { path: "/industries", element: <IndustriesPage /> },
       { path: "/industries/:slug", element: <IndustryPage /> },
       { path: "/blogs", element: <BlogsPage /> },
@@ -108,27 +111,33 @@ const router = createBrowserRouter([
       { path: "/customers", element: <CustomersPage /> },
       { path: "/guides", element: <GuidesPage /> },
       { path: "/pricing", element: <PricingPage /> },
-      { path: "/admin/login", element: <AdminLoginPage /> },
-      { path: "/admin/register", element: <AdminRegisterPage /> },
-      {
-        path: "/admin/dashboard",
-        element: (
-          <ProtectedRoute>
-            <AdminDashboardLayout />
-          </ProtectedRoute>
-        ),
-        children: [
-          { index: true, element: <DashboardOverview /> },
-          { path: "jobs", element: <JobsManagement /> },
-          { path: "jobs/new", element: <NewJobPage /> },
-          { path: "jobs/edit/:slug", element: <EditJobPage /> },
-          { path: "jobs/:slug/applications", element: <JobApplicationsPage /> },
-          { path: "applications", element: <ApplicationsManagement /> },
-          { path: "contacts", element: <ContactsManagement /> },
-          { path: "newsletter", element: <NewsletterManagement /> },
-        ],
-      },
       { path: "*", element: <NotFound /> },
+    ],
+  },
+  // Admin routes are separate and use AdminDashboardLayout
+  { path: "/admin/login", element: <AdminLoginPage /> },
+  { path: "/admin/register", element: <AdminRegisterPage /> },
+  {
+    path: "/admin/dashboard",
+    element: (
+      <ProtectedRoute>
+        <AdminDashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      { index: true, element: <DashboardOverview /> },
+      { path: "jobs", element: <JobsManagement /> },
+      { path: "jobs/new", element: <NewJobPage /> },
+      { path: "jobs/edit/:slug", element: <EditJobPage /> },
+      { path: "jobs/:slug/applications", element: <JobApplicationsPage /> },
+      { path: "applications", element: <ApplicationsManagement /> },
+      { path: "contacts", element: <ContactsManagement /> },
+      { path: "newsletter", element: <NewsletterManagement /> },
+      { path: "blogs", element: <BlogManagementPage /> },
+      { path: "blogs/new", element: <NewBlogPage /> },
+      { path: "blogs/edit/:slug", element: <EditBlogPage /> },
+      { path: "website-content", element: <WebsiteContentManagementPage /> },
+      { path: "settings", element: <AdminSettingsPage /> },
     ],
   },
 ]);

@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { Job, Application, InsertJob, InsertApplication, Blog, Contact, InsertContact, Testimonial } from "@shared/schema";
+import type { Job, Application, InsertJob, InsertApplication, Blog, InsertBlog, Contact, InsertContact, Testimonial } from "@shared/schema";
 import { blogs as mockBlogs, testimonials as mockTestimonials } from './data';
 
 // Helper to generate a URL-friendly slug
@@ -240,13 +240,17 @@ export function useTestimonials() {
   });
 }
 
-// Blog Hooks (unchanged)
+// Blog Hooks
 export function useBlogs() {
   return useQuery<Blog[]>({
     queryKey: ['blogs'],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
-      return mockBlogs;
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .order('created_at', { ascending: false });
+      if (error) throw new Error(error.message);
+      return data as Blog[];
     },
   });
 }
@@ -255,8 +259,15 @@ export function useFeaturedBlogs() {
   return useQuery<Blog[]>({
     queryKey: ['featured-blogs'],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
-      return mockBlogs.filter(blog => blog.featured).slice(0, 2);
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .eq('featured', true)
+        .eq('status', 'published')
+        .order('publish_date', { ascending: false })
+        .limit(2);
+      if (error) throw new Error(error.message);
+      return data as Blog[];
     },
   });
 }
@@ -265,14 +276,78 @@ export function useBlogPostBySlug(slug: string) {
   return useQuery<Blog>({
     queryKey: ['blog', slug],
     queryFn: async () => {
-      await new Promise(resolve => setTimeout(resolve, 500)); // Simulate API call
-      const post = mockBlogs.find((b: any) => b.slug === slug);
-      if (!post) {
-        throw new Error('Blog post not found');
-      }
-      return post;
+      const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .eq('slug', slug)
+        .single();
+      if (error) throw new Error(error.message);
+      return data as Blog;
     },
     enabled: !!slug,
+  });
+}
+
+export function useCreateBlog() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (newBlog: InsertBlog) => {
+      const slug = toSlug(newBlog.title);
+      const { data, error } = await supabase
+        .from('blogs')
+        .insert([{ ...newBlog, slug }])
+        .select()
+        .single();
+      if (error) {
+        console.error("Supabase insert error:", error);
+        throw new Error(error.message);
+      }
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['featured-blogs'] });
+    },
+  });
+}
+
+export function useUpdateBlog() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, updatedBlog }: { id: string, updatedBlog: Partial<InsertBlog> }) => {
+      const { data, error } = await supabase
+        .from('blogs')
+        .update(updatedBlog)
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) {
+        console.error("Supabase update error:", error);
+        throw new Error(error.message);
+      }
+      return data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['featured-blogs'] });
+      if (data) {
+        queryClient.invalidateQueries({ queryKey: ['blog', data.slug] });
+      }
+    },
+  });
+}
+
+export function useDeleteBlog() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from('blogs').delete().eq('id', id);
+      if (error) throw new Error(error.message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['blogs'] });
+      queryClient.invalidateQueries({ queryKey: ['featured-blogs'] });
+    },
   });
 }
 

@@ -346,7 +346,7 @@ export default function TermsPage() {
               Our legal team is available to clarify any aspects of these terms and conditions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild>
+              <Button asChild className="bg-theme-orange hover:bg-theme-orange-dark">
                 <Link to="/contact">Contact Legal Team</Link>
               </Button>
               <Button variant="outline" asChild>

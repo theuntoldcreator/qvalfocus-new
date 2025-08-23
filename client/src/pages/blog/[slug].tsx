@@ -61,7 +61,26 @@ export default function BlogPostPage() {
     );
   }
 
-  if (!blogPost) return null;
+  if (!blogPost || blogPost.status !== 'published') return ( // Only show published blogs
+    <div className="min-h-screen">
+      <Header onToggleMobileMenu={() => {}} />
+      <div className="pt-20 flex items-center justify-center min-h-[60vh]">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Blog Post Not Found</h1>
+          <p className="text-slate-600 dark:text-slate-300 mb-6">
+            The blog post you're looking for doesn't exist or is not yet published.
+          </p>
+          <Link to="/blogs">
+            <Button>
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Blog
+            </Button>
+          </Link>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
 
   return (
     <div className="min-h-screen">

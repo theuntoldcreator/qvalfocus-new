@@ -303,7 +303,7 @@ export default function PrivacyPage() {
               Our privacy team is here to help you understand and manage your data.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild>
+              <Button asChild className="bg-theme-orange hover:bg-theme-orange-dark">
                 <Link to="/contact">Contact Privacy Team</Link>
               </Button>
               <Button variant="outline" asChild>
