@@ -8,13 +8,14 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { WhyWorkWithUs } from "@/components/sections/why-work-with-us";
 import { Newsletter } from "@/components/sections/newsletter";
 import { CardStackScroll } from "@/components/sections/card-stack-scroll";
+import { ScrollAnimate } from "@/components/ui/scroll-animate";
 
 const stackCards = [
   {
     subtitle: "Recruitment Services",
     title: "Executive Search",
     description: "Mattis element semper tellus donec ornae. Eolor auctor pellen tesque urna nam lectus. Tellus risus dapibus ornare interdum tempore lorem.",
-    imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib.rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     link: "/services/executive-search"
   },
   {
@@ -39,16 +40,30 @@ export default function Home() {
       {/* Header and Footer are now handled by RootLayout */}
       <main>
         <Hero />
-        <AboutSection />
-        <ServiceCategories />
+        <ScrollAnimate>
+          <AboutSection />
+        </ScrollAnimate>
+        <ScrollAnimate>
+          <ServiceCategories />
+        </ScrollAnimate>
         
         <CardStackScroll cards={stackCards} />
 
-        <WhyWorkWithUs />
-        <Industries />
-        <FeaturedJobs />
-        <Testimonials />
-        <Newsletter />
+        <ScrollAnimate>
+          <WhyWorkWithUs />
+        </ScrollAnimate>
+        <ScrollAnimate>
+          <Industries />
+        </ScrollAnimate>
+        <ScrollAnimate>
+          <FeaturedJobs />
+        </ScrollAnimate>
+        <ScrollAnimate>
+          <Testimonials />
+        </ScrollAnimate>
+        <ScrollAnimate>
+          <Newsletter />
+        </ScrollAnimate>
       </main>
     </div>
   );
