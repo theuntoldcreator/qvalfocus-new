@@ -22,30 +22,56 @@ interface HeaderProps {
   onToggleMobileMenu: () => void;
 }
 
-const ListItem = React.forwardRef<
+// ListItem for simple dropdowns with a title and description (e.g., Home, Pages)
+const SimpleListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { icon?: React.ElementType; image?: string }
->(({ className, title, children, icon: Icon, image, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <a
           ref={ref}
           className={cn(
-            "group grid grid-cols-[1fr_1fr] items-center gap-4 select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100",
             className
           )}
           {...props}
         >
-          {/* Column 1: Icon and Title */}
+          <div className="text-sm font-medium leading-none">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-slate-500">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  );
+});
+SimpleListItem.displayName = "SimpleListItem";
+
+// ListItem specifically for the Services dropdown to match the new design
+const ServiceListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a"> & { image?: string }
+>(({ className, title, image, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "group flex w-full items-center justify-between rounded-md p-3 no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100",
+            className
+          )}
+          {...props}
+        >
           <div className="flex items-center">
-            {Icon && <Icon className="mr-3 h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />}
-            <div className="text-lg font-semibold leading-none">{title}</div>
+            <ArrowRight className="mr-3 h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
+            <div className="text-base font-medium text-slate-800">{title}</div>
           </div>
-          {/* Column 2: Image */}
           {image && (
-            <div className="overflow-hidden rounded-md justify-self-end">
-              <img src={image} alt={title || ""} className="h-12 w-40 object-cover transition-transform group-hover:scale-105" />
+            <div className="h-14 w-32 overflow-hidden rounded-md">
+              <img src={image} alt={title || ""} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
             </div>
           )}
         </a>
@@ -53,7 +79,7 @@ const ListItem = React.forwardRef<
     </li>
   );
 });
-ListItem.displayName = "ListItem";
+ServiceListItem.displayName = "ServiceListItem";
 
 export function Header({ onToggleMobileMenu }: HeaderProps) {
   const isScrolled = useScroll(50);
@@ -74,7 +100,8 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
     return cn(
       navigationMenuTriggerStyle(),
       navLinkClasses(path),
-      isActive ? "bg-slate-100 dark:bg-slate-800" : "bg-transparent"
+      isActive ? "bg-slate-100 dark:bg-slate-800" : "bg-transparent",
+      "hover:bg-slate-100 dark:hover:bg-slate-800 focus:bg-slate-100 dark:focus:bg-slate-800"
     );
   };
 
@@ -105,15 +132,15 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                       <NavigationMenuTrigger className={navItemClasses("/")}>Home</NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
-                          <ListItem href="/#about" title="About Us">
+                          <SimpleListItem href="/#about" title="About Us">
                             Learn more about our mission and values.
-                          </ListItem>
-                          <ListItem href="/#services" title="Our Services">
+                          </SimpleListItem>
+                          <SimpleListItem href="/#services" title="Our Services">
                             Explore our staffing and project solutions.
-                          </ListItem>
-                          <ListItem href="/#jobs" title="Featured Jobs">
+                          </SimpleListItem>
+                          <SimpleListItem href="/#jobs" title="Featured Jobs">
                             Find your next career opportunity.
-                          </ListItem>
+                          </SimpleListItem>
                         </ul>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
@@ -129,27 +156,26 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <div className="grid grid-cols-[1fr_2.5fr] w-[960px] p-0 overflow-hidden rounded-md">
-                          <div className="bg-avada-green-darker p-8 text-white flex flex-col justify-between">
+                        <div className="grid grid-cols-[1fr_2fr] w-[960px] overflow-hidden rounded-lg shadow-lg">
+                          <div className="bg-[#0A2628] p-8 text-white flex flex-col justify-between">
                             <div>
-                              <h4 className="text-2xl font-bold mb-3 font-serif">Recruitment Services</h4>
-                              <p className="text-primary-foreground/80 text-sm leading-relaxed">
+                              <h4 className="text-2xl font-bold mb-4 font-serif">Recruitment Services</h4>
+                              <p className="text-slate-300 text-sm leading-relaxed">
                                 Lummattis element cum semps honec rnare. Dolor auctor urna dignissim sed nunc sit plateas uellentesque tempor.
                               </p>
                             </div>
-                            <Button variant="link" asChild className="text-white hover:text-primary-foreground/80 p-0 h-auto justify-start mt-6">
+                            <Button variant="link" asChild className="text-primary hover:text-green-400 p-0 h-auto justify-start mt-6">
                               <Link to="/services/staffing-solution">
                                 Learn More <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
                             </Button>
                           </div>
-                          <ul className="p-6 bg-white">
+                          <ul className="p-4 bg-white grid gap-2">
                             {recruitmentDropdownServices.map((item) => (
-                              <ListItem
+                              <ServiceListItem
                                 key={item.title}
                                 title={item.title}
                                 href={item.link}
-                                icon={ArrowRight}
                                 image={item.image}
                               />
                             ))}
@@ -163,9 +189,9 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                           {pagesLinks.map((page) => (
-                            <ListItem key={page.link} title={page.title} href={page.link}>
+                            <SimpleListItem key={page.link} title={page.title} href={page.link}>
                               {page.description}
-                            </ListItem>
+                            </SimpleListItem>
                           ))}
                         </ul>
                       </NavigationMenuContent>
@@ -175,6 +201,14 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                       <NavigationMenuLink asChild>
                         <Link to="/contact" className={navItemClasses("/contact")}>
                           Contact
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link to="/careers" className={navItemClasses("/careers")}>
+                          Careers
                         </Link>
                       </NavigationMenuLink>
                     </NavigationMenuItem>
