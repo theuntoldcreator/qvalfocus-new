@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, ArrowUpRight } from "lucide-react";
+import { Menu, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { TopBar } from "./TopBar";
@@ -32,22 +32,21 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            "group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-blue-100",
+            "group grid grid-cols-[1fr_1fr] items-center gap-4 select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100",
             className
           )}
           {...props}
         >
+          {/* Column 1: Icon and Title */}
           <div className="flex items-center">
-            {Icon && <Icon className="mr-2 h-4 w-4 text-primary group-hover:text-accent-foreground" />}
-            <div className="text-sm font-medium leading-none">{title}</div>
-            {image && (
-              <img src={image} alt={title || ""} className="ml-auto h-10 w-20 object-cover rounded-md" />
-            )}
+            {Icon && <Icon className="mr-3 h-4 w-4 text-primary transition-transform group-hover:translate-x-1" />}
+            <div className="text-lg font-semibold leading-none">{title}</div>
           </div>
-          {children && (
-            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-              {children}
-            </p>
+          {/* Column 2: Image */}
+          {image && (
+            <div className="overflow-hidden rounded-md justify-self-end">
+              <img src={image} alt={title || ""} className="h-12 w-40 object-cover transition-transform group-hover:scale-105" />
+            </div>
           )}
         </a>
       </NavigationMenuLink>
@@ -130,43 +129,33 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0">
-                          <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
+                        <div className="grid grid-cols-[1fr_2.5fr] w-[960px] p-0 overflow-hidden rounded-md">
+                          <div className="bg-avada-green-darker p-8 text-white flex flex-col justify-between">
                             <div>
-                              <h4 className="text-2xl font-bold mb-3">Recruitment Services</h4>
-                              <p className="text-primary-foreground text-sm leading-relaxed">
-                                We provide comprehensive recruitment services to connect top talent with leading companies.
+                              <h4 className="text-2xl font-bold mb-3 font-serif">Recruitment Services</h4>
+                              <p className="text-primary-foreground/80 text-sm leading-relaxed">
+                                Lummattis element cum semps honec rnare. Dolor auctor urna dignissim sed nunc sit plateas uellentesque tempor.
                               </p>
                             </div>
-                            <Button variant="link" asChild className="text-white hover:text-primary-foreground/80 p-0 h-auto justify-start">
+                            <Button variant="link" asChild className="text-white hover:text-primary-foreground/80 p-0 h-auto justify-start mt-6">
                               <Link to="/services/staffing-solution">
-                                Learn More <ArrowUpRight className="ml-2 h-4 w-4" />
+                                Learn More <ArrowRight className="ml-2 h-4 w-4" />
                               </Link>
                             </Button>
                           </div>
-                          <ul className="grid gap-3 p-4">
+                          <ul className="p-6 bg-white">
                             {recruitmentDropdownServices.map((item) => (
                               <ListItem
                                 key={item.title}
                                 title={item.title}
                                 href={item.link}
-                                icon={ArrowUpRight}
-                                // Removed image={item.image}
-                              >
-                                {item.description}
-                              </ListItem>
+                                icon={ArrowRight}
+                                image={item.image}
+                              />
                             ))}
                           </ul>
                         </div>
                       </NavigationMenuContent>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link to="/jobs" className={navItemClasses("/jobs")}>
-                          Careers
-                        </Link>
-                      </NavigationMenuLink>
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
@@ -180,6 +169,14 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                           ))}
                         </ul>
                       </NavigationMenuContent>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link to="/contact" className={navItemClasses("/contact")}>
+                          Contact
+                        </Link>
+                      </NavigationMenuLink>
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
