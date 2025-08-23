@@ -23,11 +23,6 @@ export function AdminSidebar() {
 
   return (
     <aside className="w-64 flex-shrink-0 bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-slate-800 flex flex-col">
-      <div className="p-4 border-b border-slate-200 dark:border-slate-800">
-        <NavLink to="/">
-          <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
-        </NavLink>
-      </div>
       <nav className="flex-grow p-4 space-y-2">
         {navLinks.map(link => (
           <NavLink
