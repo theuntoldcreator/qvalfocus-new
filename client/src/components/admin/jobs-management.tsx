@@ -1,131 +1,78 @@
 import { useJobs, useDeleteJob } from "@/lib/hooks";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2, Eye, PlusCircle, Briefcase, Edit, Users } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useToast } from "@/hooks/use-toast";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Badge } from "@/components/ui/badge";
+import { PlusCircle, Edit, Trash2, Eye } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { Skeleton } from "@/components/ui/skeleton";
+import { type Job } from "@shared/schema";
 
 export function JobsManagement() {
-  const { data: jobs, isLoading: isLoadingJobs } = useJobs();
-  const deleteJob = useDeleteJob();
+  const { data: jobs, isLoading } = useJobs();
   const { toast } = useToast();
+  const deleteJobMutation = useDeleteJob();
 
   const handleDelete = (id: string) => {
-    deleteJob.mutate(id, {
-      onSuccess: () => toast({ title: "Job deleted successfully!" }),
-      onError: (err) => toast({ title: "Error", description: err.message, variant: "destructive" }),
-    });
+    if (window.confirm("Are you sure you want to delete this job?")) {
+      deleteJobMutation.mutate(id, {
+        onSuccess: () => toast({ title: "Job deleted successfully!" }),
+        onError: (err: Error) => toast({ title: "Error", description: err.message, variant: "destructive" }),
+      });
+    }
   };
 
+  if (isLoading) {
+    return <Skeleton className="h-96 w-full" />;
+  }
+
   return (
-    <div className="space-y-8">
-      <Card className="bg-white shadow-sm">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Manage Job Listings</CardTitle>
-          <Button asChild>
-            <Link to="/admin/dashboard/jobs/new">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Post a New Job
-            </Link>
-          </Button>
-        </CardHeader>
-        <CardContent>
-          {isLoadingJobs ? (
-            <div className="space-y-4">
-              {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
-            </div>
-          ) : jobs && jobs.length > 0 ? (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Company</TableHead>
-                  <TableHead>Location</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {jobs?.map((job) => (
-                  <TableRow key={job.id}>
-                    <TableCell className="font-medium">{job.title}</TableCell>
-                    <TableCell>{job.company}</TableCell>
-                    <TableCell>{job.location}</TableCell>
-                    <TableCell className="capitalize">{job.type.replace('-', ' ')}</TableCell>
-                    <TableCell>
-                      <Badge variant="secondary" className="bg-green-100 text-green-700">
-                        Open
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right space-x-2">
-                      <Button asChild variant="ghost" size="icon" title="View Applications">
-                        <Link to={`/admin/dashboard/jobs/${job.slug}/applications`}>
-                          <Users className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                      <Button asChild variant="ghost" size="icon" title="Edit Job">
-                        <Link to={`/admin/dashboard/jobs/edit/${job.slug}`}>
-                          <Edit className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button variant="destructive" size="icon" title="Delete Job">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This action cannot be undone. This will permanently delete the job listing.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => handleDelete(job.id)}>
-                              Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          ) : (
-            <div className="text-center py-20">
-              <Briefcase className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-4 text-lg font-semibold">No jobs posted yet</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Get started by posting a new job.
-              </p>
-              <Button asChild className="mt-4">
-                <Link to="/admin/dashboard/jobs/new">
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Post a New Job
-                </Link>
-              </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>Manage Jobs</CardTitle>
+        <Button asChild>
+          <Link to="/admin/new-job">
+            <PlusCircle className="w-4 h-4 mr-2" />
+            Create New Job
+          </Link>
+        </Button>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Title</TableHead>
+              <TableHead>Company</TableHead>
+              <TableHead>Location</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {jobs?.map((job: Job) => (
+              <TableRow key={job.id}>
+                <TableCell>{job.title}</TableCell>
+                <TableCell>{job.company}</TableCell>
+                <TableCell>{job.location}</TableCell>
+                <TableCell className="space-x-2">
+                  <Button variant="outline" size="icon" asChild>
+                    <Link to={`/admin/jobs/${job.slug}/applications`}>
+                      <Eye className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <Link to={`/admin/edit-job/${job.slug}`}>
+                      <Edit className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="destructive" size="icon" onClick={() => handleDelete(job.id)}>
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }

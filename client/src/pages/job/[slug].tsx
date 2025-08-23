@@ -1,8 +1,6 @@
-import { useParams, Link } from "react-router-dom";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ApplyForm } from "@/components/job/apply-form";
+import { useParams } from "react-router-dom";
 import { JobDetails } from "@/components/job/job-details";
-import { useJobBySlug } from "@/lib/hooks";
+import { useJob } from "@/lib/hooks";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,72 +8,54 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
+import { Skeleton } from "@/components/ui/skeleton";
+import { ApplyForm } from "@/components/forms/apply-form";
 
 export default function JobPage() {
-  const { slug } = useParams();
-  const { data: job, isLoading, error } = useJobBySlug(slug || "");
-
-  if (error) {
-    return (
-      <div className="min-h-screen flex flex-col">
-        <div className="pt-20 flex items-center justify-center min-h-[60vh]">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
-            <p className="text-slate-600 dark:text-slate-300 mb-6">
-              The job you're looking for doesn't exist or has been removed.
-            </p>
-            <Link to="/jobs" className="text-primary font-semibold">
-              &larr; View all open positions
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const { slug } = useParams<{ slug: string }>();
+  const { data: job, isLoading } = useJob(slug || "");
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
-      {/* Header and Footer are now handled by RootLayout */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Breadcrumb className="mb-8">
+    <div className="bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <Link to="/">Home</Link>
-              </BreadcrumbLink>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Job details</BreadcrumbPage>
+              <BreadcrumbLink href="/jobs">Jobs</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{isLoading ? "Loading..." : job?.title}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-
-        {isLoading ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-8">
-              <Skeleton className="h-24 w-full" />
-              <Skeleton className="h-64 w-full" />
-              <Skeleton className="h-48 w-full" />
-            </div>
-            <div className="lg:col-span-1">
-              <Skeleton className="h-96 w-full" />
-            </div>
-          </div>
-        ) : job ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <JobDetails job={job} />
-            </div>
-            <div className="lg:col-span-1">
-              <div className="sticky top-8">
-                <ApplyForm job={job} />
-              </div>
-            </div>
-          </div>
-        ) : null}
       </div>
+
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            {isLoading ? (
+              <Skeleton className="h-96 w-full" />
+            ) : job ? (
+              <JobDetails job={job} />
+            ) : (
+              <p>Job not found.</p>
+            )}
+          </div>
+          <aside className="lg:col-span-1">
+            {isLoading ? (
+              <Skeleton className="h-96 w-full" />
+            ) : job ? (
+              <ApplyForm job={job} />
+            ) : null}
+          </aside>
+        </div>
+      </main>
     </div>
   );
 }

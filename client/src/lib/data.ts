@@ -190,12 +190,12 @@ export const companyInfo = {
 export const services = recruitmentDropdownServices;
 
 export const industries = [
-    { id: 'hr-sales-marketing', slug: 'hr-sales-marketing', name: 'HR, Sales & Marketing', description: 'Specialized recruitment for HR, sales, and marketing professionals.', icon: 'Briefcase' },
-    { id: 'construction-design', slug: 'construction-design', name: 'Construction & Design', description: 'Connecting talent with construction and design firms.', icon: 'Building' },
-    { id: 'govt-foreign-affairs', slug: 'govt-foreign-affairs', name: 'Govt. & Foreign Affairs', description: 'Recruiting for government and foreign affairs positions.', icon: 'Landmark' },
-    { id: 'transport-logistics', slug: 'transport-logistics', name: 'Transport & Logistics', description: 'Fulfilling roles in the transport and logistics sector.', icon: 'Plane' },
-    { id: 'education-planning', slug: 'education-planning', name: 'Education & Planning', description: 'Staffing solutions for the education sector.', icon: 'GraduationCap' },
-    { id: 'computer-it', slug: 'computer-it', name: 'Computer & IT Sector', description: 'Sourcing top talent for the IT and computer industry.', icon: 'Computer' },
+    { id: 'hr-sales-marketing', slug: 'hr-sales-marketing', name: 'HR, Sales & Marketing', description: 'Specialized recruitment for HR, sales, and marketing professionals.', icon: 'Briefcase', imageUrl: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-hr.jpg', initialImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-hr.jpg', hoverImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-hr-hover.jpg' },
+    { id: 'construction-design', slug: 'construction-design', name: 'Construction & Design', description: 'Connecting talent with construction and design firms.', icon: 'Building', imageUrl: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-construction.jpg', initialImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-construction.jpg', hoverImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-construction-hover.jpg' },
+    { id: 'govt-foreign-affairs', slug: 'govt-foreign-affairs', name: 'Govt. & Foreign Affairs', description: 'Recruiting for government and foreign affairs positions.', icon: 'Landmark', imageUrl: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-gov.jpg', initialImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-gov.jpg', hoverImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-gov-hover.jpg' },
+    { id: 'transport-logistics', slug: 'transport-logistics', name: 'Transport & Logistics', description: 'Fulfilling roles in the transport and logistics sector.', icon: 'Plane', imageUrl: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-transport.jpg', initialImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-transport.jpg', hoverImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-transport-hover.jpg' },
+    { id: 'education-planning', slug: 'education-planning', name: 'Education & Planning', description: 'Staffing solutions for the education sector.', icon: 'GraduationCap', imageUrl: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-education.jpg', initialImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-education.jpg', hoverImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-education-hover.jpg' },
+    { id: 'computer-it', slug: 'computer-it', name: 'Computer & IT Sector', description: 'Sourcing top talent for the IT and computer industry.', icon: 'Computer', imageUrl: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-it.jpg', initialImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-it.jpg', hoverImage: 'https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/recruitment/industry-it-hover.jpg' },
 ];
 
 export const industryData = industries.reduce((acc, industry) => {
@@ -219,6 +219,12 @@ export const blogs = newsData.map(news => ({
     publishDate: new Date().toISOString(),
     status: 'published' as 'published' | 'draft',
     readTimeMinutes: 3,
+    tags: ['recruitment', 'career'],
+    featured: false,
+    subtitle: `A subtitle for ${news.title}`,
+    authorAvatar: 'https://randomuser.me/api/portraits/men/5.jpg',
+    imageUrl: news.image,
+    createdAt: new Date().toISOString(),
 }));
 
 export const testimonials = [

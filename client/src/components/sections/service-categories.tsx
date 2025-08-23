@@ -3,50 +3,48 @@ import { services, industries } from "@/lib/data";
 import * as LucideIcons from "lucide-react"; // Import all Lucide icons for type safety
 
 export function ServiceCategories() {
-  const categories = [
+  const serviceCategories = [
     {
-      title: "Permanent Staffing", // Changed title to match image
-      initialImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      hoverImage: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      title: "Staffing Solutions",
+      initialImage: industries[0].initialImage,
+      hoverImage: industries[0].hoverImage,
       iconName: "Users" as keyof typeof LucideIcons,
-      link: services[0].link, // Link to Staffing Solution
+      description: "We provide comprehensive staffing solutions to meet your business needs.",
+      link: "/services/staffing-solutions",
     },
     {
-      title: "Temporary Staffing", // Changed title to match image
-      initialImage: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      hoverImage: "https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      iconName: "RefreshCcw" as keyof typeof LucideIcons, // Using RefreshCcw for temporary
-      link: services[0].link, // Link to Staffing Solution
-    },
-    {
-      title: "Contract Staffing", // Changed title to match image
-      initialImage: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      hoverImage: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-      iconName: "Handshake" as keyof typeof LucideIcons, // Using Handshake for contract
-      link: services[0].link, // Link to Staffing Solution
+      title: "Executive Search",
+      initialImage: industries[2].initialImage,
+      hoverImage: industries[2].hoverImage,
+      iconName: "UserCheck" as keyof typeof LucideIcons,
+      description: "Our executive search service helps you find top-tier leadership talent.",
+      link: "/services/executive-search",
     },
     {
       title: "Project Solutions", // Using Project Solutions
       initialImage: industries[1].initialImage, // Using IT image for project solution
       hoverImage: industries[1].hoverImage,
       iconName: "HardHat" as keyof typeof LucideIcons,
-      link: services[1].link, // Link to Project Solution
+      description: "We offer project-based hiring to support your short-term and long-term projects.",
+      link: "/services/project-solutions",
     },
   ];
 
   return (
-    <section className="py-20 bg-slate-50 dark:bg-slate-900">
+    <section className="py-16 sm:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {categories.map((category, index) => (
-            <ServiceCategoryCard
-              key={index}
-              title={category.title}
-              initialImage={category.initialImage}
-              hoverImage={category.hoverImage}
-              iconName={category.iconName}
-              link={category.link}
-            />
+        <div className="text-center">
+          <h2 className="text-base font-semibold text-primary tracking-wide uppercase">Our Services</h2>
+          <p className="mt-2 text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl">
+            What We Offer
+          </p>
+          <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
+            We provide a range of recruitment services to help you find the right talent for your organization.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {serviceCategories.map((category) => (
+            <ServiceCategoryCard key={category.title} {...category} />
           ))}
         </div>
       </div>

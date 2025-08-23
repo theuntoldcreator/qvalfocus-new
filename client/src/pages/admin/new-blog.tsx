@@ -1,27 +1,42 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { BlogForm } from "@/components/admin/blog-form";
+import { useCreateBlog } from "@/lib/hooks";
+import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
+import { InsertBlog } from "@shared/schema";
 
 export default function NewBlogPage() {
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const createBlogMutation = useCreateBlog();
+
+  const handleSubmit = (values: InsertBlog) => {
+    createBlogMutation.mutate(values, {
+      onSuccess: () => {
+        toast({ title: "Blog post created successfully!" });
+        navigate("/admin/dashboard/blog");
+      },
+      onError: (error: Error) => {
+        toast({
+          title: "Error creating blog post",
+          description: error.message,
+          variant: "destructive",
+        });
+      },
+    });
+  };
+
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Create New Blog Post</h1>
-        <Button asChild variant="outline">
-          <Link to="/admin/dashboard/blogs">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blogs
-          </Link>
-        </Button>
-      </div>
+    <div className="max-w-4xl mx-auto py-12 px-4">
       <Card>
         <CardHeader>
-          <CardTitle>Blog Post Details</CardTitle>
+          <CardTitle>Create New Blog Post</CardTitle>
         </CardHeader>
         <CardContent>
-          <BlogForm />
+          <BlogForm
+            onSubmit={handleSubmit}
+            isSubmitting={createBlogMutation.isPending}
+          />
         </CardContent>
       </Card>
     </div>

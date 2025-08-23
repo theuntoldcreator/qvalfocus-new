@@ -41,7 +41,7 @@ const blogFormSchema = z.object({
 
 type BlogFormValues = z.infer<typeof blogFormSchema>;
 
-interface BlogFormProps {
+export interface BlogFormProps {
   blog?: Blog;
   onSubmit: (values: InsertBlog) => void;
   isSubmitting: boolean;
@@ -75,10 +75,11 @@ export function BlogForm({ blog, onSubmit, isSubmitting }: BlogFormProps) {
         ...blog,
         subtitle: blog.subtitle ?? undefined,
         tags: Array.isArray(blog.tags) ? blog.tags.join(", ") : undefined,
-        publishDate: blog.publish_date ? new Date(blog.publish_date).toISOString().split('T')[0] : '',
-        readTimeMinutes: blog.read_time_minutes?.toString() ?? undefined,
-        authorAvatar: blog.author_avatar ?? undefined,
-        imageUrl: blog.image_url ?? undefined,
+        publishDate: blog.publishDate ? new Date(blog.publishDate).toISOString().split('T')[0] : '',
+        readTimeMinutes: blog.readTimeMinutes?.toString() ?? undefined,
+        authorAvatar: blog.authorAvatar ?? undefined,
+        imageUrl: blog.imageUrl ?? undefined,
+        featured: blog.featured ?? false,
       });
     }
   }, [blog, form, isEditing]);
@@ -87,10 +88,7 @@ export function BlogForm({ blog, onSubmit, isSubmitting }: BlogFormProps) {
     const processedValues: InsertBlog = {
       ...values,
       tags: values.tags ? values.tags.split(",").map(tag => tag.trim()) : [],
-      read_time_minutes: values.readTimeMinutes ? parseInt(values.readTimeMinutes, 10) : undefined,
-      publish_date: values.publishDate,
-      author_avatar: values.authorAvatar,
-      image_url: values.imageUrl,
+      readTimeMinutes: values.readTimeMinutes ? parseInt(values.readTimeMinutes, 10) : undefined,
     };
     onSubmit(processedValues);
   };
@@ -98,6 +96,7 @@ export function BlogForm({ blog, onSubmit, isSubmitting }: BlogFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
+        {/* Form fields remain the same */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <FormField
             control={form.control}

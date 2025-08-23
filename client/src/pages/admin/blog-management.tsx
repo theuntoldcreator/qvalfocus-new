@@ -1,142 +1,90 @@
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PlusCircle, BookOpen, Edit, Trash2, Eye } from "lucide-react";
 import { useBlogs, useDeleteBlog } from "@/lib/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { format } from "date-fns";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { useToast } from "@/hooks/use-toast";
+import { type Blog } from "@shared/schema";
 
 export default function BlogManagementPage() {
   const { data: blogs, isLoading } = useBlogs();
-  const deleteBlog = useDeleteBlog();
   const { toast } = useToast();
+  const deleteBlogMutation = useDeleteBlog();
 
   const handleDelete = (id: string) => {
-    deleteBlog.mutate(id, {
-      onSuccess: () => {
-        toast({ title: "Blog post deleted successfully!" });
-      },
-      onError: (error) => {
-        toast({
-          title: "Error deleting blog post",
-          description: error.message,
-          variant: "destructive",
-        });
-      },
-    });
+    if (window.confirm("Are you sure you want to delete this blog post?")) {
+      deleteBlogMutation.mutate(id, {
+        onSuccess: () => {
+          toast({ title: "Blog post deleted successfully!" });
+          // Here you would typically invalidate the query, but since it's mock data, we don't.
+        },
+        onError: (error: Error) => {
+          toast({
+            title: "Error deleting blog post",
+            description: error.message,
+            variant: "destructive",
+          });
+        },
+      });
+    }
   };
 
+  if (isLoading) {
+    return <Skeleton className="h-96 w-full" />;
+  }
+
   return (
-    <div className="space-y-8">
-      <Card className="bg-white shadow-sm">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Blog Posts</CardTitle>
-          <Button asChild>
-            <Link to="/admin/dashboard/blogs/new">
-              <PlusCircle className="mr-2 h-4 w-4" />
-              New Blog Post
-            </Link>
-          </Button>
-        </CardHeader>
-        <CardContent>
-          {isLoading ? (
-            <div className="space-y-4">
-              {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
-            </div>
-          ) : blogs && blogs.length > 0 ? (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Author</TableHead>
-                  <TableHead>Category</TableHead>
-                  <TableHead>Publish Date</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {blogs.map((blog) => (
-                  <TableRow key={blog.id}>
-                    <TableCell className="font-medium">{blog.title}</TableCell>
-                    <TableCell>{blog.author}</TableCell>
-                    <TableCell>{blog.category}</TableCell>
-                    <TableCell>{format(new Date(blog.publishDate), 'PPP')}</TableCell>
-                    <TableCell>
-                      <Badge variant={blog.status === 'published' ? 'default' : 'secondary'}>
-                        {blog.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="text-right space-x-2">
-                      {blog.status === 'published' && (
-                        <Button asChild variant="ghost" size="icon" title="View Public Post">
-                          <a href={`/blogs/${blog.slug}`} target="_blank" rel="noopener noreferrer">
-                            <Eye className="h-4 w-4" />
-                          </a>
-                        </Button>
-                      )}
-                      <Button asChild variant="ghost" size="icon" title="Edit Blog Post">
-                        <Link to={`/admin/dashboard/blogs/edit/${blog.slug}`}>
-                          <Edit className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button variant="destructive" size="icon" title="Delete Blog Post">
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                            <AlertDialogDescription>
-                              This action cannot be undone. This will permanently delete the blog post.
-                            </AlertDialogDescription>
-                          </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
-                            <AlertDialogAction onClick={() => handleDelete(blog.id)}>
-                              Delete
-                            </AlertDialogAction>
-                          </AlertDialogFooter>
-                        </AlertDialogContent>
-                      </AlertDialog>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          ) : (
-            <div className="text-center py-20">
-              <BookOpen className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-4 text-lg font-semibold">No blog posts yet</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Start creating engaging content for your audience.
-              </p>
-              <Button asChild className="mt-4">
-                <Link to="/admin/dashboard/blogs/new">
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  Create New Blog Post
-                </Link>
-              </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle className="flex items-center">
+          <BookOpen className="w-6 h-6 mr-2" />
+          Blog Management
+        </CardTitle>
+        <Button asChild>
+          <Link to="/admin/new-blog">
+            <PlusCircle className="w-4 h-4 mr-2" />
+            Create New Post
+          </Link>
+        </Button>
+      </CardHeader>
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Title</TableHead>
+              <TableHead>Author</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {blogs?.map((blog: Blog) => (
+              <TableRow key={blog.id}>
+                <TableCell>{blog.title}</TableCell>
+                <TableCell>{blog.author}</TableCell>
+                <TableCell>{blog.status}</TableCell>
+                <TableCell className="space-x-2">
+                  <Button variant="outline" size="icon" asChild>
+                    <Link to={`/blog/${blog.slug}`} target="_blank">
+                      <Eye className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <Link to={`/admin/edit-blog/${blog.slug}`}>
+                      <Edit className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                  <Button variant="destructive" size="icon" onClick={() => handleDelete(blog.id)}>
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
   );
 }
