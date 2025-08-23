@@ -181,11 +181,6 @@ export const pagesLinks = [
     link: "/industries",
   },
   {
-    title: "Careers",
-    description: "Find your next opportunity with us.",
-    link: "/jobs",
-  },
-  {
     title: "Blogs",
     description: "Stay informed with our latest insights.",
     link: "/blogs",

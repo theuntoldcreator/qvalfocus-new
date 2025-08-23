@@ -53,6 +53,7 @@ const publicNavLinks = [
   { to: "/about", label: "About Us" },
   // For mobile, we can list the main service categories directly
   ...services.map(service => ({ to: service.link, label: service.title })),
+  { to: "/jobs", label: "Careers" },
   // For mobile, we can list the main pages directly
   ...pagesLinks.map(page => ({ to: page.link, label: page.title })),
   { to: "/contact", label: "Contact" },

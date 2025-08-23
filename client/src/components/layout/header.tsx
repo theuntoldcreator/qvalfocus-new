@@ -162,6 +162,14 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link to="/jobs" className={navItemClasses("/jobs")}>
+                          Careers
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+
+                    <NavigationMenuItem>
                       <NavigationMenuTrigger className={navItemClasses("/pages")}>Pages</NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
