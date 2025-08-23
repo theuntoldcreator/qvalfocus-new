@@ -1,5 +1,4 @@
 import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/sections/hero";
 import { ServiceCategories } from "@/components/sections/service-categories";
 import { AboutSection } from "@/components/sections/about-section";

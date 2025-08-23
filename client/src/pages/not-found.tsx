@@ -1,12 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onToggleMobileMenu={() => {}} /> {/* Added onToggleMobileMenu prop */}
       <main className="pt-20 md:pt-28 flex-grow flex items-center justify-center bg-gray-50 dark:bg-slate-900">
         <Card className="w-full max-w-md mx-4">
           <CardContent className="pt-6">
@@ -21,7 +18,6 @@ export default function NotFound() {
           </CardContent>
         </Card>
       </main>
-      <Footer />
     </div>
   );
 }

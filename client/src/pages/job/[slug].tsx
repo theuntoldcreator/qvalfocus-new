@@ -11,8 +11,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 
 export default function JobPage() {
   const { slug } = useParams();
@@ -21,7 +19,6 @@ export default function JobPage() {
   if (error) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header onToggleMobileMenu={() => {}} />
         <div className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Job Not Found</h1>
@@ -33,7 +30,6 @@ export default function JobPage() {
             </Link>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }

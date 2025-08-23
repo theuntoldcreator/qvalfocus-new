@@ -79,6 +79,7 @@ const RootLayout = () => {
       <Header onToggleMobileMenu={toggleMobileNav} />
       <MobileNav isOpen={isMobileNavOpen} onClose={toggleMobileNav} navLinks={publicNavLinks} />
       <Outlet />
+      <Footer />
       <Toaster />
       <ScrollToTopButton />
     </>
