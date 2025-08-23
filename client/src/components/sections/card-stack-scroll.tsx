@@ -32,7 +32,6 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
       const scrollEnd = containerTop + containerHeight - viewportHeight;
       
       if (scrollY < scrollStart || scrollY > scrollEnd + viewportHeight) {
-        // Don't calculate when not in view
         return;
       }
 
@@ -46,6 +45,7 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
         let opacity = 0;
         let transform = 'translateY(-40px) scale(0.95)';
         let zIndex = 0;
+        let filter = 'blur(0px)';
 
         if (i === activeCardIndex) {
           // Current card animating out
@@ -54,6 +54,7 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
           const translateY = progressInCard * 20;
           transform = `scale(${scale}) translateY(${translateY}px)`;
           zIndex = cards.length - i;
+          filter = `blur(${progressInCard * 8}px)`;
         } else if (i === activeCardIndex + 1) {
           // Next card animating in
           opacity = progressInCard;
@@ -61,6 +62,7 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
           const translateY = (1 - progressInCard) * -40;
           transform = `scale(${scale}) translateY(${translateY}px)`;
           zIndex = cards.length - i;
+          filter = `blur(${(1 - progressInCard) * 8}px)`;
         } else if (i < activeCardIndex) {
           // Cards already scrolled past
           opacity = 0;
@@ -72,12 +74,14 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
         if (i === 0 && progress === 0) {
           opacity = 1;
           transform = 'translateY(0px) scale(1)';
+          filter = 'blur(0px)';
         }
 
         return {
           transform,
           opacity,
           zIndex,
+          filter,
         };
       });
 
@@ -103,7 +107,7 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
             className="absolute w-full max-w-5xl p-4"
             style={{
               ...cardStyles[index],
-              transition: 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+              transition: 'transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
             }}
           >
             <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden shadow-2xl">
