@@ -12,7 +12,7 @@ function toSlug(text: string) {
 }
 
 // Jobs
-export function useJobs(options: { poll?: boolean } = {}) {
+export function useJobs(options: { refetchInterval?: number | false } = {}) {
   return useQuery<Job[]>({
     queryKey: ['jobs'],
     queryFn: async () => {
@@ -23,7 +23,7 @@ export function useJobs(options: { poll?: boolean } = {}) {
       if (error) throw new Error(error.message);
       return data as Job[];
     },
-    refetchInterval: options.poll ? 60000 : false,
+    refetchInterval: options.refetchInterval ?? false,
   });
 }
 

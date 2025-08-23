@@ -20,7 +20,7 @@ const jobCategories = [
 ];
 
 export default function JobsPage() {
-  const { data: jobs, isLoading } = useJobs({ poll: true });
+  const { data: jobs, isLoading } = useJobs({ refetchInterval: 60000 }); // Poll every 1 minute
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
