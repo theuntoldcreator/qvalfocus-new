@@ -1,18 +1,11 @@
 export function FooterCurve() {
   return (
-    <div className="absolute bottom-full left-0 w-full text-theme-black overflow-hidden leading-[0]">
-      <svg
-        data-name="Layer 1"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1200 120"
-        preserveAspectRatio="none"
-        className="relative block w-full h-[150px]"
-      >
-        <path
-          d="M0,20 Q600,100 1200,20 V120 H0 Z"
-          className="fill-current"
-        ></path>
-      </svg>
+    <div className="absolute bottom-full left-0 w-full overflow-hidden leading-[0]">
+      <img 
+        src="/images/footer.svg" 
+        className="w-full h-auto" 
+        alt="Footer Shape"
+      />
     </div>
   );
 }
