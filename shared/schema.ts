@@ -1,134 +1,104 @@
-import { z } from "zod";
+export type Job = {
+  id: string;
+  title: string;
+  slug: string;
+  company: string;
+  company_logo: string | null;
+  location: string;
+  type: string;
+  level: string;
+  salary: string | null;
+  description: string;
+  requirements: string;
+  responsibilities: string;
+  benefits: string | null;
+  skills: string[] | null;
+  tags: string[] | null;
+  remote: boolean | null;
+  featured: boolean | null;
+  industry: string;
+  recruiter_name: string | null;
+  recruiter_email: string | null;
+  recruiter_phone: string | null;
+  application_type: string;
+  external_application_url: string | null;
+  created_at: string;
+  updated_at: string;
+};
 
-// Base Job Schema
-export const jobSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string(),
-  slug: z.string(),
-  company: z.string(),
-  company_logo: z.string().nullable(),
-  location: z.string(),
-  type: z.string(),
-  level: z.string(),
-  salary: z.string().nullable(),
-  description: z.string(),
-  requirements: z.string(),
-  responsibilities: z.string(),
-  benefits: z.string().nullable(),
-  skills: z.array(z.string()).nullable(),
-  tags: z.array(z.string()).nullable(),
-  remote: z.boolean().nullable(),
-  featured: z.boolean().nullable(),
-  industry: z.string(),
-  recruiter_name: z.string().nullable(),
-  recruiter_email: z.string().nullable(),
-  recruiter_phone: z.string().nullable(),
-  application_type: z.string(),
-  external_application_url: z.string().nullable(),
-  created_at: z.string(),
-  updated_at: z.string(),
-});
+export type InsertJob = Omit<Job, 'id' | 'slug' | 'created_at' | 'updated_at'>;
 
-export const insertJobSchema = jobSchema.omit({
-  id: true,
-  slug: true,
-  created_at: true,
-  updated_at: true,
-});
+export type Application = {
+  id: string;
+  job_id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string | null;
+  current_role: string | null;
+  experience_level: string | null;
+  linkedin: string | null;
+  github: string | null;
+  portfolio: string | null;
+  cover_letter: string | null;
+  resume_url: string | null;
+  created_at: string;
+  score: number | null;
+};
 
-export const applicationSchema = z.object({
-    id: z.string().uuid(),
-    job_id: z.string().uuid(),
-    first_name: z.string(),
-    last_name: z.string(),
-    email: z.string().email(),
-    phone: z.string().nullable(),
-    current_role: z.string().nullable(),
-    experience_level: z.string().nullable(),
-    linkedin: z.string().url().nullable().or(z.literal("")),
-    github: z.string().url().nullable().or(z.literal("")),
-    portfolio: z.string().url().nullable().or(z.literal("")),
-    cover_letter: z.string().nullable(),
-    resume_url: z.string().url().nullable(),
-    created_at: z.string(),
-    score: z.number().int().min(0).max(100).nullable().default(0), // Added ATS score
-});
+export type InsertApplication = Omit<Application, 'id' | 'created_at' | 'score'>;
 
-export const insertApplicationSchema = applicationSchema.omit({
-    id: true,
-    created_at: true,
-    score: true, // Score is generated, not inserted by user
-});
+export type Blog = {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string | null;
+  author: string;
+  authorAvatar: string | null;
+  publishDate: string;
+  imageUrl: string | null;
+  category: string;
+  content: string;
+  tags: string[] | null;
+  readTimeMinutes: number | null;
+  featured: boolean | null;
+  status: 'draft' | 'published';
+  createdAt: string;
+};
 
-export const contactSchema = z.object({
-    id: z.string().uuid(),
-    type: z.enum(['client', 'candidate']),
-    first_name: z.string(),
-    last_name: z.string(),
-    email: z.string().email(),
-    company: z.string().nullable(),
-    hiring_need: z.string().nullable(),
-    message: z.string().nullable(),
-    current_role: z.string().nullable(),
-    experience_level: z.string().nullable(),
-    resume_url: z.string().url().nullable(),
-    created_at: z.string(),
-});
+export type InsertBlog = Omit<Blog, 'id' | 'createdAt'>;
 
-export const insertContactSchema = contactSchema.omit({
-    id: true,
-    created_at: true,
-});
+export type Contact = {
+  id: string;
+  type: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  company: string | null;
+  hiring_need: string | null;
+  message: string | null;
+  current_role: string | null;
+  experience_level: string | null;
+  resume_url: string | null;
+  created_at: string;
+};
 
-// New Blog Schema
-export const blogSchema = z.object({
-  id: z.string().uuid(),
-  slug: z.string(),
-  title: z.string(),
-  subtitle: z.string().nullable(),
-  author: z.string(),
-  authorAvatar: z.string().url().nullable().or(z.literal("")),
-  publishDate: z.string(),
-  imageUrl: z.string().url().nullable().or(z.literal("")),
-  category: z.string(),
-  content: z.string(), // Full blog content
-  tags: z.array(z.string()).nullable(),
-  readTimeMinutes: z.number().int().nullable(),
-  featured: z.boolean().nullable(),
-  status: z.enum(["draft", "published"]).default("draft"), // Added status
-  createdAt: z.string(),
-});
+export type InsertContact = Omit<Contact, 'id' | 'created_at'>;
 
-export const insertBlogSchema = blogSchema.omit({
-  id: true,
-  slug: true,
-  createdAt: true,
-});
+export type Testimonial = {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  testimonial: string;
+};
 
-export const testimonialSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  role: z.string(),
-  avatar: z.string(),
-  content: z.string(),
-  company: z.string(),
-});
+export type NewsletterSubscription = {
+  id: string;
+  email: string;
+  created_at: string;
+};
 
-export type Job = z.infer<typeof jobSchema>;
-export type InsertJob = z.infer<typeof insertJobSchema>;
-export type Application = z.infer<typeof applicationSchema>;
-export type InsertApplication = z.infer<typeof insertApplicationSchema>;
-export type Contact = z.infer<typeof contactSchema>;
-export type InsertContact = z.infer<typeof insertContactSchema>;
-export type Blog = z.infer<typeof blogSchema>;
-export type InsertBlog = z.infer<typeof insertBlogSchema>;
-export type Testimonial = z.infer<typeof testimonialSchema>;
-
-// The other schemas are no longer backed by a database, so they are removed for now.
-// I can add them back if needed.
-export const insertUserSchema = z.object({});
-export const insertNewsletterSchema = z.object({});
-export type User = any;
-export type InsertUser = any;
-export type Newsletter = any;
-export type InsertNewsletter = any;
+export type InsertNewsletterSubscription = {
+  email: string;
+};

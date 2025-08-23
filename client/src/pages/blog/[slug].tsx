@@ -87,7 +87,7 @@ export default function BlogPostPage() {
             <div className="mt-6 flex items-center space-x-6 text-sm text-slate-500">
               <div className="flex items-center space-x-2">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={blogPost.authorAvatar} alt={blogPost.author} />
+                  <AvatarImage src={blogPost.authorAvatar ?? undefined} alt={blogPost.author} />
                   <AvatarFallback>{blogPost.author.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <span>{blogPost.author}</span>
@@ -124,7 +124,7 @@ export default function BlogPostPage() {
                   Tags
                 </h4>
                 <div className="flex flex-wrap gap-2">
-                  {blogPost.tags.map((tag: string, index: number) => (
+                  {(blogPost.tags || []).map((tag: string, index: number) => (
                     <Badge key={index} variant="secondary" className="px-3 py-1">
                       {tag}
                     </Badge>

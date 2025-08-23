@@ -1,69 +1,56 @@
-import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
-import { Search } from "lucide-react";
-import { useDebounce } from "@/hooks/use-debounce";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface JobFiltersProps {
-  className?: string;
-  onFiltersChange?: (filters: { search: string; location: string; type: string }) => void;
+  onSearchChange: (value: string) => void;
+  onLocationChange: (value: string) => void;
+  onTypeChange: (value: string) => void;
+  onLevelChange: (value: string) => void;
+  onIndustryChange: (value: string) => void;
 }
 
-export function JobFilters({ className, onFiltersChange }: JobFiltersProps) {
-  const [filters, setFilters] = useState({
-    search: "",
-    location: "All Locations",
-    type: "All Types"
-  });
-  const debouncedSearch = useDebounce(filters.search, 300);
-
-  useEffect(() => {
-    if (onFiltersChange) {
-      onFiltersChange({ ...filters, search: debouncedSearch });
-    }
-  }, [debouncedSearch, filters.location, filters.type, onFiltersChange]);
-
-  const handleFilterChange = (key: string, value: string) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
-  };
-
+export function JobFilters({ onSearchChange, onLocationChange, onTypeChange, onLevelChange, onIndustryChange }: JobFiltersProps) {
   return (
-    <div className={cn("flex flex-col md:flex-row items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl shadow-md", className)}>
-      <div className="relative flex-grow w-full">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-        <Input 
-          placeholder="Search by title, skills, or keyword..."
-          className="pl-10 bg-slate-100 dark:bg-slate-700 border-0"
-          value={filters.search}
-          onChange={(e) => handleFilterChange("search", e.target.value)}
+    <Card>
+      <CardHeader>
+        <CardTitle>Filter Jobs</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <Input
+          placeholder="Search by title, company..."
+          onChange={(e) => onSearchChange(e.target.value)}
         />
-      </div>
-      <div className="flex items-center gap-4 w-full md:w-auto">
-        <Select value={filters.location} onValueChange={(value) => handleFilterChange("location", value)}>
-          <SelectTrigger className="min-w-[150px] w-full md:w-auto bg-slate-100 dark:bg-slate-700 border-0">
-            <SelectValue />
-          </SelectTrigger>
+        <Input
+          placeholder="Location"
+          onChange={(e) => onLocationChange(e.target.value)}
+        />
+        <Select onValueChange={onTypeChange}>
+          <SelectTrigger><SelectValue placeholder="Job Type" /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="All Locations">All Locations</SelectItem>
-            <SelectItem value="New York">New York</SelectItem>
-            <SelectItem value="San Francisco">San Francisco</SelectItem>
-            <SelectItem value="London">London</SelectItem>
-            <SelectItem value="Remote">Remote</SelectItem>
+            <SelectItem value="Full-time">Full-time</SelectItem>
+            <SelectItem value="Part-time">Part-time</SelectItem>
+            <SelectItem value="Contract">Contract</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={filters.type} onValueChange={(value) => handleFilterChange("type", value)}>
-          <SelectTrigger className="min-w-[120px] w-full md:w-auto bg-slate-100 dark:bg-slate-700 border-0">
-            <SelectValue />
-          </SelectTrigger>
+        <Select onValueChange={onLevelChange}>
+          <SelectTrigger><SelectValue placeholder="Experience Level" /></SelectTrigger>
           <SelectContent>
-            <SelectItem value="All Types">All Types</SelectItem>
-            <SelectItem value="full-time">Full-time</SelectItem>
-            <SelectItem value="contract">Contract</SelectItem>
-            <SelectItem value="part-time">Part-time</SelectItem>
+            <SelectItem value="Internship">Internship</SelectItem>
+            <SelectItem value="Entry-level">Entry-level</SelectItem>
+            <SelectItem value="Mid-level">Mid-level</SelectItem>
+            <SelectItem value="Senior">Senior</SelectItem>
           </SelectContent>
         </Select>
-      </div>
-    </div>
+        <Select onValueChange={onIndustryChange}>
+          <SelectTrigger><SelectValue placeholder="Industry" /></SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Technology">Technology</SelectItem>
+            <SelectItem value="Healthcare">Healthcare</SelectItem>
+            <SelectItem value="Finance">Finance</SelectItem>
+          </SelectContent>
+        </Select>
+      </CardContent>
+    </Card>
   );
 }

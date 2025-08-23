@@ -15,8 +15,8 @@ import {
   Plane,
   GraduationCap,
   Computer,
-  Icon as LucideIcon,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 const iconMap: { [key: string]: LucideIcon } = {
   Briefcase,

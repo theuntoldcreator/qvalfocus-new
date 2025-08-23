@@ -71,6 +71,8 @@ export function JobForm({ job }: JobFormProps) {
     if (isEditing && job) {
       form.reset({
         ...job,
+        salary: job.salary ?? undefined,
+        benefits: job.benefits ?? undefined,
         skills: Array.isArray(job.skills) ? job.skills.join(", ") : "",
         tags: Array.isArray(job.tags) ? job.tags.join(", ") : "",
       });
@@ -115,7 +117,6 @@ export function JobForm({ job }: JobFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        {/* Form fields remain the same */}
         <FormField control={form.control} name="title" render={({ field }) => (<FormItem><FormLabel>Title</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
         <FormField control={form.control} name="company" render={({ field }) => (<FormItem><FormLabel>Company</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
         <FormField control={form.control} name="location" render={({ field }) => (<FormItem><FormLabel>Location</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
@@ -128,7 +129,7 @@ export function JobForm({ job }: JobFormProps) {
         <FormField control={form.control} name="salary" render={({ field }) => (<FormItem><FormLabel>Salary</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
         <FormField control={form.control} name="benefits" render={({ field }) => (<FormItem><FormLabel>Benefits</FormLabel><FormControl><Textarea {...field} /></FormControl><FormMessage /></FormItem>)} />
         <FormField control={form.control} name="skills" render={({ field }) => (<FormItem><FormLabel>Skills (comma-separated)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
-        <FormField control={form.control} name="tags" render={({ field }) => (<FormItem><FormLabel>Tags (comma-separated)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormMessage>)} />
+        <FormField control={form.control} name="tags" render={({ field }) => (<FormItem><FormLabel>Tags (comma-separated)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Saving..." : isEditing ? "Update Job" : "Create Job"}
         </Button>
