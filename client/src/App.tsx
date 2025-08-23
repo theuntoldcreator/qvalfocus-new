@@ -63,7 +63,6 @@ const publicNavLinks = [
   ...services.map(service => ({ to: service.link, label: service.title })),
   { to: "/jobs", label: "Careers" },
   ...pagesLinks.map(page => ({ to: page.link, label: page.title })),
-  { to: "/contact", label: "Contact" },
 ];
 
 const RootLayout = () => {

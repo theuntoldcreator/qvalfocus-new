@@ -181,14 +181,6 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                         </ul>
                       </NavigationMenuContent>
                     </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link to="/contact" className={navItemClasses("/contact")}>
-                          Contact
-                        </Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
               </nav>
