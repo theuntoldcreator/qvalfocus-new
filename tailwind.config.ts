@@ -21,8 +21,8 @@ export default {
           foreground: "var(--popover-foreground)",
         },
         primary: {
-          DEFAULT: "var(--primary)", // Now a vibrant orange
-          foreground: "var(--primary-foreground)", // White text on orange
+          DEFAULT: "var(--primary)", // Now Green
+          foreground: "var(--primary-foreground)", // White text on green
         },
         secondary: {
           DEFAULT: "var(--secondary)", // Light gray
@@ -64,8 +64,8 @@ export default {
           100: '#f5f3ff',
         },
         // Custom theme colors
-        'theme-orange': '#FF7F00',
-        'theme-orange-dark': '#CC6600',
+        'theme-orange': '#16a34a', // Changed to green
+        'theme-orange-dark': '#15803d', // Darker green
         'theme-gray-light': '#F8F8F8',
         'theme-gray-medium': '#E0E0E0',
         'theme-gray-dark': '#333333',

@@ -27,8 +27,8 @@
     --card-foreground: hsl(222, 47%, 11%);
     --popover: hsl(0, 0%, 100%);
     --popover-foreground: hsl(222, 47%, 11%);
-    --primary: #FF7F00; /* Vibrant Orange */
-    --primary-foreground: hsl(0, 0%, 100%); /* White text on orange */
+    --primary: #16a34a; /* Green */
+    --primary-foreground: hsl(0, 0%, 100%); /* White text on green */
     --secondary: #F0F0F0; /* Light Gray */
     --secondary-foreground: hsl(222, 47%, 11%); /* Dark text on light gray */
     --muted: hsl(222, 40%, 96%);
@@ -39,7 +39,7 @@
     --destructive-foreground: hsl(0, 0%, 100%);
     --border: hsl(222, 40%, 91%);
     --input: hsl(222, 40%, 97%);
-    --ring: var(--primary); /* Now orange */
+    --ring: var(--primary); /* Now green */
     --chart-1: hsl(222, 83%, 58%);
     --chart-2: hsl(173, 80%, 36%);
     --chart-3: hsl(222, 47%, 51%);
@@ -47,12 +47,12 @@
     --chart-5: hsl(222, 47%, 31%);
     --sidebar-background: #FFFFFF; /* White for sidebar background */
     --sidebar-foreground: #333333; /* Dark gray for sidebar text */
-    --sidebar-primary: var(--primary); /* Orange for sidebar primary */
-    --sidebar-primary-foreground: var(--primary-foreground); /* White text on orange */
+    --sidebar-primary: var(--primary); /* Green for sidebar primary */
+    --sidebar-primary-foreground: var(--primary-foreground); /* White text on green */
     --sidebar-accent: var(--secondary); /* Light gray for sidebar accent */
     --sidebar-accent-foreground: var(--secondary-foreground); /* Dark text on light gray */
     --sidebar-border: #E0E0E0; /* Light gray border for sidebar */
-    --sidebar-ring: var(--primary); /* Orange ring for sidebar */
+    --sidebar-ring: var(--primary); /* Green ring for sidebar */
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-serif: 'Playfair Display', serif;
     --font-mono: 'Monaco', monospace;

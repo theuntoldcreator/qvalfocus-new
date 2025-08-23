@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const heroImages = [
-  "/images/hero.jpg", // Changed to hero.jpg
+  "https://res.cloudinary.com/dbf2pscbn/image/upload/v1755965174/hero_karigh.jpg",
 ];
 
 export function Hero() {
