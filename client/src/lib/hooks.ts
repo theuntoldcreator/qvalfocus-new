@@ -161,7 +161,7 @@ export function useDeleteApplication() {
 type ApplicationWithJob = Application & {
   jobs: {
     title: string;
-    slug: string;
+    slug: string; // Added slug here
   } | null;
 };
 
