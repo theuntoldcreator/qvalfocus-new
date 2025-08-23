@@ -173,3 +173,16 @@ export const newsData = [
         link: "/blog/attracting-top-talent-strategies",
     },
 ];
+
+export const companyInfo = {
+  name: "RecruitPro",
+  address: "123 Talent Avenue, Suite 456, Innovation City, 78910",
+  phone: "+1 (555) 123-4567",
+  email: "contact@recruitpro.com",
+  socials: {
+    facebook: "https://facebook.com",
+    twitter: "https://twitter.com",
+    linkedin: "https://linkedin.com",
+    instagram: "https://instagram.com",
+  },
+};
