@@ -39,6 +39,7 @@ import ChangelogPage from "./pages/changelog";
 import CustomersPage from "./pages/customers";
 import GuidesPage from "./pages/guides";
 import PricingPage from "./pages/pricing";
+import JobApplicationsPage from "./pages/admin/job-applications";
 
 // Admin Components
 import AdminDashboardLayout from "./components/layout/admin-dashboard-layout";
@@ -121,6 +122,7 @@ const router = createBrowserRouter([
           { path: "jobs", element: <JobsManagement /> },
           { path: "jobs/new", element: <NewJobPage /> },
           { path: "jobs/edit/:slug", element: <EditJobPage /> },
+          { path: "jobs/:slug/applications", element: <JobApplicationsPage /> },
           { path: "applications", element: <ApplicationsManagement /> },
           { path: "contacts", element: <ContactsManagement /> },
           { path: "newsletter", element: <NewsletterManagement /> },

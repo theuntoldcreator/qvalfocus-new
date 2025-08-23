@@ -1,10 +1,8 @@
 import { useJobs, useDeleteJob } from "@/lib/hooks";
-import { ApplicationList } from "@/components/admin/application-list";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Trash2, Eye, PlusCircle, Briefcase, Edit } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import {
@@ -59,17 +57,11 @@ export function JobsManagement() {
                     <TableCell className="font-medium">{job.title}</TableCell>
                     <TableCell>{job.location}</TableCell>
                     <TableCell className="text-right space-x-2">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <Button variant="ghost" size="icon"><Eye className="h-4 w-4" /></Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[625px]">
-                          <DialogHeader>
-                            <DialogTitle>Applications for {job.title}</DialogTitle>
-                          </DialogHeader>
-                          <ApplicationList jobId={job.id} />
-                        </DialogContent>
-                      </Dialog>
+                      <Button asChild variant="ghost" size="icon">
+                        <Link to={`/admin/dashboard/jobs/${job.slug}/applications`}>
+                          <Eye className="h-4 w-4" />
+                        </Link>
+                      </Button>
                       <Button asChild variant="ghost" size="icon">
                         <Link to={`/admin/dashboard/jobs/edit/${job.slug}`}>
                           <Edit className="h-4 w-4" />
