@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
   const [progress, setProgress] = useState(0);
+  const progressRef = useRef(0);
+  const animationFrameRef = useRef<number | null>(null);
 
   const toggleVisibility = () => {
     if (window.pageYOffset > 300) {
@@ -20,10 +22,10 @@ export function ScrollToTopButton() {
     const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     if (totalHeight > 0) {
       const scrollPosition = window.scrollY;
-      const scrollProgress = (scrollPosition / totalHeight) * 100;
-      setProgress(scrollProgress);
+      // Update the target progress in a ref to avoid re-renders on every scroll event
+      progressRef.current = (scrollPosition / totalHeight) * 100;
     } else {
-      setProgress(0);
+      progressRef.current = 0;
     }
     toggleVisibility();
   };
@@ -34,6 +36,33 @@ export function ScrollToTopButton() {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    const animateProgress = () => {
+      // Smoothly interpolate the current progress towards the target progress
+      const newProgress = progress + (progressRef.current - progress) * 0.1;
+      
+      // Only update state if the change is significant enough
+      if (Math.abs(progressRef.current - newProgress) > 0.01) {
+        setProgress(newProgress);
+      } else {
+        // Snap to the final value if it's very close
+        setProgress(progressRef.current);
+      }
+      
+      animationFrameRef.current = requestAnimationFrame(animateProgress);
+    };
+
+    // Start the animation loop
+    animationFrameRef.current = requestAnimationFrame(animateProgress);
+
+    // Clean up the animation frame on unmount
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [progress]); // The effect re-runs when 'progress' changes, continuing the animation loop
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -78,7 +107,6 @@ export function ScrollToTopButton() {
           strokeDashoffset={offset}
           strokeLinecap="round"
           className="text-primary -rotate-90 origin-center"
-          style={{ transition: "stroke-dashoffset 0.1s linear" }}
         />
       </svg>
       <ArrowUp className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-5 w-5 text-slate-700 dark:text-slate-300" />
