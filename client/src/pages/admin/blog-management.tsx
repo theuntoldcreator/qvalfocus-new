@@ -45,7 +45,7 @@ export default function BlogManagementPage() {
       <Card className="bg-white shadow-sm">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Blog Posts</CardTitle>
-          <Button asChild> {/* This is the button */}
+          <Button asChild>
             <Link to="/admin/dashboard/blogs/new">
               <PlusCircle className="mr-2 h-4 w-4" />
               New Blog Post
