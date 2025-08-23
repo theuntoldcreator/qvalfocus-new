@@ -151,7 +151,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                                 title={item.title}
                                 href={item.link}
                                 icon={ArrowUpRight}
-                                image={item.image}
+                                // Removed image={item.image}
                               >
                                 {item.description}
                               </ListItem>
@@ -212,7 +212,8 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
               </div>
             </div>
           </div>
-        </header>
+        </div>
+      </header>
     </>
   );
 }
