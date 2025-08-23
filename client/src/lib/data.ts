@@ -186,3 +186,54 @@ export const companyInfo = {
     instagram: "https://instagram.com",
   },
 };
+
+export const services = recruitmentDropdownServices;
+
+export const industries = [
+    { id: 'hr-sales-marketing', slug: 'hr-sales-marketing', name: 'HR, Sales & Marketing', description: 'Specialized recruitment for HR, sales, and marketing professionals.', icon: 'Briefcase' },
+    { id: 'construction-design', slug: 'construction-design', name: 'Construction & Design', description: 'Connecting talent with construction and design firms.', icon: 'Building' },
+    { id: 'govt-foreign-affairs', slug: 'govt-foreign-affairs', name: 'Govt. & Foreign Affairs', description: 'Recruiting for government and foreign affairs positions.', icon: 'Landmark' },
+    { id: 'transport-logistics', slug: 'transport-logistics', name: 'Transport & Logistics', description: 'Fulfilling roles in the transport and logistics sector.', icon: 'Plane' },
+    { id: 'education-planning', slug: 'education-planning', name: 'Education & Planning', description: 'Staffing solutions for the education sector.', icon: 'GraduationCap' },
+    { id: 'computer-it', slug: 'computer-it', name: 'Computer & IT Sector', description: 'Sourcing top talent for the IT and computer industry.', icon: 'Computer' },
+];
+
+export const industryData = industries.reduce((acc, industry) => {
+    acc[industry.slug] = {
+        ...industry,
+        details: `Detailed information about the ${industry.name} sector. We provide top-tier recruitment services to find the best candidates for roles in this industry. Our expertise covers a wide range of positions, ensuring we can meet your specific hiring needs.`,
+        relatedJobs: [
+            { title: `Lead ${industry.name} Specialist`, link: '/jobs/1' },
+            { title: `Junior Associate in ${industry.name}`, link: '/jobs/2' },
+        ]
+    };
+    return acc;
+}, {} as Record<string, any>);
+
+
+export const blogs = newsData.map(news => ({
+    ...news,
+    id: news.link.split('/').pop() || '',
+    slug: news.link.split('/').pop() || '',
+    content: `This is the full content for the blog post titled "${news.title}".`,
+    publishDate: new Date().toISOString(),
+    status: 'published' as 'published' | 'draft',
+    readTimeMinutes: 3,
+}));
+
+export const testimonials = [
+    {
+        id: '1',
+        name: 'John Doe',
+        role: 'CEO, TechCorp',
+        avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
+        testimonial: 'This recruitment agency is the best! They found us the perfect candidate in just a week.'
+    },
+    {
+        id: '2',
+        name: 'Jane Smith',
+        role: 'HR Manager, Innovate Ltd.',
+        avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
+        testimonial: 'A seamless and professional experience. Highly recommended for any company looking to hire top talent.'
+    }
+];
