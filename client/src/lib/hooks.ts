@@ -158,7 +158,7 @@ export function useDeleteApplication() {
     });
 }
 
-export type ApplicationWithJob = Application & {
+type ApplicationWithJob = Application & {
   jobs: {
     title: string;
     slug: string;

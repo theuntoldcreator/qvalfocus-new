@@ -6,12 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ThumbsUp, ThumbsDown, MessageSquare, CheckCircle2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 
-// Re-import ApplicationWithJob from hooks to ensure consistency
-import type { ApplicationWithJob } from "@/lib/hooks"; 
-
 interface ApplicantCardProps {
-  application: ApplicationWithJob; // Use the consistent type
-  onSelect: (application: ApplicationWithJob) => void; // Use the consistent type
+  application: Application & { jobs: { title: string } | null };
+  onSelect: (application: Application & { jobs: { title: string } | null }) => void;
   isSelected: boolean;
 }
 

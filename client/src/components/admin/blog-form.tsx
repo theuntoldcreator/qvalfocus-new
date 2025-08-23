@@ -64,14 +64,14 @@ export function BlogForm({ blog }: BlogFormProps) {
     if (isEditing && blog) {
       form.reset({
         ...blog,
-        subtitle: blog.subtitle || undefined, // Convert null to undefined
-        authorAvatar: blog.authorAvatar || undefined, // Convert null to undefined
-        imageUrl: blog.imageUrl || undefined, // Convert null to undefined
+        authorAvatar: blog.authorAvatar || undefined,
+        imageUrl: blog.imageUrl || undefined,
         tags: blog.tags?.join(', ') || undefined,
         readTimeMinutes: blog.readTimeMinutes?.toString() || undefined,
         publishDate: blog.publishDate.split('T')[0], // Format date for input type="date"
         featured: blog.featured ?? false,
-        status: blog.status, // Ensure status is correctly assigned
+        // Assuming 'status' is part of Blog type, if not, default to 'draft'
+        status: (blog as any).status || "draft", 
       });
     }
   }, [isEditing, blog, form]);
