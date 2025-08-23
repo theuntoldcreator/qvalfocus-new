@@ -6,9 +6,16 @@ export function Footer() {
   return (
     <footer className="relative bg-white text-slate-700 pt-16 pb-8 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-8">
+          {/* Logo Column */}
+          <div className="md:col-span-2">
+            <Link to="/" className="inline-block">
+              <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-12" />
+            </Link>
+          </div>
+
           {/* Recruitment Column */}
-          <div>
+          <div className="md:col-span-1">
             <h3 className="font-bold text-slate-900 mb-4">Recruitment</h3>
             <ul className="space-y-2 text-sm text-slate-600">
               <li><Link to="/services/staffing-solution" className="hover:text-primary transition-colors">The Process</Link></li>
@@ -20,7 +27,7 @@ export function Footer() {
           </div>
 
           {/* Company Column */}
-          <div>
+          <div className="md:col-span-1">
             <h3 className="font-bold text-slate-900 mb-4">Our Company</h3>
             <ul className="space-y-2 text-sm text-slate-600">
               <li><Link to="/about" className="hover:text-primary transition-colors">Who We Are</Link></li>
@@ -31,7 +38,7 @@ export function Footer() {
           </div>
 
           {/* Help Resources Column */}
-          <div>
+          <div className="md:col-span-1">
             <h3 className="font-bold text-slate-900 mb-4">Help Resources</h3>
             <ul className="space-y-2 text-sm text-slate-600">
               <li><Link to="/jobs" className="hover:text-primary transition-colors">Careers</Link></li>
@@ -42,7 +49,7 @@ export function Footer() {
           </div>
 
           {/* Connect with Us Column */}
-          <div>
+          <div className="md:col-span-1">
             <h3 className="font-bold text-slate-900 mb-4">Connect with Us</h3>
             <div className="flex items-center space-x-3">
               <a href={companyInfo.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-primary transition-colors">
