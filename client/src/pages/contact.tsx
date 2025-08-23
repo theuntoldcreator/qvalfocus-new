@@ -15,6 +15,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { FaqAccordion } from "@/components/sections/faq-accordion";
 
 const mapUrls = {
   usa: "https://maps.google.com/maps?q=666%20Plainsboro%20Rd%20%23615%2C%20Plainsboro%20Township%2C%20NJ%2008536&t=&z=15&ie=UTF8&iwloc=&output=embed",
@@ -153,6 +154,8 @@ export default function ContactPage() {
             </div>
           </div>
         </section>
+
+        <FaqAccordion />
       </main>
     </div>
   );
