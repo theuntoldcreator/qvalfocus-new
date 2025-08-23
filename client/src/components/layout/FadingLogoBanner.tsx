@@ -6,8 +6,8 @@ export function FadingLogoBanner() {
       <h1
         className="text-8xl md:text-9xl font-extrabold text-slate-100 dark:text-slate-800 select-none animate-fade-in-out"
         style={{
-          maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
         }}
       >
         QvalFocus
