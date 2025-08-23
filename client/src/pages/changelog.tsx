@@ -1,14 +1,8 @@
 export default function ChangelogPage() {
   return (
-    <div className="pt-20 md:pt-28 flex-grow flex items-center justify-center bg-slate-50 dark:bg-slate-900">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100 sm:text-6xl">
-          Changelog
-        </h1>
-        <p className="mt-6 text-lg leading-8 text-slate-600 dark:text-slate-400">
-          This page is under construction.
-        </p>
-      </div>
+    <div className="container mx-auto p-4 pt-20 md:pt-28">
+      <h1 className="text-4xl font-bold">Changelog</h1>
+      <p className="mt-4 text-lg text-slate-600">Placeholder content for the Changelog page.</p>
     </div>
   );
 }
