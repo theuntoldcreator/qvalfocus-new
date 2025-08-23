@@ -101,6 +101,17 @@ export function useDeleteJob() {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (id: string) => {
+            // First, delete all applications associated with this job
+            const { error: deleteAppsError } = await supabase
+                .from('applications')
+                .delete()
+                .eq('job_id', id);
+
+            if (deleteAppsError) {
+                throw new Error(`Failed to delete associated applications: ${deleteAppsError.message}`);
+            }
+
+            // Then, delete the job itself
             const { error } = await supabase.from('jobs').delete().eq('id', id);
             if (error) throw new Error(error.message);
         },
