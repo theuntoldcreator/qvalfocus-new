@@ -110,97 +110,100 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between">
-            <div className="flex items-center">
+          <div className="flex md:grid md:grid-cols-[1fr_auto_1fr] h-20 items-center justify-between">
+            {/* Left: Logo */}
+            <div className="flex items-center justify-start">
               <Link to="/" className="flex items-center space-x-2">
                 <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
               </Link>
             </div>
 
-            <div className="flex items-center">
-              <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-                <NavigationMenu>
-                  <NavigationMenuList>
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navItemClasses("/")}>Home</NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
-                          <SimpleListItem href="/#about" title="About Us">
-                            Learn more about our mission and values.
-                          </SimpleListItem>
-                          <SimpleListItem href="/#services" title="Our Services">
-                            Explore our staffing and project solutions.
-                          </SimpleListItem>
-                          <SimpleListItem href="/#jobs" title="Featured Jobs">
-                            Find your next career opportunity.
-                          </SimpleListItem>
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
+            {/* Center: Navigation */}
+            <nav className="hidden md:flex items-center justify-center space-x-1 lg:space-x-2">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className={navItemClasses("/")}>Home</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
+                        <SimpleListItem href="/#about" title="About Us">
+                          Learn more about our mission and values.
+                        </SimpleListItem>
+                        <SimpleListItem href="/#services" title="Our Services">
+                          Explore our staffing and project solutions.
+                        </SimpleListItem>
+                        <SimpleListItem href="/#jobs" title="Featured Jobs">
+                          Find your next career opportunity.
+                        </SimpleListItem>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
 
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link to="/about" className={navItemClasses("/about")}>
-                          About Us
-                        </Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link to="/about" className={navItemClasses("/about")}>
+                        About Us
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
 
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <div className="grid grid-cols-[3fr_2fr] w-[760px] overflow-hidden rounded-lg shadow-lg">
-                          <div className="bg-[#0A2628] p-8 text-white flex flex-col justify-between">
-                            <div>
-                              <h4 className="text-2xl font-bold mb-4 font-serif">Recruitment Services</h4>
-                              <p className="text-slate-300 text-sm leading-relaxed">
-                                Lummattis element cum semps honec rnare. Dolor auctor urna dignissim sed nunc sit plateas uellentesque tempor.
-                              </p>
-                            </div>
-                            <Button variant="link" asChild className="text-primary hover:text-green-400 p-0 h-auto justify-start mt-6">
-                              <Link to="/services/staffing-solution">
-                                Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                              </Link>
-                            </Button>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="grid grid-cols-[3fr_2fr] w-[760px] overflow-hidden rounded-lg shadow-lg">
+                        <div className="bg-[#0A2628] p-8 text-white flex flex-col justify-between">
+                          <div>
+                            <h4 className="text-2xl font-bold mb-4 font-serif">Recruitment Services</h4>
+                            <p className="text-slate-300 text-sm leading-relaxed">
+                              Lummattis element cum semps honec rnare. Dolor auctor urna dignissim sed nunc sit plateas uellentesque tempor.
+                            </p>
                           </div>
-                          <ul className="p-4 bg-white grid gap-2">
-                            {recruitmentDropdownServices.map((item) => (
-                              <ServiceListItem
-                                key={item.title}
-                                title={item.title}
-                                href={item.link}
-                              />
-                            ))}
-                          </ul>
+                          <Button variant="link" asChild className="text-primary hover:text-green-400 p-0 h-auto justify-start mt-6">
+                            <Link to="/services/staffing-solution">
+                              Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                          </Button>
                         </div>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navItemClasses("/pages")}>Pages</NavigationMenuTrigger>
-                      <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                          {pagesLinks.map((page) => (
-                            <SimpleListItem key={page.link} title={page.title} href={page.link}>
-                              {page.description}
-                            </SimpleListItem>
+                        <ul className="p-4 bg-white grid gap-2">
+                          {recruitmentDropdownServices.map((item) => (
+                            <ServiceListItem
+                              key={item.title}
+                              title={item.title}
+                              href={item.link}
+                            />
                           ))}
                         </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                    
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link to="/careers" className={navItemClasses("/careers")}>
-                          Careers
-                        </Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
-              </nav>
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
 
-              <div className="flex items-center space-x-4 ml-8">
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className={navItemClasses("/pages")}>Pages</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {pagesLinks.map((page) => (
+                          <SimpleListItem key={page.link} title={page.title} href={page.link}>
+                            {page.description}
+                          </SimpleListItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  
+                  <NavigationMenuItem>
+                    <NavigationMenuLink asChild>
+                      <Link to="/careers" className={navItemClasses("/careers")}>
+                        Careers
+                      </Link>
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </nav>
+
+            {/* Right: Buttons */}
+            <div className="flex items-center justify-end">
+              <div className="flex items-center space-x-4">
                 <Button asChild className="hidden md:inline-flex bg-theme-orange hover:bg-theme-orange-dark">
                   <Link to="/contact?type=client">
                     Hire A Talent <ArrowUpRight className="ml-2 h-4 w-4" />
