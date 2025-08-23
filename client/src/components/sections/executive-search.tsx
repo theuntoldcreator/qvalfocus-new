@@ -21,7 +21,7 @@ const searchServices = [
     subtitle: "Talent Acquisition",
     title: "Talent Sourcing",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    imageUrl: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib-rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    imageUrl: "https://images.unsplash.com/photo-1556742502-ec-7c0e9f34b1?ixlib-rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     link: "/services/talent-sourcing"
   },
   {
@@ -37,6 +37,7 @@ export function ExecutiveSearch() {
   const [api, setApi] = React.useState<CarouselApi>();
   const sectionRef = React.useRef<HTMLDivElement>(null);
 
+  // This effect drives the carousel's position based on vertical scroll
   React.useEffect(() => {
     const onScroll = () => {
       if (!api || !sectionRef.current) return;
@@ -46,7 +47,6 @@ export function ExecutiveSearch() {
       const scrollY = window.scrollY;
       const viewportHeight = window.innerHeight;
 
-      // Define the "active" zone for scrolling animation
       const activeZoneStart = sectionTop - viewportHeight;
       const activeZoneEnd = sectionTop + sectionHeight - viewportHeight;
       
@@ -65,20 +65,54 @@ export function ExecutiveSearch() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [api]);
 
+  // This effect applies the 3D transformations as the carousel scrolls
+  React.useEffect(() => {
+    if (!api) return;
+
+    const apply3DEffect = () => {
+      const engine = api.internalEngine();
+      const scrollProgress = engine.scrollProgress.get();
+
+      api.slideNodes().forEach((slideNode, index) => {
+        const slidePosition = index / (api.scrollSnapList().length - 1);
+        const distanceFromCenter = slidePosition - scrollProgress;
+
+        const scale = 1 - Math.abs(distanceFromCenter) * 0.4;
+        const rotateY = distanceFromCenter * -30;
+        const opacity = 1 - Math.abs(distanceFromCenter) * 0.5;
+        const zIndex = 100 - Math.abs(Math.round(distanceFromCenter * 10));
+
+        slideNode.style.transform = `rotateY(${rotateY}deg) scale(${scale})`;
+        slideNode.style.opacity = `${opacity}`;
+        slideNode.style.zIndex = `${zIndex}`;
+      });
+    };
+
+    api.on("scroll", apply3DEffect);
+    api.on("reInit", apply3DEffect);
+    
+    // Set initial state
+    apply3DEffect();
+
+    return () => {
+      api.off("scroll", apply3DEffect);
+    };
+  }, [api]);
+
   return (
-    <section ref={sectionRef} className="py-20 bg-white dark:bg-slate-900">
+    <section ref={sectionRef} className="py-20 bg-white dark:bg-slate-900 [perspective:1000px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Carousel
           setApi={setApi}
           opts={{
             align: "start",
-            loop: false, // Loop is disabled for scroll-driven animation
+            loop: false,
           }}
           className="w-full"
         >
-          <CarouselContent>
+          <CarouselContent className="[transform-style:preserve-3d]">
             {searchServices.map((service, index) => (
-              <CarouselItem key={index}>
+              <CarouselItem key={index} className="transition-transform duration-300 ease-out">
                 <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl overflow-hidden">
                   <div className="grid grid-cols-1 lg:grid-cols-2 items-center">
                     <div className="p-8 md:p-12">
