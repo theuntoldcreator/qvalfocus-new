@@ -156,7 +156,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <div className="grid grid-cols-[1fr_2fr] w-[960px] overflow-hidden rounded-lg shadow-lg">
+                        <div className="grid grid-cols-[1fr_2fr] w-[1100px] overflow-hidden rounded-lg shadow-lg">
                           <div className="bg-[#0A2628] p-8 text-white flex flex-col justify-between">
                             <div>
                               <h4 className="text-2xl font-bold mb-4 font-serif">Recruitment Services</h4>
