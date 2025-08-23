@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Switch } from "@/components/ui/switch";
-import { useCreateBlog, useUpdateBlog } from "@/lib/hooks"; // These hooks will be created next
+import { useCreateBlog, useUpdateBlog } from "@/lib/hooks";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import type { Blog } from "@shared/schema";
@@ -35,8 +35,8 @@ interface BlogFormProps {
 }
 
 export function BlogForm({ blog }: BlogFormProps) {
-  const createBlog = useCreateBlog(); // Placeholder hook
-  const updateBlog = useUpdateBlog(); // Placeholder hook
+  const createBlog = useCreateBlog();
+  const updateBlog = useUpdateBlog();
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -103,7 +103,10 @@ export function BlogForm({ blog }: BlogFormProps) {
       } else {
         await createBlog.mutateAsync(payload, {
           onSuccess: () => {
-            toast({ title: "Blog post created successfully!" });
+            const message = payload.status === 'published' 
+              ? "Blog post published successfully!" 
+              : "Blog post saved as draft successfully!";
+            toast({ title: message });
             form.reset();
             navigate("/admin/dashboard/blogs");
           },
