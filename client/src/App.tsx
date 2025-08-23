@@ -34,7 +34,6 @@ import AdminRegisterPage from "./pages/admin/register";
 import NewJobPage from "./pages/admin/new-job";
 import EditJobPage from "./pages/admin/edit-job";
 import NotFound from "./pages/not-found";
-import CaseStudiesPage from "./pages/case-studies";
 import ChangelogPage from "./pages/changelog";
 import CustomersPage from "./pages/customers";
 import GuidesPage from "./pages/guides";
@@ -109,7 +108,6 @@ const router = createBrowserRouter([
       { path: "/blogs/:slug", element: <BlogPostPage /> },
       { path: "/legal/privacy", element: <PrivacyPage /> },
       { path: "/legal/terms", element: <TermsPage /> },
-      { path: "/case-studies", element: <CaseStudiesPage /> },
       { path: "/changelog", element: <ChangelogPage /> },
       { path: "/customers", element: <CustomersPage /> },
       { path: "/guides", element: <GuidesPage /> },

@@ -186,11 +186,6 @@ export const pagesLinks = [
     link: "/blogs",
   },
   {
-    title: "Case Studies",
-    description: "Discover our success stories.",
-    link: "/case-studies",
-  },
-  {
     title: "Changelog",
     description: "See our latest updates and features.",
     link: "/changelog",

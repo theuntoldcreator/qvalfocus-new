@@ -44,7 +44,7 @@ export default function IndustriesPage() {
                   <Link to="/contact?type=client">Discuss Your Industry</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
-                  <Link to="/case-studies">View Success Stories</Link>
+                  <Link to="/about">Learn More About Us</Link>
                 </Button>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function IndustriesPage() {
                 <Link to="/contact?type=client">Contact Industry Expert</Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white/20 hover:bg-white/10" asChild>
-                <Link to="/case-studies">View Industry Cases</Link>
+                <Link to="/about">Learn More About Us</Link>
               </Button>
             </div>
           </div>
