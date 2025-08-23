@@ -158,10 +158,10 @@ export function useDeleteApplication() {
     });
 }
 
-type ApplicationWithJob = Application & {
+export type ApplicationWithJob = Application & {
   jobs: {
     title: string;
-    slug: string; // Added slug here
+    slug: string;
   } | null;
 };
 
