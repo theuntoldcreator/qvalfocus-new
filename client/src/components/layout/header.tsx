@@ -49,31 +49,24 @@ const SimpleListItem = React.forwardRef<
 });
 SimpleListItem.displayName = "SimpleListItem";
 
-// ListItem specifically for the Services dropdown to match the new design
+// ListItem specifically for the Services dropdown, updated to match the new design
 const ServiceListItem = React.forwardRef<
   React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a"> & { image?: string }
->(({ className, title, image, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <a
           ref={ref}
           className={cn(
-            "group flex w-full items-center justify-between rounded-md p-3 no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100",
+            "group flex items-center rounded-md p-3 text-base font-medium text-slate-800 no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100",
             className
           )}
           {...props}
         >
-          <div className="flex items-center">
-            <ArrowRight className="mr-3 h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
-            <div className="text-base font-medium text-slate-800">{title}</div>
-          </div>
-          {image && (
-            <div className="h-14 w-32 overflow-hidden rounded-md">
-              <img src={image} alt={title || ""} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-            </div>
-          )}
+          <ArrowRight className="mr-3 h-4 w-4 text-primary transition-transform duration-300 group-hover:translate-x-1" />
+          <span>{title}</span>
         </a>
       </NavigationMenuLink>
     </li>
@@ -156,7 +149,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     <NavigationMenuItem>
                       <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <div className="grid grid-cols-[1fr_2fr] w-[960px] overflow-hidden rounded-lg shadow-lg">
+                        <div className="grid grid-cols-[3fr_2fr] w-[760px] overflow-hidden rounded-lg shadow-lg">
                           <div className="bg-[#0A2628] p-8 text-white flex flex-col justify-between">
                             <div>
                               <h4 className="text-2xl font-bold mb-4 font-serif">Recruitment Services</h4>
@@ -176,7 +169,6 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                                 key={item.title}
                                 title={item.title}
                                 href={item.link}
-                                image={item.image}
                               />
                             ))}
                           </ul>
