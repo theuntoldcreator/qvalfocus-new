@@ -13,9 +13,10 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
+  // Removed NavigationMenuTrigger as it's being replaced
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { FixedNavigationMenuTrigger } from "@/components/navigation/FixedNavigationMenuTrigger"; // Import the fixed trigger
 import { pagesLinks, recruitmentDropdownServices } from "@/lib/data";
 
 interface HeaderProps {
@@ -103,7 +104,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                 <NavigationMenu>
                   <NavigationMenuList>
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navItemClasses("/")}>Home</NavigationMenuTrigger>
+                      <FixedNavigationMenuTrigger className={navItemClasses("/")}>Home</FixedNavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
                           <ListItem href="/#about" title="About Us">
@@ -128,7 +129,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
+                      <FixedNavigationMenuTrigger className={navItemClasses("/services")}>Services</FixedNavigationMenuTrigger>
                       <NavigationMenuContent>
                         <div className="grid grid-cols-[1fr_2fr] w-[700px] p-0">
                           <div className="bg-primary p-6 text-white flex flex-col justify-between rounded-l-md">
@@ -170,7 +171,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                     </NavigationMenuItem>
 
                     <NavigationMenuItem>
-                      <NavigationMenuTrigger className={navItemClasses("/pages")}>Pages</NavigationMenuTrigger>
+                      <FixedNavigationMenuTrigger className={navItemClasses("/pages")}>Pages</FixedNavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                           {pagesLinks.map((page) => (
