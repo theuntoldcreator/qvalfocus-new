@@ -83,6 +83,7 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in-out": "fadeInOut 5s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -104,6 +105,10 @@ export default {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
+        },
+        fadeInOut: {
+          '0%, 100%': { opacity: '0.2' },
+          '50%': { opacity: '1' },
         },
       },
       backdropBlur: {
