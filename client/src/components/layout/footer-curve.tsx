@@ -9,7 +9,7 @@ export function FooterCurve() {
         className="relative block w-full h-[150px]"
       >
         <path
-          d="M0,60 L1000,60 A40,40 0 0 1 1040,100 L1200,100 V120 H0 Z"
+          d="M0,20 Q600,100 1200,20 V120 H0 Z"
           className="fill-current"
         ></path>
       </svg>
