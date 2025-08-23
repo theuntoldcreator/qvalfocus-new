@@ -12,6 +12,8 @@ interface ServiceCategoryCardProps {
   link: string;
 }
 
+const MotionLink = motion(Link);
+
 export function ServiceCategoryCard({
   title,
   initialImage,
@@ -23,13 +25,15 @@ export function ServiceCategoryCard({
   const Icon = LucideIcons[iconName] as React.ElementType; 
 
   return (
-    <Link
+    <MotionLink
       to={link}
       className="relative block rounded-2xl overflow-hidden shadow-lg group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onTouchStart={() => setIsHovered(true)}
       onTouchEnd={() => setIsHovered(false)}
+      whileHover={{ scale: 1.03, y: -5, boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
+      transition={{ type: "spring", stiffness: 300, damping: 15 }}
     >
       {/* Image Container */}
       <div className="relative w-full h-64">
@@ -60,6 +64,6 @@ export function ServiceCategoryCard({
           {Icon && <Icon className="w-5 h-5" />}
         </div>
       </div>
-    </Link>
+    </MotionLink>
   );
 }
