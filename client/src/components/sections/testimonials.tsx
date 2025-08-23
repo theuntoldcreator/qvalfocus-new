@@ -1,3 +1,5 @@
+import { useTestimonials } from "@/lib/hooks";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -5,77 +7,74 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useTestimonials } from "@/lib/hooks";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Quote, Briefcase } from "lucide-react";
-import type { Testimonial } from "@shared/schema";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Star } from "lucide-react";
 
 export function Testimonials() {
   const { data: testimonials, isLoading } = useTestimonials();
 
   return (
-    <section id="testimonials" className="py-20 bg-slate-900 text-white">
+    <section className="py-16 sm:py-24 bg-slate-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-start mb-16">
-          <div className="text-left">
-            <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-2">
-              CUSTOMER FEEDBACKS
-            </p>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold">
-              See What Our Clients Have To Say
-            </h2>
-          </div>
+        <div className="text-center">
+          <h2 className="text-base font-semibold text-primary tracking-wide uppercase">Testimonials</h2>
+          <p className="mt-2 text-3xl font-extrabold tracking-tight sm:text-4xl">
+            What Our Clients Say
+          </p>
         </div>
-        
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <Skeleton key={i} className="h-80 rounded-2xl bg-slate-800" />
-            ))}
-          </div>
-        ) : (
+        <div className="mt-12">
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full relative"
+            className="w-full"
           >
-            <CarouselContent className="-ml-8">
-              {testimonials?.map((testimonial: Testimonial) => (
-                <CarouselItem key={testimonial.id} className="pl-8 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-8 bg-slate-800 rounded-2xl h-full flex flex-col relative overflow-hidden min-h-[320px]">
-                    <div className="flex items-center space-x-3 mb-6">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <Briefcase className="w-6 h-6 text-primary" />
-                      </div>
-                      <span className="text-xl font-bold">{testimonial.company}</span>
+            <CarouselContent>
+              {isLoading ? (
+                Array.from({ length: 3 }).map((_, index) => (
+                  <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-4">
+                      <Skeleton className="h-64 w-full" />
                     </div>
-                    <p className="text-slate-300 mb-6 flex-grow">
-                      "{testimonial.content}"
-                    </p>
-                    <div className="border-t border-slate-700 pt-6 flex items-center space-x-4">
-                      <Avatar>
-                        <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                        <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-semibold text-white">{testimonial.name}</p>
-                        <p className="text-sm text-slate-400">{testimonial.role}</p>
-                      </div>
+                  </CarouselItem>
+                ))
+              ) : (
+                testimonials?.map((testimonial) => (
+                  <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/3">
+                    <div className="p-4 h-full">
+                      <Card className="bg-slate-700 border-slate-600 text-white h-full flex flex-col">
+                        <CardContent className="p-6 flex flex-col flex-grow">
+                          <div className="flex items-center mb-4">
+                            <Avatar className="h-12 w-12 mr-4">
+                              <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
+                              <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div>
+                              <h3 className="font-semibold">{testimonial.name}</h3>
+                              <p className="text-sm text-slate-400">{testimonial.role}</p>
+                            </div>
+                          </div>
+                          <p className="text-slate-300 mb-6 flex-grow">
+                            "{testimonial.testimonial}"
+                          </p>
+                          <div className="flex items-center text-yellow-400">
+                            {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="h-5 w-5 fill-current" />
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
                     </div>
-                    <Quote className="absolute -bottom-4 -right-4 w-32 h-32 text-slate-700/50" />
-                  </div>
-                </CarouselItem>
-              ))}
+                  </CarouselItem>
+                ))
+              )}
             </CarouselContent>
-            <div className="flex justify-center mt-8 gap-4">
-              <CarouselPrevious className="static translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
-              <CarouselNext className="static translate-y-0 bg-white/10 border-white/20 text-white hover:bg-white/20" />
-            </div>
+            <CarouselPrevious className="text-white" />
+            <CarouselNext className="text-white" />
           </Carousel>
-        )}
+        </div>
       </div>
     </section>
   );

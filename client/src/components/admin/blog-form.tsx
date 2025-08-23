@@ -87,6 +87,9 @@ export function BlogForm({ blog, onSubmit, isSubmitting }: BlogFormProps) {
   const handleSubmit = (values: BlogFormValues) => {
     const processedValues: InsertBlog = {
       ...values,
+      subtitle: values.subtitle || null,
+      authorAvatar: values.authorAvatar || null,
+      imageUrl: values.imageUrl || null,
       tags: values.tags ? values.tags.split(",").map(tag => tag.trim()) : [],
       readTimeMinutes: values.readTimeMinutes ? parseInt(values.readTimeMinutes, 10) : null,
     };
@@ -109,11 +112,11 @@ export function BlogForm({ blog, onSubmit, isSubmitting }: BlogFormProps) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <FormField control={form.control} name="imageUrl" render={({ field }) => (<FormItem><FormLabel>Image URL</FormLabel><FormControl><Input placeholder="https://example.com/image.jpg" {...field} /></FormControl><FormMessage /></FormItem>)} />
-          <FormField control={form.control} name="authorAvatar" render={({ field }) => (<FormItem><FormLabel>Author Avatar URL</FormLabel><FormControl><Input placeholder="https://example.com/avatar.jpg" {...field} /></FormControl><FormMessage /></FormMessage>)} />
+          <FormField control={form.control} name="authorAvatar" render={({ field }) => (<FormItem><FormLabel>Author Avatar URL</FormLabel><FormControl><Input placeholder="https://example.com/avatar.jpg" {...field} /></FormControl><FormMessage /></FormItem>)} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <FormField control={form.control} name="tags" render={({ field }) => (<FormItem><FormLabel>Tags (comma-separated)</FormLabel><FormControl><Input placeholder="react, typescript, tailwind" {...field} /></FormControl><FormMessage /></FormItem>)} />
-          <FormField control={form.control} name="readTimeMinutes" render={({ field }) => (<FormItem><FormLabel>Read Time (minutes)</FormLabel><FormControl><Input type="number" placeholder="5" {...field} /></FormControl><FormMessage /></FormMessage>)} />
+          <FormField control={form.control} name="readTimeMinutes" render={({ field }) => (<FormItem><FormLabel>Read Time (minutes)</FormLabel><FormControl><Input type="number" placeholder="5" {...field} /></FormControl><FormMessage /></FormItem>)} />
           <FormField control={form.control} name="status" render={({ field }) => (<FormItem><FormLabel>Status</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue placeholder="Select status" /></SelectTrigger></FormControl><SelectContent><SelectItem value="draft">Draft</SelectItem><SelectItem value="published">Published</SelectItem></SelectContent></Select><FormMessage /></FormItem>)} />
         </div>
         <FormField control={form.control} name="featured" render={({ field }) => (<FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4"><FormControl><Checkbox checked={field.value} onCheckedChange={field.onChange} /></FormControl><div className="space-y-1 leading-none"><FormLabel>Featured Post</FormLabel></div></FormItem>)} />

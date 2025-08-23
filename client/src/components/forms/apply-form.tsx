@@ -43,6 +43,11 @@ export function ApplyForm({ job }: ApplyFormProps) {
     const applicationData: InsertApplication = {
       ...values,
       job_id: job.id,
+      current_role: null,
+      experience_level: null,
+      linkedin: null,
+      github: null,
+      portfolio: null,
     };
     createApplicationMutation.mutate(applicationData, {
       onSuccess: () => {
