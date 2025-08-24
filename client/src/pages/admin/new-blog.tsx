@@ -1,63 +1,29 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-import { toast } from "sonner";
-import { supabase } from "../../lib/supabase";
-import { AdminLayout } from "../../components/admin/Layout";
-import { BlogForm, formSchema } from "../../components/admin/blog-form";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import { BlogForm } from "@/components/admin/blog-form";
 
 export default function NewBlogPage() {
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-
-  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    setIsLoading(true);
-    
-    const insertData = {
-      title: values.title,
-      slug: values.slug,
-      subtitle: values.subtitle,
-      author: values.author,
-      author_avatar: values.author_avatar,
-      image_url: values.image_url,
-      category: values.category,
-      content: values.content,
-      featured: values.featured,
-      status: values.status,
-      tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
-      read_time_minutes: values.read_time_minutes
-        ? parseInt(values.read_time_minutes, 10)
-        : null,
-      publish_date: values.publish_date.toISOString(),
-    };
-
-    const { error } = await supabase.from("blogs").insert(insertData as any);
-    
-    setIsLoading(false);
-
-    if (error) {
-      toast.error(`Failed to create blog post: ${error.message}`);
-    } else {
-      toast.success("Blog post created successfully!");
-      navigate("/admin/blog");
-    }
-  };
-
   return (
-    <AdminLayout>
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Create New Blog Post</h1>
+        <Button asChild variant="outline">
+          <Link to="/admin/dashboard/blogs">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Blogs
+          </Link>
+        </Button>
+      </div>
       <Card>
         <CardHeader>
-          <CardTitle>Create New Blog Post</CardTitle>
+          <CardTitle>Blog Post Details</CardTitle>
         </CardHeader>
         <CardContent>
-          <BlogForm
-            onSubmit={handleSubmit}
-            isEditing={false}
-            isLoading={isLoading}
-          />
+          <BlogForm />
         </CardContent>
       </Card>
-    </AdminLayout>
+    </div>
   );
 }

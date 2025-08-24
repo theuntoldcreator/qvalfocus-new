@@ -1,107 +1,45 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { z } from "zod";
-import { toast } from "sonner";
-import { supabase } from "../../lib/supabase";
-import { AdminLayout } from "../../components/admin/Layout";
-import { BlogForm, formSchema } from "../../components/admin/blog-form";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
-import { Skeleton } from "../../components/ui/skeleton";
-import { Database } from "../../types/supabase";
-
-type Blog = Database['public']['Tables']['blogs']['Row'];
-type BlogUpdate = Database['public']['Tables']['blogs']['Update'];
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Link, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import { BlogForm } from "@/components/admin/blog-form";
+import { useBlogPostBySlug } from "@/lib/hooks";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function EditBlogPage() {
   const { slug } = useParams<{ slug: string }>();
-  const navigate = useNavigate();
-  const [blogPost, setBlogPost] = useState<Blog | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [isUpdating, setIsUpdating] = useState(false);
-
-  useEffect(() => {
-    const fetchBlogPost = async () => {
-      if (!slug) return;
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("blogs")
-        .select("*")
-        .eq("slug", slug)
-        .single();
-
-      if (error || !data) {
-        toast.error("Failed to fetch blog post.");
-        navigate("/admin/blog");
-      } else {
-        setBlogPost(data);
-      }
-      setLoading(false);
-    };
-    fetchBlogPost();
-  }, [slug, navigate]);
-
-  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!blogPost) return;
-    setIsUpdating(true);
-
-    const updateData: BlogUpdate = {
-      title: values.title,
-      slug: values.slug,
-      author: values.author,
-      category: values.category,
-      content: values.content,
-      featured: values.featured,
-      status: values.status,
-      publish_date: values.publish_date.toISOString(),
-    };
-
-    if (values.subtitle) updateData.subtitle = values.subtitle;
-    if (values.author_avatar) updateData.author_avatar = values.author_avatar;
-    if (values.image_url) updateData.image_url = values.image_url;
-    if (values.tags) updateData.tags = values.tags.split(",").map((tag) => tag.trim());
-    if (values.read_time_minutes) {
-      const readTime = parseInt(values.read_time_minutes, 10);
-      if (!isNaN(readTime)) {
-        updateData.read_time_minutes = readTime;
-      }
-    }
-
-    const { error } = await supabase
-      .from("blogs")
-      .update(updateData)
-      .eq("id", blogPost.id);
-      
-    setIsUpdating(false);
-
-    if (error) {
-      toast.error(`Failed to update blog post: ${error.message}`);
-    } else {
-      toast.success("Blog post updated successfully!");
-      navigate("/admin/blog");
-    }
-  };
+  const { data: blogPost, isLoading } = useBlogPostBySlug(slug || "");
 
   return (
-    <AdminLayout>
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">Edit Blog Post</h1>
+        <Button asChild variant="outline">
+          <Link to="/admin/dashboard/blogs">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Blogs
+          </Link>
+        </Button>
+      </div>
       <Card>
         <CardHeader>
-          <CardTitle>Edit Blog Post</CardTitle>
+          <CardTitle>Blog Post Details</CardTitle>
         </CardHeader>
         <CardContent>
-          {loading ? (
-            <Skeleton className="h-96 w-full" />
+          {isLoading ? (
+            <div className="space-y-4">
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-24 w-full" />
+              <Skeleton className="h-10 w-24" />
+            </div>
           ) : blogPost ? (
-            <BlogForm
-              blog={blogPost}
-              onSubmit={handleSubmit}
-              isEditing={true}
-              isLoading={isUpdating}
-            />
+            <BlogForm blog={blogPost} />
           ) : (
             <p>Blog post not found.</p>
           )}
         </CardContent>
       </Card>
-    </AdminLayout>
+    </div>
   );
 }
