@@ -6,9 +6,6 @@ import { supabase } from "../../lib/supabase";
 import { AdminLayout } from "../../components/admin/Layout";
 import { BlogForm, formSchema } from "../../components/admin/blog-form";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
-import { Database } from "../../types/supabase";
-
-type BlogInsert = Database['public']['Tables']['blogs']['Insert'];
 
 export default function NewBlogPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +32,7 @@ export default function NewBlogPage() {
       publish_date: values.publish_date.toISOString(),
     };
 
-    const { error } = await supabase.from("blogs").insert(insertData as BlogInsert);
+    const { error } = await supabase.from("blogs").insert(insertData as any);
     
     setIsLoading(false);
 

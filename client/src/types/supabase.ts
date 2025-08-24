@@ -102,9 +102,7 @@ export interface Database {
           author_avatar?: string | null
           category?: string
           content?: string
-          created_at?: string | null
           featured?: boolean | null
-          id?: string
           image_url?: string | null
           publish_date?: string | null
           read_time_minutes?: number | null
