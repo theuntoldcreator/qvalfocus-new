@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -10,22 +10,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Switch } from "../ui/switch";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../ui/select";
 import { useEffect } from "react";
-import { Database } from "@/types/supabase";
+import { Database } from "../../types/supabase";
 import { CalendarIcon } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
 
@@ -96,7 +96,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="title"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
@@ -109,7 +109,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="slug"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Slug</FormLabel>
                   <FormControl>
@@ -122,7 +122,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="subtitle"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Subtitle</FormLabel>
                   <FormControl>
@@ -135,7 +135,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="content"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Content</FormLabel>
                   <FormControl>
@@ -150,7 +150,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="status"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Status</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -171,7 +171,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="publish_date"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Publish Date</FormLabel>
                   <Popover>
@@ -198,7 +198,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) =>
+                        disabled={(date: Date) =>
                           date > new Date() || date < new Date("1900-01-01")
                         }
                         initialFocus
@@ -212,7 +212,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="category"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>
                   <FormControl>
@@ -225,7 +225,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="tags"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Tags</FormLabel>
                   <FormControl>
@@ -241,7 +241,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="author"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Author</FormLabel>
                   <FormControl>
@@ -254,7 +254,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="author_avatar"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Author Avatar URL</FormLabel>
                   <FormControl>
@@ -267,7 +267,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="image_url"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Featured Image URL</FormLabel>
                   <FormControl>
@@ -280,7 +280,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="read_time_minutes"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem>
                   <FormLabel>Read Time (minutes)</FormLabel>
                   <FormControl>
@@ -293,7 +293,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="featured"
-              render={({ field }) => (
+              render={({ field }: { field: any }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                   <div className="space-y-0.5">
                     <FormLabel>Featured Post</FormLabel>

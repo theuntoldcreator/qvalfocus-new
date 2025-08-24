@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../lib/supabase";
 import { toast } from "sonner";
-import { ApplicationCard } from "@/components/admin/application-card";
-import { ApplicationDetail } from "@/components/admin/application-detail";
-import { AdminLayout } from "@/components/admin/layout";
-import { Database } from "@/types/supabase";
-import { Skeleton } from "@/components/ui/skeleton";
+import { ApplicationCard } from "../../components/admin/application-card";
+import { ApplicationDetail } from "../../components/admin/application-detail";
+import { AdminLayout } from "../../components/admin/layout";
+import { Database } from "../../types/supabase";
+import { Skeleton } from "../../components/ui/skeleton";
 
 type ApplicationWithJob = Database['public']['Tables']['applications']['Row'] & {
   jobs: {

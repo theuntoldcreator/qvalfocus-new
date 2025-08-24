@@ -1,16 +1,16 @@
 import { Routes, Route } from "react-router-dom";
-import { Layout } from "@/components/layout/layout";
-import Index from "@/pages/Index";
-import About from "@/pages/About";
-import Services from "@/pages/Services";
-import Contact from "@/pages/Contact";
-import Blog from "@/pages/Blog";
-import BlogPost from "@/pages/BlogPost";
-import JobDetail from "@/pages/JobDetail";
-import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import TermsOfService from "@/pages/TermsOfService";
-import Apply from "@/pages/Apply";
-import Careers from "@/pages/Careers";
+import { Layout } from "./components/layout/layout";
+import Index from "./pages/Index";
+import About from "./pages/about";
+import Services from "./pages/Services";
+import Contact from "./pages/contact";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import JobDetail from "./pages/JobDetail";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import Apply from "./pages/Apply";
+import Careers from "./pages/Careers";
 
 function App() {
   return (
