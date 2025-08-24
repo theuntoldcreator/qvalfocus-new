@@ -61,7 +61,9 @@ export default function EditBlogPage() {
       publish_date: values.publish_date.toISOString(),
     };
 
-    // @ts-ignore
+    // @ts-ignore - This is a last resort. The Supabase client's type inference
+    // is failing in a complex way, and this directive is the only way to
+    // bypass the incorrect compiler error.
     const { error } = await supabase
       .from("blogs")
       .update(updateData)
