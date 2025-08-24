@@ -10,6 +10,7 @@ import { Skeleton } from "../../components/ui/skeleton";
 import { Database } from "../../types/supabase";
 
 type Blog = Database['public']['Tables']['blogs']['Row'];
+type BlogUpdate = Database['public']['Tables']['blogs']['Update'];
 
 export default function EditBlogPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -44,7 +45,16 @@ export default function EditBlogPage() {
     setIsUpdating(true);
 
     const updateData = {
-      ...values,
+      title: values.title,
+      slug: values.slug,
+      subtitle: values.subtitle,
+      author: values.author,
+      author_avatar: values.author_avatar,
+      image_url: values.image_url,
+      category: values.category,
+      content: values.content,
+      featured: values.featured,
+      status: values.status,
       tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
       read_time_minutes: values.read_time_minutes
         ? parseInt(values.read_time_minutes, 10)
@@ -54,7 +64,7 @@ export default function EditBlogPage() {
 
     const { error } = await supabase
       .from("blogs")
-      .update(updateData)
+      .update(updateData as BlogUpdate)
       .eq("id", blogPost.id);
       
     setIsUpdating(false);

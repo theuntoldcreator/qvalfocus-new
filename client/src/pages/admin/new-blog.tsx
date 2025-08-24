@@ -6,6 +6,9 @@ import { supabase } from "../../lib/supabase";
 import { AdminLayout } from "../../components/admin/Layout";
 import { BlogForm, formSchema } from "../../components/admin/blog-form";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
+import { Database } from "../../types/supabase";
+
+type BlogInsert = Database['public']['Tables']['blogs']['Insert'];
 
 export default function NewBlogPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,7 +18,16 @@ export default function NewBlogPage() {
     setIsLoading(true);
     
     const insertData = {
-      ...values,
+      title: values.title,
+      slug: values.slug,
+      subtitle: values.subtitle,
+      author: values.author,
+      author_avatar: values.author_avatar,
+      image_url: values.image_url,
+      category: values.category,
+      content: values.content,
+      featured: values.featured,
+      status: values.status,
       tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
       read_time_minutes: values.read_time_minutes
         ? parseInt(values.read_time_minutes, 10)
@@ -23,7 +35,7 @@ export default function NewBlogPage() {
       publish_date: values.publish_date.toISOString(),
     };
 
-    const { error } = await supabase.from("blogs").insert(insertData);
+    const { error } = await supabase.from("blogs").insert(insertData as BlogInsert);
     
     setIsLoading(false);
 
