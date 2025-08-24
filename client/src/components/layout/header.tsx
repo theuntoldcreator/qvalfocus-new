@@ -125,7 +125,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={navItemClasses("/")}>Home</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[550px]">
                         <SimpleListItem href="/#about" title="About Us">
                           Learn more about our mission and values.
                         </SimpleListItem>
@@ -150,7 +150,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="grid grid-cols-[3fr_2fr] w-[760px] overflow-hidden rounded-lg shadow-lg">
+                      <div className="grid grid-cols-[3fr_2fr] w-[700px] overflow-hidden rounded-lg shadow-lg">
                         <div className="bg-[#0A2628] p-8 text-white flex flex-col justify-between">
                           <div>
                             <h4 className="text-2xl font-bold mb-4 font-serif">Recruitment Services</h4>
@@ -180,7 +180,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={navItemClasses("/pages")}>Pages</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[550px]">
                         {pagesLinks.map((page) => (
                           <SimpleListItem key={page.link} title={page.title} href={page.link}>
                             {page.description}
