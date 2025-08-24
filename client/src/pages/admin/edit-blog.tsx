@@ -1,45 +1,89 @@
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
+import { AdminLayout } from "@/components/admin/layout";
+import { BlogForm, formSchema } from "@/components/admin/blog-form";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import { BlogForm } from "@/components/admin/blog-form";
-import { useBlogPostBySlug } from "@/lib/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Database } from "@/types/supabase";
+
+type Blog = Database['public']['Tables']['blogs']['Row'];
 
 export default function EditBlogPage() {
   const { slug } = useParams<{ slug: string }>();
-  const { data: blogPost, isLoading } = useBlogPostBySlug(slug || "");
+  const navigate = useNavigate();
+  const [blogPost, setBlogPost] = useState<Blog | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  useEffect(() => {
+    const fetchBlogPost = async () => {
+      if (!slug) return;
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("blogs")
+        .select("*")
+        .eq("slug", slug)
+        .single();
+
+      if (error || !data) {
+        toast.error("Failed to fetch blog post.");
+        navigate("/admin/blog");
+      } else {
+        setBlogPost(data);
+      }
+      setLoading(false);
+    };
+    fetchBlogPost();
+  }, [slug, navigate]);
+
+  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!blogPost) return;
+    setIsUpdating(true);
+    const { error } = await supabase
+      .from("blogs")
+      .update({
+        ...values,
+        tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
+        read_time_minutes: values.read_time_minutes
+          ? parseInt(values.read_time_minutes, 10)
+          : null,
+        publish_date: values.publish_date.toISOString(),
+      })
+      .eq("id", blogPost.id);
+    setIsUpdating(false);
+
+    if (error) {
+      toast.error(`Failed to update blog post: ${error.message}`);
+    } else {
+      toast.success("Blog post updated successfully!");
+      navigate("/admin/blog");
+    }
+  };
 
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Edit Blog Post</h1>
-        <Button asChild variant="outline">
-          <Link to="/admin/dashboard/blogs">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blogs
-          </Link>
-        </Button>
-      </div>
+    <AdminLayout>
       <Card>
         <CardHeader>
-          <CardTitle>Blog Post Details</CardTitle>
+          <CardTitle>Edit Blog Post</CardTitle>
         </CardHeader>
         <CardContent>
-          {isLoading ? (
-            <div className="space-y-4">
-              <Skeleton className="h-10 w-full" />
-              <Skeleton className="h-10 w-full" />
-              <Skeleton className="h-24 w-full" />
-              <Skeleton className="h-10 w-24" />
-            </div>
+          {loading ? (
+            <Skeleton className="h-96 w-full" />
           ) : blogPost ? (
-            <BlogForm blog={blogPost} />
+            <BlogForm
+              blog={blogPost}
+              onSubmit={handleSubmit}
+              isEditing={true}
+              isLoading={isUpdating}
+            />
           ) : (
             <p>Blog post not found.</p>
           )}
         </CardContent>
       </Card>
-    </div>
+    </AdminLayout>
   );
 }

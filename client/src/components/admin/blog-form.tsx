@@ -31,7 +31,7 @@ import { Calendar } from "../ui/calendar";
 
 type Blog = Database['public']['Tables']['blogs']['Row'];
 
-const formSchema = z.object({
+export const formSchema = z.object({
   title: z.string().min(2, "Title must be at least 2 characters."),
   slug: z.string().min(2, "Slug must be at least 2 characters."),
   subtitle: z.string().optional(),
