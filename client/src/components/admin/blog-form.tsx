@@ -1,60 +1,77 @@
+"use client";
+
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
-import { useCreateBlog, useUpdateBlog } from "@/lib/hooks"; // These hooks will be created next
-import { useToast } from "@/hooks/use-toast";
+import * as z from "zod";
 import { useNavigate } from "react-router-dom";
-import type { Blog } from "@shared/schema";
+import { toast } from "sonner";
+
+import { supabase } from "@/integrations/supabase/client";
+import { Database } from "@/types/supabase";
+import { Button } from "../ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
+import { Switch } from "../ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+
+type Blog = Database["public"]["Tables"]["blogs"]["Row"];
 
 const blogFormSchema = z.object({
-  title: z.string().min(1, "Title is required"),
+  title: z.string().min(2, { message: "Title must be at least 2 characters." }),
+  slug: z.string().min(2, { message: "Slug must be at least 2 characters." }),
   subtitle: z.string().optional(),
-  author: z.string().min(1, "Author is required"),
-  authorAvatar: z.string().url("Invalid URL").optional().or(z.literal("")),
-  publishDate: z.string().min(1, "Publish date is required"),
-  imageUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
-  category: z.string().min(1, "Category is required"),
-  content: z.string().min(1, "Content is required"),
-  tags: z.string().optional(), // Comma-separated string
-  readTimeMinutes: z.string().optional(), // Will convert to number
-  featured: z.boolean().optional(),
+  author: z.string().min(2, { message: "Author name is required." }),
+  author_avatar: z.string().url({ message: "Please enter a valid URL." }).optional(),
+  publish_date: z.string().optional(),
+  image_url: z.string().url({ message: "Please enter a valid URL." }).optional(),
+  category: z.string().min(2, { message: "Category is required." }),
+  content: z.string().min(10, { message: "Content must be at least 10 characters." }),
+  tags: z.string().optional(),
+  read_time_minutes: z.coerce.number().int().positive().optional(),
+  featured: z.boolean().default(false),
   status: z.enum(["draft", "published"]).default("draft"),
 });
 
-type BlogFormData = z.infer<typeof blogFormSchema>;
+type BlogFormValues = z.infer<typeof blogFormSchema>;
 
 interface BlogFormProps {
-  blog?: Blog;
+  blog?: Blog | null;
 }
 
 export function BlogForm({ blog }: BlogFormProps) {
-  const createBlog = useCreateBlog(); // Placeholder hook
-  const updateBlog = useUpdateBlog(); // Placeholder hook
-  const { toast } = useToast();
+  const isEditing = !!blog;
   const navigate = useNavigate();
 
-  const isEditing = !!blog;
-
-  const form = useForm<BlogFormData>({
+  const form = useForm<BlogFormValues>({
     resolver: zodResolver(blogFormSchema),
     defaultValues: {
       title: "",
+      slug: "",
       subtitle: "",
-      author: "Admin", // Default author
-      authorAvatar: "",
-      publishDate: new Date().toISOString().split('T')[0], // Default to today
-      imageUrl: "",
-      category: "General",
+      author: "",
+      author_avatar: "",
+      publish_date: new Date().toISOString(),
+      image_url: "",
+      category: "",
       content: "",
       tags: "",
-      readTimeMinutes: "",
+      read_time_minutes: undefined,
       featured: false,
       status: "draft",
     },
@@ -64,111 +81,192 @@ export function BlogForm({ blog }: BlogFormProps) {
     if (isEditing && blog) {
       form.reset({
         ...blog,
-        authorAvatar: blog.authorAvatar || undefined,
-        imageUrl: blog.imageUrl || undefined,
-        tags: blog.tags?.join(', ') || undefined,
-        readTimeMinutes: blog.readTimeMinutes?.toString() || undefined,
-        publishDate: blog.publishDate.split('T')[0], // Format date for input type="date"
-        featured: blog.featured ?? false,
-        // Assuming 'status' is part of Blog type, if not, default to 'draft'
-        status: (blog as any).status || "draft", 
+        tags: Array.isArray(blog.tags) ? blog.tags.join(", ") : "",
+        subtitle: blog.subtitle ?? undefined,
+        author_avatar: blog.author_avatar ?? undefined,
+        image_url: blog.image_url ?? undefined,
+        read_time_minutes: blog.read_time_minutes ?? undefined,
       });
     }
-  }, [isEditing, blog, form]);
+  }, [blog, isEditing, form]);
 
-  const onSubmit = async (data: BlogFormData) => {
-    const payload = {
-      title: data.title,
-      subtitle: data.subtitle || null,
-      author: data.author,
-      authorAvatar: data.authorAvatar || null,
-      publishDate: new Date(data.publishDate).toISOString(),
-      imageUrl: data.imageUrl || null,
-      category: data.category,
-      content: data.content,
-      tags: data.tags ? data.tags.split(',').map(s => s.trim()).filter(Boolean) : null,
-      readTimeMinutes: data.readTimeMinutes ? parseInt(data.readTimeMinutes, 10) : null,
-      featured: data.featured ?? false,
-      status: data.status,
+  const onSubmit = async (values: BlogFormValues) => {
+    const transformedValues = {
+      ...values,
+      tags: values.tags ? values.tags.split(",").map((tag) => tag.trim()) : [],
     };
 
-    try {
-      if (isEditing && blog) {
-        await updateBlog.mutateAsync({ id: blog.id, updatedBlog: payload }, {
-          onSuccess: () => {
-            toast({ title: "Blog post updated successfully!" });
-            navigate("/admin/dashboard/blogs");
-          },
-        });
-      } else {
-        await createBlog.mutateAsync(payload, {
-          onSuccess: () => {
-            toast({ title: "Blog post created successfully!" });
-            form.reset();
-            navigate("/admin/dashboard/blogs");
-          },
-        });
-      }
-    } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+    const { error } = isEditing
+      ? await supabase.from("blogs").update(transformedValues).eq("id", blog!.id)
+      : await supabase.from("blogs").insert(transformedValues);
+
+    if (error) {
+      toast.error(`Failed to ${isEditing ? "update" : "create"} blog: ${error.message}`);
+    } else {
+      toast.success(`Blog ${isEditing ? "updated" : "created"} successfully!`);
+      navigate("/admin/blogs");
     }
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <FormField name="title" control={form.control} render={({ field }) => (
-          <FormItem><FormLabel>Title</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-        )} />
-        <FormField name="subtitle" control={form.control} render={({ field }) => (
-          <FormItem><FormLabel>Subtitle (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-        )} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField name="author" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Author</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-          )} />
-          <FormField name="authorAvatar" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Author Avatar URL (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-          )} />
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="md:col-span-2 space-y-8">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter blog title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="subtitle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Subtitle</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter blog subtitle (optional)" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="content"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Content</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Write your blog post here..." {...field} rows={15} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="space-y-8">
+            <FormField
+              control={form.control}
+              name="status"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Status</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select status" />
+                      </Trigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="draft">Draft</SelectItem>
+                      <SelectItem value="published">Published</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="slug"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Slug</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., my-awesome-post" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <FormControl>
+                    <Input placeholder="e.g., Technology" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="author"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Author</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter author's name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="image_url"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Image URL</FormLabel>
+                  <FormControl>
+                    <Input placeholder="https://example.com/image.png" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="tags"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Tags</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Comma-separated tags" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Separate tags with a comma (e.g., React, TypeScript).
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="featured"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel>Featured Post</FormLabel>
+                    <FormDescription>
+                      Display this post prominently.
+                    </Form-Description>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField name="publishDate" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Publish Date</FormLabel><FormControl><Input type="date" {...field} /></FormControl><FormMessage /></FormItem>
-          )} />
-          <FormField name="category" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Category</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl><SelectContent><SelectItem value="General">General</SelectItem><SelectItem value="Technology">Technology</SelectItem><SelectItem value="Life Sciences">Life Sciences</SelectItem><SelectItem value="Career Advice">Career Advice</SelectItem></SelectContent></Select><FormMessage /></FormItem>
-          )} />
-        </div>
-        <FormField name="imageUrl" control={form.control} render={({ field }) => (
-          <FormItem><FormLabel>Image URL (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-        )} />
-        <FormField name="content" control={form.control} render={({ field }) => (
-          <FormItem><FormLabel>Content</FormLabel><FormControl><Textarea {...field} rows={10} /></FormControl><FormMessage /></FormItem>
-        )} />
-        <FormField name="tags" control={form.control} render={({ field }) => (
-          <FormItem><FormLabel>Tags (comma-separated, optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>
-        )} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <FormField name="readTimeMinutes" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Read Time (minutes, optional)</FormLabel><FormControl><Input type="number" {...field} /></FormControl><FormMessage /></FormItem>
-          )} />
-          <FormField name="status" control={form.control} render={({ field }) => (
-            <FormItem><FormLabel>Status</FormLabel><Select onValueChange={field.onChange} defaultValue={field.value}><FormControl><SelectTrigger><SelectValue /></SelectTrigger></FormControl><SelectContent><SelectItem value="draft">Draft</SelectItem><SelectItem value="published">Published</SelectItem></SelectContent></Select><FormMessage /></FormItem>
-          )} />
-        </div>
-        <FormField name="featured" control={form.control} render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Featured Post</FormLabel>
-              <FormMessage />
-            </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
-          </FormItem>
-        )} />
-        <Button type="submit" disabled={createBlog.isPending || updateBlog.isPending} className="w-full">
-          {isEditing ? (updateBlog.isPending ? "Updating..." : "Update Blog Post") : (createBlog.isPending ? "Creating..." : "Create Blog Post")}
+        <Button type="submit" disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? "Saving..." : isEditing ? "Update Blog Post" : "Create Blog Post"}
         </Button>
       </form>
     </Form>
