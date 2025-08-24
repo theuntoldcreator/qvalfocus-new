@@ -7,8 +7,8 @@ import * as z from "zod";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
-import { supabase } from "@/integrations/supabase/client";
-import { Database } from "@/types/supabase";
+import { supabase } from "../../integrations/supabase/client";
+import { Database } from "../../types/supabase";
 import { Button } from "../ui/button";
 import {
   Form,
@@ -164,7 +164,7 @@ export function BlogForm({ blog }: BlogFormProps) {
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select status" />
-                      </Trigger>
+                      </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="draft">Draft</SelectItem>
@@ -252,7 +252,7 @@ export function BlogForm({ blog }: BlogFormProps) {
                     <FormLabel>Featured Post</FormLabel>
                     <FormDescription>
                       Display this post prominently.
-                    </Form-Description>
+                    </FormDescription>
                   </div>
                   <FormControl>
                     <Switch

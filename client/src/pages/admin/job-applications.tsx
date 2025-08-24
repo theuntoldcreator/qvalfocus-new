@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { AdminLayout } from "@/components/layout/admin-layout";
-import { ApplicantList } from "@/components/admin/applicant-list";
-import { ApplicantDetails } from "@/components/admin/applicant-details";
+import { supabase } from "../../integrations/supabase/client";
+import { AdminLayout } from "../../components/layout/admin-layout";
+import { ApplicantList } from "../../components/admin/applicant-list";
+import { ApplicantDetails } from "../../components/admin/applicant-details";
 import { toast } from "sonner";
-import { Database } from "@/types/supabase";
-import { PageHeader } from "@/components/admin/page-header";
+import { Database } from "../../types/supabase";
+import { PageHeader } from "../../components/admin/page-header";
 
 export type ApplicationWithJob = Database["public"]["Tables"]["applications"]["Row"] & {
   jobs: {
