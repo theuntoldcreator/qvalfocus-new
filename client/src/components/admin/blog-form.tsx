@@ -84,6 +84,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
         author_avatar: blog.author_avatar ?? undefined,
         image_url: blog.image_url ?? undefined,
         publish_date: blog.publish_date ? new Date(blog.publish_date) : new Date(),
+        featured: blog.featured ?? false,
       });
     }
   }, [blog, form, isEditing]);
@@ -96,7 +97,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="title"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Title</FormLabel>
                   <FormControl>
@@ -109,7 +110,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="slug"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Slug</FormLabel>
                   <FormControl>
@@ -122,7 +123,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="subtitle"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Subtitle</FormLabel>
                   <FormControl>
@@ -135,7 +136,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="content"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Content</FormLabel>
                   <FormControl>
@@ -150,7 +151,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="status"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Status</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
@@ -171,7 +172,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="publish_date"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem className="flex flex-col">
                   <FormLabel>Publish Date</FormLabel>
                   <Popover>
@@ -198,7 +199,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date: Date) =>
+                        disabled={(date) =>
                           date > new Date() || date < new Date("1900-01-01")
                         }
                         initialFocus
@@ -212,7 +213,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="category"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>
                   <FormControl>
@@ -225,7 +226,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="tags"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Tags</FormLabel>
                   <FormControl>
@@ -241,7 +242,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="author"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Author</FormLabel>
                   <FormControl>
@@ -254,7 +255,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="author_avatar"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Author Avatar URL</FormLabel>
                   <FormControl>
@@ -267,7 +268,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="image_url"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Featured Image URL</FormLabel>
                   <FormControl>
@@ -280,7 +281,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="read_time_minutes"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Read Time (minutes)</FormLabel>
                   <FormControl>
@@ -293,7 +294,7 @@ export function BlogForm({ blog, onSubmit, isEditing, isLoading }: BlogFormProps
             <FormField
               control={form.control}
               name="featured"
-              render={({ field }: { field: any }) => (
+              render={({ field }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                   <div className="space-y-0.5">
                     <FormLabel>Featured Post</FormLabel>

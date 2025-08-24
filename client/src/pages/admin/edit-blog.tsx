@@ -42,17 +42,21 @@ export default function EditBlogPage() {
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     if (!blogPost) return;
     setIsUpdating(true);
+
+    const updateData = {
+      ...values,
+      tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
+      read_time_minutes: values.read_time_minutes
+        ? parseInt(values.read_time_minutes, 10)
+        : null,
+      publish_date: values.publish_date.toISOString(),
+    };
+
     const { error } = await supabase
       .from("blogs")
-      .update({
-        ...values,
-        tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
-        read_time_minutes: values.read_time_minutes
-          ? parseInt(values.read_time_minutes, 10)
-          : null,
-        publish_date: values.publish_date.toISOString(),
-      })
+      .update(updateData)
       .eq("id", blogPost.id);
+      
     setIsUpdating(false);
 
     if (error) {

@@ -13,14 +13,18 @@ export default function NewBlogPage() {
 
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsLoading(true);
-    const { error } = await supabase.from("blogs").insert({
+    
+    const insertData = {
       ...values,
       tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
       read_time_minutes: values.read_time_minutes
         ? parseInt(values.read_time_minutes, 10)
         : null,
       publish_date: values.publish_date.toISOString(),
-    });
+    };
+
+    const { error } = await supabase.from("blogs").insert(insertData);
+    
     setIsLoading(false);
 
     if (error) {
