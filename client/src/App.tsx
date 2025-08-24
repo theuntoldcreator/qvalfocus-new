@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { Layout } from "./components/layout/layout";
+import { Layout } from "./components/layout/Layout";
 import Index from "./pages/Index";
-import About from "./pages/about";
+import About from "./pages/About";
 import Services from "./pages/Services";
-import Contact from "./pages/contact";
+import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import JobDetail from "./pages/JobDetail";

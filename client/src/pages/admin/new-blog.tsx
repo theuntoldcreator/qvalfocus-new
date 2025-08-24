@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { toast } from "sonner";
 import { supabase } from "../../lib/supabase";
-import { AdminLayout } from "../../components/admin/layout";
+import { AdminLayout } from "../../components/admin/Layout";
 import { BlogForm, formSchema } from "../../components/admin/blog-form";
 import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
 
@@ -15,7 +15,7 @@ export default function NewBlogPage() {
     setIsLoading(true);
     const { error } = await supabase.from("blogs").insert({
       ...values,
-      tags: values.tags?.split(",").map((tag: string) => tag.trim()) || null,
+      tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
       read_time_minutes: values.read_time_minutes
         ? parseInt(values.read_time_minutes, 10)
         : null,

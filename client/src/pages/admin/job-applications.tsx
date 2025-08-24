@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
 import { toast } from "sonner";
-import { ApplicationCard } from "../../components/admin/application-card";
-import { ApplicationDetail } from "../../components/admin/application-detail";
-import { AdminLayout } from "../../components/admin/layout";
+import { ApplicationCard } from "../../components/admin/ApplicationCard";
+import { ApplicationDetail } from "../../components/admin/ApplicationDetail";
+import { AdminLayout } from "../../components/admin/Layout";
 import { Database } from "../../types/supabase";
 import { Skeleton } from "../../components/ui/skeleton";
 

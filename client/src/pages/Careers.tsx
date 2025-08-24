@@ -1,5 +1,5 @@
-import { PageHeader } from "../components/layout/page-header";
-import { JobList } from "../components/sections/job-list";
+import { PageHeader } from "../components/layout/PageHeader";
+import { JobList } from "../components/sections/JobList";
 
 export default function Careers() {
   return (
