@@ -13,6 +13,7 @@ import {
   Eye
 } from "lucide-react";
 import { ScrollAnimate } from "@/components/ui/scroll-animate";
+import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export default function AboutPage() {
   const coreValues = [
@@ -158,6 +159,11 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
+        </ScrollAnimate>
+
+        {/* New CTA Banner Section */}
+        <ScrollAnimate>
+          <CtaBanner />
         </ScrollAnimate>
 
         {/* CTA Section */}
