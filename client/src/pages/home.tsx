@@ -10,6 +10,7 @@ import { Newsletter } from "@/components/sections/newsletter";
 import { CardStackScroll } from "@/components/sections/card-stack-scroll";
 import { ScrollAnimate } from "@/components/ui/scroll-animate";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { RecruitmentSectors } from "@/components/sections/RecruitmentSectors";
 
 const stackCards = [
   {
@@ -52,6 +53,9 @@ export default function Home() {
 
         <ScrollAnimate>
           <WhyWorkWithUs />
+        </ScrollAnimate>
+        <ScrollAnimate>
+          <RecruitmentSectors />
         </ScrollAnimate>
         <ScrollAnimate>
           <CtaBanner />
