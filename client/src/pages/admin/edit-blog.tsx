@@ -10,6 +10,7 @@ import { Skeleton } from "../../components/ui/skeleton";
 import { Database } from "../../types/supabase";
 
 type Blog = Database['public']['Tables']['blogs']['Row'];
+type BlogUpdate = Database['public']['Tables']['blogs']['Update'];
 
 export default function EditBlogPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -43,27 +44,28 @@ export default function EditBlogPage() {
     if (!blogPost) return;
     setIsUpdating(true);
 
-    const updateData = {
+    const updateData: BlogUpdate = {
       title: values.title,
       slug: values.slug,
-      subtitle: values.subtitle || null,
       author: values.author,
-      author_avatar: values.author_avatar || null,
-      image_url: values.image_url || null,
       category: values.category,
       content: values.content,
       featured: values.featured,
       status: values.status,
-      tags: values.tags ? values.tags.split(",").map((tag) => tag.trim()) : null,
-      read_time_minutes: values.read_time_minutes
-        ? parseInt(values.read_time_minutes, 10)
-        : null,
       publish_date: values.publish_date.toISOString(),
     };
 
-    // @ts-ignore - This is a last resort. The Supabase client's type inference
-    // is failing in a complex way, and this directive is the only way to
-    // bypass the incorrect compiler error.
+    if (values.subtitle) updateData.subtitle = values.subtitle;
+    if (values.author_avatar) updateData.author_avatar = values.author_avatar;
+    if (values.image_url) updateData.image_url = values.image_url;
+    if (values.tags) updateData.tags = values.tags.split(",").map((tag) => tag.trim());
+    if (values.read_time_minutes) {
+      const readTime = parseInt(values.read_time_minutes, 10);
+      if (!isNaN(readTime)) {
+        updateData.read_time_minutes = readTime;
+      }
+    }
+
     const { error } = await supabase
       .from("blogs")
       .update(updateData)
