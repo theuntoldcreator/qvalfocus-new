@@ -1,84 +1,119 @@
-import { useState, useEffect } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { AdminLayout } from "@/components/layout/admin-layout";
-import { ApplicantList } from "@/components/admin/applicant-list";
-import { ApplicantDetails } from "@/components/admin/applicant-details";
-import { toast } from "sonner";
-import { Database } from "@/types/supabase";
-import { PageHeader } from "@/components/admin/page-header";
+import { useParams, Link } from "react-router-dom";
+import { useJobBySlug, useApplications } from "@/lib/hooks";
+import { ApplicantCard } from "@/components/admin/applicant-card";
+import { ApplicantDetail } from "@/components/admin/applicant-detail";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ArrowLeft, Search, SlidersHorizontal, FileText } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useState } from "react";
+import type { Application } from "@shared/schema";
 
-export type ApplicationWithJob = Database["public"]["Tables"]["applications"]["Row"] & {
-  jobs: {
-    title: string;
-    slug: string;
-  } | null;
-};
+type ApplicationWithJobDetails = Application & { jobs: { title: string; slug: string } | null };
 
 export default function JobApplicationsPage() {
-  const [applications, setApplications] = useState<ApplicationWithJob[]>([]);
-  const [selectedApplicant, setSelectedApplicant] = useState<ApplicationWithJob | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { slug } = useParams<{ slug: string }>();
+  const { data: job, isLoading: isLoadingJob } = useJobBySlug(slug || "");
+  const { data: applications, isLoading: isLoadingApps } = useApplications(job?.id || "");
+  const [selectedApplicant, setSelectedApplicant] = useState<ApplicationWithJobDetails | null>(null);
 
-  useEffect(() => {
-    const fetchApplications = async () => {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from("applications")
-        .select("*, jobs(title, slug)")
-        .order("created_at", { ascending: false });
+  const isLoading = isLoadingJob || isLoadingApps;
 
-      if (error) {
-        console.error("Error fetching applications:", error);
-        toast.error("Failed to fetch job applications.");
-        setError("Could not load applications. Please try again later.");
-      } else if (data) {
-        const typedData = data as ApplicationWithJob[];
-        setApplications(typedData);
-        if (typedData.length > 0) {
-          setSelectedApplicant(typedData[0]);
-        }
-      }
-      setLoading(false);
-    };
-
-    fetchApplications();
-  }, []);
-
-  const handleSelectApplicant = (application: ApplicationWithJob) => {
-    setSelectedApplicant(application);
-  };
+  const applicationsWithJobTitle: ApplicationWithJobDetails[] = applications?.map(app => ({
+    ...app,
+    jobs: job ? { title: job.title, slug: job.slug } : null
+  })) || [];
 
   return (
-    <AdminLayout>
-      <PageHeader title="Job Applications" description={`Manage and review all ${applications.length} job applications.`} />
-      <div className="flex h-[calc(100vh-10rem)] border rounded-lg mt-4">
-        <aside className="w-full md:w-1/3 border-r overflow-y-auto">
-          <div className="p-4 border-b">
-            <h2 className="text-lg font-semibold">Applicants</h2>
-          </div>
-          {loading && <p className="p-4 text-muted-foreground">Loading...</p>}
-          {error && <p className="p-4 text-destructive">{error}</p>}
-          {!loading && !error && (
-            <ApplicantList
-              applications={applications}
-              onSelect={handleSelectApplicant}
-              selectedApplicantId={selectedApplicant?.id}
-            />
-          )}
-        </aside>
-        <main className="hidden md:block w-2/3 overflow-y-auto">
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center gap-4">
+          <Button asChild variant="ghost" size="icon">
+            <Link to="/admin/dashboard/jobs">
+              <ArrowLeft className="h-5 w-5" />
+            </Link>
+          </Button>
+          <h1 className="text-xl font-bold">
+            {isLoadingJob ? <Skeleton className="h-7 w-48" /> : `${job?.title} Applications`}
+          </h1>
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-180px)]"> {/* Adjust height as needed */}
+        {/* Left Column: Tabs, Search, and Applicant List */}
+        <div className="w-full lg:w-1/2 flex flex-col">
+          <Tabs defaultValue="all" className="flex-grow flex flex-col">
+            <TabsList className="bg-white p-0 border-b border-slate-200 rounded-none justify-start">
+              <TabsTrigger value="all" className="data-[state=active]:bg-theme-gray-light data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-primary">
+                All Proposals ({applications?.length ?? 0})
+              </TabsTrigger>
+              <TabsTrigger value="shortlisted" className="data-[state=active]:bg-theme-gray-light data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-primary">
+                Shortlisted
+              </TabsTrigger>
+              <TabsTrigger value="messaged" className="data-[state=active]:bg-theme-gray-light data-[state=active]:text-primary data-[state=active]:shadow-none rounded-none border-b-2 border-transparent data-[state=active]:border-primary">
+                Messaged
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="all" className="mt-4 flex-grow flex flex-col">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="relative flex-grow">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                  <Input 
+                    placeholder="Search applications..."
+                    className="pl-10 bg-white border-slate-200"
+                  />
+                </div>
+                <Button variant="outline" className="border-slate-200 bg-white hover:bg-slate-50">
+                  <SlidersHorizontal className="h-5 w-5" />
+                </Button>
+              </div>
+              
+              <div className="flex-grow overflow-y-auto pr-2">
+                {isLoading ? (
+                  <div className="space-y-4">
+                    <Skeleton className="h-48 w-full bg-slate-100" />
+                    <Skeleton className="h-48 w-full bg-slate-100" />
+                    <Skeleton className="h-48 w-full bg-slate-100" />
+                  </div>
+                ) : applicationsWithJobTitle.length > 0 ? (
+                  <div className="space-y-4">
+                    {applicationsWithJobTitle.map(app => (
+                      <ApplicantCard 
+                        key={app.id} 
+                        application={app} 
+                        onSelect={setSelectedApplicant}
+                        isSelected={selectedApplicant?.id === app.id}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-20">
+                    <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
+                    <h3 className="mt-4 text-lg font-semibold">No applications yet</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Candidates who apply for this job will appear here.
+                    </p>
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        {/* Right Column: Applicant Detail */}
+        <div className="w-full lg:w-1/2 flex-shrink-0">
           {selectedApplicant ? (
-            <ApplicantDetails application={selectedApplicant} />
+            <ApplicantDetail application={selectedApplicant} onClose={() => setSelectedApplicant(null)} />
           ) : (
-            <div className="flex items-center justify-center h-full">
-              <p className="text-muted-foreground">
-                {!loading && "Select an applicant to view details."}
-              </p>
+            <div className="flex items-center justify-center h-full bg-white rounded-lg shadow-sm border text-muted-foreground">
+              Select an applicant from the list to view details.
             </div>
           )}
-        </main>
+        </div>
       </div>
-    </AdminLayout>
+    </div>
   );
 }
