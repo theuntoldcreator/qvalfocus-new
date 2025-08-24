@@ -41,7 +41,7 @@ export default function JobsPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-white dark:bg-slate-900">
+      <div className="bg-white dark:bg-slate-900">
         {/* Header and Footer are now handled by RootLayout */}
         <main className="pt-20 md:pt-28">
           {/* Hero Section */}
