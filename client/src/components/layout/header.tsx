@@ -150,10 +150,10 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                   <NavigationMenuItem>
                     <NavigationMenuTrigger className={navItemClasses("/services")}>Services</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                      <div className="grid grid-cols-[3fr_2fr] w-[700px] overflow-hidden rounded-lg shadow-lg">
+                      <div className="grid grid-cols-[3fr_2fr] w-[600px] overflow-hidden rounded-lg shadow-lg">
                         <div className="bg-[#0A2628] p-8 text-white flex flex-col justify-between">
                           <div>
-                            <h4 className="text-2xl font-bold mb-4 font-serif">Recruitment Services</h4>
+                            <h4 className="text-xl font-bold mb-4 font-serif">Recruitment Services</h4>
                             <p className="text-slate-300 text-sm leading-relaxed">
                               Lummattis element cum semps honec rnare. Dolor auctor urna dignissim sed nunc sit plateas uellentesque tempor.
                             </p>
