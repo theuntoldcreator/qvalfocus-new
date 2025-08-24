@@ -192,7 +192,7 @@ export function Header({ onToggleMobileMenu }: HeaderProps) {
                   
                   <NavigationMenuItem>
                     <NavigationMenuLink asChild>
-                      <Link to="/careers" className={navItemClasses("/careers")}>
+                      <Link to="/jobs" className={navItemClasses("/jobs")}>
                         Careers
                       </Link>
                     </NavigationMenuLink>
