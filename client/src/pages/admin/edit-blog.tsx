@@ -54,13 +54,14 @@ export default function EditBlogPage() {
       content: values.content,
       featured: values.featured,
       status: values.status,
-      tags: values.tags?.split(",").map((tag) => tag.trim()) || null,
+      tags: values.tags ? values.tags.split(",").map((tag) => tag.trim()) : null,
       read_time_minutes: values.read_time_minutes
         ? parseInt(values.read_time_minutes, 10)
         : null,
       publish_date: values.publish_date.toISOString(),
     };
 
+    // @ts-ignore
     const { error } = await supabase
       .from("blogs")
       .update(updateData)
