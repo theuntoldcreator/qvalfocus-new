@@ -36,8 +36,7 @@ export function AdminSidebar() {
   return (
     <div className="hidden md:flex flex-col h-full w-64 border-r bg-white p-4 shadow-sm">
       <div className="flex items-center justify-center h-20 border-b pb-4 mb-6">
-        <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10 mr-2" />
-        <span className="text-xl font-bold text-theme-black">Admin Portal</span>
+        <img src="https://res.cloudinary.com/div5rg0md/image/upload/v1754902643/qvalfocus_ghitel.png" alt="QvalFocus Logo" className="h-10" />
       </div>
       <nav className="grid items-start gap-2 flex-grow">
         {navItems.map((item) => (
