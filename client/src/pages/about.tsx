@@ -13,6 +13,8 @@ import {
   Eye
 } from "lucide-react";
 import { ScrollAnimate } from "@/components/ui/scroll-animate";
+import { CtaBanner } from "@/components/sections/CtaBanner";
+import { NewAboutSection } from "@/components/sections/NewAboutSection";
 
 export default function AboutPage() {
   const coreValues = [
@@ -48,54 +50,9 @@ export default function AboutPage() {
       {/* Header and Footer are now handled by RootLayout */}
       
       <main>
-        {/* Hero Section */}
-        <section className="relative pt-24 md:pt-32 pb-20 overflow-hidden bg-white dark:bg-slate-900">
-          <div className="absolute inset-0">
-            <img 
-              src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib.rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
-              alt="Diverse team collaborating in a modern office"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-white/80"></div>
-          </div>
-          
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Badge className="mb-6">About Us</Badge>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-slate-900 dark:text-white">
-              Flexible, Scalable Talent Solutions
-            </h1>
-            <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
-              At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly or build a long-term hiring strategy, our solutions ensure you have access to the right talent when and where you need it.
-            </p>
-            <Button size="lg" asChild className="bg-theme-orange hover:bg-theme-orange-dark">
-              <Link to="/contact?type=client">Get In Touch</Link>
-            </Button>
-          </div>
-        </section>
-
-        {/* Who We Are */}
+        {/* New About Section */}
         <ScrollAnimate>
-          <section className="py-20 bg-white dark:bg-slate-800">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div className="relative order-2 lg:order-1">
-                  <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Who We Are</h2>
-                  <div className="space-y-6 text-slate-700 dark:text-slate-300">
-                    <p>
-                      QvalFocus, Inc. is a professional services company delivering innovative solutions in Life Sciences and Information Technology. With over 50 years of combined leadership experience, we connect high-caliber talent with forward-thinking companies.
-                    </p>
-                  </div>
-                </div>
-                <div className="relative order-1 lg:order-2">
-                  <img 
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                    alt="Professional team in a discussion"
-                    className="w-full h-auto object-cover rounded-2xl shadow-lg"
-                  />
-                </div>
-              </div>
-            </div>
-          </section>
+          <NewAboutSection />
         </ScrollAnimate>
 
         {/* Core Values */}
@@ -158,6 +115,11 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
+        </ScrollAnimate>
+
+        {/* New CTA Banner Section */}
+        <ScrollAnimate>
+          <CtaBanner />
         </ScrollAnimate>
 
         {/* CTA Section */}
