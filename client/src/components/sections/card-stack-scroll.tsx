@@ -24,17 +24,14 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
       if (!containerRef.current) return;
 
       const containerTop = containerRef.current.offsetTop;
+      const containerHeight = containerRef.current.offsetHeight;
       const scrollY = window.scrollY;
       const viewportHeight = window.innerHeight;
 
-      // Each card's animation will last for the duration of one viewport height of scrolling
-      const scrollDurationPerCard = viewportHeight;
-      const totalScrollDuration = scrollDurationPerCard * (cards.length - 1);
-
+      const totalScrollDuration = containerHeight - viewportHeight;
       const scrollStart = containerTop;
-      const scrollEnd = scrollStart + totalScrollDuration;
 
-      if (scrollY < scrollStart || scrollY > scrollEnd + viewportHeight) {
+      if (scrollY < scrollStart || scrollY > scrollStart + totalScrollDuration + viewportHeight) {
         return;
       }
 
@@ -46,24 +43,20 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
 
       const newStyles = cards.map((_, i) => {
         let opacity = 0;
-        let transform = 'translateY(40px)'; // Default position for cards yet to be seen
+        let transform = 'translateY(40px)';
         let zIndex = cards.length - i;
 
         if (i === activeCardIndex) {
-          // This is the card currently in view, animating out
           opacity = 1 - progressInCard;
-          transform = `translateY(${-progressInCard * 40}px)`; // Moves up
+          transform = `translateY(${-progressInCard * 40}px)`;
         } else if (i === activeCardIndex + 1) {
-          // This is the next card, animating in
           opacity = progressInCard;
-          transform = `translateY(${(1 - progressInCard) * 40}px)`; // Moves up from below
+          transform = `translateY(${(1 - progressInCard) * 40}px)`;
         } else if (i < activeCardIndex) {
-          // Cards that have already been scrolled past
           opacity = 0;
-          transform = 'translateY(-40px)'; // Stay moved up
+          transform = 'translateY(-40px)';
         }
         
-        // Special case for the very first card at the very beginning of the scroll
         if (i === 0 && scrollY <= scrollStart) {
           opacity = 1;
           transform = 'translateY(0px)';
@@ -80,17 +73,22 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial calculation
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [cards.length]);
+
+  // The height of this container dictates how long the scroll animation takes.
+  // A smaller height means a faster transition.
+  // We'll make each transition take 30vh of scrolling.
+  const scrollDistancePerCard = 30; // vh
+  const containerHeight = ((cards.length - 1) * scrollDistancePerCard) + 100; // Add 100vh for the last card to be fully visible
 
   return (
     <div
       ref={containerRef}
       className="relative"
-      // The container height determines how long the scroll animation lasts
-      style={{ height: `${cards.length * 100}vh` }}
+      style={{ height: `${containerHeight}vh` }}
     >
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         {cards.map((card, index) => (
@@ -99,7 +97,6 @@ export function CardStackScroll({ cards }: CardStackScrollProps) {
             className="absolute w-full max-w-5xl p-4"
             style={{
               ...cardStyles[index],
-              // Using a quick, smooth transition for the properties that change
               transition: 'transform 0.3s ease-out, opacity 0.3s ease-out',
             }}
           >
