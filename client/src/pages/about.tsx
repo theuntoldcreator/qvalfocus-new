@@ -15,6 +15,7 @@ import {
 import { ScrollAnimate } from "@/components/ui/scroll-animate";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { NewAboutSection } from "@/components/sections/NewAboutSection";
+import { RecruitmentPlans } from "@/components/sections/RecruitmentPlans";
 
 export default function AboutPage() {
   const coreValues = [
@@ -78,6 +79,11 @@ export default function AboutPage() {
               </div>
             </div>
           </section>
+        </ScrollAnimate>
+
+        {/* Recruitment Plans Section */}
+        <ScrollAnimate>
+          <RecruitmentPlans />
         </ScrollAnimate>
 
         {/* Vision & Mission */}
