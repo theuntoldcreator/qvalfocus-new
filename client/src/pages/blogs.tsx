@@ -19,7 +19,7 @@ export default function BlogsPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header and Footer are now handled by RootLayout */}
+      <Header />
       
       <main>
         {/* Hero Section */}
@@ -111,7 +111,7 @@ export default function BlogsPage() {
               </div>
             ) : blogs && blogs.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {blogs.filter(blog => blog.status === 'published').map((blog) => ( // Only show published blogs
+                {blogs.map((blog) => (
                   <Link key={blog.id} to={`/blogs/${blog.slug}`}>
                     <div className="glass dark:glass-dark rounded-2xl p-8 hover:scale-105 transition-all duration-300 group h-full">
                       <div className="w-full h-48 rounded-xl mb-6 overflow-hidden">
@@ -226,6 +226,8 @@ export default function BlogsPage() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }

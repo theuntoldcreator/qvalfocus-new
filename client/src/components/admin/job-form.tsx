@@ -71,16 +71,6 @@ export function JobForm({ job }: JobFormProps) {
         ...job,
         skills: job.skills?.join(', ') || '',
         tags: job.tags?.join(', ') || '',
-        // Ensure null values are converted to undefined for optional string/boolean fields
-        company_logo: job.company_logo || undefined,
-        salary: job.salary || undefined,
-        benefits: job.benefits || undefined,
-        remote: job.remote ?? undefined, // Convert null to undefined
-        featured: job.featured ?? undefined, // Convert null to undefined
-        recruiter_name: job.recruiter_name || undefined,
-        recruiter_email: job.recruiter_email || undefined,
-        recruiter_phone: job.recruiter_phone || undefined,
-        external_application_url: job.external_application_url || undefined,
       });
     }
   }, [isEditing, job, form]);

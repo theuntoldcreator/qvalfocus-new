@@ -55,7 +55,7 @@ export default function IndustryPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header and Footer are now handled by RootLayout */}
+      <Header />
       
       <main>
         {/* Hero Section */}
@@ -81,7 +81,7 @@ export default function IndustryPage() {
                 {data.title}
               </h1>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" asChild className="bg-theme-orange hover:bg-theme-orange-dark">
+                <Button size="lg" asChild>
                   <Link to="/contact?type=client">Discuss Your Needs</Link>
                 </Button>
                 <Button variant="outline" size="lg" className="text-white border-white/20 hover:bg-white/10" asChild>
@@ -197,7 +197,7 @@ export default function IndustryPage() {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Ready to Build Your {industry.name} Team?
             </h2>
-            <p className="text-xl text-primary-foreground/80 mb-8">
+            <p className="text-xl text-primary-100 mb-8">
               Connect with our {industry.name.toLowerCase()} specialists to discuss your specific needs and challenges.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -211,6 +211,8 @@ export default function IndustryPage() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }

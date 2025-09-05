@@ -16,9 +16,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Trash2, FileText, Eye } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
+import { Trash2, FileText } from "lucide-react";
 
 export function ApplicationsManagement() {
   const { data: applications, isLoading } = useAllApplications();
@@ -40,25 +38,22 @@ export function ApplicationsManagement() {
     });
   };
 
+  if (isLoading) return <p>Loading applications...</p>;
+
   return (
     <div className="space-y-8">
-      <Card className="bg-white shadow-sm">
+      <Card>
         <CardHeader>
           <CardTitle>All Job Applications</CardTitle>
         </CardHeader>
         <CardContent>
-          {isLoading ? (
-            <div className="space-y-4">
-              {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
-            </div>
-          ) : applications && applications.length > 0 ? (
+          {applications && applications.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>Applicant</TableHead>
                   <TableHead>Email</TableHead>
                   <TableHead>Job Title</TableHead>
-                  <TableHead>Score</TableHead>
                   <TableHead>Applied At</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -76,11 +71,6 @@ export function ApplicationsManagement() {
                       ) : (
                         'N/A'
                       )}
-                    </TableCell>
-                    <TableCell>
-                      <Badge variant="secondary" className="bg-primary/10 text-primary">
-                        {app.score}%
-                      </Badge>
                     </TableCell>
                     <TableCell>{format(new Date(app.created_at), 'PPP')}</TableCell>
                     <TableCell className="text-right space-x-2">

@@ -21,11 +21,21 @@ export default {
           foreground: "var(--popover-foreground)",
         },
         primary: {
-          DEFAULT: "var(--primary)", // Now Avada Green
-          foreground: "var(--primary-foreground)", // Now White
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
         },
         secondary: {
-          DEFAULT: "var(--secondary)", // Keep as Avada Light Green or similar
+          DEFAULT: "var(--secondary)",
           foreground: "var(--secondary-foreground)",
         },
         muted: {
@@ -33,8 +43,18 @@ export default {
           foreground: "var(--muted-foreground)",
         },
         accent: {
-          DEFAULT: "var(--accent)", // Now Avada Yellow
-          foreground: "var(--accent-foreground)", // Now Dark text on yellow
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
         },
         destructive: {
           DEFAULT: "var(--destructive)",
@@ -62,21 +82,12 @@ export default {
         },
         violet: {
           100: '#f5f3ff',
-        },
-        // Avada specific colors
-        'avada-yellow': '#fcdb00',
-        'avada-green': '#1a4731',
-        'avada-green-darker': '#103020',
-        'avada-light-green': '#e6f2ed',
-        'avada-light-purple': '#f5f3ff',
-        'avada-light-blue': '#bfdbfe',
-        'avada-blue': '#3b82f6', // New custom blue color
+        }
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
-        freigeist: ['Freigeist', 'sans-serif'], // Added Freigeist font
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out",

@@ -4,20 +4,14 @@ export const industries = [
     name: "Life Sciences",
     description: "Aseptic Manufacturing, Biologics, Validation",
     slug: "life-sciences",
-    imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    initialImage: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    hoverImage: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    icon: "FlaskConical"
+    imageUrl: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   },
   {
     id: "information-technology",
     name: "Information Technology", 
     description: "Software, Cloud, Data, Cybersecurity",
     slug: "information-technology",
-    imageUrl: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    initialImage: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    hoverImage: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    icon: "Cpu"
+    imageUrl: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
   }
 ];
 
@@ -124,102 +118,24 @@ export const services = [
     title: "Staffing Solution",
     description: "Flexible and scalable staffing services tailored to your organization’s goals, from filling critical roles to building long-term hiring strategies.",
     features: [],
-    icon: "Users",
+    icon: "👥",
     color: "primary",
-    link: "/services/staffing-solution",
-    initialImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    hoverImage: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "/services/staffing-solution"
   },
   {
     id: "project-solution", 
     title: "Project Solution",
     description: "End-to-end project-based solutions to accelerate delivery, improve efficiency, and meet regulatory or technical demands.",
     features: [],
-    icon: "HardHat",
+    icon: "📊",
     color: "accent",
-    link: "/services/project-solution",
-    initialImage: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    hoverImage: "https://images.unsplash.com/photo-1587440871875-191322ee64b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    link: "/services/project-solution"
   }
 ];
 
-export const recruitmentDropdownServices = [
-  {
-    title: "Executive Search",
-    description: "Finding top-tier leadership talent.",
-    link: "/services/executive-search",
-    icon: "ArrowRight",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
-  },
-  {
-    title: "Talent Sourcing",
-    description: "Proactive identification of skilled professionals.",
-    link: "/services/talent-sourcing",
-    icon: "ArrowRight",
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
-  },
-  {
-    title: "Jobs Advertising",
-    description: "Strategic placement of job openings.",
-    link: "/services/jobs-advertising",
-    icon: "ArrowRight",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
-  },
-  {
-    title: "Career Counseling",
-    description: "Guidance for professional growth.",
-    link: "/services/career-counseling",
-    icon: "ArrowRight",
-    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=100&q=80",
-  },
-];
-
-export const pagesLinks = [
-  {
-    title: "Industries",
-    description: "Explore our specialized industry expertise.",
-    link: "/industries",
-  },
-  {
-    title: "Blogs",
-    description: "Stay informed with our latest insights.",
-    link: "/blogs",
-  },
-  {
-    title: "Changelog",
-    description: "See our latest updates and features.",
-    link: "/changelog",
-  },
-  {
-    title: "Customers",
-    description: "Hear from our valued partners.",
-    link: "/customers",
-  },
-  {
-    title: "Guides",
-    description: "In-depth resources and tutorials.",
-    link: "/guides",
-  },
-  {
-    title: "Pricing",
-    description: "Understand our service models.",
-    link: "/pricing",
-  },
-  {
-    title: "Privacy Policy",
-    description: "Learn how we protect your data.",
-    link: "/legal/privacy",
-  },
-  {
-    title: "Terms of Service",
-    description: "Our terms and conditions.",
-    link: "/legal/terms",
-  },
-];
-
 export const companyInfo = {
-  name: "Avada",
-  tagline: "Recruitment Agency",
+  name: "QvalFocus",
+  tagline: "Driving Operational Excellence Through Deep Domain Expertise.",
   description: "QvalFocus, Inc. is a professional services company delivering innovative solutions in Life Sciences and Information Technology.",
   founded: "2018",
   headquarters: "666 Plainsboro Rd #615, Plainsboro Township, NJ 08536",
@@ -227,9 +143,7 @@ export const companyInfo = {
   email: "info@qvalfocus.com",
   phone: "+1 (609) 701-9988",
   linkedin: "https://linkedin.com/company/qvalfocus",
-  twitter: "https://twitter.com/qvalfocus",
-  facebook: "https://facebook.com/qvalfocus",
-  instagram: "https://instagram.com/qvalfocus"
+  twitter: "https://twitter.com/qvalfocus"
 };
 
 export const leadership = [

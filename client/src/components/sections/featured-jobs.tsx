@@ -19,7 +19,7 @@ export function FeaturedJobs() {
             </p>
           </div>
           <div className="mt-6 md:mt-0">
-            <Button asChild className="bg-theme-orange hover:bg-theme-orange-dark">
+            <Button asChild>
               <Link to="/jobs">View All Jobs</Link>
             </Button>
           </div>

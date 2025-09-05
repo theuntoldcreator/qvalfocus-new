@@ -16,7 +16,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Newspaper, Trash2 } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function NewsletterManagement() {
   const { data: subscriptions, isLoading } = useNewsletterSubscriptions();
@@ -30,18 +29,16 @@ export function NewsletterManagement() {
     });
   };
 
+  if (isLoading) return <p>Loading subscriptions...</p>;
+
   return (
     <div className="space-y-8">
-      <Card className="bg-white shadow-sm">
+      <Card>
         <CardHeader>
           <CardTitle>Newsletter Subscriptions</CardTitle>
         </CardHeader>
         <CardContent>
-          {isLoading ? (
-            <div className="space-y-4">
-              {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
-            </div>
-          ) : subscriptions && subscriptions.length > 0 ? (
+          {subscriptions && subscriptions.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>

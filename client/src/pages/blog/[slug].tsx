@@ -19,7 +19,7 @@ export default function BlogPostPage() {
   if (error) {
     return (
       <div className="min-h-screen">
-        <Header onToggleMobileMenu={() => {}} /> {/* Added onToggleMobileMenu prop */}
+        <Header />
         <div className="pt-20 flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <h1 className="text-2xl font-bold mb-4">Blog Post Not Found</h1>
@@ -42,7 +42,7 @@ export default function BlogPostPage() {
   if (isLoading) {
     return (
       <div className="min-h-screen">
-        <Header onToggleMobileMenu={() => {}} /> {/* Added onToggleMobileMenu prop */}
+        <Header />
         <div className="pt-20">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <Skeleton className="h-8 w-32 mb-4" />
@@ -61,30 +61,11 @@ export default function BlogPostPage() {
     );
   }
 
-  if (!blogPost || blogPost.status !== 'published') return ( // Only show published blogs
-    <div className="min-h-screen">
-      <Header onToggleMobileMenu={() => {}} />
-      <div className="pt-20 flex items-center justify-center min-h-[60vh]">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Blog Post Not Found</h1>
-          <p className="text-slate-600 dark:text-slate-300 mb-6">
-            The blog post you're looking for doesn't exist or is not yet published.
-          </p>
-          <Link to="/blogs">
-            <Button>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Blog
-            </Button>
-          </Link>
-        </div>
-      </div>
-      <Footer />
-    </div>
-  );
+  if (!blogPost) return null;
 
   return (
     <div className="min-h-screen">
-      {/* Header and Footer are now handled by RootLayout */}
+      <Header />
       
       <main className="pt-20 md:pt-28">
         {/* Hero Section */}
@@ -211,6 +192,8 @@ export default function BlogPostPage() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }
