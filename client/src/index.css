@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;600&display=swap');
 
 /* Custom Freigeist Font */
 @font-face {
@@ -71,6 +71,7 @@
     --avada-blue: #3b82f6; /* This will be overridden by the new primary/accent */
     --theme-orange: #16a34a; /* Corrected to green */
     --theme-orange-dark: #15803d; /* Corrected to darker green */
+    --color-theme-gray-light: #F8F8F8; /* Defined as CSS variable */
 }
 
 @layer base {

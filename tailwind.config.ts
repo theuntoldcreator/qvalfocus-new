@@ -21,40 +21,20 @@ export default {
           foreground: "var(--popover-foreground)",
         },
         primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          200: '#bfdbfe',
-          300: '#93c5fd',
-          400: '#60a5fa',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          800: '#1e40af',
-          900: '#1e3a8a',
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
+          DEFAULT: "var(--primary)", // Now Green
+          foreground: "var(--primary-foreground)", // White text on green
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+          DEFAULT: "var(--secondary)", // Light gray
+          foreground: "var(--secondary-foreground)", // Dark text on light gray
         },
         muted: {
           DEFAULT: "var(--muted)",
           foreground: "var(--muted-foreground)",
         },
         accent: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+          DEFAULT: "var(--accent)", // Dark gray/black
+          foreground: "var(--accent-foreground)", // White text on dark gray
         },
         destructive: {
           DEFAULT: "var(--destructive)",
@@ -80,11 +60,22 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        violet: {
+          100: '#f5f3ff',
+        },
+        // Custom theme colors
+        'theme-orange': '#16a34a', // Changed to green
+        'theme-orange-dark': '#15803d', // Darker green
+        'theme-gray-light': 'var(--color-theme-gray-light)', // Referenced from CSS variable
+        'theme-gray-medium': '#E0E0E0',
+        'theme-gray-dark': '#333333',
+        'theme-black': '#1A1A1A',
       },
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
         mono: ["var(--font-mono)"],
+        freigeist: ['Freigeist', 'sans-serif'],
       },
       animation: {
         "fade-in": "fadeIn 0.6s ease-out",
@@ -92,6 +83,8 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in-out": "fadeInOut 5s ease-in-out infinite",
+        "blur-in-out": "blurInOut 5s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -113,6 +106,14 @@ export default {
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
+        },
+        fadeInOut: {
+          '0%, 100%': { opacity: '0.2' },
+          '50%': { opacity: '1' },
+        },
+        blurInOut: {
+          '0%, 100%': { filter: 'blur(4px)', opacity: '0.4' },
+          '50%': { filter: 'blur(0px)', opacity: '1' },
         },
       },
       backdropBlur: {
