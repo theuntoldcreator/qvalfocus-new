@@ -7,13 +7,13 @@ export function Newsletter() {
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
           Stay Ahead of the Curve
         </h2>
-        <p className="text-xl text-primary-100 mb-8">
+        <p className="text-xl text-primary-foreground/80 mb-8">
           Get insights on industry trends, salary reports, and career advice delivered monthly.
         </p>
         
         <NewsletterForm />
         
-        <p className="text-sm text-primary-200 mt-4">
+        <p className="text-sm text-primary-foreground/60 mt-4">
           No spam, unsubscribe anytime. Read our{" "}
           <a href="/legal/privacy" className="underline hover:text-white">privacy policy</a>.
         </p>

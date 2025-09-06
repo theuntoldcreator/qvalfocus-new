@@ -22,7 +22,7 @@ export default function StaffingSolutionPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      {/* Header and Footer are now handled by RootLayout */}
       
       <main>
         {/* Hero Section */}
@@ -46,7 +46,7 @@ export default function StaffingSolutionPage() {
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
               At QvalFocus, we offer flexible and scalable staffing services tailored to your organization’s goals. Whether you need to fill critical roles quickly, address seasonal hiring spikes, or build a long-term workforce strategy, we ensure you have access to the right talent when and where you need it.
             </p>
-            <Button size="lg" asChild>
+            <Button size="lg" asChild className="bg-theme-orange hover:bg-theme-orange-dark">
               <Link to="/contact?type=client">Get In Touch</Link>
             </Button>
           </div>
@@ -131,7 +131,7 @@ export default function StaffingSolutionPage() {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Ready to Build Your Team?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-xl text-primary-foreground/80 mb-8">
               Connect with our talent specialists to find the right professionals for your organization.
             </p>
             <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
@@ -140,8 +140,6 @@ export default function StaffingSolutionPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
