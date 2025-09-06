@@ -10,7 +10,7 @@ export default function TermsPage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header and Footer are now handled by RootLayout */}
+      <Header />
       
       <main className="pt-20 md:pt-28">
         {/* Header */}
@@ -346,7 +346,7 @@ export default function TermsPage() {
               Our legal team is available to clarify any aspects of these terms and conditions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild className="bg-theme-orange hover:bg-theme-orange-dark">
+              <Button asChild>
                 <Link to="/contact">Contact Legal Team</Link>
               </Button>
               <Button variant="outline" asChild>
@@ -356,6 +356,8 @@ export default function TermsPage() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 }

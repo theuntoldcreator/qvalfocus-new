@@ -1,98 +1,44 @@
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-
-const heroImages = [
-  "https://res.cloudinary.com/dbf2pscbn/image/upload/v1755965174/hero_karigh.jpg",
-];
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
-};
 
 export function Hero() {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        (prevIndex + 1) % heroImages.length
-      );
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="relative pb-12 md:pb-16 bg-white dark:bg-slate-900 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative w-full h-[400px] md:h-[500px] rounded-3xl overflow-hidden">
-          <AnimatePresence initial={false}>
-            <motion.img
-              key={currentImageIndex}
-              src={heroImages[currentImageIndex]}
-              alt="People sitting on chairs in a modern office"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-              className="absolute inset-0 w-full h-full object-cover object-left"
-            />
-          </AnimatePresence>
-          <div className="absolute inset-0 rounded-3xl shadow-[inset_0_0_30px_rgba(0,0,0,0.4)]"></div>
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/50 to-transparent flex flex-col items-start justify-center text-left p-8 md:p-12"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.p
-              className="text-sm font-semibold text-white uppercase tracking-wider mb-4 font-freigeist"
-              variants={itemVariants}
-            >
-              Helping Job Seekers Get Working Opportunities!
-            </motion.p>
-            <motion.h1
-              className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight max-w-3xl font-freigeist"
-              variants={itemVariants}
-            >
-              Bringing The Global Recruitment Solutions
-            </motion.h1>
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-start"
-              variants={itemVariants}
-            >
-              <Button size="lg" asChild className="bg-theme-orange text-white hover:bg-theme-orange-dark">
-                <Link to="/about">
-                  Learn More <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button size="lg" asChild className="bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                <Link to="/services/staffing-solution">
-                  What We Offer <ArrowUpRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </motion.div>
-          </motion.div>
+    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-50 dark:bg-slate-900">
+      <div 
+        className="absolute inset-0"
+      >
+        {/* Video for medium screens and up */}
+        <video
+          src="https://res.cloudinary.com/dbf2pscbn/video/upload/210797_tiny_hfni18.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="hidden md:block w-full h-full object-cover opacity-30"
+        />
+        {/* Static image for mobile */}
+        <img
+          src="https://res.cloudinary.com/dbf2pscbn/video/upload/210797_tiny_hfni18.jpg"
+          alt="Team working in an office"
+          className="block md:hidden w-full h-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/80 to-transparent dark:from-slate-900 dark:via-slate-900/80"></div>
+      </div>
+      
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-slate-900 dark:text-white">
+          Driving Operational Excellence Through Deep Domain Expertise.
+        </h1>
+        <p className="text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-3xl mx-auto">
+          Merging your vision & our expertise, We help you achieve Excellence.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" asChild>
+            <Link to="/jobs">Find Job</Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild className="hover:bg-primary hover:text-primary-foreground hover:border-primary">
+            <Link to="/contact?type=client">Find Talent</Link>
+          </Button>
         </div>
       </div>
     </section>

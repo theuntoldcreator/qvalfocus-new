@@ -1,8 +1,10 @@
 import { useJobs, useDeleteJob } from "@/lib/hooks";
+import { ApplicationList } from "@/components/admin/application-list";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Trash2, Eye, PlusCircle, Briefcase, Edit, Users } from "lucide-react";
+import { Trash2, Eye, PlusCircle, Briefcase, Edit } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
 import {
@@ -16,8 +18,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export function JobsManagement() {
   const { data: jobs, isLoading: isLoadingJobs } = useJobs();
@@ -33,7 +33,7 @@ export function JobsManagement() {
 
   return (
     <div className="space-y-8">
-      <Card className="bg-white shadow-sm">
+      <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Manage Job Listings</CardTitle>
           <Button asChild>
@@ -44,19 +44,12 @@ export function JobsManagement() {
           </Button>
         </CardHeader>
         <CardContent>
-          {isLoadingJobs ? (
-            <div className="space-y-4">
-              {[...Array(5)].map((_, i) => <Skeleton key={i} className="h-12 w-full" />)}
-            </div>
-          ) : jobs && jobs.length > 0 ? (
+          {isLoadingJobs ? <p>Loading jobs...</p> : jobs && jobs.length > 0 ? (
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>Title</TableHead>
-                  <TableHead>Company</TableHead>
                   <TableHead>Location</TableHead>
-                  <TableHead>Type</TableHead>
-                  <TableHead>Status</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -64,28 +57,27 @@ export function JobsManagement() {
                 {jobs?.map((job) => (
                   <TableRow key={job.id}>
                     <TableCell className="font-medium">{job.title}</TableCell>
-                    <TableCell>{job.company}</TableCell>
                     <TableCell>{job.location}</TableCell>
-                    <TableCell className="capitalize">{job.type.replace('-', ' ')}</TableCell>
-                    <TableCell>
-                      <Badge variant="secondary" className="bg-green-100 text-green-700">
-                        Open
-                      </Badge>
-                    </TableCell>
                     <TableCell className="text-right space-x-2">
-                      <Button asChild variant="ghost" size="icon" title="View Applications">
-                        <Link to={`/admin/dashboard/jobs/${job.slug}/applications`}>
-                          <Users className="h-4 w-4" />
-                        </Link>
-                      </Button>
-                      <Button asChild variant="ghost" size="icon" title="Edit Job">
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button variant="ghost" size="icon"><Eye className="h-4 w-4" /></Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[625px]">
+                          <DialogHeader>
+                            <DialogTitle>Applications for {job.title}</DialogTitle>
+                          </DialogHeader>
+                          <ApplicationList jobId={job.id} />
+                        </DialogContent>
+                      </Dialog>
+                      <Button asChild variant="ghost" size="icon">
                         <Link to={`/admin/dashboard/jobs/edit/${job.slug}`}>
                           <Edit className="h-4 w-4" />
                         </Link>
                       </Button>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <Button variant="destructive" size="icon" title="Delete Job">
+                          <Button variant="destructive" size="icon">
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </AlertDialogTrigger>
