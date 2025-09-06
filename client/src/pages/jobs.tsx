@@ -20,7 +20,7 @@ const jobCategories = [
 ];
 
 export default function JobsPage() {
-  const { data: jobs, isLoading } = useJobs({ poll: true });
+  const { data: jobs, isLoading } = useJobs({ refetchInterval: 60000 }); // Poll every 1 minute
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -41,11 +41,11 @@ export default function JobsPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-white dark:bg-slate-900">
-        <Header />
-        <main className="pt-20 md:pt-28">
+      <div className="bg-white dark:bg-slate-900">
+        {/* Header and Footer are now handled by RootLayout */}
+        <main>
           {/* Hero Section */}
-          <section className="py-16 md:py-24 text-center bg-slate-50 dark:bg-slate-800">
+          <section className="pt-36 md:pt-48 pb-16 md:pb-24 text-center bg-slate-50 dark:bg-slate-800">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <h1 className="text-4xl md:text-6xl font-serif font-bold mb-4">
                 Find your dream job at <span className="text-gradient">QvalFocus</span>
@@ -63,7 +63,7 @@ export default function JobsPage() {
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
-                <Button size="lg" className="h-12">Search</Button>
+                <Button size="lg" className="h-12 bg-theme-orange hover:bg-theme-orange-dark">Search</Button>
               </div>
             </div>
           </section>
@@ -120,7 +120,6 @@ export default function JobsPage() {
             </div>
           </div>
         </main>
-        <Footer />
       </div>
     </>
   );

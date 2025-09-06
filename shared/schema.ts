@@ -51,11 +51,13 @@ export const applicationSchema = z.object({
     cover_letter: z.string().nullable(),
     resume_url: z.string().url().nullable(),
     created_at: z.string(),
+    score: z.number().int().min(0).max(100).nullable().default(0), // Added ATS score
 });
 
 export const insertApplicationSchema = applicationSchema.omit({
     id: true,
     created_at: true,
+    score: true, // Score is generated, not inserted by user
 });
 
 export const contactSchema = z.object({
@@ -85,15 +87,22 @@ export const blogSchema = z.object({
   title: z.string(),
   subtitle: z.string().nullable(),
   author: z.string(),
-  authorAvatar: z.string().nullable(),
+  authorAvatar: z.string().url().nullable().or(z.literal("")),
   publishDate: z.string(),
-  imageUrl: z.string().nullable(),
+  imageUrl: z.string().url().nullable().or(z.literal("")),
   category: z.string(),
   content: z.string(), // Full blog content
   tags: z.array(z.string()).nullable(),
-  readTimeMinutes: z.number().nullable(),
+  readTimeMinutes: z.number().int().nullable(),
   featured: z.boolean().nullable(),
+  status: z.enum(["draft", "published"]).default("draft"), // Added status
   createdAt: z.string(),
+});
+
+export const insertBlogSchema = blogSchema.omit({
+  id: true,
+  slug: true,
+  createdAt: true,
 });
 
 export const testimonialSchema = z.object({
@@ -112,6 +121,7 @@ export type InsertApplication = z.infer<typeof insertApplicationSchema>;
 export type Contact = z.infer<typeof contactSchema>;
 export type InsertContact = z.infer<typeof insertContactSchema>;
 export type Blog = z.infer<typeof blogSchema>;
+export type InsertBlog = z.infer<typeof insertBlogSchema>;
 export type Testimonial = z.infer<typeof testimonialSchema>;
 
 // The other schemas are no longer backed by a database, so they are removed for now.

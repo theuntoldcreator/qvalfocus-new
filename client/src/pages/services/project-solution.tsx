@@ -73,7 +73,7 @@ export default function ProjectSolutionPage() {
 
   return (
     <div className="min-h-screen">
-      <Header />
+      {/* Header and Footer are now handled by RootLayout */}
       
       <main>
         {/* Hero Section */}
@@ -97,7 +97,7 @@ export default function ProjectSolutionPage() {
             <p className="text-xl text-slate-600 dark:text-slate-300 mb-8 max-w-3xl mx-auto">
               We deliver end-to-end project execution for both IT and Life Sciences sectors. Our goal is to help you accelerate delivery, improve efficiency, and meet technical or regulatory requirements with precision.
             </p>
-            <Button size="lg" asChild>
+            <Button size="lg" asChild className="bg-theme-orange hover:bg-theme-orange-dark">
               <Link to="/contact?type=client">Get In Touch</Link>
             </Button>
           </div>
@@ -157,7 +157,7 @@ export default function ProjectSolutionPage() {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6">
               Ready to Start Your Project?
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-xl text-primary-foreground/80 mb-8">
               Let's discuss how our project solutions can help you achieve your business objectives.
             </p>
             <Button size="lg" variant="default" className="bg-white text-primary hover:bg-slate-200" asChild>
@@ -166,8 +166,6 @@ export default function ProjectSolutionPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }
