@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+    --background: hsl(0, 0%, 100%);
+    --foreground: hsl(222, 47%, 11%);
+    --card: hsl(0, 0%, 100%);
+    --card-foreground: hsl(222, 47%, 11%);
+    --popover: hsl(0, 0%, 100%);
+    --popover-foreground: hsl(222, 47%, 11%);
+    --primary: hsl(224, 83%, 58%);
+    --primary-foreground: hsl(0, 0%, 100%);
+    --secondary: hsl(222, 83%, 97%);
+    --secondary-foreground: hsl(222, 83%, 58%);
+    --muted: hsl(222, 40%, 96%);
+    --muted-foreground: hsl(222, 30%, 50%);
+    --accent: hsl(224, 83%, 58%);
+    --accent-foreground: hsl(0, 0%, 100%);
+    --destructive: hsl(356, 90%, 54%);
+    --destructive-foreground: hsl(0, 0%, 100%);
+    --border: hsl(222, 40%, 91%);
+    --input: hsl(222, 40%, 97%);
+    --ring: hsl(222, 83%, 58%);
+    --chart-1: hsl(222, 83%, 58%);
+    --chart-2: hsl(173, 80%, 36%);
+    --chart-3: hsl(222, 47%, 51%);
+    --chart-4: hsl(173, 70%, 45%);
+    --chart-5: hsl(222, 47%, 31%);
+    --sidebar: hsl(222, 47%, 11%);
+    --sidebar-foreground: hsl(0, 0%, 98%);
+    --sidebar-primary: hsl(222, 83%, 58%);
+    --sidebar-primary-foreground: hsl(0, 0%, 100%);
+    --sidebar-accent: hsl(137, 80%, 36%);
+    --sidebar-accent-foreground: hsl(0, 0%, 100%);
+    --sidebar-border: hsl(222, 40%, 20%);
+    --sidebar-ring: hsl(222, 83%, 58%);
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --font-mono: 'Monaco', monospace;
+    --radius: 0.75rem;
+    --shadow-2xs: 0px 1px 2px 0px hsl(222, 84%, 5%, 0.05);
+    --shadow-xs: 0px 1px 3px 0px hsl(222, 84%, 5%, 0.1);
+    --shadow-sm: 0px 1px 2px 0px hsl(222, 84%, 5%, 0.05), 0px 2px 4px 0px hsl(222, 84%, 5%, 0.1);
+    --shadow: 0px 1px 3px 0px hsl(222, 84%, 5%, 0.1), 0px 1px 2px 0px hsl(222, 84%, 5%, 0.06);
+    --shadow-md: 0px 2px 4px -1px hsl(222, 84%, 5%, 0.1), 0px 4px 6px -1px hsl(222, 84%, 5%, 0.1);
+    --shadow-lg: 0px 4px 6px -2px hsl(222, 84%, 5%, 0.1), 0px 10px 15px -3px hsl(222, 84%, 5%, 0.1);
+    --shadow-xl: 0px 8px 10px -3px hsl(222, 84%, 5%, 0.1), 0px 20px 25px -5px hsl(222, 84%, 5%, 0.1);
+    --shadow-2xl: 0px 25px 50px -12px hsl(222, 84%, 5%, 0.25);
+    --tracking-normal: 0em;
+    --spacing: 0.25rem;
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply font-sans antialiased bg-slate-50 text-foreground scroll-smooth leading-relaxed;
+    }
+    a,
+    button,
+    [role="button"],
+    input[type="submit"],
+    input[type="checkbox"],
+    input[type="radio"],
+    select,
+    label {
+        cursor: pointer;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="url"],
+    input[type="tel"],
+    input[type="number"],
+    textarea {
+        cursor: text;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-serif leading-tight;
+    }
+}
+
+@layer components {
+    /* No custom navbar components here for a clean slate */
+}
+
+@layer utilities {
+    .glass {
+        @apply bg-white/10 backdrop-blur-md border border-white/20;
+    }
+    .glass-dark {
+        @apply bg-black/20 backdrop-blur-md border border-white/10;
+    }
+    .text-gradient {
+        @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.6s ease-out;
+    }
+    .animate-slide-up {
+        animation: slideUp 0.6s ease-out;
+    }
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+    .parallax {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .navbar-glass {
+        @apply bg-white/95 dark: bg-slate-900/95 backdrop-blur-sm border-b border-slate-200 dark: border-slate-700;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

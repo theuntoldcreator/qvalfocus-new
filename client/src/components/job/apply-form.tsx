@@ -1,0 +1,204 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Progress } from "@/components/ui/progress";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useCreateApplication } from "@/lib/hooks";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import type { Job, InsertApplication } from "@shared/schema";
+import { CheckCircle } from "lucide-react";
+import * as tus from "tus-js-client";
+
+const applicationFormSchema = z.object({
+  full_name: z.string().min(1, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().optional(),
+  experience_level: z.string().min(1, "Experience level is required"),
+  resumeFile: z.instanceof(File).optional(),
+  portfolio_link: z.string().url().optional().or(z.literal("")),
+  linkedin_profile: z.string().url().optional().or(z.literal("")),
+});
+
+type ApplicationFormData = z.infer<typeof applicationFormSchema>;
+
+interface ApplyFormProps {
+  job: Job;
+}
+
+export function ApplyForm({ job }: ApplyFormProps) {
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const createApplication = useCreateApplication();
+  const { toast } = useToast();
+
+  const form = useForm<ApplicationFormData>({
+    resolver: zodResolver(applicationFormSchema),
+    defaultValues: {
+      full_name: "",
+      email: "",
+      phone: "",
+      experience_level: "",
+      portfolio_link: "",
+      linkedin_profile: "",
+    },
+  });
+
+  const submitApplicationWithResume = async (data: ApplicationFormData, resume_url: string | null) => {
+    const nameParts = data.full_name.trim().split(/\s+/);
+    const first_name = nameParts.shift() || "";
+    const last_name = nameParts.join(" ");
+
+    try {
+      const payload: InsertApplication = {
+        job_id: job.id,
+        first_name,
+        last_name,
+        email: data.email,
+        experience_level: data.experience_level,
+        phone: data.phone || null,
+        current_role: null,
+        linkedin: data.linkedin_profile || null,
+        github: null,
+        portfolio: data.portfolio_link || null,
+        cover_letter: null,
+        resume_url: resume_url,
+      };
+
+      await createApplication.mutateAsync(payload);
+      setIsSuccess(true);
+      form.reset();
+    } catch (error: any) {
+      toast({ title: "Error submitting application", description: error.message || "Please try again later.", variant: "destructive" });
+    } finally {
+      setIsUploading(false);
+      setUploadProgress(0);
+    }
+  };
+
+  const onSubmit = async (data: ApplicationFormData) => {
+    if (data.resumeFile) {
+      setIsUploading(true);
+      setUploadProgress(0);
+      const file = data.resumeFile;
+      const fileName = `${Date.now()}-${file.name}`;
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://ojmiaheeooffjberilkr.supabase.co';
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qbWlhaGVlb29mZmpiZXJpbGtyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ4OTAyNDcsImV4cCI6MjA3MDQ2NjI0N30.XID76y57mLUrlmQxNMZKpV6cO54KbVP5e0c8u-GdlAo';
+
+      const upload = new tus.Upload(file, {
+        endpoint: `${supabaseUrl}/storage/v1/upload/resumable`,
+        retryDelays: [0, 3000, 5000, 10000, 20000],
+        headers: {
+          authorization: `Bearer ${supabaseAnonKey}`,
+          'x-upsert': 'true',
+        },
+        metadata: {
+          bucketName: 'resumes',
+          objectName: `public/${fileName}`,
+          contentType: file.type,
+          cacheControl: '3600',
+        },
+        onError: (error) => {
+          console.error("Upload failed:", error);
+          toast({ title: "Resume Upload Failed", description: "Please try again.", variant: "destructive" });
+          setIsUploading(false);
+        },
+        onProgress: (bytesUploaded, bytesTotal) => {
+          const percentage = (bytesUploaded / bytesTotal * 100);
+          setUploadProgress(percentage);
+        },
+        onSuccess: () => {
+          const { data: { publicUrl } } = supabase.storage.from('resumes').getPublicUrl(`public/${fileName}`);
+          submitApplicationWithResume(data, publicUrl);
+        },
+      });
+
+      upload.start();
+    } else {
+      submitApplicationWithResume(data, null);
+    }
+  };
+
+  return (
+    <>
+      <Dialog open={isSuccess} onOpenChange={setIsSuccess}>
+        <DialogContent>
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <CheckCircle className="w-16 h-16 text-green-500" />
+            </div>
+            <DialogTitle className="text-center text-2xl">Application Submitted!</DialogTitle>
+            <DialogDescription className="text-center">
+              Thank you for your interest. We've received your application and will be in touch soon if your profile is a match.
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
+      <div className="bg-white dark:bg-slate-800 rounded-xl p-8 border border-slate-200 dark:border-slate-700">
+        <h3 className="text-xl font-bold mb-2">Apply to Job Opening</h3>
+        <p className="text-slate-600 dark:text-slate-300 mb-6">Fill the information below to apply for this job</p>
+        
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <FormField control={form.control} name="full_name" render={({ field }) => ( <FormItem><FormLabel>Full name</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="email" render={({ field }) => ( <FormItem><FormLabel>Email address</FormLabel><FormControl><Input type="email" {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="phone" render={({ field }) => ( <FormItem><FormLabel>Phone number (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+            
+            <FormField control={form.control} name="experience_level" render={({ field }) => (
+              <FormItem>
+                <FormLabel>Experience Level</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your experience level" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="Entry Level">Entry Level (0-2 years)</SelectItem>
+                    <SelectItem value="Mid Level">Mid Level (3-7 years)</SelectItem>
+                    <SelectItem value="Senior Level">Senior Level (8-15 years)</SelectItem>
+                    <SelectItem value="Executive Level">Executive Level (15+ years)</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )} />
+
+            <FormField control={form.control} name="resumeFile" render={({ field: { onChange, value, ...rest } }) => (
+              <FormItem>
+                <FormLabel>Resume</FormLabel>
+                <FormControl>
+                  <label htmlFor="resume-upload" className="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700">
+                    <span className="text-primary font-semibold">{value?.name || "Upload resume/CV"}</span>
+                    <Input id="resume-upload" type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={(e) => onChange(e.target.files?.[0])} {...rest} />
+                  </label>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )} />
+            {isUploading && (
+              <div className="flex items-center gap-2">
+                <Progress value={uploadProgress} className="w-full" />
+                <span className="text-sm font-semibold min-w-[40px] text-right">{Math.round(uploadProgress)}%</span>
+              </div>
+            )}
+
+            <FormField control={form.control} name="portfolio_link" render={({ field }) => ( <FormItem><FormLabel>Portfolio link, Github url</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+            <FormField control={form.control} name="linkedin_profile" render={({ field }) => ( <FormItem><FormLabel>LinkedIn profile (optional)</FormLabel><FormControl><Input {...field} /></FormControl><FormMessage /></FormItem>)} />
+
+            <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700" disabled={createApplication.isPending || isUploading}>
+              {isUploading ? `Uploading...` : createApplication.isPending ? "Submitting..." : 'Submit application'}
+            </Button>
+          </form>
+        </Form>
+      </div>
+    </>
+  );
+}
